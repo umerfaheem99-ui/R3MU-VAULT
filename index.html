@@ -3,192 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R3MU VAULT | Premium Minecraft Archive</title>
+    <title>R3MU VAULT | Official Archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        :root { --bg: #050505; --header-bg: #0f0f0f; --accent: #8147ff; --card-bg: #0f0f0f; --sub-text: #888; }
-        body { margin: 0; background-color: var(--bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .container { max-width: 1300px; margin: 0 auto; padding: 20px; }
+        :root { --bg: #050505; --accent: #8147ff; --card-bg: #0f0f0f; --text: #eee; }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
         
-        /* Header */
-        .top-nav { display: flex; justify-content: space-between; align-items: center; background: var(--header-bg); padding: 15px 30px; border-radius: 12px; margin-bottom: 40px; border: 1px solid #1a1a1a; }
-        .brand h1 { font-size: 26px; font-weight: 900; background: linear-gradient(90deg, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
-        .socials { display: flex; gap: 12px; }
-        .s-link { color: white; background: #1a1a1a; width: 38px; height: 38px; border-radius: 8px; display: flex; justify-content: center; align-items: center; text-decoration: none; transition: 0.3s; }
-        .s-link:hover { background: var(--accent); transform: translateY(-3px); }
+        /* --- Stylish Home Hero Section --- */
+        #homeHero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a0b3a 0%, #050505 70%);
+            padding: 20px;
+        }
+        .hero-title { font-size: 4.5rem; font-weight: 900; margin: 0; background: linear-gradient(to bottom, #fff, #8147ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -2px; }
+        .hero-sub { color: #888; font-size: 1.2rem; margin: 20px 0 40px; max-width: 600px; }
+        .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; }
+        .btn-main { padding: 15px 35px; border-radius: 10px; font-weight: 800; text-decoration: none; transition: 0.3s; cursor: pointer; }
+        .btn-vault { background: var(--accent); color: white; border: none; font-size: 1.1rem; box-shadow: 0 0 20px rgba(129,71,255,0.4); }
+        .btn-vault:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(129,71,255,0.6); }
+        .btn-social { background: #111; color: white; border: 1px solid #222; font-size: 1.1rem; }
+        .btn-social:hover { background: #1a1a1a; border-color: var(--accent); }
 
-        /* Tabs & Search */
-        .controls { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-bottom: 50px; }
-        .tabs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-        .tab { padding: 10px 20px; background: #111; border-radius: 8px; font-size: 13px; font-weight: 700; color: var(--sub-text); cursor: pointer; transition: 0.3s; text-transform: uppercase; border: 1px solid transparent; }
+        /* --- Vault UI --- */
+        #vaultContent { display: none; padding: 40px 20px; max-width: 1300px; margin: 0 auto; }
+        .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .tabs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 30px; }
+        .tab { padding: 10px 20px; background: #111; border-radius: 8px; font-size: 13px; font-weight: 700; color: #888; cursor: pointer; transition: 0.3s; text-transform: uppercase; border: 1px solid transparent; }
         .tab.active { background: var(--accent); color: white; }
         .tab.shop-tab { border-color: gold; color: gold; }
-        .search-box { width: 100%; max-width: 600px; padding: 15px 20px; background: #111; border: 1px solid #1a1a1a; border-radius: 10px; color: white; outline: none; }
-        .search-box:focus { border-color: var(--accent); }
 
-        /* Grid */
+        .search-box { width: 100%; max-width: 500px; padding: 15px; background: #111; border: 1px solid #222; border-radius: 10px; color: white; margin-bottom: 40px; display: block; margin-left: auto; margin-right: auto; }
+
+        /* --- Grid & Cards --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: var(--card-bg); border-radius: 15px; border: 1px solid #1a1a1a; overflow: hidden; transition: 0.3s; cursor: pointer; position: relative; }
+        .card { background: var(--card-bg); border-radius: 15px; border: 1px solid #1a1a1a; overflow: hidden; transition: 0.3s; cursor: pointer; }
         .card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .card-img { width: 100%; height: 170px; object-fit: cover; border-bottom: 1px solid #1a1a1a; }
+        .card-img { width: 100%; height: 170px; object-fit: cover; }
         .card-body { padding: 20px; }
         .card-cat { font-size: 10px; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 5px; }
         .card-cat.shop { color: gold; }
         .card-name { font-size: 20px; font-weight: 800; margin: 5px 0; }
         
-        /* Pricing Styles */
-        .p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 15px 0; font-size: 11px; background: #000; padding: 10px; border-radius: 8px; }
-        .p-item { border-bottom: 1px solid #111; padding: 3px 0; display: flex; justify-content: space-between; }
-        .p-val { color: var(--accent); font-weight: 900; }
-        .details-txt { font-size: 10px; color: #666; line-height: 1.4; border-top: 1px dashed #222; padding-top: 8px; }
+        /* Pricing Table for Shop */
+        .p-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin: 15px 0; font-size: 11px; background: #000; padding: 10px; border-radius: 8px; }
+        .p-val { color: var(--accent); font-weight: 900; float: right; }
 
-        /* Admin Styles */
+        /* Admin / DL Page */
+        #dlPage { display: none; text-align: center; padding: 50px 20px; }
         #adminArea { display: none; margin-top: 60px; padding: 30px; background: #0a0a0a; border-radius: 15px; border: 1px dashed var(--accent); }
-        .adm-in { width: 100%; padding: 12px; margin: 8px 0; background: #000; border: 1px solid #222; color: white; border-radius: 8px; box-sizing: border-box; }
-        .adm-btn { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 8px; font-weight: 900; cursor: pointer; width: 100%; margin-top: 10px; }
-        #dlPage { display: none; text-align: center; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="top-nav" id="topNav">
-        <div class="brand"><h1>ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</h1></div>
-        <div class="socials">
-            <a href="#" class="s-link" id="ytLink"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="s-link" id="dcLink"><i class="fab fa-discord"></i></a>
+    <div id="homeHero">
+        <h1 class="hero-title">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</h1>
+        <p class="hero-sub">Premium Minecraft Clients, Bypasses, and Custom Modules. Built for the elite, maintained by R3MU.</p>
+        <div class="hero-btns">
+            <button class="btn-main btn-vault" onclick="enterVault()">ENTER THE VAULT</button>
+            <a href="https://youtube.com/@yourchannel" target="_blank" class="btn-main btn-social"><i class="fab fa-youtube"></i> YOUTUBE</a>
+            <a href="https://discord.gg/yourlink" target="_blank" class="btn-main btn-social"><i class="fab fa-discord"></i> DISCORD</a>
         </div>
     </div>
 
-    <div id="home">
+    <div id="vaultContent">
+        <div class="top-nav">
+            <h2 style="font-weight: 900; letter-spacing: -1px;">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</h2>
+            <button onclick="goHome()" style="background:none; border:none; color:#555; cursor:pointer;">Back to Home</button>
+        </div>
+
         <div class="controls">
             <div class="tabs">
-                <div class="tab active" onclick="filter('all')">All</div>
+                <div class="tab active" onclick="filter('all')">All Items</div>
                 <div class="tab" onclick="filter('clients')">Clients</div>
-                <div class="tab" onclick="filter('mods')">Mods</div>
+                <div class="tab" onclick="filter('mods')">MODS / MACROS</div>
                 <div class="tab" onclick="filter('bypass')">Bypasses</div>
+                <div class="tab" onclick="filter('source')">Source Codes</div>
                 <div class="tab shop-tab" onclick="filter('shop')">💰 SHOP</div>
             </div>
-            <input type="text" class="search-box" id="search" onkeyup="search()" placeholder="Search vault items...">
+            <input type="text" class="search-box" id="search" onkeyup="search()" placeholder="Search through archive...">
         </div>
+
         <div class="grid" id="mainGrid"></div>
     </div>
 
-    <div id="dlPage">
-        <p onclick="goHome()" style="color:var(--accent); cursor:pointer; font-weight:800; margin-bottom:30px;">← BACK TO VAULT</p>
-        <h1 id="dlTitle" style="font-size:3rem;">Item Name</h1>
-        <img id="dlImg" src="" style="width:100%; max-width:800px; border-radius:15px; margin:20px 0;">
-        <div id="dlLinks" style="max-width:500px; margin: 0 auto; display:flex; flex-direction:column; gap:10px;"></div>
+    <div id="dlPage" class="container">
+        <p onclick="exitDL()" style="color:var(--accent); cursor:pointer; font-weight:800; margin-bottom:30px;">← BACK TO VAULT</p>
+        <h1 id="dlTitle" style="font-size:3.5rem; font-weight:900;">Item Name</h1>
+        <img id="dlImg" src="" style="width:100%; max-width:800px; border-radius:15px; margin:30px 0; border:1px solid #222;">
+        <div id="dlLinks" style="max-width:500px; margin: 0 auto; display:flex; flex-direction:column; gap:12px;"></div>
     </div>
 
-    <p style="color:#080808; text-align:center; margin-top:100px; cursor:pointer;" onclick="accessAdmin()">Vault Console</p>
-    <div id="adminArea">
-        <h2 style="color:var(--accent);">Admin Manager</h2>
-        <select id="aCat" class="adm-in">
+    <p style="color:#080808; text-align:center; margin-top:100px; cursor:pointer;" onclick="accessAdmin()">Admin Console</p>
+    <div id="adminArea" class="container">
+        <h2 style="color:var(--accent);">Vault Manager</h2>
+        <select id="aCat" style="width:100%; padding:10px; margin-bottom:10px; background:#000; color:white; border:1px solid #333;">
             <option value="clients">Clients</option>
-            <option value="mods">Mods</option>
-            <option value="bypass">SS Bypass</option>
+            <option value="mods">MODS / MACROS</option>
+            <option value="bypass">Bypasses</option>
+            <option value="source">Source Codes</option>
             <option value="shop">SHOP (Premium)</option>
         </select>
-        <input type="text" id="aName" class="adm-in" placeholder="Item Name">
-        <input type="text" id="aImg" class="adm-in" placeholder="Image URL (Imgur)">
-        <input type="text" id="aVers" class="adm-in" placeholder="Versions (e.g. 1.21, 1.21.1)">
-        <input type="text" id="aLinks" class="adm-in" placeholder="Links (e.g. url1, url2)">
-        <button class="adm-btn" onclick="gen()">GENERATE & COPY CODE</button>
-        <textarea id="aOut" class="adm-in" style="height:100px; display:none;"></textarea>
+        <input type="text" id="aName" placeholder="Name" style="width:100%; padding:10px; margin-bottom:10px;">
+        <input type="text" id="aImg" placeholder="Image Link" style="width:100%; padding:10px; margin-bottom:10px;">
+        <input type="text" id="aVers" placeholder="Versions" style="width:100%; padding:10px; margin-bottom:10px;">
+        <input type="text" id="aLinks" placeholder="Links" style="width:100%; padding:10px; margin-bottom:10px;">
+        <button onclick="gen()" style="width:100%; padding:15px; background:var(--accent); color:white; border:none; font-weight:900; cursor:pointer;">GENERATE & COPY CODE</button>
     </div>
-</div>
 
-<script>
-    function filter(c) {
-        let cards = document.getElementsByClassName('card');
-        for (let card of cards) card.style.display = (c==='all' || card.dataset.cat===c) ? "block" : "none";
-        for (let t of document.getElementsByClassName('tab')) t.classList.remove('active');
-        event.target.classList.add('active');
-    }
-
-    function search() {
-        let query = document.getElementById('search').value.toUpperCase();
-        let cards = document.getElementsByClassName('card');
-        for (let card of cards) {
-            let name = card.querySelector('.card-name').innerText;
-            card.style.display = (name.toUpperCase().indexOf(query) > -1) ? "block" : "none";
+    <script>
+        function enterVault() {
+            document.getElementById('homeHero').style.display = 'none';
+            document.getElementById('vaultContent').style.display = 'block';
         }
-    }
+        function goHome() {
+            document.getElementById('homeHero').style.display = 'flex';
+            document.getElementById('vaultContent').style.display = 'none';
+        }
+        function filter(c) {
+            let cards = document.getElementsByClassName('card');
+            for (let card of cards) card.style.display = (c==='all' || card.dataset.cat===c) ? "block" : "none";
+            for (let t of document.getElementsByClassName('tab')) t.classList.remove('active');
+            event.target.classList.add('active');
+        }
+        function search() {
+            let q = document.getElementById('search').value.toUpperCase();
+            let cards = document.getElementsByClassName('card');
+            for (let card of cards) card.style.display = card.querySelector('.card-name').innerText.toUpperCase().includes(q) ? "block" : "none";
+        }
+        function openDL(n, i, v, l, c) {
+            document.getElementById('vaultContent').style.display = 'none';
+            document.getElementById('dlPage').style.display = 'block';
+            document.getElementById('dlTitle').innerText = n;
+            document.getElementById('dlImg').src = i;
+            let vArr = v.split(','), lArr = l.split(','), html = '';
+            vArr.forEach((ver, idx) => {
+                let txt = (c==='shop') ? 'ORDER VIA DISCORD' : 'DOWNLOAD v' + ver.trim();
+                html += `<a href="${lArr[idx].trim()}" target="_blank" style="background:white; color:black; padding:18px; border-radius:12px; text-decoration:none; font-weight:900; font-size:1.1rem;">${txt} →</a>`;
+            });
+            document.getElementById('dlLinks').innerHTML = html;
+            window.scrollTo(0,0);
+        }
+        function exitDL() {
+            document.getElementById('vaultContent').style.display = 'block';
+            document.getElementById('dlPage').style.display = 'none';
+        }
+        function accessAdmin() {
+            if(btoa(prompt("Pass:")) === "cG9va2llMTIz") document.getElementById('adminArea').style.display = 'block';
+        }
+        function gen() {
+            const n = document.getElementById('aName').value, c = document.getElementById('aCat').value, 
+                  i = document.getElementById('aImg').value, v = document.getElementById('aVers').value, l = document.getElementById('aLinks').value;
+            let shopInfo = (c === 'shop') ? `<div class="p-grid"><div class="p-item">Module <span class="p-val">$1</span></div><div class="p-item">Analyzer <span class="p-val">+$4</span></div><div class="p-item">Ocean <span class="p-val">+$10</span></div><div class="p-item">All SS <span class="p-val">+$15</span></div></div>` : '';
+            const code = `<div class="card" data-cat="${c}" onclick="openDL('${n}','${i}','${v}','${l}','${c}')"><img src="${i}" class="card-img"><div class="card-body"><div class="card-cat ${c}">${c}</div><h3 class="card-name">${n}</h3>${shopInfo}<p style="font-size:11px; color:#444; margin-top:10px;">Click to view details</p></div></div>`;
+            navigator.clipboard.writeText(code);
+            alert("Code Copied! Paste in vault-data.");
+        }
+    </script>
 
-    function openDL(name, img, vers, links, cat) {
-        document.getElementById('home').style.display = 'none';
-        document.getElementById('topNav').style.display = 'none';
-        document.getElementById('dlPage').style.display = 'block';
-        document.getElementById('dlTitle').innerText = name;
-        document.getElementById('dlImg').src = img;
-        
-        let vArr = vers.split(','), lArr = links.split(','), html = '';
-        vArr.forEach((v, i) => {
-            let btnTxt = (cat === 'shop') ? 'ORDER ON DISCORD' : 'DOWNLOAD v' + v.trim();
-            html += `<a href="${lArr[i].trim()}" target="_blank" style="background:white; color:black; padding:15px; border-radius:10px; text-decoration:none; font-weight:900;">${btnTxt} →</a>`;
-        });
-        document.getElementById('dlLinks').innerHTML = html;
-        window.scrollTo(0,0);
-    }
-
-    function goHome() {
-        document.getElementById('home').style.display = 'block';
-        document.getElementById('topNav').style.display = 'flex';
-        document.getElementById('dlPage').style.display = 'none';
-    }
-
-    function accessAdmin() {
-        if(btoa(prompt("Password:")) === "cG9va2llMTIz") document.getElementById('adminArea').style.display = 'block';
-    }
-
-    function gen() {
-        const n = document.getElementById('aName').value, c = document.getElementById('aCat').value, 
-              i = document.getElementById('aImg').value, v = document.getElementById('aVers').value, l = document.getElementById('aLinks').value;
-        
-        let extra = (c === 'shop') ? `
-            <div class="p-grid">
-                <div class="p-item">Per Module <span class="p-val">$1</span></div>
-                <div class="p-item">Mod Analyzer <span class="p-val">+$4</span></div>
-                <div class="p-item">Ocean Bypass <span class="p-val">+$10</span></div>
-                <div class="p-item">All SS Tools <span class="p-val">+$15</span></div>
-            </div>
-            <div class="details-txt">• Custom Built • 3 Day Warranty • Fixes Included</div>` : '';
-
-        const code = `
-        <div class="card" data-cat="${c}" onclick="openDL('${n}','${i}','${v}','${l}','${c}')">
-            <img src="${i}" class="card-img">
+    <div id="vault-data" style="display:none;">
+        <div class="card" data-cat="shop" onclick="openDL('Custom Client Build','https://i.imgur.com/8nN2S3H.png','Premium','https://discord.gg/yourlink','shop')">
+            <img src="https://i.imgur.com/8nN2S3H.png" class="card-img">
             <div class="card-body">
-                <div class="card-cat ${c}">${c}</div>
-                <h3 class="card-name">${n}</h3>
-                ${extra}
-                <p style="font-size:11px; color:#555; margin-top:10px;">Click to view details</p>
+                <div class="card-cat shop">shop</div>
+                <h3 class="card-name">Custom Client Build</h3>
+                <div class="p-grid">
+                    <div>Module <span class="p-val">$1</span></div>
+                    <div>Analyzer <span class="p-val">+$4</span></div>
+                    <div>Ocean <span class="p-val">+$10</span></div>
+                    <div>All SS <span class="p-val">+$15</span></div>
+                </div>
             </div>
-        </div>`;
-        document.getElementById('aOut').value = code;
-        navigator.clipboard.writeText(code);
-        alert("Code Copied! Paste in vault-data div.");
-    }
-</script>
-
-<div id="vault-data" style="display:none;">
-    <div class="card" data-cat="shop" onclick="openDL('Custom Client Build','https://i.imgur.com/8nN2S3H.png','Premium','https://discord.gg/yourlink','shop')">
-        <img src="https://i.imgur.com/8nN2S3H.png" class="card-img">
-        <div class="card-body">
-            <div class="card-cat shop">shop</div>
-            <h3 class="card-name">Custom Client Build</h3>
-            <div class="p-grid">
-                <div class="p-item">Per Module <span class="p-val">$1</span></div>
-                <div class="p-item">Mod Analyzer <span class="p-val">+$4</span></div>
-                <div class="p-item">Ocean Bypass <span class="p-val">+$10</span></div>
-                <div class="p-item">All SS Tools <span class="p-val">+$15</span></div>
-            </div>
-            <div class="details-txt">• Custom Built • 3 Day Warranty • Fixes Included</div>
         </div>
     </div>
-</div>
 
-<script>document.getElementById('mainGrid').innerHTML = document.getElementById('vault-data').innerHTML;</script>
+    <script>document.getElementById('mainGrid').innerHTML = document.getElementById('vault-data').innerHTML;</script>
 </body>
 </html>
