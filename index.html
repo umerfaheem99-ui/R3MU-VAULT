@@ -10,55 +10,64 @@
     <style>
         :root { --bg: #050505; --accent: #8147ff; --card-bg: #0d0d0d; --text: #eee; --border: #1a1a1a; --yt: #FF0000; --dc: #5865F2; }
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        /* Original High-Density Particles */
         #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none; }
         #content-wrapper { position: relative; z-index: 2; }
 
-        .nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background: rgba(5,5,5,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
-        .nav-logo { font-weight: 800; font-size: 1.5rem; text-transform: uppercase; color: #fff; }
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; background: rgba(5,5,5,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
+        /* Simple Bold Logo */
+        .nav-logo { font-weight: 900; font-size: 1.8rem; color: #fff; letter-spacing: -1px; }
 
-        .hero { padding: 60px 20px 20px; text-align: center; }
-        .hero-title { font-size: 2.8rem; font-weight: 900; margin: 0; text-transform: uppercase; }
+        .nav-links a { font-size: 1.5rem; transition: 0.3s; } /* Fixed Icon Size */
+        .nav-links a:hover { transform: scale(1.2); opacity: 0.8; }
 
-        .tabs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-        .tab { padding: 10px 20px; background: #111; border-radius: 10px; font-weight: 800; color: #555; cursor: pointer; border: 1px solid var(--border); transition: 0.3s; }
-        /* Tab Hover Effect */
-        .tab:hover { border-color: var(--accent); color: var(--accent); }
+        .hero { padding: 80px 20px 20px; text-align: center; }
+        .hero-title { font-size: 3.5rem; font-weight: 900; margin: 0; text-transform: uppercase; }
+        .hero-sub { color: #888; font-size: 1.1rem; margin: 10px 0 40px; font-weight: 600; }
+
+        /* Search Bar Restored */
+        .search-bar { width: 100%; max-width: 650px; padding: 18px 25px; background: rgba(15,15,15,0.9); border: 1px solid var(--border); border-radius: 15px; color: white; font-size: 1rem; outline: none; margin-bottom: 50px; display: block; margin-left: auto; margin-right: auto; }
+
+        .tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; }
+        .tab { padding: 12px 24px; background: #111; border-radius: 12px; font-weight: 800; color: #555; cursor: pointer; border: 1px solid var(--border); transition: 0.3s; }
+        .tab:hover { color: var(--accent); border-color: var(--accent); }
         .tab.active { background: var(--accent); color: white; border-color: var(--accent); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding-bottom: 100px; }
-        .card { background: rgba(13,13,13,0.8); border-radius: 18px; border: 1px solid var(--border); padding: 20px; transition: 0.4s; cursor: pointer; }
-        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .card img { width: 100%; border-radius: 12px; height: 160px; object-fit: cover; margin-bottom: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding-bottom: 100px; }
+        .card { background: rgba(13,13,13,0.8); border-radius: 20px; border: 1px solid var(--border); padding: 22px; transition: 0.4s; cursor: pointer; }
+        .card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(129,71,255,0.2); }
+        .card img { width: 100%; border-radius: 14px; height: 180px; object-fit: cover; margin-bottom: 18px; }
 
-        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
-        .m-content { background: #0a0a0a; padding: 30px; border-radius: 20px; max-width: 450px; width: 100%; border: 1px solid #222; text-align: center; }
-        .m-img { width: 100%; border-radius: 12px; height: 180px; object-fit: cover; margin-bottom: 15px; }
-        
-        /* Download Button Hover Effect */
-        .dl-btn { display: flex; justify-content: space-between; padding: 14px 18px; background: #151515; color: #fff; text-decoration: none; border-radius: 10px; font-weight: 800; margin-top: 10px; border: 1px solid #222; transition: 0.3s; }
-        .dl-btn:hover { background: var(--accent); transform: scale(1.02); }
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .m-content { background: #0a0a0a; padding: 40px; border-radius: 25px; max-width: 500px; width: 100%; border: 1px solid #222; text-align: center; }
+        .m-img { width: 100%; border-radius: 15px; margin-bottom: 20px; height: 220px; object-fit: cover; }
+        .dl-btn { display: flex; justify-content: space-between; padding: 16px 20px; background: #151515; color: #fff; text-decoration: none; border-radius: 12px; font-weight: 800; margin-top: 12px; border: 1px solid #222; transition: 0.3s; }
+        .dl-btn:hover { background: var(--accent); }
 
-        /* Admin Layout */
         #nimdoArea { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 2000; overflow-y: auto; padding: 50px 20px; }
-        .nimdo-card { background: #0d0d0d; max-width: 600px; margin: 0 auto; padding: 30px; border-radius: 20px; border: 1px solid var(--accent); }
-        .nimdo-in { width: 100%; padding: 12px; margin-bottom: 10px; background: #000; border: 1px solid #222; color: #fff; border-radius: 8px; box-sizing: border-box; }
-        .ver-row { display: flex; gap: 10px; margin-bottom: 10px; }
-        .btn-sm { padding: 10px; background: #222; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .nimdo-card { background: #0d0d0d; max-width: 600px; margin: 0 auto; padding: 40px; border-radius: 30px; border: 1px solid var(--accent); }
+        .nimdo-in { width: 100%; padding: 14px; margin-bottom: 12px; background: #000; border: 1px solid #222; color: #fff; border-radius: 10px; }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
     <div id="content-wrapper">
         <nav class="nav">
-            <div class="nav-logo">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</div>
+            <div class="nav-logo">R3MU VAULT</div>
             <div class="nav-links">
-                <a href="#" style="color:var(--yt); margin-right:15px;"><i class="fab fa-youtube"></i></a>
-                <a href="#" style="color:var(--dc);"><i class="fab fa-discord"></i></a>
+                <a href="#" target="_blank" style="color:var(--yt); margin-right:20px;"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank" style="color:var(--dc);"><i class="fab fa-discord"></i></a>
             </div>
         </nav>
 
         <div id="vaultContent">
-            <div class="hero"><h1 class="hero-title">PREMIUM VAULT</h1><p class="hero-sub">The ultimate archive.</p></div>
+            <div class="hero">
+                <h1 class="hero-title">PREMIUM VAULT</h1>
+                <p class="hero-sub">The ultimate archive. Crafted for eliteness.</p>
+                <input type="text" id="searchBar" class="search-bar" placeholder="Search for clients, mods, or sources..." onkeyup="search()">
+            </div>
+
             <div class="tabs">
                 <div class="tab active" onclick="filter('all', this)">ALL</div>
                 <div class="tab" onclick="filter('clients', this)">CLIENTS</div>
@@ -66,7 +75,15 @@
                 <div class="tab" onclick="filter('source', this)">SOURCE CODES</div>
                 <div class="tab" onclick="filter('shop', this)" style="color: gold;">💰 SHOP</div>
             </div>
-            <div class="grid" id="mainGrid"></div>
+
+            <div class="grid" id="mainGrid">
+                <div class="card" data-cat="shop" onclick="openItem('CustomClient','https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png','ALL Versions','https://discord.gg/aFnv9JMX5Y','shop','T3JkZXIgeW91ciBjdXN0b20gYnVpbHQgY2xpZW50IGZvciBtYXhpbXVtIHBlcmZvcm1hbmNl')">
+                    <img src="https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png">
+                    <div style="color:var(--accent); font-weight:900; font-size:11px;">SHOP</div>
+                    <h3>CustomClient</h3>
+                    <p>Order your custom built client for maximum performance...</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -81,38 +98,42 @@
             </select>
             <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
             <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL">
-            <textarea id="nDesc" class="nimdo-in" style="height:60px" placeholder="Description"></textarea>
+            <textarea id="nDesc" class="nimdo-in" style="height:80px" placeholder="Description"></textarea>
             
             <div id="versionList">
-                <div class="ver-row">
-                    <input type="text" class="nimdo-in nVer" placeholder="Version (e.g. 1.21)">
-                    <input type="text" class="nimdo-in nLink" placeholder="Link">
+                <div style="display:flex; gap:10px; margin-bottom:10px;">
+                    <input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1">
+                    <input type="text" class="nimdo-in nLink" placeholder="Link" style="flex:2">
                 </div>
             </div>
-            <button class="btn-sm" onclick="addVerRow()">+ Add Version</button>
-            <button class="btn-sm" onclick="remVerRow()">- Remove</button>
-            <button class="btn-sm" onclick="generateCode()" style="background:var(--accent); width:100%; margin-top:20px; font-weight:900;">GENERATE CODE</button>
+            <button onclick="addVerRow()" style="padding:10px; border-radius:5px; border:none; background:#222; color:white; cursor:pointer;">+ Add</button>
+            <button onclick="generateCode()" style="background:var(--accent); width:100%; margin-top:25px; padding:15px; border:none; border-radius:12px; color:white; font-weight:900; cursor:pointer;">GENERATE CODE</button>
         </div>
     </div>
 
     <div id="modal" onclick="closeM(event)">
         <div class="m-content" onclick="event.stopPropagation()">
             <img id="mImg" class="m-img" src="">
-            <h2 id="mTitle" style="font-size:24px; margin:0; font-weight:900;"></h2>
-            <p id="mDesc" style="color:#888; margin:15px 0;"></p>
+            <h2 id="mTitle" style="font-size:28px; margin:0; font-weight:900;"></h2>
+            <p id="mDesc" style="color:#888; margin:20px 0; font-weight:600;"></p>
             <div id="mLinks"></div>
         </div>
     </div>
 
     <script>
-        // Original Particle Config
-        particlesJS("particles-js", { "particles": { "number": { "value": 80 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "distance": 150, "color": "#8147ff", "opacity": 0.2 }, "move": { "speed": 2 } } });
+        // High Density Original Configuration
+        particlesJS("particles-js", { "particles": { "number": { "value": 100 }, "size": { "value": 3 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "distance": 150, "color": "#8147ff", "opacity": 0.35 }, "move": { "speed": 2.5 } } });
 
         if (window.location.search.includes('nimda')) {
             if (prompt("NIMDO Password:") === "pookie123") {
                 document.getElementById('nimdoArea').style.display = 'block';
                 document.getElementById('content-wrapper').style.display = 'none';
             }
+        }
+
+        function search() {
+            let q = document.getElementById('searchBar').value.toLowerCase();
+            document.querySelectorAll('.card').forEach(c => c.style.display = c.innerText.toLowerCase().includes(q) ? "block" : "none");
         }
 
         function filter(cat, el) {
@@ -126,29 +147,20 @@
             document.getElementById('mImg').src = img;
             document.getElementById('mDesc').innerText = descB64 ? atob(descB64) : "";
             let vArr = versions.split('|'), lArr = links.split('|'), h = '';
-            // Smart Button Text
-            let btnText = (cat === 'shop') ? "Order At Discord" : "Download Now";
-            vArr.forEach((v, i) => { h += `<a href="${lArr[i]}" class="dl-btn" target="_blank"><span>${v} | ${btnText}</span> <i class="fas fa-chevron-right"></i></a>`; });
+            let btnTxt = (cat === 'shop') ? "Order At Discord" : "Download Now";
+            vArr.forEach((v, i) => { h += `<a href="${lArr[i]}" class="dl-btn" target="_blank"><span>${v} | ${btnTxt}</span> <i class="fas fa-chevron-right"></i></a>`; });
             document.getElementById('mLinks').innerHTML = h;
             document.getElementById('modal').style.display = 'flex';
         }
 
         function closeM(e) { if(!e || e.target.id === 'modal') document.getElementById('modal').style.display = 'none'; }
-
-        function addVerRow() { document.getElementById('versionList').insertAdjacentHTML('beforeend', '<div class="ver-row"><input type="text" class="nimdo-in nVer" placeholder="Version"><input type="text" class="nimdo-in nLink" placeholder="Link"></div>'); }
-        function remVerRow() { let rows = document.querySelectorAll('.ver-row'); if(rows.length > 1) rows[rows.length-1].remove(); }
+        function addVerRow() { document.getElementById('versionList').insertAdjacentHTML('beforeend', '<div style="display:flex; gap:10px; margin-bottom:10px;"><input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1"><input type="text" class="nimdo-in nLink" placeholder="Link" style="flex:2"></div>'); }
 
         function generateCode() {
-            let cat = document.getElementById('nCat').value;
-            let name = document.getElementById('nName').value;
-            let img = document.getElementById('nImg').value;
-            let desc = btoa(document.getElementById('nDesc').value);
-            let vers = Array.from(document.querySelectorAll('.nVer')).map(i => i.value).join('|');
-            let links = Array.from(document.querySelectorAll('.nLink')).map(i => i.value).join('|');
-            
-            let code = `<div class="card" data-cat="${cat}" onclick="openItem('${name}','${img}','${vers}','${links}','${cat}','${desc}')"><img src="${img}"><div style="color:var(--accent); font-weight:900; font-size:10px;">${cat.toUpperCase()}</div><h3>${name}</h3><p>${document.getElementById('nDesc').value.substring(0,30)}...</p></div>`;
-            navigator.clipboard.writeText(code);
-            alert("Copied!");
+            let cat = document.getElementById('nCat').value, name = document.getElementById('nName').value, img = document.getElementById('nImg').value, desc = btoa(document.getElementById('nDesc').value);
+            let vers = Array.from(document.querySelectorAll('.nVer')).map(i => i.value).join('|'), links = Array.from(document.querySelectorAll('.nLink')).map(i => i.value).join('|');
+            let code = `<div class="card" data-cat="${cat}" onclick="openItem('${name}','${img}','${vers}','${links}','${cat}','${desc}')"><img src="${img}"><div style="color:var(--accent); font-weight:900; font-size:11px;">${cat.toUpperCase()}</div><h3>${name}</h3><p>${document.getElementById('nDesc').value.substring(0,30)}...</p></div>`;
+            navigator.clipboard.writeText(code); alert("Code Copied!");
         }
     </script>
 </body>
