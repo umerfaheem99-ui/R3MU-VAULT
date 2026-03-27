@@ -9,257 +9,440 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root { 
-            --bg: #0a0a0a; 
-            --accent: #a855f7; 
-            --card-bg: #111111; 
-            --text: #f1f1f1; 
-            --border: #282828; 
+            --bg: #050505; 
+            --accent: #8147ff; 
+            --card-bg: #0d0d0d; 
+            --text: #eee; 
+            --border: #1a1a1a; 
+            --yt: #FF0000; 
+            --dc: #5865F2; 
         }
-        body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; overflow-x:hidden; }
-        #particles-js { position:fixed; width:100%; height:100%; top:0; left:0; z-index:1; pointer-events:none; opacity:0.75; }
-
-        .nav { position:sticky; top:0; z-index:100; background:rgba(10,10,10,0.98); backdrop-filter:blur(20px); padding:20px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); }
-        .nav-logo { font-size:1.95rem; font-weight:900; letter-spacing:-2px; color:#c026d3; }
-        .nav-right { display:flex; align-items:center; gap:18px; }
-        .live-counter { background:rgba(168,85,247,0.15); border:1px solid var(--accent); padding:6px 16px; border-radius:50px; font-size:13.5px; font-weight:700; display:flex; align-items:center; gap:6px; }
-        .social-icon { font-size:1.85rem; transition:all 0.3s ease; }
-        .social-icon:hover { transform:scale(1.3); }
-
-        .hero { text-align:center; padding:85px 20px 45px; }
-        .hero-title { font-size:3.7rem; font-weight:900; margin:0; letter-spacing:-3px; background:linear-gradient(90deg,#fff,#c026d3); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-        .hero-sub { color:#aaa; font-size:1.25rem; margin:12px 0 38px; }
-
-        .search-bar { width:88%; max-width:680px; margin:0 auto 35px; padding:18px 30px; background:#1a1a1a; border:2px solid #333; border-radius:9999px; color:white; font-size:1.05rem; outline:none; transition:all 0.4s; }
-        .search-bar:focus { border-color:var(--accent); box-shadow:0 0 30px rgba(168,85,247,0.4); }
-
-        /* FILTER BAR - EXACTLY LIKE YOUR NEW IMAGE */
-        .filter-bar {
-            max-width:1400px; margin:0 auto; padding:0 20px 30px;
-            display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
+        body { 
+            margin: 0; 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
         }
-        .filter-container {
-            background:#1a1a1a; border-radius:9999px; padding:6px; display:flex; gap:6px; box-shadow:0 4px 15px rgba(0,0,0,0.3);
+       
+        #particles-js { 
+            position: fixed; 
+            width: 100%; 
+            height: 100%; 
+            top: 0; 
+            left: 0; 
+            z-index: 1; 
+            pointer-events: none; 
         }
-        .filter-btn {
-            padding:12px 26px; border-radius:9999px; font-weight:700; font-size:0.95rem; cursor:pointer; transition:all 0.3s;
+        #content-wrapper, #detailPage { 
+            position: relative; 
+            z-index: 2; 
         }
-        .filter-btn.active {
-            background:var(--accent); color:white; box-shadow:0 0 15px rgba(168,85,247,0.5);
+        .nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 16px 5%; 
+            background: rgba(5,5,5,0.95); 
+            backdrop-filter: blur(15px); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 1px solid var(--border); 
         }
-        .filter-btn:not(.active) {
-            background:transparent; color:#bbb;
+        .nav-logo { 
+            font-weight: 900; 
+            font-size: 1.4rem; 
+            color: #fff; 
+            letter-spacing: -1px; 
         }
-        .filter-btn:not(.active):hover { color:white; }
+        .nav-links { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+       
+        .cheat-counter { 
+            display: flex; 
+            align-items: center; 
+            color: #fff; 
+            font-weight: 700; 
+            font-size: 12px; 
+            margin-right: 10px; 
+            border: 1px solid rgba(129,71,255,0.3); 
+            padding: 4px 10px; 
+            border-radius: 9999px; 
+            background: rgba(129,71,255,0.08); 
+        }
+        .live-dot { 
+            width: 6px; 
+            height: 6px; 
+            background: var(--accent); 
+            border-radius: 50%; 
+            margin-right: 6px; 
+            animation: pulse 1.5s infinite; 
+        }
+        @keyframes pulse { 
+            0% { box-shadow: 0 0 0 0 rgba(129,71,255,0.7); } 
+            70% { box-shadow: 0 0 0 6px rgba(129,71,255,0); } 
+            100% { box-shadow: 0 0 0 0 rgba(129,71,255,0); } 
+        }
+        .hero { 
+            padding: 50px 16px 20px; 
+            text-align: center; 
+        }
+        .hero-title { 
+            font-size: 2.2rem; 
+            font-weight: 900; 
+            margin: 0; 
+            text-transform: uppercase; 
+            letter-spacing: -1.5px; 
+        }
+        .hero-sub { 
+            color: #888; 
+            font-size: 0.95rem; 
+            margin: 8px 0 25px; 
+            font-weight: 600; 
+        }
 
-        .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:24px; max-width:1400px; margin:0 auto; padding:0 20px 80px; }
-        .card { background:var(--card-bg); border-radius:18px; overflow:hidden; border:1px solid var(--border); transition:all 0.4s ease; cursor:pointer; }
-        .card:hover { transform:translateY(-12px); border-color:var(--accent); box-shadow:0 20px 40px rgba(168,85,247,0.25); }
-        .card img { width:100%; height:165px; object-fit:cover; }
-        .card-content { padding:16px; }
-        .card .cat { color:var(--accent); font-size:11px; font-weight:800; letter-spacing:1px; }
-        .card h3 { margin:8px 0 5px; font-size:1.2rem; }
-        .card p { color:#999; font-size:0.9rem; }
+        .search-bar { 
+            width: 90%; 
+            max-width: 520px; 
+            padding: 14px 20px; 
+            background: rgba(15,15,15,0.95); 
+            border: 1px solid var(--border); 
+            border-radius: 9999px; 
+            color: white; 
+            font-size: 0.95rem; 
+            outline: none; 
+            margin-bottom: 20px; 
+            display: block; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        .search-bar:focus { 
+            border-color: var(--accent); 
+            box-shadow: 0 0 15px rgba(129, 71, 255, 0.3); 
+        }
 
-        /* DETAIL PAGE (Clean & Simple) */
-        #detailPage { display:none; min-height:100vh; background:var(--bg); }
-        .detail-hero { display:flex; flex-wrap:wrap; gap:40px; padding:50px 5%; max-width:1400px; margin:0 auto; }
-        .detail-img { flex:1; min-width:340px; }
-        .detail-img img { width:100%; border-radius:18px; box-shadow:0 15px 40px rgba(0,0,0,0.6); cursor:zoom-in; }
-        .detail-info { flex:1; min-width:340px; }
-        .detail-info .cat { color:var(--accent); font-weight:700; font-size:13.5px; }
-        .detail-info h1 { font-size:3rem; margin:12px 0 14px; font-weight:900; }
-        .detail-info p { color:#ccc; font-size:1.15rem; }
+        .version-filter { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 8px; 
+            margin-bottom: 18px; 
+        }
+        .version-btn { 
+            padding: 6px 13px; 
+            background: #111; 
+            border-radius: 9999px; 
+            font-size: 0.85rem; 
+            cursor: pointer; 
+            border: 1px solid var(--border); 
+            color: #666; 
+            transition: all 0.25s ease; 
+        }
+        .version-btn:hover { 
+            background: #1f1f1f; 
+            color: #fff; 
+        }
+        .version-btn.active { 
+            background: var(--accent); 
+            color: white; 
+            border-color: var(--accent); 
+        }
 
-        .version-box { max-width:1400px; margin:30px auto; padding:0 5%; }
-        .version-box h3 { margin-bottom:12px; color:#ddd; }
-        .version-select { width:100%; padding:16px 22px; background:#1f1f1f; border:1px solid #444; border-radius:14px; color:white; font-size:1.1rem; margin-bottom:16px; }
-        .big-dl-btn { width:100%; padding:19px; background:linear-gradient(90deg,var(--accent),#c026d3); color:white; font-size:1.3rem; font-weight:800; border:none; border-radius:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:12px; }
-        .big-dl-btn:hover { transform:translateY(-4px); box-shadow:0 15px 35px rgba(168,85,247,0.5); }
+        .tabs { 
+            display: flex; 
+            gap: 10px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            margin-bottom: 20px; 
+        }
+        .tab { 
+            padding: 10px 18px; 
+            background: #111; 
+            border-radius: 9999px; 
+            font-weight: 700; 
+            color: #666; 
+            cursor: pointer; 
+            border: 1px solid var(--border); 
+            transition: all 0.25s ease; 
+            font-size: 0.85rem; 
+        }
+        .tab:hover { 
+            background: #1f1f1f; 
+            color: #fff; 
+        }
+        .tab.active { 
+            background: var(--accent); 
+            color: white; 
+            border-color: var(--accent); 
+        }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            gap: 14px; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 0 12px 60px; 
+        }
+        .card { 
+            background: rgba(13,13,13,0.85); 
+            border-radius: 12px; 
+            border: 1px solid var(--border); 
+            padding: 10px; 
+            transition: all 0.4s ease; 
+            cursor: pointer; 
+            overflow: hidden; 
+        }
+        .card:hover { 
+            transform: translateY(-6px); 
+            border-color: var(--accent); 
+        }
+        .card img { 
+            width: 100%; 
+            border-radius: 8px; 
+            height: 110px; 
+            object-fit: cover; 
+            margin-bottom: 10px; 
+        }
+        .card .cat-badge { 
+            color: var(--accent); 
+            font-weight: 800; 
+            font-size: 9px; 
+            letter-spacing: 1px; 
+        }
+        .card h3 { 
+            font-size: 0.95rem; 
+            margin: 6px 0 3px; 
+            font-weight: 700; 
+        }
+        .card p { 
+            font-size: 0.8rem; 
+            color: #777; 
+            margin: 0; 
+            line-height: 1.3; 
+        }
 
-        .detail-sections { max-width:1400px; margin:0 auto; padding:0 5% 80px; }
-        .section { background:#121212; border:1px solid var(--border); border-radius:18px; padding:28px; margin-bottom:30px; }
-        .section-title { font-size:1.35rem; font-weight:700; margin-bottom:16px; color:#ddd; display:flex; align-items:center; gap:10px; }
-        .screenshots { display:flex; gap:14px; flex-wrap:wrap; }
-        .screenshots img { width:210px; border-radius:12px; cursor:zoom-in; }
-        .keybinds, .changelog { white-space:pre-line; line-height:1.75; color:#ccc; font-size:1.05rem; }
+        /* DETAIL PAGE - CLEANER & SMALLER */
+        #detailPage {
+            min-height: 100vh;
+            background: var(--bg);
+        }
+        .detail-hero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px 5%;
+            max-width: 1200px; 
+            margin: 0 auto; 
+            align-items: flex-start;
+        }
+        .detail-main-img-container {
+            flex: 1;
+            min-width: 280px;
+        }
+        .detail-main-img-container img {
+            width: 100%;
+            border-radius: 10px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+        .detail-main-img-container img:hover {
+            transform: scale(1.03);
+        }
+        .detail-info-header {
+            flex: 1.3;
+            min-width: 260px;
+        }
+        .detail-info-header .cat-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(129,71,255,0.15);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .detail-info-header h1 {
+            font-size: 1.8rem; 
+            font-weight: 900;
+            margin: 0 0 8px;
+        }
+        .detail-info-header p {
+            font-size: 0.95rem;
+            color: #aaa;
+            margin: 0;
+        }
+
+        .detail-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5% 60px;
+        }
+        .detail-section {
+            margin-bottom: 28px;
+        }
+        .section-title {
+            font-size: 1.1rem; 
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #ddd;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 18px;
+        }
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            gap: 8px;
+        }
+        .screenshots-grid img {
+            width: 100%;
+            border-radius: 8px;
+            cursor: zoom-in;
+            transition: all 0.2s ease;
+        }
+        .screenshots-grid img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 10px rgba(129,71,255,0.2);
+        }
+        .dl-btn { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 10px 14px; 
+            background: #151515; 
+            color: #fff; 
+            text-decoration: none; 
+            border-radius: 10px; 
+            font-weight: 600; 
+            margin-bottom: 10px; 
+            border: 1px solid #222; 
+            font-size: 0.9rem; 
+        }
+        .dl-btn:hover { 
+            background: var(--accent); 
+        }
+        .keybind-list {
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.9rem; 
+            font-family: monospace;
+            white-space: pre-line;
+        }
+
+        #zoomOverlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.98); 
+            z-index: 2000; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        #zoomImg { 
+            max-width: 90%; 
+            max-height: 90%; 
+            border-radius: 12px; 
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+        }
+
+        /* ADMIN PANEL - MINIMAL STYLED */
+        #nimdoArea { 
+            display: none; 
+            padding: 30px 16px; 
+            min-height: 100vh; 
+            background: #050505; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 5000; 
+            overflow-y: auto; 
+        }
+        .nimdo-card { 
+            background: #0d0d0d; 
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 28px; 
+            border-radius: 16px; 
+            border: 1px solid var(--accent); 
+        }
+        .nimdo-in { 
+            width: 100%; 
+            padding: 11px 14px; 
+            margin-bottom: 12px; 
+            background: #000; 
+            border: 1px solid #333; 
+            color: #fff; 
+            border-radius: 8px; 
+            font-size: 0.95rem; 
+            box-sizing: border-box; 
+        }
+        .row-flex {
+            display: flex; 
+            gap: 10px; 
+            margin-bottom: 10px; 
+            align-items: center;
+        }
+        .admin-label {
+            font-weight: 600;
+            color: #ccc;
+            margin: 16px 0 6px;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
+    <div id="adminTrigger" onclick="checkAdmin()"></div>
 
-    <!-- ADMIN TRIGGER -->
-    <div id="adminTrigger" onclick="checkAdmin()" style="position:fixed;bottom:12px;right:12px;width:20px;height:20px;opacity:0.05;cursor:pointer;z-index:9999;"></div>
+    <!-- ADMIN PANEL -->
+    <div id="nimdoArea">
+        <div class="nimdo-card">
+            <h2 style="color:var(--accent); text-align:center; margin:0 0 8px; font-size:1.5rem;">NIMDO ADMIN v2</h2>
+            <p style="text-align:center; color:#777; margin-bottom:20px; font-size:0.95rem;">Add new vault item</p>
+            
+            <select id="nCat" class="nimdo-in">
+                <option value="clients">Clients</option>
+                <option value="mods / macros">Mods / Macros</option>
+                <option value="source codes">Source Codes</option>
+                <option value="shop">Shop</option>
+            </select>
+            <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
+            <input type="text" id="nImg" class="nimdo-in" placeholder="Main Image URL">
+            
+            <div class="admin-label">Description</div>
+            <textarea id="nDesc" class="nimdo-in" style="height:70px" placeholder="Short description..."></textarea>
+            
+            <div class="admin-label">Loader / Installation</div>
+            <textarea id="nLoader" class="nimdo-in" style="height:70px" placeholder="e.g. Fabric 1.17-1.18 • Put in mods folder"></textarea>
+            
+            <div class="admin-label">Keybinds</div>
+            <textarea id="nKeybinds" class="nimdo-in" style="height:70px" placeholder="e.g. Right Shift&#10;Left Ctrl + K"></textarea>
 
-    <!-- MAIN PAGE -->
-    <div id="content-wrapper">
-        <nav class="nav">
-            <div class="nav-logo">R3MU VAULT</div>
-            <div class="nav-right">
-                <div class="live-counter"><span style="color:#a855f7;">●</span> LIVE • <span id="cheatCount">0</span> CHEATS</div>
-                <a href="https://www.youtube.com/@r3mu2" target="_blank" class="social-icon" style="color:#FF0000;"><i class="fab fa-youtube"></i></a>
-                <a href="https://discord.com/invite/r3musblackmarket" target="_blank" class="social-icon" style="color:#5865F2;"><i class="fab fa-discord"></i></a>
+            <!-- VERSIONS -->
+            <div class="admin-label">Versions &amp; Download Links</div>
+            <div id="versionList">
+                <div class="row-flex">
+                    <input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1">
+                    <input type="text" class="nimdo-in nLink" placeholder="Download Link" style="flex:2">
+                    <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:6px 10px;border-radius:8px;font-size:14px;cursor:pointer;">−</button>
+                </div>
             </div>
-        </nav>
-
-        <div class="hero">
-            <h1 class="hero-title">PREMIUM VAULT</h1>
-            <p class="hero-sub">Elite Minecraft Archive by R3MU</p>
-            <input type="text" id="searchBar" class="search-bar" placeholder="Search clients, mods, keybinds..." onkeyup="search()">
-        </div>
-
-        <!-- FILTER BAR - EXACTLY LIKE YOUR IMAGE -->
-        <div class="filter-bar">
-            <div class="filter-container" id="sortContainer">
-                <div onclick="setFilter(this,'all')" class="filter-btn active">All</div>
-                <div onclick="setFilter(this,'newest')" class="filter-btn">Newest</div>
-                <div onclick="setFilter(this,'most-viewed')" class="filter-btn">Most Viewed</div>
-                <div onclick="setFilter(this,'most-downloaded')" class="filter-btn">Most Downloaded</div>
-            </div>
-        </div>
-
-        <div class="grid" id="mainGrid"></div>
-    </div>
-
-    <!-- DETAIL PAGE -->
-    <div id="detailPage">
-        <nav class="nav">
-            <div class="nav-logo">R3MU VAULT</div>
-            <div class="nav-right">
-                <a onclick="backToVault()" style="color:#fff;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:1.1rem;">
-                    ← BACK TO VAULT
-                </a>
-            </div>
-        </nav>
-
-        <div class="detail-hero">
-            <div class="detail-img"><img id="detailImg" src="" onclick="zoomImg(this.src)"></div>
-            <div class="detail-info">
-                <div id="detailCat" class="cat"></div>
-                <h1 id="detailTitle"></h1>
-                <p id="detailDesc"></p>
-            </div>
-        </div>
-
-        <div class="version-box">
-            <h3>Choose Version & Download</h3>
-            <select id="versionSelect" class="version-select" onchange="updateBigBtn()"></select>
-            <button id="bigDownloadBtn" class="big-dl-btn" onclick="triggerDownload()">
-                <span id="bigVersionText">1.21</span> • Download Now
-            </button>
-        </div>
-
-        <div class="detail-sections">
-            <div class="section">
-                <div class="section-title"><i class="fas fa-images"></i> SCREENSHOTS</div>
-                <div id="detailScreenshots" class="screenshots"></div>
-            </div>
-            <div class="section">
-                <div class="section-title"><i class="fas fa-cube"></i> LOADER / INSTALLATION</div>
-                <div id="detailLoader" class="keybinds"></div>
-            </div>
-            <div class="section">
-                <div class="section-title"><i class="fas fa-keyboard"></i> KEYBINDS</div>
-                <div id="detailKeybinds" class="keybinds"></div>
-            </div>
-            <div class="section">
-                <div class="section-title"><i class="fas fa-star"></i> WHAT'S NEW</div>
-                <div id="detailChangelog" class="changelog"></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="zoomOverlay" onclick="this.style.display='none'" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.97);z-index:9999;justify-content:center;align-items:center;">
-        <img id="zoomImg" src="" style="max-width:92%;max-height:92%;border-radius:18px;">
-    </div>
-
-    <script>
-        particlesJS("particles-js", { particles: { number:{value:75}, color:{value:"#a855f7"}, line_linked:{enable:true,distance:160,color:"#c026d3",opacity:0.3,width:1}, move:{speed:1.6} }});
-
-        const items = [
-            { slug:"cw-hack-client", name:"Cw Hack Client", cat:"clients", img:"https://i.postimg.cc/dtJfGxjM/2.png", desc:"Best CPVP Hack Client", loader:"Fabric Loader • 1.17x - 1.18x\nPlace in mods folder", keybinds:"Right Shift - Open Menu\nLeft Ctrl + K - Toggle", changelog:"• Fixed crashes\n• Added new reach\n• Better performance", versions:[{ver:"1.17x",link:"https://shrinkme.click/9Kz0O"},{ver:"1.18x",link:"https://shrinkme.click/md3Y"}], screenshots:["https://i.postimg.cc/dtJfGxjM/2.png","https://picsum.photos/id/1015/1400/900"] },
-            { slug:"gardenia-client", name:"Gardenia Client", cat:"clients", img:"https://i.postimg.cc/4xWnXqBg/image.png", desc:"Best High Ping Client", loader:"Fabric Loader • 1.21\nOptimized for high ping", keybinds:"Right Shift - Open GUI\nF8 - Toggle modules", changelog:"• New high-ping optimizer\n• Fixed memory leak\n• 1.21.4 support", versions:[{ver:"1.21",link:"https://shrinkme.click/bUCrhByx"}], screenshots:["https://i.postimg.cc/4xWnXqBg/image.png","https://picsum.photos/id/201/1400/900"] }
-        ];
-
-        let currentSort = 'all';
-
-        function renderGrid() {
-            const grid = document.getElementById('mainGrid');
-            grid.innerHTML = '';
-            let filtered = [...items];
-            filtered.forEach(item => {
-                const cardHTML = `
-                    <div class="card" onclick="openDetail('${item.slug}')">
-                        <img src="${item.img}">
-                        <div class="card-content">
-                            <div class="cat">${item.cat.toUpperCase()}</div>
-                            <h3>${item.name}</h3>
-                            <p>${item.desc}</p>
-                        </div>
-                    </div>`;
-                grid.innerHTML += cardHTML;
-            });
-            document.getElementById('cheatCount').innerText = items.length;
-        }
-
-        function setFilter(el, type) {
-            currentSort = type;
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            el.classList.add('active');
-            renderGrid();
-        }
-
-        function openDetail(slug) {
-            const item = items.find(i => i.slug === slug);
-            if (!item) return;
-            document.getElementById('content-wrapper').style.display = 'none';
-            document.getElementById('detailPage').style.display = 'block';
-
-            document.getElementById('detailImg').src = item.img;
-            document.getElementById('detailCat').innerText = item.cat.toUpperCase();
-            document.getElementById('detailTitle').innerText = item.name;
-            document.getElementById('detailDesc').innerText = item.desc;
-            document.getElementById('detailLoader').innerHTML = `<p style="white-space:pre-line;">${item.loader}</p>`;
-            document.getElementById('detailKeybinds').innerHTML = `<p style="white-space:pre-line;">${item.keybinds}</p>`;
-            document.getElementById('detailChangelog').innerHTML = `<p style="white-space:pre-line;">${item.changelog}</p>`;
-
-            const select = document.getElementById('versionSelect');
-            select.innerHTML = '';
-            item.versions.forEach((v,i) => {
-                const opt = document.createElement('option');
-                opt.value = i; opt.textContent = v.ver;
-                select.appendChild(opt);
-            });
-            updateBigBtn();
-        }
-
-        function updateBigBtn() {
-            const select = document.getElementById('versionSelect');
-            document.getElementById('bigVersionText').innerText = select.options[select.selectedIndex].text;
-        }
-
-        function triggerDownload() {
-            const select = document.getElementById('versionSelect');
-            const item = items.find(i => document.getElementById('detailTitle').innerText === i.name);
-            if (item) window.open(item.versions[select.value].link, '_blank');
-        }
-
-        function backToVault() {
-            document.getElementById('detailPage').style.display = 'none';
-            document.getElementById('content-wrapper').style.display = 'block';
-        }
-
-        function zoomImg(src) {
-            document.getElementById('zoomImg').src = src;
-            document.getElementById('zoomOverlay').style.display = 'flex';
-        }
-
-        function search() { renderGrid(); }
-
-        function checkAdmin() {
-            if (prompt("Enter NIMDO Password:") === "pookie123") alert("Admin panel coming soon!");
-        }
-
-        window.onload = () => { renderGrid(); };
-    </script>
-</body>
-</html>
+            <button onclick="addVerRow()" style="padding:8
