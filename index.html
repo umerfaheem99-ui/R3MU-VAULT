@@ -16,17 +16,15 @@
         #content-wrapper { position: relative; z-index: 2; }
 
         .nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; background: rgba(5,5,5,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
-        /* Simple Bold Logo */
         .nav-logo { font-weight: 900; font-size: 1.8rem; color: #fff; letter-spacing: -1px; }
 
-        .nav-links a { font-size: 1.5rem; transition: 0.3s; } /* Fixed Icon Size */
+        .nav-links a { font-size: 1.5rem; transition: 0.3s; }
         .nav-links a:hover { transform: scale(1.2); opacity: 0.8; }
 
         .hero { padding: 80px 20px 20px; text-align: center; }
         .hero-title { font-size: 3.5rem; font-weight: 900; margin: 0; text-transform: uppercase; }
         .hero-sub { color: #888; font-size: 1.1rem; margin: 10px 0 40px; font-weight: 600; }
 
-        /* Search Bar Restored */
         .search-bar { width: 100%; max-width: 650px; padding: 18px 25px; background: rgba(15,15,15,0.9); border: 1px solid var(--border); border-radius: 15px; color: white; font-size: 1rem; outline: none; margin-bottom: 50px; display: block; margin-left: auto; margin-right: auto; }
 
         .tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; }
@@ -77,6 +75,13 @@
             </div>
 
             <div class="grid" id="mainGrid">
+                <div class="card" data-cat="clients" onclick="openItem('Gardenia Client','https://media.discordapp.net/attachments/1466198923277369464/1466199335929905324/image.png?ex=69c65cca&is=69c50b4a&hm=025377816c926eb151c07181936244c222199817823145a81db58fed5151d0c3&=&format=webp&quality=lossless&width=1463&height=822','1.21','https://shrinkme.click/bUCrhByx','clients','S2V5YmluZCA6IFJpZ2h0IFNoaWZ0')">
+                    <img src="https://media.discordapp.net/attachments/1466198923277369464/1466199335929905324/image.png?ex=69c65cca&is=69c50b4a&hm=025377816c926eb151c07181936244c222199817823145a81db58fed5151d0c3&=&format=webp&quality=lossless&width=1463&height=822">
+                    <div style="color:var(--accent); font-weight:900; font-size:11px;">CLIENTS</div>
+                    <h3>Gardenia Client</h3>
+                    <p>Keybind : Right Shift...</p>
+                </div>
+
                 <div class="card" data-cat="shop" onclick="openItem('CustomClient','https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png','ALL Versions','https://discord.gg/aFnv9JMX5Y','shop','T3JkZXIgeW91ciBjdXN0b20gYnVpbHQgY2xpZW50IGZvciBtYXhpbXVtIHBlcmZvcm1hbmNl')">
                     <img src="https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png">
                     <div style="color:var(--accent); font-weight:900; font-size:11px;">SHOP</div>
@@ -99,7 +104,6 @@
             <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
             <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL">
             <textarea id="nDesc" class="nimdo-in" style="height:80px" placeholder="Description"></textarea>
-            
             <div id="versionList">
                 <div style="display:flex; gap:10px; margin-bottom:10px;">
                     <input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1">
@@ -121,7 +125,6 @@
     </div>
 
     <script>
-        // High Density Original Configuration
         particlesJS("particles-js", { "particles": { "number": { "value": 100 }, "size": { "value": 3 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "distance": 150, "color": "#8147ff", "opacity": 0.35 }, "move": { "speed": 2.5 } } });
 
         if (window.location.search.includes('nimda')) {
