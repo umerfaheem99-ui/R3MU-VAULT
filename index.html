@@ -1438,28 +1438,45 @@ function generateCode() {
   document.querySelectorAll('#versionList .row-flex').forEach(row => {
     const v = row.querySelector('.nVer').value.trim();
     const l = row.querySelector('.nLink').value.trim();
-    if (v && l) versions.push({ ver: v, link: l });
+    if (v && l) versions.push({ "ver": v, "link": l });
   });
 
   const screenshots = [...document.querySelectorAll('.nScreenshot')]
     .map(i => i.value.trim()).filter(Boolean);
 
-  const newItem = {
-    slug: name.toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,''),
-    name,
-    cat: document.getElementById('nCat').value,
-    img,
-    desc: document.getElementById('nDesc').value.trim(),
-    loader: document.getElementById('nLoader').value.trim(),
-    keybinds: document.getElementById('nKeybinds').value.trim(),
-    versions,
-    screenshots: screenshots.length ? screenshots : [img]
-  };
+  const slug = name.toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
 
-  const code = `items.push(${JSON.stringify(newItem, null, 2)});`;
+  // Build the code string in the same format as the existing items.push() code
+  let code = `items.push({\n`;
+  code += `  "slug": "${slug}",\n`;
+  code += `  "name": "${name}",\n`;
+  code += `  "cat": "${document.getElementById('nCat').value}",\n`;
+  code += `  "img": "${img}",\n`;
+  code += `  "desc": "${document.getElementById('nDesc').value.trim().replace(/\n/g, '\n')}",\n`;
+  code += `  "loader": "${document.getElementById('nLoader').value.trim().replace(/\n/g, '\n')}",\n`;
+  code += `  "keybinds": "${document.getElementById('nKeybinds').value.trim().replace(/\n/g, '\n')}",\n`;
+
+  code += `  "versions": [\n`;
+  versions.forEach((v, i) => {
+    code += `    {\n      "ver": "${v.ver}",\n      "link": "${v.link}"\n    }`;
+    if (i < versions.length - 1) code += ',';
+    code += '\n';
+  });
+  code += `  ],\n`;
+
+  code += `  "screenshots": [\n`;
+  const finalScreenshots = screenshots.length ? screenshots : [img];
+  finalScreenshots.forEach((s, i) => {
+    code += `    "${s}"`;
+    if (i < finalScreenshots.length - 1) code += ',';
+    code += '\n';
+  });
+  code += `  ]\n`;
+  code += `});`;
+
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(code)
-      .then(() => alert("✅ Copied! Paste inside the items array in the <script> section."))
+      .then(() => alert("✅ Code copied! Paste it in the JavaScript section after the items array (where the other items.push() code is)."))
       .catch(() => prompt("Copy manually:", code));
   } else {
     prompt("Copy manually:", code);
