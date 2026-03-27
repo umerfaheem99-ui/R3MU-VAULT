@@ -9,13 +9,14 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root { 
-            --bg: #050505; 
-            --accent: #8147ff; 
-            --card-bg: #0d0d0d; 
-            --text: #eee; 
-            --border: #1a1a1a; 
+            --bg: #0a0a0a; 
+            --accent: #a855f7; 
+            --card-bg: #111111; 
+            --text: #f1f1f1; 
+            --border: #222222; 
             --yt: #FF0000; 
             --dc: #5865F2; 
+            --neon: #c026d3;
         }
         body { 
             margin: 0; 
@@ -33,18 +34,21 @@
             left: 0; 
             z-index: 1; 
             pointer-events: none; 
+            opacity: 0.85;
         }
         #content-wrapper, #detailPage { 
             position: relative; 
             z-index: 2; 
         }
+
+        /* NAV */
         .nav { 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            padding: 20px 5%; 
-            background: rgba(5,5,5,0.95); 
-            backdrop-filter: blur(15px); 
+            padding: 22px 5%; 
+            background: rgba(10,10,10,0.97); 
+            backdrop-filter: blur(20px); 
             position: sticky; 
             top: 0; 
             z-index: 100; 
@@ -52,155 +56,192 @@
         }
         .nav-logo { 
             font-weight: 900; 
-            font-size: 1.7rem; 
+            font-size: 1.85rem; 
             color: #fff; 
-            letter-spacing: -1.5px; 
+            letter-spacing: -2px; 
+            background: linear-gradient(90deg, #a855f7, #e0a3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .nav-links { 
             display: flex; 
             align-items: center; 
-            gap: 15px; 
+            gap: 18px; 
         }
-       
         .cheat-counter { 
             display: flex; 
             align-items: center; 
             color: #fff; 
             font-weight: 700; 
-            font-size: 13px; 
-            margin-right: 10px; 
-            border: 1px solid rgba(129,71,255,0.3); 
-            padding: 5px 12px; 
+            font-size: 13.5px; 
+            border: 1px solid rgba(168,85,247,0.4); 
+            padding: 6px 14px; 
             border-radius: 9999px; 
-            background: rgba(129,71,255,0.08); 
+            background: rgba(168,85,247,0.1); 
         }
         .live-dot { 
-            width: 7px; 
-            height: 7px; 
+            width: 8px; 
+            height: 8px; 
             background: var(--accent); 
             border-radius: 50%; 
             margin-right: 8px; 
-            animation: pulse 1.5s infinite; 
+            animation: pulse 1.4s infinite; 
         }
         @keyframes pulse { 
-            0% { box-shadow: 0 0 0 0 rgba(129,71,255,0.7); } 
-            70% { box-shadow: 0 0 0 8px rgba(129,71,255,0); } 
-            100% { box-shadow: 0 0 0 0 rgba(129,71,255,0); } 
+            0% { box-shadow: 0 0 0 0 rgba(168,85,247,0.8); } 
+            70% { box-shadow: 0 0 0 10px rgba(168,85,247,0); } 
+            100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); } 
         }
+
+        /* HERO + HOMEPAGE */
         .hero { 
-            padding: 70px 20px 30px; 
+            padding: 80px 20px 40px; 
             text-align: center; 
+            position: relative;
         }
         .hero-title { 
-            font-size: 3.2rem; 
+            font-size: 3.6rem; 
             font-weight: 900; 
             margin: 0; 
             text-transform: uppercase; 
-            letter-spacing: -2px; 
+            letter-spacing: -3px;
+            background: linear-gradient(90deg, #fff, #e0a3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .hero-sub { 
-            color: #888; 
-            font-size: 1.1rem; 
-            margin: 12px 0 35px; 
+            color: #bbb; 
+            font-size: 1.25rem; 
+            margin: 14px 0 40px; 
             font-weight: 600; 
         }
         .search-bar { 
             width: 90%; 
-            max-width: 620px; 
-            padding: 16px 24px; 
-            background: rgba(15,15,15,0.95); 
-            border: 1px solid var(--border); 
+            max-width: 660px; 
+            padding: 18px 28px; 
+            background: rgba(20,20,20,0.95); 
+            border: 2px solid var(--border); 
             border-radius: 9999px; 
             color: white; 
-            font-size: 1rem; 
+            font-size: 1.05rem; 
             outline: none; 
             margin-bottom: 40px; 
-            display: block; 
-            margin-left: auto; 
-            margin-right: auto; 
-            transition: all 0.3s ease; 
+            transition: all 0.4s ease; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        .search-bar:focus { 
+        .search-bar:focus, .search-bar:hover { 
             border-color: var(--accent); 
-            box-shadow: 0 0 20px rgba(129, 71, 255, 0.3); 
-            transform: scale(1.02); 
+            box-shadow: 0 0 25px rgba(168,85,247,0.4); 
+            transform: scale(1.03); 
         }
-        .tabs { 
+
+        /* TABS + FILTERS */
+        .tabs-and-filters {
             display: flex; 
-            gap: 10px; 
-            justify-content: center; 
             flex-wrap: wrap; 
-            margin-bottom: 40px; 
+            gap: 12px; 
+            justify-content: center; 
+            align-items: center;
+            margin-bottom: 30px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
         }
         .tab { 
-            padding: 12px 22px; 
+            padding: 13px 26px; 
             background: #111; 
             border-radius: 9999px; 
             font-weight: 700; 
-            color: #666; 
+            color: #777; 
             cursor: pointer; 
-            border: 1px solid var(--border); 
-            transition: all 0.3s ease; 
-            font-size: 0.9rem; 
+            border: 2px solid transparent; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            font-size: 0.95rem; 
         }
         .tab:hover { 
-            background: #1f1f1f; 
+            border-color: var(--accent); 
             color: #fff; 
-            transform: translateY(-2px); 
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(168,85,247,0.3);
         }
         .tab.active { 
             background: var(--accent); 
             color: white; 
             border-color: var(--accent); 
+            box-shadow: 0 0 25px rgba(168,85,247,0.5);
         }
+        .sort-options {
+            display: flex;
+            gap: 8px;
+            background: #111;
+            padding: 6px;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+        }
+        .sort-btn {
+            padding: 8px 18px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: transparent;
+            color: #aaa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .sort-btn.active, .sort-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-            gap: 20px; 
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); 
+            gap: 24px; 
             max-width: 1400px; 
             margin: 0 auto; 
             padding: 0 20px 80px; 
         }
         .card { 
-            background: rgba(13,13,13,0.85); 
-            border-radius: 16px; 
+            background: var(--card-bg); 
+            border-radius: 18px; 
             border: 1px solid var(--border); 
-            padding: 14px; 
+            padding: 16px; 
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             cursor: pointer; 
             overflow: hidden; 
         }
         .card:hover { 
-            transform: translateY(-10px); 
+            transform: translateY(-12px) scale(1.03); 
             border-color: var(--accent); 
-            box-shadow: 0 15px 35px rgba(129,71,255,0.15); 
+            box-shadow: 0 20px 40px rgba(168,85,247,0.25); 
         }
         .card img { 
             width: 100%; 
-            border-radius: 12px; 
-            height: 140px; 
+            border-radius: 14px; 
+            height: 150px; 
             object-fit: cover; 
-            margin-bottom: 12px; 
+            margin-bottom: 14px; 
         }
         .card .cat-badge { 
             color: var(--accent); 
             font-weight: 800; 
-            font-size: 10px; 
-            letter-spacing: 1px; 
+            font-size: 10.5px; 
+            letter-spacing: 1.2px; 
         }
         .card h3 { 
-            font-size: 1.1rem; 
-            margin: 8px 0 4px; 
+            font-size: 1.15rem; 
+            margin: 10px 0 6px; 
             font-weight: 700; 
         }
         .card p { 
-            font-size: 0.85rem; 
-            color: #777; 
+            font-size: 0.87rem; 
+            color: #888; 
             margin: 0; 
-            line-height: 1.3; 
+            line-height: 1.4; 
         }
 
-        /* DETAIL PAGE - PROFESSIONAL LOOK */
+        /* DETAIL PAGE - MAJOR UPGRADE */
         #detailPage {
             min-height: 100vh;
             background: var(--bg);
@@ -208,52 +249,98 @@
         .detail-hero {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
-            padding: 40px 5%;
+            gap: 50px;
+            padding: 50px 5%;
             max-width: 1400px;
             margin: 0 auto;
             align-items: flex-start;
         }
         .detail-main-img-container {
             flex: 1;
-            min-width: 320px;
+            min-width: 340px;
         }
         .detail-main-img-container img {
             width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
             cursor: zoom-in;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
         .detail-main-img-container img:hover {
-            transform: scale(1.03);
+            transform: scale(1.04);
         }
         .detail-info-header {
             flex: 1;
-            min-width: 320px;
+            min-width: 340px;
         }
         .detail-info-header .cat-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(129,71,255,0.15);
+            gap: 8px;
+            background: rgba(168,85,247,0.2);
             color: var(--accent);
-            padding: 6px 16px;
+            padding: 8px 20px;
             border-radius: 9999px;
-            font-size: 13px;
+            font-size: 13.5px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
         .detail-info-header h1 {
-            font-size: 3rem;
+            font-size: 3.4rem;
             font-weight: 900;
-            line-height: 1.1;
-            margin: 0 0 12px;
+            line-height: 1.05;
+            margin: 0 0 16px;
         }
         .detail-info-header p {
-            font-size: 1.15rem;
-            color: #aaa;
+            font-size: 1.2rem;
+            color: #ccc;
             margin: 0;
+        }
+
+        .version-selector {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 30px 5% 0;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .version-selector h3 {
+            margin: 0 0 16px;
+            font-size: 1.4rem;
+            color: #ddd;
+        }
+        .version-select {
+            width: 100%;
+            padding: 14px 18px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+        .big-dl-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(90deg, var(--accent), #e0a3ff);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 800;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+        .big-dl-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(168,85,247,0.5);
         }
 
         .detail-content {
@@ -262,68 +349,74 @@
             padding: 0 5% 80px;
         }
         .detail-section {
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
         .section-title {
-            font-size: 1.35rem;
+            font-size: 1.45rem;
             font-weight: 700;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             color: #ddd;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .info-box {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 30px;
+            border-radius: 18px;
+            padding: 32px;
         }
         .screenshots-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 18px;
         }
         .screenshots-grid img {
             width: 100%;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: zoom-in;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
         .screenshots-grid img:hover {
-            transform: scale(1.04);
-            box-shadow: 0 10px 25px rgba(129,71,255,0.2);
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(168,85,247,0.3);
         }
         .dl-btn { 
             display: flex; 
             justify-content: space-between; 
             align-items: center;
-            padding: 16px 20px; 
-            background: #151515; 
+            padding: 18px 24px; 
+            background: #1a1a1a; 
             color: #fff; 
             text-decoration: none; 
-            border-radius: 12px; 
+            border-radius: 14px; 
             font-weight: 700; 
-            margin-bottom: 12px; 
-            border: 1px solid #222; 
-            font-size: 1rem; 
+            margin-bottom: 14px; 
+            border: 1px solid #333; 
+            font-size: 1.05rem; 
             transition: all 0.3s ease; 
         }
         .dl-btn:hover { 
             background: var(--accent); 
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
         .keybind-list {
-            background: rgba(0,0,0,0.3);
-            padding: 16px;
-            border-radius: 12px;
+            background: rgba(0,0,0,0.4);
+            padding: 20px;
+            border-radius: 14px;
             font-family: monospace;
             white-space: pre-wrap;
+            font-size: 1.05rem;
+            line-height: 1.7;
         }
 
-        #modal { display: none; }
+        .whats-new {
+            background: linear-gradient(90deg, rgba(168,85,247,0.1), rgba(224,163,255,0.05));
+            border: 1px solid var(--accent);
+        }
+
+        /* ZOOM */
         #zoomOverlay { 
             display: none; 
             position: fixed; 
@@ -331,24 +424,24 @@
             left: 0; 
             width: 100%; 
             height: 100%; 
-            background: rgba(0,0,0,0.98); 
+            background: rgba(0,0,0,0.97); 
             z-index: 2000; 
             justify-content: center; 
             align-items: center; 
         }
         #zoomImg { 
-            max-width: 92%; 
-            max-height: 92%; 
-            border-radius: 16px; 
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            max-width: 94%; 
+            max-height: 94%; 
+            border-radius: 20px; 
+            box-shadow: 0 0 50px rgba(168,85,247,0.6);
         }
 
-        /* ADMIN PANEL - NEW PROFESSIONAL VERSION */
+        /* ADMIN v2.1 */
         #nimdoArea { 
             display: none; 
             padding: 40px 20px; 
             min-height: 100vh; 
-            background: #050505; 
+            background: #0a0a0a; 
             position: fixed; 
             top: 0; 
             left: 0; 
@@ -357,48 +450,47 @@
             overflow-y: auto; 
         }
         .nimdo-card { 
-            background: #0d0d0d; 
-            max-width: 620px; 
+            background: #111; 
+            max-width: 680px; 
             margin: 0 auto; 
-            padding: 35px; 
-            border-radius: 20px; 
-            border: 2px solid var(--accent); 
-            box-shadow: 0 0 40px rgba(129,71,255,0.3);
+            padding: 40px; 
+            border-radius: 24px; 
+            border: 3px solid var(--accent); 
+            box-shadow: 0 0 60px rgba(168,85,247,0.4);
         }
         .nimdo-in { 
             width: 100%; 
-            padding: 14px 16px; 
-            margin-bottom: 14px; 
-            background: #000; 
-            border: 1px solid #333; 
+            padding: 16px 20px; 
+            margin-bottom: 16px; 
+            background: #1a1a1a; 
+            border: 1px solid #444; 
             color: #fff; 
-            border-radius: 10px; 
-            box-sizing: border-box; 
-            font-size: 1rem;
+            border-radius: 12px; 
+            font-size: 1.05rem;
         }
         .row-flex {
             display: flex; 
-            gap: 10px; 
-            margin-bottom: 12px; 
+            gap: 12px; 
+            margin-bottom: 14px; 
             align-items: center;
         }
         .admin-label {
-            font-weight: 600;
-            color: #ccc;
-            margin: 20px 0 8px;
-            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ddd;
+            margin: 24px 0 10px;
+            font-size: 1.15rem;
         }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
-    <div id="adminTrigger" onclick="checkAdmin()"></div>
+    <div id="adminTrigger" onclick="checkAdmin()" style="position:fixed;bottom:12px;right:12px;width:18px;height:18px;opacity:0.02;cursor:pointer;z-index:9999;"></div>
 
-    <!-- NEW ADMIN PANEL -->
+    <!-- ADMIN PANEL UPDATED -->
     <div id="nimdoArea">
         <div class="nimdo-card">
-            <h2 style="color:var(--accent); text-align:center; margin-top:0; font-size:2rem;">NIMDO ADMIN v2</h2>
-            <p style="text-align:center; color:#777; margin-bottom:25px;">Add new vault item • Professional format</p>
+            <h2 style="color:var(--accent); text-align:center; margin-top:0; font-size:2.2rem;">NIMDO ADMIN v2.1</h2>
+            <p style="text-align:center; color:#aaa; margin-bottom:30px;">Create professional vault item with versions + what's new</p>
             
             <select id="nCat" class="nimdo-in">
                 <option value="clients">Clients</option>
@@ -407,79 +499,104 @@
                 <option value="shop">Shop</option>
             </select>
             
-            <input type="text" id="nName" class="nimdo-in" placeholder="Item Name (e.g. Cw Hack Client)">
+            <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
             <input type="text" id="nImg" class="nimdo-in" placeholder="Main Image URL">
             
             <div class="admin-label">Description</div>
-            <textarea id="nDesc" class="nimdo-in" style="height:80px" placeholder="Short description..."></textarea>
-            
+            <textarea id="nDesc" class="nimdo-in" style="height:80px" placeholder="Short one-liner description"></textarea>
+
             <div class="admin-label">Loader / Installation</div>
-            <textarea id="nLoader" class="nimdo-in" style="height:70px" placeholder="e.g. Fabric 1.17-1.18 • Put in mods folder"></textarea>
+            <textarea id="nLoader" class="nimdo-in" style="height:70px" placeholder="Fabric 1.21 • Put in mods folder..."></textarea>
             
             <div class="admin-label">Keybinds</div>
-            <textarea id="nKeybinds" class="nimdo-in" style="height:70px" placeholder="e.g. Right Shift&#10;Left Ctrl + K"></textarea>
+            <textarea id="nKeybinds" class="nimdo-in" style="height:70px" placeholder="Right Shift = Menu\nLeft Ctrl + K = Toggle"></textarea>
 
-            <!-- VERSIONS -->
+            <div class="admin-label">What's New / Changelog</div>
+            <textarea id="nChangelog" class="nimdo-in" style="height:100px" placeholder="• Fixed major crash on 1.21\n• Added new fly module\n• 30% better performance"></textarea>
+
+            <!-- Versions -->
             <div class="admin-label">Versions &amp; Download Links</div>
             <div id="versionList">
                 <div class="row-flex">
                     <input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1">
                     <input type="text" class="nimdo-in nLink" placeholder="Download Link" style="flex:2">
-                    <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:18px;cursor:pointer;">−</button>
+                    <button onclick="this.parentElement.remove()" style="background:#f43f5e;color:white;border:none;padding:10px 16px;border-radius:10px;font-size:20px;cursor:pointer;">−</button>
                 </div>
             </div>
-            <button onclick="addVerRow()" style="padding:10px; border-radius:8px; border:none; background:#222; color:white; cursor:pointer; width:100%; font-size:14px; margin-bottom:25px;">+ Add Version Row</button>
+            <button onclick="addVerRow()" style="padding:12px; border-radius:12px; border:none; background:#222; color:white; cursor:pointer; width:100%; font-size:15px; margin-bottom:30px;">+ Add Version</button>
 
-            <!-- SCREENSHOTS -->
-            <div class="admin-label">Screenshots (multiple allowed)</div>
+            <!-- Screenshots -->
+            <div class="admin-label">Screenshots</div>
             <div id="screenshotList">
                 <div class="row-flex">
                     <input type="text" class="nimdo-in nScreenshot" placeholder="Screenshot URL" style="flex:1">
-                    <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:18px;cursor:pointer;">−</button>
+                    <button onclick="this.parentElement.remove()" style="background:#f43f5e;color:white;border:none;padding:10px 16px;border-radius:10px;font-size:20px;cursor:pointer;">−</button>
                 </div>
             </div>
-            <button onclick="addScreenshotRow()" style="padding:10px; border-radius:8px; border:none; background:#222; color:white; cursor:pointer; width:100%; font-size:14px; margin-bottom:30px;">+ Add Screenshot</button>
+            <button onclick="addScreenshotRow()" style="padding:12px; border-radius:12px; border:none; background:#222; color:white; cursor:pointer; width:100%; font-size:15px; margin-bottom:35px;">+ Add Screenshot</button>
 
             <button onclick="generateCode()" 
-                    style="background:var(--accent); width:100%; margin-top:10px; padding:16px; border:none; border-radius:12px; color:white; font-weight:900; font-size:1.1rem; cursor:pointer;">
-                GENERATE CODE &amp; COPY
+                    style="background:linear-gradient(90deg, var(--accent), #e0a3ff); width:100%; padding:18px; border:none; border-radius:16px; color:white; font-weight:900; font-size:1.25rem; cursor:pointer;">
+                GENERATE &amp; COPY CODE
             </button>
             <button onclick="location.reload()" 
-                    style="background:transparent; color:#666; border:none; width:100%; margin-top:12px; cursor:pointer; font-size:0.95rem;">
-                ← Exit Admin
+                    style="background:transparent; color:#777; border:none; width:100%; margin-top:14px; cursor:pointer; font-size:1rem;">
+                ← Back to Vault
             </button>
         </div>
     </div>
 
-    <!-- MAIN VAULT -->
+    <!-- MAIN HOMEPAGE -->
     <div id="content-wrapper">
         <nav class="nav">
             <div class="nav-logo">R3MU VAULT</div>
             <div class="nav-links">
                 <div class="cheat-counter">
                     <div class="live-dot"></div>
-                    <span>LIVE • </span><span id="cheatCount">0</span><span> CHEATS</span>
+                    LIVE • <span id="cheatCount">0</span> CHEATS
                 </div>
-                <a href="https://www.youtube.com/@r3mu2" target="_blank" style="color:var(--yt); font-size:1.4rem;"><i class="fab fa-youtube"></i></a>
-                <a href="https://discord.com/invite/r3musblackmarket" target="_blank" style="color:var(--dc); font-size:1.4rem;"><i class="fab fa-discord"></i></a>
+                <a href="https://www.youtube.com/@r3mu2" target="_blank" class="social-icon" style="color:var(--yt); font-size:1.75rem; transition:all 0.3s ease;"><i class="fab fa-youtube"></i></a>
+                <a href="https://discord.com/invite/r3musblackmarket" target="_blank" class="social-icon" style="color:var(--dc); font-size:1.75rem; transition:all 0.3s ease;"><i class="fab fa-discord"></i></a>
             </div>
         </nav>
 
         <div class="hero">
             <h1 class="hero-title">PREMIUM VAULT</h1>
-            <p class="hero-sub">Elite Minecraft archive • Clean • Shareable • Professional</p>
+            <p class="hero-sub">Elite • Clean • Shareable • Always Updated</p>
             <input type="text" id="searchBar" class="search-bar" placeholder="Search clients, mods, keybinds..." onkeyup="search()">
         </div>
 
-        <div class="tabs">
+        <div class="tabs-and-filters">
             <div class="tab active" onclick="filter('all', this)">ALL</div>
             <div class="tab" onclick="filter('clients', this)">CLIENTS</div>
             <div class="tab" onclick="filter('mods / macros', this)">MODS / MACROS</div>
             <div class="tab" onclick="filter('source codes', this)">SOURCE CODES</div>
             <div class="tab" onclick="filter('shop', this)" style="color: gold;">💰 SHOP</div>
+
+            <div class="sort-options">
+                <button onclick="setSort(this, 'all')" class="sort-btn active">All</button>
+                <button onclick="setSort(this, 'newest')" class="sort-btn">Newest</button>
+                <button onclick="setSort(this, 'most-viewed')" class="sort-btn">Most Viewed</button>
+                <button onclick="setSort(this, 'most-downloaded')" class="sort-btn">Most Downloaded</button>
+            </div>
         </div>
 
         <div class="grid" id="mainGrid"></div>
+
+        <!-- WHAT'S NEW SECTION ON HOMEPAGE -->
+        <div style="max-width:1400px;margin:0 auto;padding:0 30px 80px;">
+            <h2 style="text-align:center;font-size:2rem;margin-bottom:30px;color:#ddd;">What's New • March 2026</h2>
+            <div style="background:#111;border-radius:20px;padding:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
+                <div style="background:#1a1a1a;padding:20px;border-radius:16px;">
+                    <h4 style="color:var(--accent);">Gardenia Client v2.1</h4>
+                    <p style="color:#ccc;">• Added new high-ping optimizer<br>• Fixed memory leak<br>• 1.21.4 support</p>
+                </div>
+                <div style="background:#1a1a1a;padding:20px;border-radius:16px;">
+                    <h4 style="color:var(--accent);">Cw Hack Client Update</h4>
+                    <p style="color:#ccc;">• New kill aura modules<br>• Better anti-cheat bypass<br>• 200+ downloads today</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- PROFESSIONAL DETAIL PAGE (opens in new tab) -->
@@ -487,15 +604,15 @@
         <nav class="nav">
             <div class="nav-logo">R3MU VAULT</div>
             <div class="nav-links">
-                <a onclick="backToVault()" style="color:#fff; font-weight:700; display:flex; align-items:center; gap:8px; font-size:1.1rem;">
+                <a onclick="backToVault()" style="color:#fff;font-weight:700;display:flex;align-items:center;gap:10px;font-size:1.15rem;">
                     <i class="fas fa-arrow-left"></i> BACK TO VAULT
                 </a>
                 <div class="cheat-counter">
                     <div class="live-dot"></div>
-                    <span>LIVE • </span><span id="detailCheatCount">0</span><span> CHEATS</span>
+                    LIVE • <span id="detailCheatCount">0</span> CHEATS
                 </div>
-                <a href="https://www.youtube.com/@r3mu2" target="_blank" style="color:var(--yt); font-size:1.4rem;"><i class="fab fa-youtube"></i></a>
-                <a href="https://discord.com/invite/r3musblackmarket" target="_blank" style="color:var(--dc); font-size:1.4rem;"><i class="fab fa-discord"></i></a>
+                <a href="https://www.youtube.com/@r3mu2" target="_blank" class="social-icon" style="color:var(--yt); font-size:1.75rem; transition:all 0.3s ease;"><i class="fab fa-youtube"></i></a>
+                <a href="https://discord.com/invite/r3musblackmarket" target="_blank" class="social-icon" style="color:var(--dc); font-size:1.75rem; transition:all 0.3s ease;"><i class="fab fa-discord"></i></a>
             </div>
         </nav>
 
@@ -510,6 +627,16 @@
             </div>
         </div>
 
+        <!-- VERSION SELECTOR + BIG DOWNLOAD -->
+        <div class="version-selector">
+            <h3><i class="fas fa-download"></i> Choose Version &amp; Download</h3>
+            <select id="versionSelect" class="version-select" onchange="updateBigDownload()"></select>
+            <button id="bigDownloadBtn" class="big-dl-btn" onclick="triggerBigDownload()">
+                <span id="bigVersionText"></span> 
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
         <div class="detail-content">
             <!-- Screenshots -->
             <div class="detail-section">
@@ -520,7 +647,7 @@
             <!-- Loader -->
             <div class="info-box">
                 <div class="section-title"><i class="fas fa-cube"></i> LOADER / INSTALLATION</div>
-                <div id="detailLoader" style="font-size:1.05rem; line-height:1.6;"></div>
+                <div id="detailLoader" style="font-size:1.1rem; line-height:1.7; white-space:pre-line;"></div>
             </div>
 
             <!-- Keybinds -->
@@ -529,32 +656,37 @@
                 <div id="detailKeybinds" class="keybind-list"></div>
             </div>
 
-            <!-- Versions & Downloads -->
+            <!-- What's New -->
+            <div class="info-box whats-new">
+                <div class="section-title"><i class="fas fa-star"></i> WHAT'S NEW</div>
+                <div id="detailChangelog" style="white-space:pre-line; line-height:1.8;"></div>
+            </div>
+
+            <!-- All Versions List -->
             <div class="info-box">
-                <div class="section-title"><i class="fas fa-download"></i> VERSIONS &amp; DOWNLOADS</div>
+                <div class="section-title"><i class="fas fa-list"></i> ALL VERSIONS</div>
                 <div id="detailVersions"></div>
             </div>
         </div>
     </div>
 
-    <!-- Zoom Overlay -->
+    <!-- Zoom -->
     <div id="zoomOverlay" onclick="this.style.display='none'">
         <img id="zoomImg" src="">
     </div>
 
     <script>
-        // PARTICLES
         particlesJS("particles-js", { 
             "particles": { 
-                "number": { "value": 70 }, 
-                "size": { "value": 2.5 }, 
-                "color": { "value": "#8147ff" }, 
-                "line_linked": { "enable": true, "distance": 160, "color": "#8147ff", "opacity": 0.25 }, 
-                "move": { "speed": 1.8 } 
+                "number": { "value": 80 }, 
+                "size": { "value": 3 }, 
+                "color": { "value": "#a855f7" }, 
+                "line_linked": { "enable": true, "distance": 170, "color": "#c026d3", "opacity": 0.3 }, 
+                "move": { "speed": 2 } 
             } 
         });
 
-        // ALL ITEMS DATA (updated with new professional fields)
+        // ITEMS DATABASE (with new fields)
         const items = [
             {
                 slug: "cw-hack-client",
@@ -564,14 +696,18 @@
                 desc: "Best CPVP Hack Client",
                 loader: "Fabric Loader • 1.17x - 1.18x\nPlace in your mods folder and launch with Fabric",
                 keybinds: "Right Shift - Open menu\nLeft Ctrl + K - Toggle key features",
+                changelog: "• Fixed crash on latest 1.18\n• Added new reach module\n• Improved anti-cheat bypass\n• +45% performance",
+                views: 1842,
+                downloads: 1327,
+                dateAdded: "2026-03-25",
                 versions: [
                     { ver: "1.17x", link: "https://shrinkme.click/9Kz0O" },
                     { ver: "1.18x", link: "https://shrinkme.click/md3Y" }
                 ],
                 screenshots: [
                     "https://i.postimg.cc/dtJfGxjM/2.png",
-                    "https://picsum.photos/id/1015/1200/800",
-                    "https://picsum.photos/id/160/1200/800"
+                    "https://picsum.photos/id/1015/1400/900",
+                    "https://picsum.photos/id/160/1400/900"
                 ]
             },
             {
@@ -582,20 +718,25 @@
                 desc: "Best High Ping Client",
                 loader: "Fabric Loader • 1.21\nOptimized for high ping gameplay",
                 keybinds: "Right Shift - Open GUI\nF8 - Toggle modules",
+                changelog: "• Added new high-ping optimizer\n• Fixed memory leak\n• 1.21.4 full support\n• Better visuals",
+                views: 967,
+                downloads: 684,
+                dateAdded: "2026-03-22",
                 versions: [
                     { ver: "1.21", link: "https://shrinkme.click/bUCrhByx" }
                 ],
                 screenshots: [
                     "https://i.postimg.cc/4xWnXqBg/image.png",
-                    "https://picsum.photos/id/201/1200/800",
-                    "https://picsum.photos/id/29/1200/800"
+                    "https://picsum.photos/id/201/1400/900",
+                    "https://picsum.photos/id/29/1400/900"
                 ]
             }
         ];
 
         let currentFilterCat = 'all';
+        let currentSort = 'all';
 
-        function getFilteredItems() {
+        function getFilteredAndSortedItems() {
             let filtered = currentFilterCat === 'all' 
                 ? [...items] 
                 : items.filter(i => i.cat === currentFilterCat);
@@ -607,14 +748,22 @@
                     (item.desc && item.desc.toLowerCase().includes(q))
                 );
             }
+
+            // Apply sort
+            if (currentSort === 'newest') {
+                filtered.sort((a,b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+            } else if (currentSort === 'most-viewed') {
+                filtered.sort((a,b) => b.views - a.views);
+            } else if (currentSort === 'most-downloaded') {
+                filtered.sort((a,b) => b.downloads - a.downloads);
+            }
             return filtered;
         }
 
         function renderGrid() {
             const grid = document.getElementById('mainGrid');
             grid.innerHTML = '';
-            
-            const filtered = getFilteredItems();
+            const filtered = getFilteredAndSortedItems();
             
             filtered.forEach(item => {
                 const cardHTML = `
@@ -622,7 +771,7 @@
                         <img src="${item.img}">
                         <div class="cat-badge">${item.cat.toUpperCase()}</div>
                         <h3>${item.name}</h3>
-                        <p>${item.desc ? item.desc.substring(0, 32) + (item.desc.length > 32 ? '...' : '') : ''}</p>
+                        <p>${item.desc}</p>
                     </div>
                 `;
                 grid.innerHTML += cardHTML;
@@ -645,59 +794,89 @@
             renderGrid();
         }
 
-        // DETAIL PAGE RENDER (professional layout)
+        function setSort(btn, sortType) {
+            currentSort = sortType;
+            document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderGrid();
+        }
+
+        // DETAIL PAGE RENDER
         function renderDetail(item) {
-            // Header
             document.getElementById('detailTitle').innerText = item.name;
             document.getElementById('detailDesc').innerHTML = `<strong>${item.desc}</strong>`;
-            document.getElementById('detailCatBadge').innerHTML = `
-                <i class="fas fa-cube"></i> ${item.cat.toUpperCase()}
-            `;
+            document.getElementById('detailCatBadge').innerHTML = `<i class="fas fa-cube"></i> ${item.cat.toUpperCase()}`;
             document.getElementById('detailMainImg').src = item.img;
 
             // Screenshots
             let sHTML = '';
             item.screenshots.forEach(src => {
-                if (src) {
-                    sHTML += `<img src="${src}" onclick="zoomImg(this.src)">`;
-                }
+                sHTML += `<img src="${src}" onclick="zoomImg(this.src)">`;
             });
-            document.getElementById('detailScreenshots').innerHTML = sHTML || '<p style="color:#666; text-align:center; padding:30px;">No screenshots available yet.</p>';
+            document.getElementById('detailScreenshots').innerHTML = sHTML || '<p style="color:#666;text-align:center;padding:40px;">No screenshots yet.</p>';
 
             // Loader
             document.getElementById('detailLoader').innerHTML = item.loader 
-                ? `<p style="white-space: pre-line;">${item.loader}</p>` 
-                : '<p style="color:#666;">No loader information provided.</p>';
+                ? `<p style="white-space:pre-line;">${item.loader}</p>` 
+                : '<p style="color:#666;">No loader info.</p>';
 
             // Keybinds
             document.getElementById('detailKeybinds').innerHTML = item.keybinds 
-                ? `<div style="white-space: pre-line;">${item.keybinds}</div>` 
+                ? `<div style="white-space:pre-line;">${item.keybinds}</div>` 
                 : '<p style="color:#666;">No keybinds provided.</p>';
 
-            // Versions
-            let vHTML = '';
-            if (item.versions && item.versions.length) {
-                item.versions.forEach(v => {
-                    vHTML += `
-                        <a href="${v.link}" class="dl-btn" target="_blank">
-                            <span>${v.ver} • Download</span> 
-                            <i class="fas fa-chevron-right"></i>
-                        </a>`;
-                });
-            } else {
-                vHTML = '<p style="color:#666; text-align:center;">No versions available.</p>';
-            }
-            document.getElementById('detailVersions').innerHTML = vHTML;
+            // Changelog / What's New
+            document.getElementById('detailChangelog').innerHTML = item.changelog 
+                ? `<p style="white-space:pre-line;">${item.changelog}</p>` 
+                : '<p style="color:#666;">No updates yet.</p>';
 
-            // Update count in detail nav
+            // Version selector
+            const select = document.getElementById('versionSelect');
+            select.innerHTML = '';
+            item.versions.forEach((v, i) => {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = v.ver;
+                select.appendChild(opt);
+            });
+            updateBigDownload();
+
+            // All versions list
+            let vHTML = '';
+            item.versions.forEach(v => {
+                vHTML += `
+                    <a href="${v.link}" class="dl-btn" target="_blank">
+                        <span>${v.ver} • Download</span> 
+                        <i class="fas fa-chevron-right"></i>
+                    </a>`;
+            });
+            document.getElementById('detailVersions').innerHTML = vHTML || '<p style="color:#666;">No versions available.</p>';
+
             document.getElementById('detailCheatCount').innerText = items.length;
+        }
+
+        function updateBigDownload() {
+            const itemSlug = new URLSearchParams(window.location.search).get('item');
+            const item = items.find(i => i.slug === itemSlug);
+            if (!item) return;
+            
+            const select = document.getElementById('versionSelect');
+            const idx = parseInt(select.value);
+            const version = item.versions[idx];
+            
+            document.getElementById('bigVersionText').innerHTML = `${version.ver} <span style="font-size:0.9rem;opacity:0.8;">(Instant Download)</span>`;
+            document.getElementById('bigDownloadBtn').setAttribute('data-link', version.link);
+        }
+
+        function triggerBigDownload() {
+            const link = document.getElementById('bigDownloadBtn').getAttribute('data-link');
+            if (link) window.open(link, '_blank');
         }
 
         function backToVault() {
             window.location.href = window.location.pathname;
         }
 
-        // ZOOM
         function zoomImg(src) {
             document.getElementById('zoomImg').src = src;
             document.getElementById('zoomOverlay').style.display = 'flex';
@@ -708,9 +887,7 @@
             if (prompt("Enter NIMDO Password:") === "pookie123") {
                 document.getElementById('nimdoArea').style.display = 'block';
                 document.getElementById('content-wrapper').style.display = 'none';
-                if (document.getElementById('detailPage').style.display === 'block') {
-                    document.getElementById('detailPage').style.display = 'none';
-                }
+                if (document.getElementById('detailPage').style.display === 'block') document.getElementById('detailPage').style.display = 'none';
             }
         }
 
@@ -721,7 +898,7 @@
             row.innerHTML = `
                 <input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1">
                 <input type="text" class="nimdo-in nLink" placeholder="Download Link" style="flex:2">
-                <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:18px;cursor:pointer;">−</button>
+                <button onclick="this.parentElement.remove()" style="background:#f43f5e;color:white;border:none;padding:10px 16px;border-radius:10px;font-size:20px;cursor:pointer;">−</button>
             `;
             list.appendChild(row);
         }
@@ -732,7 +909,7 @@
             row.className = 'row-flex';
             row.innerHTML = `
                 <input type="text" class="nimdo-in nScreenshot" placeholder="Screenshot URL" style="flex:1">
-                <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:8px 14px;border-radius:8px;font-size:18px;cursor:pointer;">−</button>
+                <button onclick="this.parentElement.remove()" style="background:#f43f5e;color:white;border:none;padding:10px 16px;border-radius:10px;font-size:20px;cursor:pointer;">−</button>
             `;
             list.appendChild(row);
         }
@@ -744,8 +921,8 @@
             const desc = document.getElementById('nDesc').value.trim();
             const loader = document.getElementById('nLoader').value.trim();
             const keybinds = document.getElementById('nKeybinds').value.trim();
+            const changelog = document.getElementById('nChangelog').value.trim();
 
-            // Versions
             const verInputs = document.querySelectorAll('.nVer');
             const linkInputs = document.querySelectorAll('.nLink');
             const versions = [];
@@ -755,31 +932,28 @@
                 if (v && l) versions.push({ ver: v, link: l });
             }
 
-            // Screenshots
             const screenInputs = document.querySelectorAll('.nScreenshot');
-            const screenshots = Array.from(screenInputs)
-                .map(i => i.value.trim())
-                .filter(Boolean);
+            const screenshots = Array.from(screenInputs).map(i => i.value.trim()).filter(Boolean);
 
-            if (!name || !img) {
-                alert("Name and Main Image URL are required!");
+            if (!name || !img || versions.length === 0) {
+                alert("Name, Main Image & at least 1 version are required!");
                 return;
             }
 
-            // Create clean slug
-            const slug = name.toLowerCase()
-                .trim()
-                .replace(/\s+/g, '-')
-                .replace(/[^a-z0-9-]/g, '');
+            const slug = name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
             const newItem = {
                 slug: slug,
                 name: name,
                 cat: cat,
                 img: img,
-                desc: desc,
+                desc: desc || "Premium Minecraft client",
                 loader: loader,
                 keybinds: keybinds,
+                changelog: changelog || "• Initial release",
+                views: 0,
+                downloads: 0,
+                dateAdded: "2026-03-27",
                 versions: versions,
                 screenshots: screenshots.length ? screenshots : [img]
             };
@@ -787,30 +961,40 @@
             const codeString = `items.push(${JSON.stringify(newItem, null, 4)});`;
             
             navigator.clipboard.writeText(codeString).then(() => {
-                alert("✅ Code copied to clipboard!\n\nPaste it inside the 'items' array in the <script> section.\n\nYour new item is ready with screenshots, loader, keybinds & full new-tab support.");
+                alert("✅ Full code copied!\n\nPaste inside the 'items' array.\nNew item has version selector + What's New + all new features.");
                 location.reload();
             });
         }
 
-        // MAIN LOAD
+        // SOCIAL ICON HOVER
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.social-icon').forEach(icon => {
+                icon.addEventListener('mouseenter', () => {
+                    icon.style.transform = 'scale(1.3)';
+                });
+                icon.addEventListener('mouseleave', () => {
+                    icon.style.transform = 'scale(1)';
+                });
+            });
+        });
+
+        // MAIN INIT
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const itemSlug = urlParams.get('item');
 
             if (itemSlug) {
-                // DETAIL MODE (new tab)
                 const item = items.find(i => i.slug === itemSlug);
                 if (item) {
                     document.getElementById('content-wrapper').style.display = 'none';
                     document.getElementById('detailPage').style.display = 'block';
                     renderDetail(item);
                 } else {
-                    // Invalid slug → go back to main
                     window.location.href = window.location.pathname;
                 }
             } else {
-                // MAIN VAULT MODE
                 currentFilterCat = 'all';
+                currentSort = 'all';
                 renderGrid();
                 document.getElementById('cheatCount').innerText = items.length;
             }
