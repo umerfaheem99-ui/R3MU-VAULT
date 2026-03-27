@@ -14,38 +14,40 @@
         #content-wrapper { position: relative; z-index: 2; }
 
         .nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background: rgba(5,5,5,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
-        .nav-logo { font-weight: 800; font-size: 1.5rem; text-transform: uppercase; color: #fff; letter-spacing: -1px; }
+        .nav-logo { font-weight: 800; font-size: 1.5rem; text-transform: uppercase; color: #fff; }
 
         .hero { padding: 60px 20px 20px; text-align: center; }
-        .hero-title { font-size: 2.8rem; font-weight: 900; margin: 0; letter-spacing: -2px; text-transform: uppercase; }
-        .hero-sub { color: #888; font-size: 1rem; margin: 10px 0 35px; font-weight: 600; }
-
-        .search-bar { width: 100%; max-width: 600px; padding: 16px 22px; background: rgba(15,15,15,0.9); border: 1px solid var(--border); border-radius: 12px; color: white; font-size: 0.95rem; outline: none; margin-bottom: 40px; }
+        .hero-title { font-size: 2.8rem; font-weight: 900; margin: 0; text-transform: uppercase; }
 
         .tabs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-        .tab { padding: 9px 18px; background: #111; border-radius: 8px; font-weight: 800; color: #555; cursor: pointer; border: 1px solid var(--border); font-size: 11px; text-transform: uppercase; transition: 0.3s; }
+        .tab { padding: 10px 20px; background: #111; border-radius: 10px; font-weight: 800; color: #555; cursor: pointer; border: 1px solid var(--border); transition: 0.3s; }
+        /* Tab Hover Effect */
+        .tab:hover { border-color: var(--accent); color: var(--accent); }
         .tab.active { background: var(--accent); color: white; border-color: var(--accent); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding-bottom: 100px; }
         .card { background: rgba(13,13,13,0.8); border-radius: 18px; border: 1px solid var(--border); padding: 20px; transition: 0.4s; cursor: pointer; }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
         .card img { width: 100%; border-radius: 12px; height: 160px; object-fit: cover; margin-bottom: 15px; }
 
-        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
         .m-content { background: #0a0a0a; padding: 30px; border-radius: 20px; max-width: 450px; width: 100%; border: 1px solid #222; text-align: center; }
-        .m-img { width: 100%; border-radius: 12px; margin-bottom: 15px; height: 180px; object-fit: cover; }
-        .dl-btn { display: flex; justify-content: space-between; padding: 14px 18px; background: #151515; color: #fff; text-decoration: none; border-radius: 10px; font-weight: 800; margin-top: 10px; border: 1px solid #222; }
+        .m-img { width: 100%; border-radius: 12px; height: 180px; object-fit: cover; margin-bottom: 15px; }
+        
+        /* Download Button Hover Effect */
+        .dl-btn { display: flex; justify-content: space-between; padding: 14px 18px; background: #151515; color: #fff; text-decoration: none; border-radius: 10px; font-weight: 800; margin-top: 10px; border: 1px solid #222; transition: 0.3s; }
+        .dl-btn:hover { background: var(--accent); transform: scale(1.02); }
 
-        /* Admin Panel Styles */
+        /* Admin Layout */
         #nimdoArea { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 2000; overflow-y: auto; padding: 50px 20px; }
         .nimdo-card { background: #0d0d0d; max-width: 600px; margin: 0 auto; padding: 30px; border-radius: 20px; border: 1px solid var(--accent); }
-        .nimdo-in { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid #222; color: #fff; border-radius: 8px; box-sizing: border-box; }
-        .gen-btn { width: 100%; padding: 15px; background: var(--accent); color: #fff; border: none; border-radius: 10px; font-weight: 900; cursor: pointer; }
+        .nimdo-in { width: 100%; padding: 12px; margin-bottom: 10px; background: #000; border: 1px solid #222; color: #fff; border-radius: 8px; box-sizing: border-box; }
+        .ver-row { display: flex; gap: 10px; margin-bottom: 10px; }
+        .btn-sm { padding: 10px; background: #222; color: white; border: none; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
-
     <div id="content-wrapper">
         <nav class="nav">
             <div class="nav-logo">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</div>
@@ -56,12 +58,7 @@
         </nav>
 
         <div id="vaultContent">
-            <div class="hero">
-                <h1 class="hero-title">PREMIUM VAULT</h1>
-                <p class="hero-sub">The ultimate archive. Crafted for eliteness.</p>
-                <input type="text" id="searchBar" class="search-bar" placeholder="Search items..." onkeyup="search()">
-            </div>
-
+            <div class="hero"><h1 class="hero-title">PREMIUM VAULT</h1><p class="hero-sub">The ultimate archive.</p></div>
             <div class="tabs">
                 <div class="tab active" onclick="filter('all', this)">ALL</div>
                 <div class="tab" onclick="filter('clients', this)">CLIENTS</div>
@@ -69,21 +66,13 @@
                 <div class="tab" onclick="filter('source', this)">SOURCE CODES</div>
                 <div class="tab" onclick="filter('shop', this)" style="color: gold;">💰 SHOP</div>
             </div>
-
-            <div class="grid" id="mainGrid">
-                <div class="card" data-cat="shop" onclick="openItem('CustomClient','https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png','ALL Versions','https://discord.gg/aFnv9JMX5Y','shop','T3JkZXIgeW91ciBjdXN0b20gYnVpbHQgY2xpZW50IGZvciBtYXhpbXVtIHBlcmZvcm1hbmNl')">
-                    <img src="https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png">
-                    <div style="color:var(--accent); font-weight:900; font-size:10px;">SHOP</div>
-                    <h3>CustomClient</h3>
-                    <p>Order your custom built client...</p>
-                </div>
-            </div>
+            <div class="grid" id="mainGrid"></div>
         </div>
     </div>
 
     <div id="nimdoArea">
         <div class="nimdo-card">
-            <h2 style="color:var(--accent); margin-top:0;">NIMDO Console</h2>
+            <h2 style="color:var(--accent);">NIMDO Console</h2>
             <select id="nCat" class="nimdo-in">
                 <option value="clients">Clients</option>
                 <option value="mods">Mods / Macros</option>
@@ -92,11 +81,17 @@
             </select>
             <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
             <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL">
-            <textarea id="nDesc" class="nimdo-in" style="height:80px" placeholder="Description"></textarea>
-            <input type="text" id="nVer" class="nimdo-in" placeholder="Version (e.g. 1.21.1)">
-            <input type="text" id="nLink" class="nimdo-in" placeholder="Download/Discord Link">
-            <button class="gen-btn" onclick="generateCode()">GENERATE & COPY CODE</button>
-            <p id="status" style="font-size:12px; color:#555; margin-top:10px;"></p>
+            <textarea id="nDesc" class="nimdo-in" style="height:60px" placeholder="Description"></textarea>
+            
+            <div id="versionList">
+                <div class="ver-row">
+                    <input type="text" class="nimdo-in nVer" placeholder="Version (e.g. 1.21)">
+                    <input type="text" class="nimdo-in nLink" placeholder="Link">
+                </div>
+            </div>
+            <button class="btn-sm" onclick="addVerRow()">+ Add Version</button>
+            <button class="btn-sm" onclick="remVerRow()">- Remove</button>
+            <button class="btn-sm" onclick="generateCode()" style="background:var(--accent); width:100%; margin-top:20px; font-weight:900;">GENERATE CODE</button>
         </div>
     </div>
 
@@ -104,27 +99,20 @@
         <div class="m-content" onclick="event.stopPropagation()">
             <img id="mImg" class="m-img" src="">
             <h2 id="mTitle" style="font-size:24px; margin:0; font-weight:900;"></h2>
-            <p id="mDesc" style="color:#888; margin:15px 0; font-size:14px;"></p>
+            <p id="mDesc" style="color:#888; margin:15px 0;"></p>
             <div id="mLinks"></div>
         </div>
     </div>
 
     <script>
-        // Check for Admin URL
+        // Original Particle Config
+        particlesJS("particles-js", { "particles": { "number": { "value": 80 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "distance": 150, "color": "#8147ff", "opacity": 0.2 }, "move": { "speed": 2 } } });
+
         if (window.location.search.includes('nimda')) {
             if (prompt("NIMDO Password:") === "pookie123") {
                 document.getElementById('nimdoArea').style.display = 'block';
                 document.getElementById('content-wrapper').style.display = 'none';
-            } else {
-                window.location.href = window.location.pathname;
             }
-        }
-
-        particlesJS("particles-js", { "particles": { "number": { "value": 40 }, "color": { "value": "#8147ff" }, "size": { "value": 2 }, "line_linked": { "enable": true, "opacity": 0.1 }, "move": { "speed": 1 } } });
-
-        function search() {
-            let q = document.getElementById('searchBar').value.toLowerCase();
-            document.querySelectorAll('.card').forEach(c => c.style.display = c.innerText.toLowerCase().includes(q) ? "block" : "none");
         }
 
         function filter(cat, el) {
@@ -136,27 +124,31 @@
         function openItem(name, img, versions, links, cat, descB64) {
             document.getElementById('mTitle').innerText = name;
             document.getElementById('mImg').src = img;
-            document.getElementById('mDesc').innerText = descB64 ? atob(descB64) : "Contact on Discord.";
+            document.getElementById('mDesc').innerText = descB64 ? atob(descB64) : "";
             let vArr = versions.split('|'), lArr = links.split('|'), h = '';
-            vArr.forEach((v, i) => { h += `<a href="${lArr[i]}" class="dl-btn" target="_blank"><span>${v}</span> <i class="fas fa-download"></i></a>`; });
+            // Smart Button Text
+            let btnText = (cat === 'shop') ? "Order At Discord" : "Download Now";
+            vArr.forEach((v, i) => { h += `<a href="${lArr[i]}" class="dl-btn" target="_blank"><span>${v} | ${btnText}</span> <i class="fas fa-chevron-right"></i></a>`; });
             document.getElementById('mLinks').innerHTML = h;
             document.getElementById('modal').style.display = 'flex';
         }
 
         function closeM(e) { if(!e || e.target.id === 'modal') document.getElementById('modal').style.display = 'none'; }
 
+        function addVerRow() { document.getElementById('versionList').insertAdjacentHTML('beforeend', '<div class="ver-row"><input type="text" class="nimdo-in nVer" placeholder="Version"><input type="text" class="nimdo-in nLink" placeholder="Link"></div>'); }
+        function remVerRow() { let rows = document.querySelectorAll('.ver-row'); if(rows.length > 1) rows[rows.length-1].remove(); }
+
         function generateCode() {
             let cat = document.getElementById('nCat').value;
             let name = document.getElementById('nName').value;
             let img = document.getElementById('nImg').value;
             let desc = btoa(document.getElementById('nDesc').value);
-            let ver = document.getElementById('nVer').value;
-            let link = document.getElementById('nLink').value;
+            let vers = Array.from(document.querySelectorAll('.nVer')).map(i => i.value).join('|');
+            let links = Array.from(document.querySelectorAll('.nLink')).map(i => i.value).join('|');
             
-            let code = `<div class="card" data-cat="${cat}" onclick="openItem('${name}','${img}','${ver}','${link}','${cat}','${desc}')">\n<img src="${img}">\n<div style="color:var(--accent); font-weight:900; font-size:10px;">${cat.toUpperCase()}</div>\n<h3>${name}</h3>\n<p>${document.getElementById('nDesc').value.substring(0,30)}...</p>\n</div>`;
-            
+            let code = `<div class="card" data-cat="${cat}" onclick="openItem('${name}','${img}','${vers}','${links}','${cat}','${desc}')"><img src="${img}"><div style="color:var(--accent); font-weight:900; font-size:10px;">${cat.toUpperCase()}</div><h3>${name}</h3><p>${document.getElementById('nDesc').value.substring(0,30)}...</p></div>`;
             navigator.clipboard.writeText(code);
-            document.getElementById('status').innerText = "Code Copied! Paste it into your index.html grid.";
+            alert("Copied!");
         }
     </script>
 </body>
