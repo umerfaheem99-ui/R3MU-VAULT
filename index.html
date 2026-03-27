@@ -43,9 +43,8 @@
         .dl-btn { display: flex; justify-content: space-between; padding: 16px 20px; background: #151515; color: #fff; text-decoration: none; border-radius: 12px; font-weight: 800; margin-top: 12px; border: 1px solid #222; transition: 0.3s; }
         .dl-btn:hover { background: var(--accent); }
 
-        /* Admin Area Styling */
         #nimdoArea { display: none; padding: 50px 20px; min-height: 100vh; background: #050505; position: fixed; top: 0; left: 0; width: 100%; z-index: 5000; overflow-y: auto; }
-        .nimdo-card { background: #0d0d0d; max-width: 600px; margin: 0 auto; padding: 40px; border-radius: 30px; border: 1px solid var(--accent); box-shadow: 0 0 50px rgba(129,71,255,0.1); }
+        .nimdo-card { background: #0d0d0d; max-width: 600px; margin: 0 auto; padding: 40px; border-radius: 30px; border: 1px solid var(--accent); }
         .nimdo-in { width: 100%; padding: 14px; margin-bottom: 12px; background: #000; border: 1px solid #222; color: #fff; border-radius: 10px; box-sizing: border-box; }
         
         #adminTrigger { position: fixed; bottom: 10px; right: 10px; width: 20px; height: 20px; opacity: 0.05; cursor: pointer; z-index: 10; }
@@ -53,7 +52,7 @@
 </head>
 <body>
     <div id="particles-js"></div>
-    <div id="adminTrigger" onclick="checkAdmin('manual')"></div>
+    <div id="adminTrigger" onclick="checkAdmin()"></div>
 
     <div id="nimdoArea">
         <div class="nimdo-card">
@@ -103,11 +102,18 @@
         </div>
 
         <div class="grid" id="mainGrid">
-            <div class="card" data-cat="clients" onclick="openItem('Gardenia Client','https://media.discordapp.net/attachments/1466198923277369464/1466199335929905324/image.png','1.21','https://shrinkme.click/bUCrhByx','clients','S2V5YmluZCA6IFJpZ2h0IFNoaWZ0')">
-                <img src="https://media.discordapp.net/attachments/1466198923277369464/1466199335929905324/image.png">
+            <div class="card" data-cat="clients" onclick="openItem('Cw Hack Client','https://i.postimg.cc/dtJfGxjM/2.png','1.17x|1.18x','https://shrinkme.click/9Kz0O |https://shrinkme.click/md3Y','clients','Q3cgSGFjayBDbGllbnQKQmVzdCBDUFZQIEhhY2sgQ2xpZW50CktleSBSaWdodCBTaGlmdAo=')">
+                <img src="https://i.postimg.cc/dtJfGxjM/2.png">
+                <div style="color:var(--accent); font-weight:900; font-size:11px;">CLIENTS</div>
+                <h3>Cw Hack Client</h3>
+                <p>Cw Hack Client Best CPVP Hack ...</p>
+            </div>
+
+            <div class="card" data-cat="clients" onclick="openItem('Gardenia Client','https://i.postimg.cc/dtJfGxjM/2.png','1.21','https://shrinkme.click/bUCrhByx','clients','R2FyZGVuaWEgSGFjayBDbGllbnQKQmVzdCBIaWdoIFBpbmcgQ2xpZW50CmtleSA6IFJpZ2h0IFNoaWZ0')">
+                <img src="https://i.postimg.cc/dtJfGxjM/2.png">
                 <div style="color:var(--accent); font-weight:900; font-size:11px;">CLIENTS</div>
                 <h3>Gardenia Client</h3>
-                <p>Keybind : Right Shift...</p>
+                <p>Gardenia Hack Client Best High...</p>
             </div>
         </div>
     </div>
@@ -128,21 +134,15 @@
     <script>
         particlesJS("particles-js", { "particles": { "number": { "value": 80 }, "size": { "value": 3 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "distance": 150, "color": "#8147ff", "opacity": 0.35 }, "move": { "speed": 2 } } });
 
-        // DIRECT ADMIN LOGIC
-        function checkAdmin(mode) {
+        function checkAdmin() {
             let pass = prompt("Enter NIMDO Password:");
             if (pass === "pookie123") {
                 document.getElementById('nimdoArea').style.display = 'block';
                 document.getElementById('content-wrapper').style.display = 'none';
-            } else if (pass !== null) {
-                alert("Incorrect Password!");
-            }
+            } else if (pass !== null) { alert("Incorrect Password!"); }
         }
 
-        // Auto-check URL on load
-        if (window.location.search.includes('nimda')) {
-            checkAdmin();
-        }
+        if (window.location.search.includes('nimda')) { checkAdmin(); }
 
         function search() {
             let q = document.getElementById('searchBar').value.toLowerCase();
@@ -161,7 +161,7 @@
             document.getElementById('mDesc').innerText = descB64 ? atob(descB64) : "";
             let vArr = versions.split('|'), lArr = links.split('|'), h = '';
             let btnTxt = (cat === 'shop') ? "Order At Discord" : "Download Now";
-            vArr.forEach((v, i) => { h += `<a href="${lArr[i]}" class="dl-btn" target="_blank"><span>${v} | ${btnTxt}</span> <i class="fas fa-chevron-right"></i></a>`; });
+            vArr.forEach((v, i) => { if(v.trim()) h += `<a href="${lArr[i].trim()}" class="dl-btn" target="_blank"><span>${v.trim()} | ${btnTxt}</span> <i class="fas fa-chevron-right"></i></a>`; });
             document.getElementById('mLinks').innerHTML = h;
             document.getElementById('modal').style.display = 'flex';
         }
