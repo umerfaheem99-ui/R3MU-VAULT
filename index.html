@@ -11,201 +11,91 @@
         :root { 
             --bg: #0a0a0a; 
             --accent: #a855f7; 
-            --card-bg: #121212; 
-            --text: #e0e0e0; 
+            --card-bg: #111111; 
+            --text: #f1f1f1; 
             --border: #282828; 
         }
-        body { 
-            margin: 0; background: var(--bg); color: var(--text); 
-            font-family: 'Inter', sans-serif; overflow-x: hidden; 
-        }
-        #particles-js { 
-            position: fixed; width: 100%; height: 100%; top: 0; left: 0; 
-            z-index: 1; pointer-events: none; opacity: 0.7;
-        }
+        body { margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; overflow-x:hidden; }
+        #particles-js { position:fixed; width:100%; height:100%; top:0; left:0; z-index:1; pointer-events:none; opacity:0.75; }
 
-        /* NAV */
-        .nav {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(10,10,10,0.98); backdrop-filter: blur(20px);
-            padding: 18px 5%; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--border);
-        }
-        .nav-logo {
-            font-size: 1.9rem; font-weight: 900; letter-spacing: -2px;
-            color: #c026d3; 
-        }
-        .nav-right {
-            display: flex; align-items: center; gap: 20px;
-        }
-        .live-counter {
-            background: rgba(168,85,247,0.15); border: 1px solid var(--accent);
-            padding: 6px 14px; border-radius: 50px; font-size: 13px; font-weight: 700;
-            display: flex; align-items: center; gap: 6px;
-        }
-        .social-icon { font-size: 1.8rem; transition: all 0.3s ease; }
-        .social-icon:hover { transform: scale(1.25); }
+        .nav { position:sticky; top:0; z-index:100; background:rgba(10,10,10,0.98); backdrop-filter:blur(20px); padding:20px 5%; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); }
+        .nav-logo { font-size:1.95rem; font-weight:900; letter-spacing:-2px; color:#c026d3; }
+        .nav-right { display:flex; align-items:center; gap:18px; }
+        .live-counter { background:rgba(168,85,247,0.15); border:1px solid var(--accent); padding:6px 16px; border-radius:50px; font-size:13.5px; font-weight:700; display:flex; align-items:center; gap:6px; }
+        .social-icon { font-size:1.85rem; transition:all 0.3s ease; }
+        .social-icon:hover { transform:scale(1.3); }
 
-        /* HERO */
-        .hero {
-            text-align: center; padding: 90px 20px 50px;
-        }
-        .hero-title {
-            font-size: 3.8rem; font-weight: 900; margin: 0; letter-spacing: -3px;
-            background: linear-gradient(90deg, #fff, #c026d3);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .hero-sub { color: #aaa; font-size: 1.2rem; margin: 12px 0 40px; }
+        .hero { text-align:center; padding:85px 20px 45px; }
+        .hero-title { font-size:3.7rem; font-weight:900; margin:0; letter-spacing:-3px; background:linear-gradient(90deg,#fff,#c026d3); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .hero-sub { color:#aaa; font-size:1.25rem; margin:12px 0 38px; }
 
-        .search-bar {
-            width: 85%; max-width: 680px; margin: 0 auto 40px;
-            padding: 18px 30px; background: #1a1a1a; border: 2px solid #333;
-            border-radius: 9999px; color: white; font-size: 1.05rem;
-            outline: none; transition: all 0.4s;
-        }
-        .search-bar:focus {
-            border-color: var(--accent); box-shadow: 0 0 30px rgba(168,85,247,0.4);
-        }
+        .search-bar { width:88%; max-width:680px; margin:0 auto 35px; padding:18px 30px; background:#1a1a1a; border:2px solid #333; border-radius:9999px; color:white; font-size:1.05rem; outline:none; transition:all 0.4s; }
+        .search-bar:focus { border-color:var(--accent); box-shadow:0 0 30px rgba(168,85,247,0.4); }
 
-        /* TABS & FILTERS */
-        .filters-container {
-            display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
-            max-width: 1400px; margin: 0 auto; padding: 0 20px 30px;
+        /* FILTER BAR - EXACTLY LIKE YOUR NEW IMAGE */
+        .filter-bar {
+            max-width:1400px; margin:0 auto; padding:0 20px 30px;
+            display:flex; flex-wrap:wrap; justify-content:center; gap:8px;
         }
-        .tab {
-            padding: 12px 28px; background: #1a1a1a; border-radius: 9999px;
-            font-weight: 700; color: #888; cursor: pointer; transition: all 0.3s;
-            border: 2px solid transparent;
+        .filter-container {
+            background:#1a1a1a; border-radius:9999px; padding:6px; display:flex; gap:6px; box-shadow:0 4px 15px rgba(0,0,0,0.3);
         }
-        .tab:hover, .tab.active {
-            background: var(--accent); color: white; transform: translateY(-3px);
-            box-shadow: 0 0 20px rgba(168,85,247,0.5);
+        .filter-btn {
+            padding:12px 26px; border-radius:9999px; font-weight:700; font-size:0.95rem; cursor:pointer; transition:all 0.3s;
         }
-        .sort-group {
-            display: flex; background: #1a1a1a; border-radius: 9999px; padding: 4px;
+        .filter-btn.active {
+            background:var(--accent); color:white; box-shadow:0 0 15px rgba(168,85,247,0.5);
         }
-        .sort-btn {
-            padding: 10px 20px; border-radius: 9999px; font-weight: 600;
-            background: transparent; color: #aaa; cursor: pointer;
+        .filter-btn:not(.active) {
+            background:transparent; color:#bbb;
         }
-        .sort-btn.active {
-            background: var(--accent); color: white;
-        }
+        .filter-btn:not(.active):hover { color:white; }
 
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 24px; max-width: 1400px; margin: 0 auto; padding: 0 20px 80px;
-        }
-        .card {
-            background: var(--card-bg); border-radius: 16px; overflow: hidden;
-            border: 1px solid var(--border); transition: all 0.4s ease;
-            cursor: pointer;
-        }
-        .card:hover {
-            transform: translateY(-10px); border-color: var(--accent);
-            box-shadow: 0 15px 35px rgba(168,85,247,0.25);
-        }
-        .card img {
-            width: 100%; height: 160px; object-fit: cover;
-        }
-        .card-content {
-            padding: 16px;
-        }
-        .card .cat {
-            color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: 1px;
-        }
-        .card h3 { margin: 8px 0 4px; font-size: 1.2rem; }
-        .card p { color: #999; font-size: 0.9rem; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:24px; max-width:1400px; margin:0 auto; padding:0 20px 80px; }
+        .card { background:var(--card-bg); border-radius:18px; overflow:hidden; border:1px solid var(--border); transition:all 0.4s ease; cursor:pointer; }
+        .card:hover { transform:translateY(-12px); border-color:var(--accent); box-shadow:0 20px 40px rgba(168,85,247,0.25); }
+        .card img { width:100%; height:165px; object-fit:cover; }
+        .card-content { padding:16px; }
+        .card .cat { color:var(--accent); font-size:11px; font-weight:800; letter-spacing:1px; }
+        .card h3 { margin:8px 0 5px; font-size:1.2rem; }
+        .card p { color:#999; font-size:0.9rem; }
 
-        /* DETAIL PAGE - SIMPLIFIED & CLEAN */
-        #detailPage {
-            display: none; min-height: 100vh; background: var(--bg);
-        }
-        .detail-header {
-            padding: 40px 5% 20px; display: flex; gap: 40px; flex-wrap: wrap;
-            max-width: 1300px; margin: 0 auto;
-        }
-        .detail-img {
-            flex: 1; min-width: 300px;
-        }
-        .detail-img img {
-            width: 100%; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        }
-        .detail-info {
-            flex: 1; min-width: 300px;
-        }
-        .detail-info .cat {
-            color: var(--accent); font-weight: 700; font-size: 13px;
-        }
-        .detail-info h1 {
-            font-size: 2.8rem; margin: 10px 0 12px; font-weight: 900;
-        }
-        .detail-info p {
-            color: #bbb; font-size: 1.1rem;
-        }
+        /* DETAIL PAGE (Clean & Simple) */
+        #detailPage { display:none; min-height:100vh; background:var(--bg); }
+        .detail-hero { display:flex; flex-wrap:wrap; gap:40px; padding:50px 5%; max-width:1400px; margin:0 auto; }
+        .detail-img { flex:1; min-width:340px; }
+        .detail-img img { width:100%; border-radius:18px; box-shadow:0 15px 40px rgba(0,0,0,0.6); cursor:zoom-in; }
+        .detail-info { flex:1; min-width:340px; }
+        .detail-info .cat { color:var(--accent); font-weight:700; font-size:13.5px; }
+        .detail-info h1 { font-size:3rem; margin:12px 0 14px; font-weight:900; }
+        .detail-info p { color:#ccc; font-size:1.15rem; }
 
-        /* Version Selector - Clean like your image */
-        .version-box {
-            max-width: 1300px; margin: 30px auto; padding: 0 5%;
-        }
-        .version-box h3 { margin-bottom: 12px; color: #ddd; }
-        .version-select {
-            width: 100%; padding: 16px 20px; background: #1f1f1f; border: 1px solid #444;
-            border-radius: 12px; color: white; font-size: 1.1rem; margin-bottom: 16px;
-        }
-        .big-download-btn {
-            width: 100%; padding: 18px; background: linear-gradient(90deg, #a855f7, #c026d3);
-            color: white; font-size: 1.25rem; font-weight: 800; border: none;
-            border-radius: 12px; cursor: pointer; display: flex; align-items: center;
-            justify-content: center; gap: 10px;
-        }
-        .big-download-btn:hover {
-            transform: translateY(-4px); box-shadow: 0 10px 25px rgba(168,85,247,0.6);
-        }
+        .version-box { max-width:1400px; margin:30px auto; padding:0 5%; }
+        .version-box h3 { margin-bottom:12px; color:#ddd; }
+        .version-select { width:100%; padding:16px 22px; background:#1f1f1f; border:1px solid #444; border-radius:14px; color:white; font-size:1.1rem; margin-bottom:16px; }
+        .big-dl-btn { width:100%; padding:19px; background:linear-gradient(90deg,var(--accent),#c026d3); color:white; font-size:1.3rem; font-weight:800; border:none; border-radius:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:12px; }
+        .big-dl-btn:hover { transform:translateY(-4px); box-shadow:0 15px 35px rgba(168,85,247,0.5); }
 
-        .detail-sections {
-            max-width: 1300px; margin: 0 auto; padding: 0 5% 80px;
-        }
-        .section {
-            background: #121212; border-radius: 16px; padding: 24px; margin-bottom: 28px;
-            border: 1px solid var(--border);
-        }
-        .section-title {
-            font-size: 1.25rem; font-weight: 700; margin-bottom: 14px; color: #ddd;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .screenshots {
-            display: flex; gap: 12px; flex-wrap: wrap;
-        }
-        .screenshots img {
-            width: 180px; border-radius: 10px; cursor: zoom-in;
-        }
-        .keybinds, .changelog {
-            white-space: pre-line; line-height: 1.7; color: #ccc;
-        }
-
-        /* ZOOM */
-        #zoomOverlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center;
-        }
-        #zoomImg { max-width: 90%; max-height: 90%; border-radius: 16px; }
+        .detail-sections { max-width:1400px; margin:0 auto; padding:0 5% 80px; }
+        .section { background:#121212; border:1px solid var(--border); border-radius:18px; padding:28px; margin-bottom:30px; }
+        .section-title { font-size:1.35rem; font-weight:700; margin-bottom:16px; color:#ddd; display:flex; align-items:center; gap:10px; }
+        .screenshots { display:flex; gap:14px; flex-wrap:wrap; }
+        .screenshots img { width:210px; border-radius:12px; cursor:zoom-in; }
+        .keybinds, .changelog { white-space:pre-line; line-height:1.75; color:#ccc; font-size:1.05rem; }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
 
     <!-- ADMIN TRIGGER -->
-    <div onclick="checkAdmin()" style="position:fixed;bottom:10px;right:10px;width:20px;height:20px;opacity:0.05;cursor:pointer;z-index:999;"></div>
+    <div id="adminTrigger" onclick="checkAdmin()" style="position:fixed;bottom:12px;right:12px;width:20px;height:20px;opacity:0.05;cursor:pointer;z-index:9999;"></div>
 
-    <!-- MAIN VAULT -->
+    <!-- MAIN PAGE -->
     <div id="content-wrapper">
         <nav class="nav">
             <div class="nav-logo">R3MU VAULT</div>
             <div class="nav-right">
-                <div class="live-counter">
-                    <span style="color:#a855f7;">●</span> LIVE • <span id="cheatCount">2</span> CHEATS
-                </div>
+                <div class="live-counter"><span style="color:#a855f7;">●</span> LIVE • <span id="cheatCount">0</span> CHEATS</div>
                 <a href="https://www.youtube.com/@r3mu2" target="_blank" class="social-icon" style="color:#FF0000;"><i class="fab fa-youtube"></i></a>
                 <a href="https://discord.com/invite/r3musblackmarket" target="_blank" class="social-icon" style="color:#5865F2;"><i class="fab fa-discord"></i></a>
             </div>
@@ -217,18 +107,13 @@
             <input type="text" id="searchBar" class="search-bar" placeholder="Search clients, mods, keybinds..." onkeyup="search()">
         </div>
 
-        <div class="filters-container">
-            <div class="tab active" onclick="filter('all', this)">ALL</div>
-            <div class="tab" onclick="filter('clients', this)">CLIENTS</div>
-            <div class="tab" onclick="filter('mods / macros', this)">MODS / MACROS</div>
-            <div class="tab" onclick="filter('source codes', this)">SOURCE CODES</div>
-            <div class="tab" onclick="filter('shop', this)" style="color:#fbbf24;">💰 SHOP</div>
-
-            <div class="sort-group">
-                <div class="sort-btn active" onclick="setSort(this, 'all')">All</div>
-                <div class="sort-btn" onclick="setSort(this, 'newest')">Newest</div>
-                <div class="sort-btn" onclick="setSort(this, 'most-viewed')">Most Viewed</div>
-                <div class="sort-btn" onclick="setSort(this, 'most-downloaded')">Most Downloaded</div>
+        <!-- FILTER BAR - EXACTLY LIKE YOUR IMAGE -->
+        <div class="filter-bar">
+            <div class="filter-container" id="sortContainer">
+                <div onclick="setFilter(this,'all')" class="filter-btn active">All</div>
+                <div onclick="setFilter(this,'newest')" class="filter-btn">Newest</div>
+                <div onclick="setFilter(this,'most-viewed')" class="filter-btn">Most Viewed</div>
+                <div onclick="setFilter(this,'most-downloaded')" class="filter-btn">Most Downloaded</div>
             </div>
         </div>
 
@@ -240,16 +125,14 @@
         <nav class="nav">
             <div class="nav-logo">R3MU VAULT</div>
             <div class="nav-right">
-                <a onclick="backToVault()" style="color:#fff; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:8px;">
+                <a onclick="backToVault()" style="color:#fff;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:1.1rem;">
                     ← BACK TO VAULT
                 </a>
             </div>
         </nav>
 
-        <div class="detail-header">
-            <div class="detail-img">
-                <img id="detailImg" src="" onclick="zoomImg(this.src)">
-            </div>
+        <div class="detail-hero">
+            <div class="detail-img"><img id="detailImg" src="" onclick="zoomImg(this.src)"></div>
             <div class="detail-info">
                 <div id="detailCat" class="cat"></div>
                 <h1 id="detailTitle"></h1>
@@ -257,35 +140,27 @@
             </div>
         </div>
 
-        <!-- Version Selector -->
         <div class="version-box">
             <h3>Choose Version & Download</h3>
-            <select id="versionSelect" class="version-select" onchange="updateDownloadBtn()"></select>
-            <button id="bigDownloadBtn" class="big-download-btn" onclick="downloadCurrentVersion()">
-                <span id="selectedVersion">1.21</span> • Download Now
+            <select id="versionSelect" class="version-select" onchange="updateBigBtn()"></select>
+            <button id="bigDownloadBtn" class="big-dl-btn" onclick="triggerDownload()">
+                <span id="bigVersionText">1.21</span> • Download Now
             </button>
         </div>
 
         <div class="detail-sections">
-            <!-- Screenshots -->
             <div class="section">
                 <div class="section-title"><i class="fas fa-images"></i> SCREENSHOTS</div>
                 <div id="detailScreenshots" class="screenshots"></div>
             </div>
-
-            <!-- Loader -->
             <div class="section">
                 <div class="section-title"><i class="fas fa-cube"></i> LOADER / INSTALLATION</div>
-                <div id="detailLoader" style="color:#ccc;"></div>
+                <div id="detailLoader" class="keybinds"></div>
             </div>
-
-            <!-- Keybinds -->
             <div class="section">
                 <div class="section-title"><i class="fas fa-keyboard"></i> KEYBINDS</div>
                 <div id="detailKeybinds" class="keybinds"></div>
             </div>
-
-            <!-- What's New -->
             <div class="section">
                 <div class="section-title"><i class="fas fa-star"></i> WHAT'S NEW</div>
                 <div id="detailChangelog" class="changelog"></div>
@@ -293,92 +168,49 @@
         </div>
     </div>
 
-    <!-- Zoom Overlay -->
-    <div id="zoomOverlay" onclick="this.style.display='none'">
-        <img id="zoomImg" src="">
+    <div id="zoomOverlay" onclick="this.style.display='none'" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.97);z-index:9999;justify-content:center;align-items:center;">
+        <img id="zoomImg" src="" style="max-width:92%;max-height:92%;border-radius:18px;">
     </div>
 
     <script>
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 90 },
-                color: { value: "#a855f7" },
-                shape: { type: "circle" },
-                opacity: { value: 0.6 },
-                size: { value: 3 },
-                line_linked: { enable: true, distance: 150, color: "#c026d3", opacity: 0.3, width: 1 },
-                move: { enable: true, speed: 1.5 }
-            }
-        });
+        particlesJS("particles-js", { particles: { number:{value:75}, color:{value:"#a855f7"}, line_linked:{enable:true,distance:160,color:"#c026d3",opacity:0.3,width:1}, move:{speed:1.6} }});
 
-        const items = [ /* same as before - you can add more */ 
-            {
-                slug: "cw-hack-client", name: "Cw Hack Client", cat: "clients",
-                img: "https://i.postimg.cc/dtJfGxjM/2.png",
-                desc: "Best CPVP Hack Client",
-                loader: "Fabric Loader • 1.17x - 1.18x\nPlace in mods folder",
-                keybinds: "Right Shift - Open Menu\nLeft Ctrl + K - Toggle Features",
-                changelog: "• Fixed crashes\n• Added new reach\n• Better performance",
-                versions: [
-                    {ver: "1.17x", link: "https://shrinkme.click/9Kz0O"},
-                    {ver: "1.18x", link: "https://shrinkme.click/md3Y"}
-                ],
-                screenshots: ["https://i.postimg.cc/dtJfGxjM/2.png", "https://picsum.photos/id/1015/800/500"]
-            },
-            {
-                slug: "gardenia-client", name: "Gardenia Client", cat: "clients",
-                img: "https://i.postimg.cc/4xWnXqBg/image.png",
-                desc: "Best High Ping Client",
-                loader: "Fabric Loader • 1.21\nOptimized for high ping",
-                keybinds: "Right Shift - Open GUI\nF8 - Toggle modules",
-                changelog: "• New high-ping optimizer\n• Fixed memory leak\n• 1.21.4 support",
-                versions: [{ver: "1.21", link: "https://shrinkme.click/bUCrhByx"}],
-                screenshots: ["https://i.postimg.cc/4xWnXqBg/image.png", "https://picsum.photos/id/201/800/500"]
-            }
+        const items = [
+            { slug:"cw-hack-client", name:"Cw Hack Client", cat:"clients", img:"https://i.postimg.cc/dtJfGxjM/2.png", desc:"Best CPVP Hack Client", loader:"Fabric Loader • 1.17x - 1.18x\nPlace in mods folder", keybinds:"Right Shift - Open Menu\nLeft Ctrl + K - Toggle", changelog:"• Fixed crashes\n• Added new reach\n• Better performance", versions:[{ver:"1.17x",link:"https://shrinkme.click/9Kz0O"},{ver:"1.18x",link:"https://shrinkme.click/md3Y"}], screenshots:["https://i.postimg.cc/dtJfGxjM/2.png","https://picsum.photos/id/1015/1400/900"] },
+            { slug:"gardenia-client", name:"Gardenia Client", cat:"clients", img:"https://i.postimg.cc/4xWnXqBg/image.png", desc:"Best High Ping Client", loader:"Fabric Loader • 1.21\nOptimized for high ping", keybinds:"Right Shift - Open GUI\nF8 - Toggle modules", changelog:"• New high-ping optimizer\n• Fixed memory leak\n• 1.21.4 support", versions:[{ver:"1.21",link:"https://shrinkme.click/bUCrhByx"}], screenshots:["https://i.postimg.cc/4xWnXqBg/image.png","https://picsum.photos/id/201/1400/900"] }
         ];
 
-        let currentCat = 'all';
+        let currentSort = 'all';
 
         function renderGrid() {
             const grid = document.getElementById('mainGrid');
             grid.innerHTML = '';
-            let filtered = currentCat === 'all' ? items : items.filter(i => i.cat === currentCat);
-
+            let filtered = [...items];
             filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <img src="${item.img}">
-                    <div class="card-content">
-                        <div class="cat">${item.cat.toUpperCase()}</div>
-                        <h3>${item.name}</h3>
-                        <p>${item.desc}</p>
-                    </div>
-                `;
-                card.onclick = () => openDetail(item.slug);
-                grid.appendChild(card);
+                const cardHTML = `
+                    <div class="card" onclick="openDetail('${item.slug}')">
+                        <img src="${item.img}">
+                        <div class="card-content">
+                            <div class="cat">${item.cat.toUpperCase()}</div>
+                            <h3>${item.name}</h3>
+                            <p>${item.desc}</p>
+                        </div>
+                    </div>`;
+                grid.innerHTML += cardHTML;
             });
             document.getElementById('cheatCount').innerText = items.length;
         }
 
-        function filter(cat, el) {
-            currentCat = cat;
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        function setFilter(el, type) {
+            currentSort = type;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             el.classList.add('active');
-            renderGrid();
-        }
-
-        function setSort(btn, type) {
-            document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            // You can add sorting logic later if needed
             renderGrid();
         }
 
         function openDetail(slug) {
             const item = items.find(i => i.slug === slug);
             if (!item) return;
-
             document.getElementById('content-wrapper').style.display = 'none';
             document.getElementById('detailPage').style.display = 'block';
 
@@ -390,31 +222,25 @@
             document.getElementById('detailKeybinds').innerHTML = `<p style="white-space:pre-line;">${item.keybinds}</p>`;
             document.getElementById('detailChangelog').innerHTML = `<p style="white-space:pre-line;">${item.changelog}</p>`;
 
-            // Version dropdown
             const select = document.getElementById('versionSelect');
             select.innerHTML = '';
-            item.versions.forEach((v, i) => {
+            item.versions.forEach((v,i) => {
                 const opt = document.createElement('option');
-                opt.value = i;
-                opt.textContent = v.ver;
+                opt.value = i; opt.textContent = v.ver;
                 select.appendChild(opt);
             });
-            updateDownloadBtn();
+            updateBigBtn();
         }
 
-        function updateDownloadBtn() {
-            const itemSlug = /* you can improve this later */;
+        function updateBigBtn() {
             const select = document.getElementById('versionSelect');
-            document.getElementById('selectedVersion').innerText = select.options[select.selectedIndex].text;
+            document.getElementById('bigVersionText').innerText = select.options[select.selectedIndex].text;
         }
 
-        function downloadCurrentVersion() {
+        function triggerDownload() {
             const select = document.getElementById('versionSelect');
             const item = items.find(i => document.getElementById('detailTitle').innerText === i.name);
-            if (item) {
-                const idx = parseInt(select.value);
-                window.open(item.versions[idx].link, '_blank');
-            }
+            if (item) window.open(item.versions[select.value].link, '_blank');
         }
 
         function backToVault() {
@@ -427,20 +253,13 @@
             document.getElementById('zoomOverlay').style.display = 'flex';
         }
 
+        function search() { renderGrid(); }
+
         function checkAdmin() {
-            if (prompt("Enter NIMDO Password:") === "pookie123") {
-                alert("Admin panel coming in next update!");
-            }
+            if (prompt("Enter NIMDO Password:") === "pookie123") alert("Admin panel coming soon!");
         }
 
-        function search() {
-            // Basic search
-            renderGrid();
-        }
-
-        window.onload = () => {
-            renderGrid();
-        };
+        window.onload = () => { renderGrid(); };
     </script>
 </body>
 </html>
