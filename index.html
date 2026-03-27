@@ -10,24 +10,22 @@
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
         #vaultContent { padding: 40px 20px; max-width: 1300px; margin: 0 auto; }
         
-        /* Admin Console UI */
+        /* Admin Manager UI (As per Image 12) */
         #adminArea { display: none; padding: 30px; background: #0a0a0a; border-radius: 15px; border: 1px dashed var(--accent); max-width: 800px; margin: 50px auto; }
         .adm-title { color: var(--accent); font-size: 2rem; font-weight: 900; margin-bottom: 20px; }
         .adm-in { width: 100%; padding: 14px; margin-bottom: 12px; background: #000; color: white; border: 1px solid #333; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
         
-        /* Version System with +/- */
+        /* Version Plus System */
         .v-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
-        .btn-action { width: 45px; height: 45px; border-radius: 10px; cursor: pointer; font-size: 24px; font-weight: bold; transition: 0.3s; flex-shrink: 0; border: 2px solid; display: flex; align-items: center; justify-content: center; }
-        .btn-plus { background: #1a1a1a; color: var(--accent); border-color: var(--accent); }
-        .btn-minus { background: #1a1a1a; color: #ff4747; border-color: #ff4747; }
+        .btn-plus { background: #1a1a1a; color: var(--accent); border: 2px solid var(--accent); width: 45px; height: 45px; border-radius: 10px; cursor: pointer; font-size: 24px; font-weight: bold; transition: 0.3s; flex-shrink: 0; }
         .btn-plus:hover { background: var(--accent); color: white; }
-        .btn-minus:hover { background: #ff4747; color: white; }
         
         .adm-btn { width: 100%; padding: 18px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 10px; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1.1rem; }
         
-        /* Grid */
+        /* Vault Grid */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: var(--card-bg); border-radius: 15px; border: 1px solid #1a1a1a; padding: 20px; cursor: pointer; }
+        .card { background: var(--card-bg); border-radius: 15px; border: 1px solid #1a1a1a; padding: 20px; cursor: pointer; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
     </style>
 </head>
 <body>
@@ -43,29 +41,34 @@
         <select id="aCat" class="adm-in">
             <option value="clients">Clients</option>
             <option value="mods">Mods / Macros</option>
+            <option value="bypass">SS Bypass</option>
             <option value="source">Source Codes</option>
-            <option value="shop">Shop</option>
+            <option value="shop">Shop (Premium)</option>
         </select>
         
-        <input type="text" id="aName" class="adm-in" placeholder="Item Name">
-        <input type="text" id="aImg" class="adm-in" placeholder="Image URL">
-        <textarea id="aDesc" class="adm-in" placeholder="Description..." style="height:100px;"></textarea>
+        <input type="text" id="aName" class="adm-in" placeholder="Item Name (e.g. Argon Client)">
+        <input type="text" id="aImg" class="adm-in" placeholder="Direct Image URL (Imgur link)">
+        
+        <textarea id="aDesc" class="adm-in" placeholder="Enter full item description here..." style="height:100px;"></textarea>
         
         <div id="versionList">
             <div class="v-row">
                 <input type="text" class="adm-in v-num" placeholder="Version" style="margin-bottom:0;">
                 <input type="text" class="adm-in v-link" placeholder="Download Link" style="margin-bottom:0;">
-                <button class="btn-action btn-plus" onclick="addVersion()">+</button>
+                <button class="btn-plus" onclick="addVersion()">+</button>
             </div>
         </div>
         
         <button class="adm-btn" onclick="generateItem()">GENERATE & COPY CODE</button>
+        <textarea id="aOut" style="display:none;"></textarea>
     </div>
 
     <script>
-        // Secret URL Access
+        // Secret URL Check for ?nimda
         if (window.location.search === "?nimda") {
-            if (btoa(prompt("Security Key:")) === "cG9va2llMTIz") {
+            // "Ulta Seedha" password check
+            let k = prompt("Enter Security Key:");
+            if (btoa(k) === "cG9va2llMTIz") { // pookie123
                 document.getElementById('adminArea').style.display = 'block';
                 document.getElementById('vaultContent').style.display = 'none';
             } else {
@@ -80,7 +83,7 @@
             row.innerHTML = `
                 <input type="text" class="adm-in v-num" placeholder="Version" style="margin-bottom:0;">
                 <input type="text" class="adm-in v-link" placeholder="Download Link" style="margin-bottom:0;">
-                <button class="btn-action btn-minus" onclick="this.parentElement.remove()">-</button>
+                <button class="btn-plus" style="visibility:hidden;">+</button>
             `;
             container.appendChild(row);
         }
@@ -94,6 +97,7 @@
             const vArr = Array.from(document.getElementsByClassName('v-num')).map(e => e.value).filter(e => e !== "");
             const lArr = Array.from(document.getElementsByClassName('v-link')).map(e => e.value).filter(e => e !== "");
 
+            // Code generation with description support
             const code = `
             <div class="card" data-cat="${c}" onclick="openItem('${n}','${i}','${vArr.join(',')}','${lArr.join(',')}','${c}','${btoa(d)}')">
                 <img src="${i}" style="width:100%; border-radius:10px; height:180px; object-fit:cover;">
@@ -103,7 +107,7 @@
             </div>`;
             
             navigator.clipboard.writeText(code);
-            alert("Code Copied!");
+            alert("Success! Code copied. Now paste it into the 'vault-data' section.");
         }
     </script>
 </body>
