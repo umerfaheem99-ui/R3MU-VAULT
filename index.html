@@ -8,23 +8,24 @@
     <style>
         :root { --bg: #050505; --accent: #8147ff; --card-bg: #0f0f0f; --text: #eee; }
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
-        
-        /* Home Page */
         #vaultContent { padding: 80px 20px; max-width: 1300px; margin: 0 auto; text-align: center; }
         .hero-title { font-size: 4rem; font-weight: 900; margin-bottom: 50px; letter-spacing: -2px; text-transform: uppercase; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; text-align: left; }
+        
+        /* Card Style */
+        .card { background: var(--card-bg); border-radius: 18px; border: 1px solid #1a1a1a; padding: 25px; cursor: pointer; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .card img { width: 100%; border-radius: 12px; height: 180px; object-fit: cover; }
+        .card-cat { color: var(--accent); font-size: 11px; font-weight: 900; text-transform: uppercase; margin-top: 15px; }
 
-        /* NIMDO Panel (image_6b3a3a.png) */
-        #nimdoArea { display: none; padding: 40px; background: #0a0a0a; border-radius: 20px; border: 1px dashed var(--accent); max-width: 850px; margin: 50px auto; }
-        .nimdo-title { color: var(--accent); font-size: 2rem; font-weight: 900; margin-bottom: 20px; }
-        .nimdo-in { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; color: white; border: 1px solid #333; border-radius: 10px; box-sizing: border-box; }
-        .v-row { display: flex; gap: 10px; margin-bottom: 10px; }
-        .btn-plus { width: 50px; height: 50px; background: var(--accent); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 20px; }
-        .nimdo-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 12px; cursor: pointer; text-transform: uppercase; }
-
-        /* Popup */
+        /* Popup Logic */
         #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; }
-        .m-content { background: #0f0f0f; padding: 40px; border-radius: 20px; max-width: 500px; width: 90%; text-align: left; border: 1px solid #222; }
+        .m-content { background: #0f0f0f; padding: 30px; border-radius: 20px; max-width: 500px; width: 90%; border: 1px solid #222; }
+        .dl-btn { display: block; background: var(--accent); color: white; padding: 15px; text-align: center; border-radius: 10px; text-decoration: none; margin-top: 10px; font-weight: bold; }
+
+        #nimdoArea { display: none; padding: 40px; background: #0a0a0a; border-radius: 20px; border: 1px dashed var(--accent); max-width: 850px; margin: 50px auto; }
+        .nimdo-in { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; color: white; border: 1px solid #333; border-radius: 10px; box-sizing: border-box; }
+        .nimdo-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 12px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -32,60 +33,64 @@
     <div id="vaultContent">
         <h1 class="hero-title">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</h1>
         <div class="grid" id="mainGrid">
+            <div class="card" onclick="openItem('sss','https://via.placeholder.com/300','1.21','https://google.com','Clients','U3NzIGlzIGEgY2xpZW50')">
+                <img src="https://via.placeholder.com/300">
+                <div class="card-cat">Clients</div>
+                <h3>sss</h3>
+                <p style="font-size:13px; color:#888;">sss...</p>
+            </div>
             </div>
     </div>
 
+    <div id="modal" onclick="this.style.display='none'">
+        <div class="m-content" onclick="event.stopPropagation()">
+            <h2 id="mTitle" style="font-size:32px; margin:0;"></h2>
+            <p id="mDesc" style="color:#aaa; margin:20px 0;"></p>
+            <div id="mLinks"></div>
+        </div>
+    </div>
+
     <div id="nimdoArea">
-        <div class="nimdo-title">Vault Manager</div>
-        <select id="nCat" class="nimdo-in">
-            <option value="Clients">Clients</option>
-            <option value="Mods">Mods</option>
-            <option value="Shop">Shop</option>
-        </select>
+        <div class="nimdo-title" style="color:var(--accent); font-weight:900; font-size:24px; margin-bottom:20px;">Vault Manager</div>
         <input type="text" id="nName" class="nimdo-in" placeholder="Name">
         <input type="text" id="nImg" class="nimdo-in" placeholder="Image Link">
-        <textarea id="nDesc" class="nimdo-in" placeholder="Description" style="height:100px;"></textarea>
-        <div id="vList">
-            <div class="v-row">
-                <input type="text" class="nimdo-in v-num" placeholder="Version" style="margin:0;">
-                <input type="text" class="nimdo-in v-link" placeholder="Link" style="margin:0;">
-                <button class="btn-plus" onclick="addV()">+</button>
-            </div>
-        </div>
+        <textarea id="nDesc" class="nimdo-in" placeholder="Description" style="height:80px;"></textarea>
+        <input type="text" id="nVer" class="nimdo-in" placeholder="Version (e.g. 1.21)">
+        <input type="text" id="nLink" class="nimdo-in" placeholder="Link">
         <button class="nimdo-btn" onclick="genItem()">GENERATE & COPY CODE</button>
     </div>
 
     <script>
-        // NIMDO Access System
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('nimda')) {
             const pass = prompt("Enter NIMDO Key:");
-            if (pass === "pookie123") { // Password is pookie123
+            if (pass === "pookie123") {
                 document.getElementById('nimdoArea').style.display = 'block';
                 document.getElementById('vaultContent').style.display = 'none';
-            } else {
-                alert("Wrong Key!");
-                window.location.href = window.location.pathname;
             }
         }
 
-        function addV() {
-            const row = document.createElement('div');
-            row.className = 'v-row';
-            row.innerHTML = `<input type="text" class="nimdo-in v-num" style="margin:0;"><input type="text" class="nimdo-in v-link" style="margin:0;"><button class="btn-plus" style="background:#ff4747;" onclick="this.parentElement.remove()">-</button>`;
-            document.getElementById('vList').appendChild(row);
+        function openItem(name, img, ver, link, cat, descBase64) {
+            document.getElementById('mTitle').innerText = name;
+            document.getElementById('mDesc').innerText = atob(descBase64);
+            document.getElementById('mLinks').innerHTML = `<a href="${link}" class="dl-btn" target="_blank">Download (${ver})</a>`;
+            document.getElementById('modal').style.display = 'flex';
         }
 
         function genItem() {
             const n = document.getElementById('nName').value;
             const i = document.getElementById('nImg').value;
             const d = document.getElementById('nDesc').value;
-            const v = Array.from(document.getElementsByClassName('v-num')).map(e => e.value).join(',');
-            const l = Array.from(document.getElementsByClassName('v-link')).map(e => e.value).join(',');
-            
-            const cardCode = `<div class="card" onclick="openItem('${n}','${i}','${v}','${l}','Base64Here')">...</div>`;
+            const v = document.getElementById('nVer').value;
+            const l = document.getElementById('nLink').value;
+            const cardCode = `<div class="card" onclick="openItem('${n}','${i}','${v}','${l}','Clients','${btoa(d)}')">
+    <img src="${i}">
+    <div class="card-cat">Clients</div>
+    <h3>${n}</h3>
+    <p style="font-size:13px; color:#888;">${d.substring(0,30)}...</p>
+</div>`;
             navigator.clipboard.writeText(cardCode);
-            alert("Code Copied!");
+            alert("Code Copied! Now paste it in the grid section.");
         }
     </script>
 </body>
