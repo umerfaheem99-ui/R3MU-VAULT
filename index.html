@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R3MU PREMIUM VAULT | Premium Minecraft Archive</title>
+    <title>R3MU VAULT | Premium Minecraft Archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -51,11 +51,9 @@
         .dl-btn { display: flex; justify-content: space-between; padding: 14px 18px; background: #151515; color: #fff; text-decoration: none; border-radius: 10px; font-weight: 700; margin-top: 10px; border: 1px solid #222; font-size: 0.9rem; transition: 0.3s; }
         .dl-btn:hover { background: var(--accent); }
 
-        /* BACK TO TOP BUTTON */
         #backToTop { position: fixed; bottom: 30px; left: 30px; background: var(--accent); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 500; border: none; box-shadow: 0 5px 15px rgba(129,71,255,0.4); opacity: 0; visibility: hidden; transition: 0.4s; }
         #backToTop.show { opacity: 1; visibility: visible; }
-        #backToTop:hover { transform: translateY(-5px); }
-
+        
         #adminTrigger { position: fixed; bottom: 5px; right: 5px; width: 15px; height: 15px; opacity: 0.01; cursor: pointer; z-index: 10; }
         #nimdoArea { display: none; padding: 40px 20px; min-height: 100vh; background: #050505; position: fixed; top: 0; left: 0; width: 100%; z-index: 5000; overflow-y: auto; }
         .nimdo-card { background: #0d0d0d; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 20px; border: 1px solid var(--accent); }
@@ -119,7 +117,20 @@
         </div>
 
         <div class="grid" id="mainGrid">
+            <div class="card" data-cat="clients" onclick="openItem('Cw Hack Client','https://i.postimg.cc/dtJfGxjM/2.png','1.17x|1.18x','https://shrinkme.click/9Kz0O |https://shrinkme.click/md3Y','clients','Q3cgSGFjayBDbGllbnQKQmVzdCBDUFZQIEhhY2sgQ2xpZW50CktleSBSaWdodCBTaGlmdAo=')">
+                <img src="https://i.postimg.cc/dtJfGxjM/2.png">
+                <div style="color:var(--accent); font-weight:900; font-size:10px;">CLIENTS</div>
+                <h3>Cw Hack Client</h3>
+                <p>Best CPVP Client...</p>
             </div>
+
+            <div class="card" data-cat="clients" onclick="openItem('Gardenia Client','https://i.postimg.cc/4xWnXqBg/image.png','1.21','https://shrinkme.click/bUCrhByx','clients','R2FyZGVuaWEgSGFjayBDbGllbnQKQmVzdCBIaWdoIFBpbmcgQ2xpZW50CmtleSA6IFJpZ2h0IFNoaWZ0')">
+                <img src="https://i.postimg.cc/4xWnXqBg/image.png">
+                <div style="color:var(--accent); font-weight:900; font-size:10px;">CLIENTS</div>
+                <h3>Gardenia Client</h3>
+                <p>Best High Ping Client...</p>
+            </div>
+        </div>
     </div>
 
     <div id="modal" onclick="closeM(event)">
@@ -138,19 +149,17 @@
     <script>
         particlesJS("particles-js", { "particles": { "number": { "value": 60 }, "size": { "value": 2 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "distance": 150, "color": "#8147ff", "opacity": 0.3 }, "move": { "speed": 1.5 } } });
 
-        // Back to Top button logic
         window.onscroll = function() {
             let btt = document.getElementById('backToTop');
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                btt.classList.add('show');
-            } else {
-                btt.classList.remove('show');
-            }
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { btt.classList.add('show'); } 
+            else { btt.classList.remove('show'); }
         };
 
-        window.onload = function() {
+        window.onload = function() { updateCount(); };
+
+        function updateCount() {
             document.getElementById('cheatCount').innerText = document.querySelectorAll('#mainGrid .card').length;
-        };
+        }
 
         function checkAdmin() {
             if (prompt("Enter NIMDO Password:") === "pookie123") {
@@ -185,10 +194,10 @@
         function addVerRow() { document.getElementById('versionList').insertAdjacentHTML('beforeend', '<div style="display:flex; gap:8px; margin-bottom:8px;"><input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1"><input type="text" class="nimdo-in nLink" placeholder="Link" style="flex:2"></div>'); }
 
         function generateCode() {
-            let cat = document.getElementById('nCat').value, name = document.getElementById('nName').value, img = document.getElementById('nImg').value, desc = btoa(document.getElementById('nDesc').value);
+            let cat = document.getElementById('nCat').value, name = document.getElementById('nName').value, img = document.getElementById('nImg').value, descRaw = document.getElementById('nDesc').value, desc = btoa(descRaw);
             let vers = Array.from(document.querySelectorAll('.nVer')).map(i => i.value).join('|'), links = Array.from(document.querySelectorAll('.nLink')).map(i => i.value).join('|');
-            let code = `<div class="card" data-cat="${cat}" onclick="openItem('${name}','${img}','${vers}','${links}','${cat}','${desc}')"><img src="${img}"><div style="color:var(--accent); font-weight:900; font-size:10px;">${cat.toUpperCase()}</div><h3>${name}</h3><p>${document.getElementById('nDesc').value.substring(0,25)}...</p></div>`;
-            navigator.clipboard.writeText(code); alert("Copied!");
+            let code = `<div class="card" data-cat="${cat}" onclick="openItem('${name}','${img}','${vers}','${links}','${cat}','${desc}')"><img src="${img}"><div style="color:var(--accent); font-weight:900; font-size:10px;">${cat.toUpperCase()}</div><h3>${name}</h3><p>${descRaw.substring(0,25)}...</p></div>`;
+            navigator.clipboard.writeText(code); alert("Copied! Paste this inside <div id='mainGrid'> in your code.");
         }
     </script>
 </body>
