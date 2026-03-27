@@ -47,6 +47,7 @@ body {
   position: sticky; top: 0; z-index: 100;
   border-bottom: 1px solid var(--border);
 }
+/* R3MU VAULT logo styled as a clickable button */
 .nav-logo {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
@@ -104,6 +105,7 @@ body {
   100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); }
 }
 
+/* Social icons with hover glow */
 .social-icon {
   display: flex; align-items: center; justify-content: center;
   width: 34px; height: 34px;
@@ -129,6 +131,7 @@ body {
   transform: translateY(-2px) scale(1.1);
 }
 
+/* ── WHATS NEW BUTTON ────────────────────────── */
 .whats-new-btn {
   display: flex; align-items: center; gap: 6px;
   padding: 5px 13px;
@@ -161,6 +164,7 @@ body {
   box-shadow: 0 0 14px rgba(168,85,247,0.3);
 }
 
+/* ── MARQUEE BANNER ──────────────────────────── */
 #marqueeBar {
   display: none;
   width: 100%;
@@ -193,6 +197,7 @@ body {
   100% { transform: translateX(-50%); }
 }
 
+/* ── HERO ────────────────────────────────────── */
 .hero {
   padding: 42px 16px 22px;
   text-align: center;
@@ -217,6 +222,7 @@ body {
   letter-spacing: 1px;
 }
 
+/* Search bar */
 .search-bar {
   width: 90%; max-width: 480px;
   padding: 11px 20px;
@@ -242,6 +248,7 @@ body {
   border-color: rgba(124,58,237,0.4);
 }
 
+/* ── FILTER ROWS ─────────────────────────────── */
 .filter-row {
   display: flex; gap: 7px;
   justify-content: center;
@@ -249,6 +256,7 @@ body {
   margin-bottom: 10px;
 }
 
+/* Category tabs */
 .tab {
   padding: 7px 16px;
   background: transparent;
@@ -295,6 +303,7 @@ body {
   border-color: #f59e0b;
 }
 
+/* Booster locked tab */
 .tab.booster-tab {
   color: #a78bfa;
   border-color: rgba(167,139,250,0.3);
@@ -313,6 +322,7 @@ body {
   opacity: 0.75;
 }
 
+/* Version filter tabs - smaller style */
 .ver-tab {
   padding: 5px 12px;
   background: transparent;
@@ -345,6 +355,7 @@ body {
   text-transform: uppercase;
 }
 
+/* ── GRID ────────────────────────────────────── */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -361,6 +372,7 @@ body {
   font-size: 0.95rem;
 }
 
+/* ── CARD ────────────────────────────────────── */
 .card {
   background: var(--card-bg);
   border-radius: 12px;
@@ -428,6 +440,7 @@ body {
   letter-spacing: 0.3px;
 }
 
+/* ── DETAIL PAGE ─────────────────────────────── */
 #detailPage { min-height: 100vh; background: var(--bg); }
 
 .detail-hero {
@@ -472,6 +485,7 @@ body {
   font-size: 0.95rem; color: #888; margin: 0; line-height: 1.5;
 }
 
+/* Quick version selector on detail page */
 .detail-ver-selector {
   display: flex; flex-wrap: wrap; gap: 6px;
   margin-top: 16px;
@@ -567,6 +581,7 @@ body {
   line-height: 1.8;
 }
 
+/* ── ZOOM ────────────────────────────────────── */
 #zoomOverlay {
   display: none; position: fixed;
   inset: 0; background: rgba(0,0,0,0.96);
@@ -580,6 +595,7 @@ body {
   pointer-events: none;
 }
 
+/* ── BOOSTER MODAL ───────────────────────────── */
 #boosterModal {
   display: none;
   position: fixed; inset: 0;
@@ -658,6 +674,7 @@ body {
 }
 .booster-modal-card .modal-close:hover { color: #888; }
 
+/* ── ADMIN PANEL ─────────────────────────────── */
 #nimdoArea {
   display: none; padding: 30px 16px;
   min-height: 100vh; background: #050505;
@@ -700,12 +717,14 @@ body {
 }
 .admin-btn-sm:hover { background: rgba(124,58,237,0.22); }
 
+/* Admin divider */
 .admin-divider {
   border: none;
   border-top: 1px solid #1e1e2e;
   margin: 22px 0 18px;
 }
 
+/* Marquee update section in admin */
 .marquee-update-row {
   display: flex; gap: 8px; align-items: center;
 }
@@ -736,6 +755,7 @@ body {
 <body>
 <div id="particles-js"></div>
 
+<!-- BOOSTER MODAL -->
 <div id="boosterModal" onclick="closeBoosterModal(event)">
   <div class="booster-modal-card">
     <span class="booster-gem">💎</span>
@@ -750,6 +770,7 @@ body {
   </div>
 </div>
 
+<!-- ADMIN PANEL -->
 <div id="nimdoArea">
 <div class="nimdo-card">
   <h2 style="color:var(--accent2);text-align:center;margin-top:0;font-family:'Rajdhani',sans-serif;font-size:1.8rem;letter-spacing:2px;">NIMDO ADMIN v2</h2>
@@ -796,6 +817,7 @@ body {
     GENERATE CODE &amp; COPY
   </button>
 
+  <!-- ── WHAT'S NEW EDITOR ── -->
   <hr class="admin-divider">
   <div class="admin-label" style="margin-top:0;">
     <i class="fas fa-bullhorn" style="color:var(--accent2);margin-right:6px;"></i> Update What's New Banner
@@ -813,6 +835,7 @@ body {
 </div>
 </div>
 
+<!-- MAIN VAULT -->
 <div id="content-wrapper">
   <nav class="nav">
     <div class="nav-logo" id="adminTrigger">R3MU VAULT</div>
@@ -829,6 +852,7 @@ body {
     </div>
   </nav>
 
+  <!-- MARQUEE BANNER (below nav, toggleable) -->
   <div id="marqueeBar">
     <div class="marquee-inner" id="marqueeInner">
       <span id="marqueeTextA"><i class="fas fa-star"></i> Welcome to R3MU VAULT — Your elite Minecraft archive is live! &nbsp;•&nbsp; <i class="fas fa-bolt"></i> New clients dropping soon — Stay tuned! &nbsp;•&nbsp; <i class="fas fa-shield-alt"></i> Always updated. Always clean. Always premium. &nbsp;•&nbsp; <i class="fab fa-discord"></i> Join the Discord for exclusive early access! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -842,6 +866,7 @@ body {
     <input type="text" id="searchBar" class="search-bar" placeholder="Search clients, mods, keybinds..." oninput="doSearch()">
   </div>
 
+  <!-- Category tabs -->
   <div class="filter-row" id="catTabs">
     <div class="tab active" onclick="filterCat('all',this)">ALL</div>
     <div class="tab" onclick="filterCat('clients',this)">CLIENTS</div>
@@ -851,6 +876,7 @@ body {
     <div class="tab booster-tab" onclick="openBoosterModal()">💎 BOOSTER <i class="fas fa-lock lock-icon"></i></div>
   </div>
 
+  <!-- Version filter -->
   <div class="filter-label">MINECRAFT VERSION</div>
   <div class="filter-row" id="verTabs">
     <div class="ver-tab active" onclick="filterVer('all',this)">ALL</div>
@@ -859,6 +885,7 @@ body {
   <div class="grid" id="mainGrid"></div>
 </div>
 
+<!-- DETAIL PAGE -->
 <div id="detailPage" style="display:none;">
   <nav class="nav">
     <div class="nav-logo" onclick="backToVault()" style="cursor:pointer;" title="Back to Vault">R3MU VAULT</div>
@@ -880,6 +907,7 @@ body {
       <div id="detailCatBadge" class="cat-badge"></div>
       <h1 id="detailTitle"></h1>
       <p id="detailDesc"></p>
+      <!-- Quick download buttons right on header -->
       <div id="detailVerBtns" class="detail-ver-selector"></div>
     </div>
   </div>
@@ -906,6 +934,7 @@ body {
   </div>
 </div>
 
+<!-- Zoom Overlay -->
 <div id="zoomOverlay" onclick="this.style.display='none'">
   <img id="zoomImg" src="" alt="Zoomed">
 </div>
@@ -960,10 +989,7 @@ const items = [
     "loader": "Fabric 1.18.2\nPut It In Mods Folder",
     "keybinds": "Comma To open gui",
     "versions": [
-      {
-        "ver": "1.18.2",
-        "link": "https://shrinkme.click/gfdyk52q"
-      }
+      { "ver": "1.18.2", "link": "https://shrinkme.click/gfdyk52q" }
     ],
     "screenshots": [
       "https://i.postimg.cc/kXxghNs0/image.webp"
@@ -974,7 +1000,12 @@ const items = [
 // ── STATE ────────────────────────────────────
 let currentCat = 'all';
 let currentVer = 'all';
+
+// ── MARQUEE STATE ─────────────────────────────
 let marqueeVisible = false;
+
+// Default marquee text (can be overridden by admin)
+const DEFAULT_MARQUEE = "Welcome to R3MU VAULT — Your elite Minecraft archive is live! &nbsp;•&nbsp; <i class='fas fa-bolt'></i> New clients dropping soon — Stay tuned! &nbsp;•&nbsp; <i class='fas fa-shield-alt'></i> Always updated. Always clean. Always premium. &nbsp;•&nbsp; <i class='fab fa-discord'></i> Join the Discord for exclusive early access! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
 function toggleMarquee() {
   const bar = document.getElementById('marqueeBar');
@@ -986,27 +1017,48 @@ function toggleMarquee() {
 
 function applyMarqueeText() {
   const raw = document.getElementById('marqueeInput').value.trim();
-  if (!raw) return;
+  if (!raw) { alert("Please enter some text for the banner."); return; }
   const formatted = `<i class='fas fa-star'></i> ${raw} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
   document.getElementById('marqueeTextA').innerHTML = formatted;
   document.getElementById('marqueeTextB').innerHTML = formatted;
-  alert("✅ Updated!");
+  alert("✅ Banner updated! The marquee text is now live.");
 }
 
+// ── BOOSTER MODAL ─────────────────────────────
 function openBoosterModal() {
   document.getElementById('boosterModal').style.display = 'flex';
 }
 
 function closeBoosterModal(e) {
+  // Only close if clicking the dark backdrop, not the card itself
   if (e.target === document.getElementById('boosterModal')) {
     document.getElementById('boosterModal').style.display = 'none';
   }
 }
 
+// ── DISCORD OAUTH2 PLACEHOLDER ────────────────
+// Replace DISCORD_CLIENT_ID and REDIRECT_URI with your real values when ready.
+const DISCORD_CLIENT_ID = 'YOUR_DISCORD_CLIENT_ID';
+const DISCORD_REDIRECT_URI = encodeURIComponent(window.location.origin + window.location.pathname);
+const DISCORD_SCOPE = 'identify guilds.members.read';
+
 function initiateDiscordOAuth() {
-  alert("Discord coming soon!");
+  // Constructs the Discord OAuth2 authorization URL
+  const oauthURL = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${DISCORD_REDIRECT_URI}&response_type=code&scope=${encodeURIComponent(DISCORD_SCOPE)}`;
+  // TODO: After redirect, exchange the `code` param for an access token via your backend,
+  // then call the Discord API to check if the user has the "Server Booster" role in your guild.
+  // If verified, set a session flag (e.g. localStorage.setItem('isBooster','1')) and unlock the tab.
+  window.location.href = oauthURL;
 }
 
+function checkBoosterStatus() {
+  // Placeholder: call your backend here to verify Booster role via Discord API.
+  // Example: GET /api/discord/verify-booster?token=ACCESS_TOKEN
+  // Returns: { isBooster: true/false }
+  return false; // Default: not verified
+}
+
+// ── BUILD VERSION LIST ────────────────────────
 function getAllVersions() {
   const vers = new Set();
   items.forEach(item => {
@@ -1015,7 +1067,11 @@ function getAllVersions() {
       if (base) vers.add(base);
     });
   });
-  return [...vers].sort();
+  return [...vers].sort((a,b) => {
+    const [ma,mia] = a.split('.').map(Number);
+    const [mb,mib] = b.split('.').map(Number);
+    return ma !== mb ? ma-mb : mia-mib;
+  });
 }
 
 function buildVerTabs() {
@@ -1034,6 +1090,7 @@ function filterVer(ver, el) {
   renderGrid();
 }
 
+// ── FILTER + SEARCH ──────────────────────────
 function filterCat(cat, el) {
   currentCat = cat;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -1045,108 +1102,137 @@ function doSearch() { renderGrid(); }
 
 function getFilteredItems() {
   let filtered = currentCat === 'all' ? [...items] : items.filter(i => i.cat === currentCat);
+
+  // Version filter
   if (currentVer !== 'all') {
     filtered = filtered.filter(item =>
       (item.versions || []).some(v => v.ver.includes(currentVer))
     );
   }
+
   const q = document.getElementById('searchBar').value.toLowerCase().trim();
   if (q) {
     filtered = filtered.filter(item =>
       item.name.toLowerCase().includes(q) ||
-      (item.desc && item.desc.toLowerCase().includes(q))
+      (item.desc && item.desc.toLowerCase().includes(q)) ||
+      (item.keybinds && item.keybinds.toLowerCase().includes(q)) ||
+      (item.versions || []).some(v => v.ver.toLowerCase().includes(q))
     );
   }
   return filtered;
 }
 
+// ── RENDER GRID ──────────────────────────────
 function renderGrid() {
   const grid = document.getElementById('mainGrid');
   const filtered = getFilteredItems();
+
   if (!filtered.length) {
     grid.innerHTML = '<div class="no-results">No items found</div>';
     return;
   }
+
   grid.innerHTML = filtered.map(item => {
-    const chips = (item.versions || []).map(v => `<span class="ver-chip">${v.ver}</span>`).join('');
+    const chips = (item.versions || []).map(v =>
+      `<span class="ver-chip">${v.ver}</span>`
+    ).join('');
     return `
       <div class="card" onclick="openDetail('${item.slug}')">
         <img src="${item.img}" alt="${item.name}" loading="lazy">
         <div class="cat-badge">${item.cat.toUpperCase()}</div>
         <h3>${item.name}</h3>
-        <p>${(item.desc||'').substring(0,55)}...</p>
+        <p>${(item.desc||'').substring(0,55)}${(item.desc||'').length>55?'…':''}</p>
         <div class="ver-chips">${chips}</div>
       </div>`;
   }).join('');
 }
 
+// ── OPEN DETAIL ──────────────────────────────
 function openDetail(slug) {
   const url = `${location.origin}${location.pathname}?item=${encodeURIComponent(slug)}`;
   window.open(url, '_blank');
 }
 
+// ── BACK TO VAULT ─────────────────────────────
 function backToVault() {
-  window.location.href = window.location.pathname;
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    window.location.href = window.location.pathname;
+  }
 }
 
+// ── RENDER DETAIL ────────────────────────────
 function renderDetail(item) {
   document.title = `${item.name} | R3MU VAULT`;
+
   document.getElementById('detailTitle').textContent = item.name;
   document.getElementById('detailDesc').textContent = item.desc || '';
   document.getElementById('detailCatBadge').innerHTML = `<i class="fas fa-cube"></i> ${item.cat.toUpperCase()}`;
   document.getElementById('detailMainImg').src = item.img;
   document.getElementById('detailCheatCount').textContent = items.length;
+
+  // Quick download buttons in header
   document.getElementById('detailVerBtns').innerHTML = (item.versions||[]).map(v =>
-    `<a href="${v.link}" class="detail-ver-btn" target="_blank">
-      <i class="fas fa-download"></i> ${v.ver}
+    `<a href="${v.link}" class="detail-ver-btn" target="_blank" rel="noopener">
+      <i class="fas fa-download" style="font-size:10px;"></i> ${v.ver}
     </a>`
   ).join('');
+
+  // Screenshots (deduplicated, main image first)
   const unique = [...new Set([item.img, ...(item.screenshots||[])])];
   document.getElementById('detailScreenshots').innerHTML = unique.map(src =>
-    `<img src="${src}" onclick="zoomImg(this.src)" loading="lazy">`
-  ).join('');
-  document.getElementById('detailLoader').innerHTML = `<span style="white-space:pre-line">${item.loader || 'None'}</span>`;
-  document.getElementById('detailKeybinds').textContent = item.keybinds || 'None';
-  document.getElementById('detailVersions').innerHTML = (item.versions||[]).map(v => `
-    <a href="${v.link}" class="dl-btn" target="_blank">
-      <span><i class="fas fa-download"></i> ${v.ver} • Download</span>
-      <i class="fas fa-chevron-right"></i>
-    </a>`).join('');
+    `<img src="${src}" alt="Screenshot" onclick="zoomImg(this.src)" loading="lazy">`
+  ).join('') || '<p style="color:var(--muted);padding:20px 0;">No screenshots available.</p>';
+
+  // Loader
+  document.getElementById('detailLoader').innerHTML = item.loader
+    ? `<span style="white-space:pre-line">${item.loader}</span>`
+    : '<span style="color:var(--muted)">No info provided.</span>';
+
+  // Keybinds
+  document.getElementById('detailKeybinds').textContent = item.keybinds || 'No keybinds provided.';
+
+  // Versions list
+  document.getElementById('detailVersions').innerHTML = (item.versions&&item.versions.length)
+    ? item.versions.map(v => `
+        <a href="${v.link}" class="dl-btn" target="_blank" rel="noopener">
+          <span><i class="fas fa-download" style="margin-right:8px;opacity:0.6;font-size:12px;"></i>${v.ver} • Download</span>
+          <i class="fas fa-chevron-right" style="font-size:12px;"></i>
+        </a>`).join('')
+    : '<p style="color:var(--muted);text-align:center;">No versions available.</p>';
+
+  // Make info grid single column on small screen
+  if (window.innerWidth < 600) {
+    document.getElementById('infoGrid').style.gridTemplateColumns = '1fr';
+  }
 }
 
+// ── ZOOM ─────────────────────────────────────
 function zoomImg(src) {
   document.getElementById('zoomImg').src = src;
   document.getElementById('zoomOverlay').style.display = 'flex';
 }
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('zoomOverlay').style.display = 'none';
+    document.getElementById('boosterModal').style.display = 'none';
+  }
+});
 
-function addVerRow() {
-  const container = document.getElementById('versionList');
-  const div = document.createElement('div');
-  div.className = 'row-flex';
-  div.innerHTML = `
-    <input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1;margin-bottom:0">
-    <input type="text" class="nimdo-in nLink" placeholder="Link" style="flex:2;margin-bottom:0">
-    <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:7px 12px;border-radius:7px;cursor:pointer;">−</button>
-  `;
-  container.appendChild(div);
-}
-
-function addScreenshotRow() {
-  const container = document.getElementById('screenshotList');
-  const div = document.createElement('div');
-  div.className = 'row-flex';
-  div.innerHTML = `
-    <input type="text" class="nimdo-in nScreenshot" placeholder="Screenshot URL" style="flex:1;margin-bottom:0">
-    <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:7px 12px;border-radius:7px;cursor:pointer;">−</button>
-  `;
-  container.appendChild(div);
-}
-
+// ── ADMIN (triple-click logo OR ?page=admin URL) ──
+let logoClicks = 0, logoTimer = null;
 document.getElementById('adminTrigger').addEventListener('click', () => {
-  const pw = prompt("NIMDO Password:");
-  if (pw === "pookie123") {
-    document.getElementById('nimdoArea').style.display = 'block';
-    document.getElementById('content-wrapper').style.display = 'none';
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(() => { logoClicks = 0; }, 600);
+  if (logoClicks >= 3) {
+    logoClicks = 0;
+    const pw = prompt("NIMDO Password:");
+    if (pw === "pookie123") {
+      document.getElementById('nimdoArea').style.display = 'block';
+      document.getElementById('content-wrapper').style.display = 'none';
+    }
   }
 });
 
@@ -1155,10 +1241,29 @@ function exitAdmin() {
   document.getElementById('content-wrapper').style.display = 'block';
 }
 
+function addVerRow() {
+  const row = document.createElement('div');
+  row.className = 'row-flex';
+  row.innerHTML = `
+    <input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1;margin-bottom:0">
+    <input type="text" class="nimdo-in nLink" placeholder="Download Link" style="flex:2;margin-bottom:0">
+    <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:7px 12px;border-radius:7px;font-size:16px;cursor:pointer;flex-shrink:0;">−</button>`;
+  document.getElementById('versionList').appendChild(row);
+}
+
+function addScreenshotRow() {
+  const row = document.createElement('div');
+  row.className = 'row-flex';
+  row.innerHTML = `
+    <input type="text" class="nimdo-in nScreenshot" placeholder="Screenshot URL" style="flex:1;margin-bottom:0">
+    <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:7px 12px;border-radius:7px;font-size:16px;cursor:pointer;flex-shrink:0;">−</button>`;
+  document.getElementById('screenshotList').appendChild(row);
+}
+
 function generateCode() {
   const name = document.getElementById('nName').value.trim();
-  const img = document.getElementById('nImg').value.trim();
-  if (!name || !img) { alert("Need Name & Main Image!"); return; }
+  const img  = document.getElementById('nImg').value.trim();
+  if (!name || !img) { alert("Name and Image URL are required!"); return; }
 
   const versions = [];
   document.querySelectorAll('#versionList .row-flex').forEach(row => {
@@ -1167,14 +1272,11 @@ function generateCode() {
     if (v && l) versions.push({ ver: v, link: l });
   });
 
-  const screenshots = [];
-  document.querySelectorAll('.nScreenshot').forEach(inp => {
-    const val = inp.value.trim();
-    if (val) screenshots.push(val);
-  });
+  const screenshots = [...document.querySelectorAll('.nScreenshot')]
+    .map(i => i.value.trim()).filter(Boolean);
 
   const newItem = {
-    slug: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+    slug: name.toLowerCase().trim().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,''),
     name,
     cat: document.getElementById('nCat').value,
     img,
@@ -1186,12 +1288,32 @@ function generateCode() {
   };
 
   const code = `items.push(${JSON.stringify(newItem, null, 2)});`;
-  prompt("Copy manually:", code);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code)
+      .then(() => alert("✅ Copied! Paste inside the items array in the <script> section."))
+      .catch(() => prompt("Copy manually:", code));
+  } else {
+    prompt("Copy manually:", code);
+  }
 }
 
 // ── INIT ─────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(location.search);
+
+  // URL-based admin access: ?page=admin
+  if (params.get('page') === 'admin') {
+    const pw = prompt("NIMDO Password:");
+    if (pw === "pookie123") {
+      document.getElementById('nimdoArea').style.display = 'block';
+      document.getElementById('content-wrapper').style.display = 'none';
+    } else {
+      // Wrong password — fall through to normal vault
+      history.replaceState(null, '', location.pathname);
+    }
+    return;
+  }
+
   const slug = params.get('item');
   if (slug) {
     const item = items.find(i => i.slug === slug);
@@ -1199,6 +1321,8 @@ window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('content-wrapper').style.display = 'none';
       document.getElementById('detailPage').style.display = 'block';
       renderDetail(item);
+    } else {
+      location.replace(location.pathname);
     }
   } else {
     buildVerTabs();
