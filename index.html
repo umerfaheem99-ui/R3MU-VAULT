@@ -5,173 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R3MU VAULT | Official Archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root { --bg: #050505; --accent: #8147ff; --card-bg: #0f0f0f; --text: #eee; }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+        #vaultContent { padding: 40px 20px; max-width: 1300px; margin: 0 auto; }
         
-        /* Main Page Layout */
-        #vaultContent { padding: 80px 20px; max-width: 1300px; margin: 0 auto; text-align: center; }
-        .hero-title { font-size: 5rem; font-weight: 900; margin: 0; background: linear-gradient(to bottom, #fff, #8147ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -2px; text-transform: uppercase; }
-        .hero-sub { color: #888; font-size: 1.2rem; margin: 15px 0 50px; }
-
-        /* ADVANCED: Tab Categories (Ref: image_6b45ba.png) */
-        .tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-        .tab { padding: 12px 24px; background: #111; border-radius: 10px; font-weight: 700; color: #888; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 14px; border: 1px solid transparent; }
-        .tab:hover { background: #1a1a1a; }
-        .tab.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 0 15px rgba(129,71,255,0.4); }
-
-        /* Standard Grid System */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; text-align: left; }
+        /* Admin Console UI */
+        #adminArea { display: none; padding: 30px; background: #0a0a0a; border-radius: 15px; border: 1px dashed var(--accent); max-width: 800px; margin: 50px auto; }
+        .adm-title { color: var(--accent); font-size: 2rem; font-weight: 900; margin-bottom: 20px; }
+        .adm-in { width: 100%; padding: 14px; margin-bottom: 12px; background: #000; color: white; border: 1px solid #333; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
         
-        /* Premium Card Design (Fixed image size and layout) */
-        .card { background: var(--card-bg); border-radius: 18px; border: 1px solid #1a1a1a; padding: 25px; transition: 0.3s; cursor: pointer; position: relative; overflow: hidden; }
-        .card:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .card img { width: 100%; border-radius: 12px; height: 180px; object-fit: cover; border: 1px solid #222; margin-bottom: 15px; }
-        .card-cat { color: var(--accent); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
-        .card h3 { margin: 10px 0; font-size: 24px; font-weight: 800; color: white; }
-        .card p { font-size: 13px; color: #aaa; line-height: 1.6; margin: 0; }
-
-        /* STANDARD POPUP (Restored & Advanced) */
-        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
-        .m-content { background: #0f0f0f; padding: 40px; border-radius: 25px; max-width: 600px; width: 100%; border: 1px solid #222; position: relative; max-height: 90vh; overflow-y: auto; text-align: left;}
-        .m-close { position: absolute; top: 20px; right: 20px; font-size: 28px; color: #666; cursor: pointer; transition: 0.3s; }
-        .m-close:hover { color: white; }
-        .m-img { width: 100%; border-radius: 15px; height: 250px; object-fit: cover; border: 1px solid #222; margin-bottom: 25px; }
-        .m-desc { color: #ccc; line-height: 1.7; font-size: 1.1rem; margin-bottom: 30px; }
-        .dl-btn { display: block; background: var(--accent); color: white; padding: 20px; text-align: center; border-radius: 12px; text-decoration: none; font-weight: 900; text-transform: uppercase; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 0 20px rgba(129,71,255,0.4); }
-        .dl-btn:hover { background: #966aff; transform: translateY(-3px); box-shadow: 0 0 30px rgba(129,71,255,0.6); }
-
-        /* Admin Console UI (Ref: image_6b3a3a.png) */
-        #nimdoArea { display: none; padding: 40px; background: #0a0a0a; border-radius: 20px; border: 1px dashed var(--accent); max-width: 850px; margin: 50px auto; }
-        .nimdo-in { width: 100%; padding: 15px; margin-bottom: 12px; background: #000; color: white; border: 1px solid #222; border-radius: 10px; box-sizing: border-box; font-family: inherit; font-size: 14px;}
-        .nimdo-textarea { height: 100px; resize: vertical; }
-        .nimdo-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 12px; cursor: pointer; text-transform: uppercase; font-size: 1.1rem; }
-        .nimdo-btn:hover { background: #966aff; }
+        /* Version System with +/- */
+        .v-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .btn-action { width: 45px; height: 45px; border-radius: 10px; cursor: pointer; font-size: 24px; font-weight: bold; transition: 0.3s; flex-shrink: 0; border: 2px solid; display: flex; align-items: center; justify-content: center; }
+        .btn-plus { background: #1a1a1a; color: var(--accent); border-color: var(--accent); }
+        .btn-minus { background: #1a1a1a; color: #ff4747; border-color: #ff4747; }
+        .btn-plus:hover { background: var(--accent); color: white; }
+        .btn-minus:hover { background: #ff4747; color: white; }
+        
+        .adm-btn { width: 100%; padding: 18px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 10px; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1.1rem; }
+        
+        /* Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .card { background: var(--card-bg); border-radius: 15px; border: 1px solid #1a1a1a; padding: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div id="vaultContent">
-        <h1 class="hero-title">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</h1>
-        <p class="hero-sub">Official Archive. Built for the Elite.</p>
+        <h1 style="text-align:center; font-size: 3.5rem; font-weight: 900; letter-spacing: -2px;">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</h1>
+        <div class="grid" id="mainGrid"></div>
+    </div>
+
+    <div id="adminArea">
+        <div class="adm-title">Vault Manager Console</div>
         
-        <div class="tabs">
-            <div class="tab active" onclick="filterVault('all', this)">All</div>
-            <div class="tab" onclick="filterVault('clients', this)">Clients</div>
-            <div class="tab" onclick="filterVault('mods', this)">Mods</div>
-            <div class="tab" onclick="filterVault('shop', this)">Shop</div>
-        </div>
-
-        <div class="grid" id="mainGrid">
-            </div>
-    </div>
-
-    <div id="modal" onclick="closeM(event)">
-        <div class="m-content" onclick="event.stopPropagation()">
-            <span class="m-close" onclick="closeM(null)">&times;</span>
-            <img id="mImg" class="m-img" src="">
-            <div id="mCat" class="card-cat" style="font-size:12px;"></div>
-            <h2 id="mTitle" style="font-size:36px; margin: 10px 0 20px; color: white;"></h2>
-            <p id="mDesc" class="m-desc"></p>
-            <div id="mLinks"></div>
-        </div>
-    </div>
-
-    <div id="nimdoArea">
-        <h2 style="color:var(--accent); font-weight:900;">NIMDO Console</h2>
-        <select id="nCat" class="nimdo-in">
+        <select id="aCat" class="adm-in">
             <option value="clients">Clients</option>
-            <option value="mods">Mods</option>
+            <option value="mods">Mods / Macros</option>
+            <option value="source">Source Codes</option>
             <option value="shop">Shop</option>
         </select>
-        <input type="text" id="nName" class="nimdo-in" placeholder="Client Name (e.g. Custom Clients)">
-        <input type="text" id="nImg" class="nimdo-in" placeholder="Direct Image URL (Imgur/Discord link)">
-        <textarea id="nDesc" class="nimdo-in nimdo-textarea" placeholder="Detailed Description (What does it do?)"></textarea>
-        <input type="text" id="nVer" class="nimdo-in" placeholder="Version (e.g. ALL)">
-        <input type="text" id="nLink" class="nimdo-in" placeholder="Order/Download Link (Discord server link for ordering)">
         
-        <button class="nimdo-btn" onclick="genItem()">GENERATE & COPY NIMDO CODE</button>
-    </div>
-
-    <div id="vault-data" style="display:none;">
-        <div class="card" data-cat="clients" onclick="openItem('Argon Client','https://i.imgur.com/8nN2S3H.png','1.21','https://discord.gg/yourlink','Clients','QXJnb24gaXMgYSBQcmVtaXVtIE1pbmVjcmFmdCBDbGllbnQgZm9ocm9pbmcgQnlwYXNzIHdpdGggY3VzdG9tIG1vZHVsZXMu')">
-            <img src="https://i.imgur.com/8nN2S3H.png">
-            <div class="card-cat">Clients</div>
-            <h3>Argon Client</h3>
-            <p>Premium Minecraft Client bypassing Anticheats...</p>
+        <input type="text" id="aName" class="adm-in" placeholder="Item Name">
+        <input type="text" id="aImg" class="adm-in" placeholder="Image URL">
+        <textarea id="aDesc" class="adm-in" placeholder="Description..." style="height:100px;"></textarea>
+        
+        <div id="versionList">
+            <div class="v-row">
+                <input type="text" class="adm-in v-num" placeholder="Version" style="margin-bottom:0;">
+                <input type="text" class="adm-in v-link" placeholder="Download Link" style="margin-bottom:0;">
+                <button class="btn-action btn-plus" onclick="addVersion()">+</button>
+            </div>
         </div>
+        
+        <button class="adm-btn" onclick="generateItem()">GENERATE & COPY CODE</button>
     </div>
 
     <script>
-        // Check for Admin Access via ?nimda
+        // Secret URL Access
         if (window.location.search === "?nimda") {
-            // Encode password Po**ie123
-            if (btoa(prompt("NIMDO Key:")) === "cG9va2llMTIz") {
-                document.getElementById('nimdoArea').style.display = 'block';
+            if (btoa(prompt("Security Key:")) === "cG9va2llMTIz") {
+                document.getElementById('adminArea').style.display = 'block';
                 document.getElementById('vaultContent').style.display = 'none';
             } else {
                 window.location.href = window.location.pathname;
             }
         }
 
-        // Vault Filtering Logic
-        function filterVault(category, tabEl) {
-            const cards = document.getElementsByClassName('card');
-            for (let card of cards) {
-                if (category === 'all' || card.dataset.cat === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            }
-            // Update Tab active state
-            const tabs = document.getElementsByClassName('tab');
-            for (let tab of tabs) tab.classList.remove('active');
-            tabEl.classList.add('active');
+        function addVersion() {
+            const container = document.getElementById('versionList');
+            const row = document.createElement('div');
+            row.className = 'v-row';
+            row.innerHTML = `
+                <input type="text" class="adm-in v-num" placeholder="Version" style="margin-bottom:0;">
+                <input type="text" class="adm-in v-link" placeholder="Download Link" style="margin-bottom:0;">
+                <button class="btn-action btn-minus" onclick="this.parentElement.remove()">-</button>
+            `;
+            container.appendChild(row);
         }
 
-        // POPUP (Modal) Logic
-        function openItem(name, img, ver, link, cat, descBase64) {
-            document.getElementById('mTitle').innerText = name;
-            document.getElementById('mImg').src = img;
-            document.getElementById('mCat').innerText = cat;
-            document.getElementById('mDesc').innerText = atob(descBase64);
+        function generateItem() {
+            const n = document.getElementById('aName').value;
+            const c = document.getElementById('aCat').value;
+            const i = document.getElementById('aImg').value;
+            const d = document.getElementById('aDesc').value;
             
-            // Generate order/download button
-            let btnText = (cat === 'Shop') ? 'ORDER ON DISCORD →' : 'DOWNLOAD →';
-            let btnStyle = (cat === 'Shop') ? 'style="border-color:gold;"' : '';
-            document.getElementById('mLinks').innerHTML = `<a href="${link}" class="dl-btn" ${btnStyle} target="_blank">${btnText}</a>`;
-            document.getElementById('modal').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Stop scrolling on main page
-        }
+            const vArr = Array.from(document.getElementsByClassName('v-num')).map(e => e.value).filter(e => e !== "");
+            const lArr = Array.from(document.getElementsByClassName('v-link')).map(e => e.value).filter(e => e !== "");
 
-        function closeM(event) {
-            if (!event || event.target.id === 'modal' || event.target.className === 'm-close') {
-                document.getElementById('modal').style.display = 'none';
-                document.body.style.overflow = ''; // Restore scrolling
-            }
-        }
-
-        // Generator Logic
-        function genItem() {
-            const n = document.getElementById('nName').value;
-            const c = document.getElementById('nCat').value;
-            const i = document.getElementById('nImg').value;
-            const d = document.getElementById('nDesc').value;
-            const v = document.getElementById('nVer').value;
-            const l = document.getElementById('nLink').value;
-
-            // FIX: Encodes description to Base64 for safe HTML transfer
-            const cardCode = `
-<div class="card" data-cat="${c}" onclick="openItem('${n}','${i}','${v}','${l}','${c.charAt(0).toUpperCase() + c.slice(1)}','${btoa(d)}')">
-    <img src="${i}">
-    <div class="card-cat">${c.charAt(0).toUpperCase() + c.slice(1)}</div>
-    <h3>${n}</h3>
-    <p>${d.substring(0,60)}...</p>
-</div>`;
-            navigator.clipboard.writeText(cardCode);
-            alert("Code Copied! Paste it into 'vault-data' div in your index.html manually.");
+            const code = `
+            <div class="card" data-cat="${c}" onclick="openItem('${n}','${i}','${vArr.join(',')}','${lArr.join(',')}','${c}','${btoa(d)}')">
+                <img src="${i}" style="width:100%; border-radius:10px; height:180px; object-fit:cover;">
+                <div class="card-cat" style="color:var(--accent); font-size:10px; font-weight:800; margin-top:15px; text-transform:uppercase;">${c}</div>
+                <h3 style="margin:5px 0; font-size:22px;">${n}</h3>
+                <p style="font-size:12px; color:#666;">${d.substring(0,60)}...</p>
+            </div>`;
+            
+            navigator.clipboard.writeText(code);
+            alert("Code Copied!");
         }
     </script>
 </body>
