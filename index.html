@@ -8,53 +8,55 @@
     <style>
         :root { --bg: #050505; --accent: #8147ff; --card-bg: #0f0f0f; --text: #eee; }
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
-        #vaultContent { padding: 40px 20px; max-width: 1300px; margin: 0 auto; }
-        
-        /* NIMDO Panel UI */
-        #nimdoArea { display: none; padding: 30px; background: #0a0a0a; border-radius: 15px; border: 1px dashed var(--accent); max-width: 800px; margin: 50px auto; }
-        .nimdo-title { color: var(--accent); font-size: 2rem; font-weight: 900; margin-bottom: 20px; }
-        .nimdo-in { width: 100%; padding: 14px; margin-bottom: 12px; background: #000; color: white; border: 1px solid #333; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
-        
-        /* Version System with +/- */
-        .v-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
-        .btn-action { width: 45px; height: 45px; border-radius: 10px; cursor: pointer; font-size: 24px; font-weight: bold; transition: 0.3s; flex-shrink: 0; border: 2px solid; display: flex; align-items: center; justify-content: center; }
+        #vaultContent { padding: 60px 20px; max-width: 1300px; margin: 0 auto; text-align: center; }
+        .hero-title { font-size: 4rem; font-weight: 900; margin-bottom: 50px; letter-spacing: -2px; text-transform: uppercase; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; text-align: left; }
+
+        /* NIMDO Console UI (Ref: image_6bc19f.png) */
+        #nimdoArea { display: none; padding: 40px; background: #0a0a0a; border-radius: 20px; border: 1px dashed var(--accent); max-width: 850px; margin: 50px auto; box-shadow: 0 0 30px rgba(129, 71, 255, 0.1); }
+        .nimdo-title { color: var(--accent); font-size: 2.2rem; font-weight: 900; margin-bottom: 25px; }
+        .nimdo-in { width: 100%; padding: 16px; margin-bottom: 15px; background: #000; color: white; border: 1px solid #222; border-radius: 10px; box-sizing: border-box; font-family: inherit; font-size: 14px; }
+        .v-row { display: flex; gap: 12px; margin-bottom: 12px; align-items: center; }
+        .btn-action { width: 50px; height: 50px; border-radius: 12px; cursor: pointer; font-size: 22px; font-weight: bold; border: 2px solid; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
         .btn-plus { background: #1a1a1a; color: var(--accent); border-color: var(--accent); }
         .btn-minus { background: #1a1a1a; color: #ff4747; border-color: #ff4747; }
-        .btn-plus:hover { background: var(--accent); color: white; }
-        .btn-minus:hover { background: #ff4747; color: white; }
-        
-        .nimdo-btn { width: 100%; padding: 18px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 10px; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1.1rem; }
-        
-        /* Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: var(--card-bg); border-radius: 15px; border: 1px solid #1a1a1a; padding: 20px; cursor: pointer; }
+        .nimdo-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 12px; cursor: pointer; text-transform: uppercase; margin-top: 15px; font-size: 1.1rem; transition: 0.3s; }
+        .nimdo-btn:hover { background: #966aff; transform: scale(1.02); }
+
+        /* Card Visuals */
+        .card { background: var(--card-bg); border-radius: 18px; border: 1px solid #1a1a1a; padding: 25px; transition: 0.3s; cursor: pointer; position: relative; }
+        .card:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .card img { width: 100%; border-radius: 12px; height: 180px; object-fit: cover; border: 1px solid #222; }
+        .card h3 { margin: 15px 0 8px; font-size: 24px; font-weight: 800; }
+        .card-cat { color: var(--accent); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
     <div id="vaultContent">
-        <h1 style="text-align:center; font-size: 3.5rem; font-weight: 900; letter-spacing: -2px;">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</h1>
-        <div class="grid" id="mainGrid"></div>
+        <h1 class="hero-title">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</h1>
+        <div class="grid" id="mainGrid">
+            </div>
     </div>
 
     <div id="nimdoArea">
         <div class="nimdo-title">NIMDO Access Console</div>
         
         <select id="nCat" class="nimdo-in">
-            <option value="clients">Clients</option>
-            <option value="mods">Mods / Macros</option>
-            <option value="source">Source Codes</option>
-            <option value="shop">Shop (Premium)</option>
+            <option value="Clients">Clients</option>
+            <option value="Mods">Mods / Macros</option>
+            <option value="Shop">Shop (Premium)</option>
         </select>
         
-        <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
-        <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL (Direct Link)">
-        <textarea id="nDesc" class="nimdo-in" placeholder="Enter Description..." style="height:100px;"></textarea>
+        <input type="text" id="nName" class="nimdo-in" placeholder="Item Name (e.g. Custom Clients)">
+        <input type="text" id="nImg" class="nimdo-in" placeholder="Direct Image URL (Imgur/Discord)">
+        
+        <textarea id="nDesc" class="nimdo-in" placeholder="Description (Pricing, Features, etc.)" style="height:120px;"></textarea>
         
         <div id="vList">
             <div class="v-row">
-                <input type="text" class="nimdo-in v-num" placeholder="Version" style="margin-bottom:0;">
-                <input type="text" class="nimdo-in v-link" placeholder="Download Link" style="margin-bottom:0;">
+                <input type="text" class="nimdo-in v-num" placeholder="Version (e.g. ALL)" style="margin-bottom:0;">
+                <input type="text" class="nimdo-in v-link" placeholder="Download/Order Link" style="margin-bottom:0;">
                 <button class="btn-action btn-plus" onclick="addV()">+</button>
             </div>
         </div>
@@ -63,10 +65,9 @@
     </div>
 
     <script>
-        // Secret Access via ?nimda
+        // NIMDO Activation Logic
         if (window.location.search === "?nimda") {
-            // Password logic kept as requested
-            if (btoa(prompt("NIMDO Security Key:")) === "cG9va2llMTIz") { 
+            if (btoa(prompt("NIMDO Security Key:")) === "cG9va2llMTIz") {
                 document.getElementById('nimdoArea').style.display = 'block';
                 document.getElementById('vaultContent').style.display = 'none';
             } else {
@@ -80,7 +81,7 @@
             row.className = 'v-row';
             row.innerHTML = `
                 <input type="text" class="nimdo-in v-num" placeholder="Version" style="margin-bottom:0;">
-                <input type="text" class="nimdo-in v-link" placeholder="Download Link" style="margin-bottom:0;">
+                <input type="text" class="nimdo-in v-link" placeholder="Link" style="margin-bottom:0;">
                 <button class="btn-action btn-minus" onclick="this.parentElement.remove()">-</button>
             `;
             container.appendChild(row);
@@ -95,16 +96,17 @@
             const vArr = Array.from(document.getElementsByClassName('v-num')).map(e => e.value).filter(e => e !== "");
             const lArr = Array.from(document.getElementsByClassName('v-link')).map(e => e.value).filter(e => e !== "");
 
-            const code = `
-            <div class="card" data-cat="${c}" onclick="openItem('${n}','${i}','${vArr.join(',')}','${lArr.join(',')}','${c}','${btoa(d)}')">
-                <img src="${i}" style="width:100%; border-radius:10px; height:180px; object-fit:cover;">
-                <div class="card-cat" style="color:var(--accent); font-size:10px; font-weight:800; margin-top:15px; text-transform:uppercase;">${c}</div>
-                <h3 style="margin:5px 0; font-size:22px;">${n}</h3>
-                <p style="font-size:12px; color:#666;">${d.substring(0,60)}...</p>
-            </div>`;
+            // FIX: Generates the full HTML Card instead of just text
+            const fullCardCode = `
+<div class="card" data-cat="${c}" onclick="openItem('${n}','${i}','${vArr.join(',')}','${lArr.join(',')}','${c}','${btoa(d)}')">
+    <img src="${i}">
+    <div class="card-cat">${c}</div>
+    <h3>${n}</h3>
+    <p style="font-size:13px; color:#888; line-height:1.5;">${d.split('\n')[0]}...</p>
+</div>`;
             
-            navigator.clipboard.writeText(code);
-            alert("NIMDO Code Copied successfully!");
+            navigator.clipboard.writeText(fullCardCode);
+            alert("NIMDO Card Code Copied! Paste it into your Grid section.");
         }
     </script>
 </body>
