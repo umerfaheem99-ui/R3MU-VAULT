@@ -10,54 +10,41 @@
         :root { --bg: #050505; --accent: #8147ff; --card-bg: #0d0d0d; --text: #eee; --border: #1a1a1a; --yt: #FF0000; --dc: #5865F2; }
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; letter-spacing: -0.2px; }
         
-        /* Navbar with normal smooth bold logo */
         .nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; background: rgba(5,5,5,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
         .nav-logo { font-weight: 700; font-size: 1.7rem; letter-spacing: -1.2px; text-transform: uppercase; color: #fff; }
         .nav-links { display: flex; gap: 20px; }
         .nav-links a { font-size: 1.4rem; transition: 0.3s; }
         .fa-youtube { color: var(--yt); }
         .fa-discord { color: var(--dc); }
-        .nav-links a:hover { transform: scale(1.15); filter: brightness(1.2); }
 
-        /* ADVANCED: Full Hero Section with bold Title */
         .hero { padding: 90px 20px 20px; text-align: center; }
         .hero-title { font-size: 3.5rem; font-weight: 900; margin: 0; letter-spacing: -3px; text-transform: uppercase; line-height: 1; }
-        .hero-accent { color: var(--accent); }
         .hero-sub { color: #888; font-size: 1.1rem; margin: 15px 0 50px; font-weight: 600;}
 
-        /* Search bar (Fixed and styled like Cyde.xyz) */
         .search-container { max-width: 700px; margin: 0 auto 50px; position: relative; }
         .search-bar { width: 100%; padding: 20px 30px; background: #0f0f0f; border: 1px solid var(--border); border-radius: 18px; color: white; font-size: 1.1rem; outline: none; transition: 0.3s; box-sizing: border-box; font-weight: 600; }
         .search-bar:focus { border-color: var(--accent); box-shadow: 0 0 30px rgba(129,71,255,0.15); }
 
-        /* Categories */
         .tabs { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; padding: 0 20px; }
         .tab { padding: 12px 24px; background: #111; border-radius: 12px; font-weight: 800; color: #555; cursor: pointer; transition: 0.3s; font-size: 13px; text-transform: uppercase; border: 1px solid var(--border); }
         .tab.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 8px 20px rgba(129,71,255,0.3); }
-        .tab:hover:not(.active) { color: #aaa; border-color: #333; }
 
-        /* Grid */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; max-width: 1300px; margin: 0 auto; padding: 0 30px 100px; }
-        .card { background: var(--card-bg); border-radius: 24px; border: 1px solid var(--border); padding: 25px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
-        .card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .card { background: var(--card-bg); border-radius: 24px; border: 1px solid var(--border); padding: 25px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; text-align: left; }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent); }
         .card img { width: 100%; border-radius: 16px; height: 190px; object-fit: cover; margin-bottom: 20px; border: 1px solid #1a1a1a; }
-        .card-cat { color: var(--accent); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
-        .card h3 { margin: 0; font-size: 24px; font-weight: 900; letter-spacing: -0.5px; }
+        .card-cat { color: var(--accent); font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 8px; }
+        .card h3 { margin: 0; font-size: 24px; font-weight: 900; }
         .card p { font-size: 14px; color: #888; margin-top: 10px; line-height: 1.6; }
 
-        /* Modal Popup */
-        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
         .m-content { background: #0a0a0a; padding: 40px; border-radius: 30px; max-width: 550px; width: 100%; border: 1px solid #222; position: relative; }
-        .m-close { position: absolute; top: 20px; right: 25px; font-size: 30px; color: #444; cursor: pointer; }
         .dl-btn { display: flex; justify-content: space-between; align-items: center; background: #151515; color: white; padding: 18px 25px; border-radius: 15px; text-decoration: none; font-weight: 800; margin-top: 12px; border: 1px solid #222; transition: 0.3s; }
-        .dl-btn:hover { background: var(--accent); border-color: var(--accent); transform: scale(1.02); }
+        .dl-btn:hover { background: var(--accent); transform: scale(1.02); }
 
-        /* Admin Panel Styles */
         #nimdoArea { display: none; padding: 60px 20px; max-width: 800px; margin: 0 auto; }
         .nimdo-card { background: #0f0f0f; padding: 40px; border-radius: 30px; border: 2px dashed var(--accent); }
         .nimdo-in { width: 100%; padding: 16px; margin-bottom: 15px; background: #000; color: white; border: 1px solid #222; border-radius: 12px; box-sizing: border-box; font-family: inherit; font-weight: 600; }
-        .v-row { display: flex; gap: 10px; margin-bottom: 10px; }
-        .btn-v { background: var(--accent); color: white; border: none; width: 50px; border-radius: 10px; cursor: pointer; font-size: 20px; font-weight: 900; }
     </style>
 </head>
 <body>
@@ -74,7 +61,6 @@
         <div class="hero">
             <h1 class="hero-title">PREMIUM VAULT</h1>
             <p class="hero-sub">The ultimate archive. Crafted for eliteness.</p>
-            
             <div class="search-container">
                 <input type="text" id="searchBar" class="search-bar" placeholder="Search for clients, mods, or sources..." onkeyup="search()">
             </div>
@@ -91,46 +77,20 @@
         </div>
 
         <div class="grid" id="mainGrid">
-            <div class="card" data-cat="shop" onclick="openItem('Custom Client Build','https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png','Order Now','https://discord.gg/r3mu','Shop','Q3VzdG9tIEJ1aWx0IC0gMyBEYXkgV2FycmFudHkgLSBGaXhlcyBJbmNsdWRlZA==')">
-                <img src="https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png">
-                <div class="card-cat">Shop</div>
-                <h3>Custom Client Build</h3>
-                <p>Per Module: $1 | Mod Analyzer Bypass: $4...</p>
+            <div class="card" data-cat="shop" onclick="openItem('CustomClient','https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png?ex=69c64c99&is=69c4fb19&hm=00f75bf8124d2c101e6b8d66f6e79d481bcb1a8d94e4b9bed7cf74030dc1ab1b&=&format=webp&quality=lossless&width=723&height=410','ALL Versions','https://discord.gg/aFnv9JMX5Y','shop','')">
+                <img src="https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png?ex=69c64c99&is=69c4fb19&hm=00f75bf8124d2c101e6b8d66f6e79d481bcb1a8d94e4b9bed7cf74030dc1ab1b&=&format=webp&quality=lossless&width=723&height=410">
+                <div class="card-cat">shop</div>
+                <h3>CustomClient</h3>
+                <p>Order your custom built client for maximum performance...</p>
             </div>
         </div>
     </div>
 
     <div id="modal" onclick="closeM(event)">
         <div class="m-content" onclick="event.stopPropagation()">
-            <span class="m-close" onclick="closeM(null)">&times;</span>
             <h2 id="mTitle" style="font-size:36px; margin:0; font-weight:900;"></h2>
             <p id="mDesc" style="color:#888; margin:25px 0; font-size:16px; font-weight:600;"></p>
             <div id="mLinks"></div>
-        </div>
-    </div>
-
-    <div id="nimdoArea">
-        <div class="nimdo-card">
-            <h1 style="color:var(--accent); font-weight:900; margin-top:0;">NIMDO CONSOLE</h1>
-            <select id="nCat" class="nimdo-in">
-                <option value="clients">Clients</option>
-                <option value="mods">Mods / Macros</option>
-                <option value="pvp">PvP Optimizers</option>
-                <option value="source">Source Codes</option>
-                <option value="bypass">Bypasses</option>
-                <option value="shop">Shop</option>
-            </select>
-            <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
-            <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL">
-            <textarea id="nDesc" class="nimdo-in" placeholder="Description" style="height:100px;"></textarea>
-            <div id="vList">
-                <div class="v-row">
-                    <input type="text" class="nimdo-in v-num" placeholder="Version (e.g. ALL)" style="margin:0;">
-                    <input type="text" class="nimdo-in v-link" placeholder="Order Link" style="margin:0;">
-                    <button class="btn-v" onclick="addV()">+</button>
-                </div>
-            </div>
-            <button onclick="genItem()" style="width:100%; padding:20px; background:var(--accent); color:white; border:none; border-radius:15px; font-weight:900; cursor:pointer; margin-top:10px; font-size:1rem;">GENERATE & COPY CODE</button>
         </div>
     </div>
 
@@ -142,13 +102,6 @@
                 document.getElementById('vaultContent').style.display = 'none';
                 document.querySelector('.nav').style.display = 'none';
             }
-        }
-
-        function addV() {
-            const row = document.createElement('div');
-            row.className = 'v-row';
-            row.innerHTML = `<input type="text" class="nimdo-in v-num" style="margin:0;"><input type="text" class="nimdo-in v-link" style="margin:0;"><button class="btn-v" style="background:#ff4747;" onclick="this.parentElement.remove()">-</button>`;
-            document.getElementById('vList').appendChild(row);
         }
 
         function search() {
@@ -168,7 +121,7 @@
 
         function openItem(name, img, versions, links, cat, descB64) {
             document.getElementById('mTitle').innerText = name;
-            document.getElementById('mDesc').innerText = atob(descB64);
+            document.getElementById('mDesc').innerText = descB64 ? atob(descB64) : "Contact on Discord for details.";
             let vArr = versions.split('|'), lArr = links.split('|'), h = '';
             vArr.forEach((v, i) => {
                 h += `<a href="${lArr[i]}" class="dl-btn" target="_blank"><span>${v}</span> <i class="fas fa-chevron-right"></i></a>`;
@@ -177,16 +130,7 @@
             document.getElementById('modal').style.display = 'flex';
         }
 
-        function closeM(e) { if(!e || e.target.id === 'modal' || e.target.className === 'm-close') document.getElementById('modal').style.display = 'none'; }
-
-        function genItem() {
-            const n = document.getElementById('nName').value, c = document.getElementById('nCat').value, i = document.getElementById('nImg').value, d = document.getElementById('nDesc').value;
-            const v = Array.from(document.querySelectorAll('.v-num')).map(e => e.value).join('|');
-            const l = Array.from(document.querySelectorAll('.v-link')).map(e => e.value).join('|');
-            const code = `<div class="card" data-cat="${c}" onclick="openItem('${n}','${i}','${v}','${l}','${c}','${btoa(d)}')"><img src="${i}"><div class="card-cat">${c}</div><h3>${n}</h3><p>${d.substring(0,50)}...</p></div>`;
-            navigator.clipboard.writeText(code);
-            alert("Card Code Copied! Now paste it into the main grid.");
-        }
+        function closeM(e) { if(!e || e.target.id === 'modal') document.getElementById('modal').style.display = 'none'; }
     </script>
 </body>
 </html>
