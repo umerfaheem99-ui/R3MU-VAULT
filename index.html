@@ -7,33 +7,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #050505; --accent: #8147ff; --card-bg: #0f0f0f; --text: #eee; }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
         
-        /* Layout */
-        #vaultContent { padding: 60px 20px; max-width: 1300px; margin: 0 auto; text-align: center; }
+        /* Home Page */
+        #vaultContent { padding: 80px 20px; max-width: 1300px; margin: 0 auto; text-align: center; }
         .hero-title { font-size: 4rem; font-weight: 900; margin-bottom: 50px; letter-spacing: -2px; text-transform: uppercase; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; text-align: left; }
 
-        /* NIMDO Console (image_6bc19f.png Style) */
+        /* NIMDO Panel (image_6b3a3a.png) */
         #nimdoArea { display: none; padding: 40px; background: #0a0a0a; border-radius: 20px; border: 1px dashed var(--accent); max-width: 850px; margin: 50px auto; }
-        .nimdo-in { width: 100%; padding: 16px; margin-bottom: 15px; background: #000; color: white; border: 1px solid #222; border-radius: 10px; box-sizing: border-box; font-family: inherit; }
-        .v-row { display: flex; gap: 12px; margin-bottom: 12px; }
-        .btn-action { width: 50px; height: 50px; border-radius: 12px; cursor: pointer; font-size: 22px; font-weight: bold; border: 2px solid; display: flex; align-items: center; justify-content: center; }
-        .btn-plus { background: #1a1a1a; color: var(--accent); border-color: var(--accent); }
-        .btn-minus { background: #1a1a1a; color: #ff4747; border-color: #ff4747; }
+        .nimdo-title { color: var(--accent); font-size: 2rem; font-weight: 900; margin-bottom: 20px; }
+        .nimdo-in { width: 100%; padding: 15px; margin-bottom: 15px; background: #000; color: white; border: 1px solid #333; border-radius: 10px; box-sizing: border-box; }
+        .v-row { display: flex; gap: 10px; margin-bottom: 10px; }
+        .btn-plus { width: 50px; height: 50px; background: var(--accent); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 20px; }
         .nimdo-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 12px; cursor: pointer; text-transform: uppercase; }
 
-        /* Card Visuals */
-        .card { background: var(--card-bg); border-radius: 18px; border: 1px solid #1a1a1a; padding: 25px; transition: 0.3s; cursor: pointer; }
-        .card:hover { border-color: var(--accent); transform: translateY(-8px); }
-        .card img { width: 100%; border-radius: 12px; height: 180px; object-fit: cover; }
-        .card-cat { color: var(--accent); font-size: 11px; font-weight: 900; text-transform: uppercase; margin-top: 15px; }
-
-        /* POPUP SYSTEM (Modal) */
-        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
-        .m-content { background: #0f0f0f; border: 1px solid #222; padding: 40px; border-radius: 25px; max-width: 600px; width: 100%; position: relative; }
-        .m-close { position: absolute; top: 20px; right: 20px; font-size: 30px; cursor: pointer; color: #666; }
-        .dl-btn { display: block; width: 100%; padding: 15px; background: var(--accent); color: white; text-align: center; text-decoration: none; border-radius: 10px; margin-top: 10px; font-weight: bold; }
+        /* Popup */
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; }
+        .m-content { background: #0f0f0f; padding: 40px; border-radius: 20px; max-width: 500px; width: 90%; text-align: left; border: 1px solid #222; }
     </style>
 </head>
 <body>
@@ -44,85 +35,57 @@
             </div>
     </div>
 
-    <div id="modal" onclick="closeM(event)">
-        <div class="m-content" onclick="event.stopPropagation()">
-            <span class="m-close" onclick="document.getElementById('modal').style.display='none'">&times;</span>
-            <img id="mImg" style="width:100%; border-radius:15px; margin-bottom:20px;">
-            <h2 id="mTitle" style="font-size:32px; margin:0;"></h2>
-            <p id="mDesc" style="color:#aaa; line-height:1.6; margin:20px 0;"></p>
-            <div id="mLinks"></div>
-        </div>
-    </div>
-
     <div id="nimdoArea">
-        <h2 style="color:var(--accent); font-weight:900;">NIMDO Access Console</h2>
+        <div class="nimdo-title">Vault Manager</div>
         <select id="nCat" class="nimdo-in">
             <option value="Clients">Clients</option>
             <option value="Mods">Mods</option>
             <option value="Shop">Shop</option>
         </select>
         <input type="text" id="nName" class="nimdo-in" placeholder="Name">
-        <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL">
-        <textarea id="nDesc" class="nimdo-in" placeholder="Description" style="height:120px;"></textarea>
+        <input type="text" id="nImg" class="nimdo-in" placeholder="Image Link">
+        <textarea id="nDesc" class="nimdo-in" placeholder="Description" style="height:100px;"></textarea>
         <div id="vList">
             <div class="v-row">
-                <input type="text" class="nimdo-in v-num" placeholder="Version" style="margin-bottom:0;">
-                <input type="text" class="nimdo-in v-link" placeholder="Link" style="margin-bottom:0;">
-                <button class="btn-action btn-plus" onclick="addV()">+</button>
+                <input type="text" class="nimdo-in v-num" placeholder="Version" style="margin:0;">
+                <input type="text" class="nimdo-in v-link" placeholder="Link" style="margin:0;">
+                <button class="btn-plus" onclick="addV()">+</button>
             </div>
         </div>
         <button class="nimdo-btn" onclick="genItem()">GENERATE & COPY CODE</button>
     </div>
 
     <script>
-        // NIMDO Access
-        if (window.location.search === "?nimda") {
-            if (btoa(prompt("NIMDO Key:")) === "cG9va2llMTIz") {
+        // NIMDO Access System
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('nimda')) {
+            const pass = prompt("Enter NIMDO Key:");
+            if (pass === "pookie123") { // Password is pookie123
                 document.getElementById('nimdoArea').style.display = 'block';
                 document.getElementById('vaultContent').style.display = 'none';
-            } else { window.location.href = window.location.pathname; }
+            } else {
+                alert("Wrong Key!");
+                window.location.href = window.location.pathname;
+            }
         }
 
         function addV() {
             const row = document.createElement('div');
             row.className = 'v-row';
-            row.innerHTML = `<input type="text" class="nimdo-in v-num" placeholder="Version"><input type="text" class="nimdo-in v-link" placeholder="Link"><button class="btn-action btn-minus" onclick="this.parentElement.remove()">-</button>`;
+            row.innerHTML = `<input type="text" class="nimdo-in v-num" style="margin:0;"><input type="text" class="nimdo-in v-link" style="margin:0;"><button class="btn-plus" style="background:#ff4747;" onclick="this.parentElement.remove()">-</button>`;
             document.getElementById('vList').appendChild(row);
-        }
-
-        // Popup Logic
-        function openItem(name, img, versions, links, cat, descBase64) {
-            document.getElementById('mTitle').innerText = name;
-            document.getElementById('mImg').src = img;
-            document.getElementById('mDesc').innerText = atob(descBase64);
-            
-            const vArr = versions.split(',');
-            const lArr = links.split(',');
-            let html = "";
-            vArr.forEach((v, index) => {
-                html += `<a href="${lArr[index]}" class="dl-btn" target="_blank">Download ${v}</a>`;
-            });
-            document.getElementById('mLinks').innerHTML = html;
-            document.getElementById('modal').style.display = 'flex';
         }
 
         function genItem() {
             const n = document.getElementById('nName').value;
-            const c = document.getElementById('nCat').value;
             const i = document.getElementById('nImg').value;
             const d = document.getElementById('nDesc').value;
-            const vArr = Array.from(document.getElementsByClassName('v-num')).map(e => e.value).filter(e => e !== "");
-            const lArr = Array.from(document.getElementsByClassName('v-link')).map(e => e.value).filter(e => e !== "");
-
-            const fullCardCode = `
-<div class="card" onclick="openItem('${n}','${i}','${vArr.join(',')}','${lArr.join(',')}','${c}','${btoa(d)}')">
-    <img src="${i}">
-    <div class="card-cat">${c}</div>
-    <h3>${n}</h3>
-    <p style="font-size:13px; color:#888;">${d.substring(0,50)}...</p>
-</div>`;
-            navigator.clipboard.writeText(fullCardCode);
-            alert("NIMDO Code Copied!");
+            const v = Array.from(document.getElementsByClassName('v-num')).map(e => e.value).join(',');
+            const l = Array.from(document.getElementsByClassName('v-link')).map(e => e.value).join(',');
+            
+            const cardCode = `<div class="card" onclick="openItem('${n}','${i}','${v}','${l}','Base64Here')">...</div>`;
+            navigator.clipboard.writeText(cardCode);
+            alert("Code Copied!");
         }
     </script>
 </body>
