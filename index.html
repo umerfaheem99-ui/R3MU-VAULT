@@ -917,52 +917,55 @@ particlesJS("particles-js",{particles:{number:{value:55},color:{value:"#7c3aed"}
 // ── DATA ─────────────────────────────────────
 const items = [
   {
-    slug: "cw-hack-client",
-    name: "Cw Hack Client",
-    cat: "clients",
-    img: "https://i.postimg.cc/dtJfGxjM/2.png",
-    desc: "Best CPVP Hack Client",
-    loader: "Fabric Loader • 1.17x - 1.18x\nPlace in your mods folder and launch with Fabric",
-    keybinds: "Right Shift  →  Open menu\nLeft Ctrl + K  →  Toggle features",
-    versions: [
-      { ver: "1.17x", link: "https://shrinkme.click/9Kz0O" },
-      { ver: "1.18x", link: "https://shrinkme.click/md3Y" }
+    "slug": "cw-hack-client",
+    "name": "Cw Hack Client",
+    "cat": "clients",
+    "img": "https://i.postimg.cc/dtJfGxjM/2.png",
+    "desc": "Best CPVP Hack Client",
+    "loader": "Fabric Loader • 1.17x - 1.18x\nPlace in your mods folder and launch with Fabric",
+    "keybinds": "Right Shift  →  Open menu\nLeft Ctrl + K  →  Toggle features",
+    "versions": [
+      { "ver": "1.17x", "link": "https://shrinkme.click/9Kz0O" },
+      { "ver": "1.18x", "link": "https://shrinkme.click/md3Y" }
     ],
-    screenshots: [
+    "screenshots": [
       "https://i.postimg.cc/dtJfGxjM/2.png",
       "https://picsum.photos/id/1015/1200/800",
       "https://picsum.photos/id/160/1200/800"
     ]
   },
   {
-    slug: "gardenia-client",
-    name: "Gardenia Client",
-    cat: "clients",
-    img: "https://i.postimg.cc/4xWnXqBg/image.png",
-    desc: "Best High Ping Client",
-    loader: "Fabric Loader • 1.21\nOptimized for high ping gameplay",
-    keybinds: "Right Shift  →  Open GUI\nF8  →  Toggle modules",
-    versions: [
-      { ver: "1.21", link: "https://shrinkme.click/bUCrhByx" }
+    "slug": "gardenia-client",
+    "name": "Gardenia Client",
+    "cat": "clients",
+    "img": "https://i.postimg.cc/4xWnXqBg/image.png",
+    "desc": "Best High Ping Client",
+    "loader": "Fabric Loader • 1.21\nOptimized for high ping gameplay",
+    "keybinds": "Right Shift  →  Open GUI\nF8  →  Toggle modules",
+    "versions": [
+      { "ver": "1.21", "link": "https://shrinkme.click/bUCrhByx" }
     ],
-    screenshots: [
+    "screenshots": [
       "https://i.postimg.cc/4xWnXqBg/image.png",
       "https://picsum.photos/id/201/1200/800",
       "https://picsum.photos/id/29/1200/800"
     ]
   },
   {
-    slug: "platinium-client",
-    name: "Platinium Client",
-    cat: "clients",
-    img: "https://i.postimg.cc/kXxghNs0/image.webp",
-    desc: "Minecraft OldGen CPvP Hack Client Used By Dr Donut",
-    loader: "Fabric 1.18.2\nPut It In Mods Folder",
-    keybinds: "Comma To open gui",
-    versions: [
-      { ver: "1.18.2", link: "https://shrinkme.click/gfdyk52q" }
+    "slug": "platinium-client",
+    "name": "Platinium Client",
+    "cat": "clients",
+    "img": "https://i.postimg.cc/kXxghNs0/image.webp",
+    "desc": "Minecraft OldGen CPvP Hack Client Used By Dr Donut",
+    "loader": "Fabric 1.18.2\nPut It In Mods Folder",
+    "keybinds": "Comma To open gui",
+    "versions": [
+      {
+        "ver": "1.18.2",
+        "link": "https://shrinkme.click/gfdyk52q"
+      }
     ],
-    screenshots: [
+    "screenshots": [
       "https://i.postimg.cc/kXxghNs0/image.webp"
     ]
   }
@@ -972,7 +975,6 @@ const items = [
 let currentCat = 'all';
 let currentVer = 'all';
 let marqueeVisible = false;
-const DEFAULT_MARQUEE = "Welcome to R3MU VAULT — Your elite Minecraft archive is live! &nbsp;•&nbsp; <i class='fas fa-bolt'></i> New clients dropping soon — Stay tuned! &nbsp;•&nbsp; <i class='fas fa-shield-alt'></i> Always updated. Always clean. Always premium. &nbsp;•&nbsp; <i class='fab fa-discord'></i> Join the Discord for exclusive early access! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
 function toggleMarquee() {
   const bar = document.getElementById('marqueeBar');
@@ -984,11 +986,11 @@ function toggleMarquee() {
 
 function applyMarqueeText() {
   const raw = document.getElementById('marqueeInput').value.trim();
-  if (!raw) { alert("Please enter some text for the banner."); return; }
+  if (!raw) return;
   const formatted = `<i class='fas fa-star'></i> ${raw} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`;
   document.getElementById('marqueeTextA').innerHTML = formatted;
   document.getElementById('marqueeTextB').innerHTML = formatted;
-  alert("✅ Banner updated!");
+  alert("✅ Updated!");
 }
 
 function openBoosterModal() {
@@ -1002,7 +1004,7 @@ function closeBoosterModal(e) {
 }
 
 function initiateDiscordOAuth() {
-  alert("Discord connection coming soon!");
+  alert("Discord coming soon!");
 }
 
 function getAllVersions() {
@@ -1013,11 +1015,7 @@ function getAllVersions() {
       if (base) vers.add(base);
     });
   });
-  return [...vers].sort((a,b) => {
-    const [ma,mia] = a.split('.').map(Number);
-    const [mb,mib] = b.split('.').map(Number);
-    return ma !== mb ? ma-mb : mia-mib;
-  });
+  return [...vers].sort();
 }
 
 function buildVerTabs() {
@@ -1121,6 +1119,29 @@ function zoomImg(src) {
   document.getElementById('zoomOverlay').style.display = 'flex';
 }
 
+function addVerRow() {
+  const container = document.getElementById('versionList');
+  const div = document.createElement('div');
+  div.className = 'row-flex';
+  div.innerHTML = `
+    <input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1;margin-bottom:0">
+    <input type="text" class="nimdo-in nLink" placeholder="Link" style="flex:2;margin-bottom:0">
+    <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:7px 12px;border-radius:7px;cursor:pointer;">−</button>
+  `;
+  container.appendChild(div);
+}
+
+function addScreenshotRow() {
+  const container = document.getElementById('screenshotList');
+  const div = document.createElement('div');
+  div.className = 'row-flex';
+  div.innerHTML = `
+    <input type="text" class="nimdo-in nScreenshot" placeholder="Screenshot URL" style="flex:1;margin-bottom:0">
+    <button onclick="this.parentElement.remove()" style="background:#ff4444;color:white;border:none;padding:7px 12px;border-radius:7px;cursor:pointer;">−</button>
+  `;
+  container.appendChild(div);
+}
+
 document.getElementById('adminTrigger').addEventListener('click', () => {
   const pw = prompt("NIMDO Password:");
   if (pw === "pookie123") {
@@ -1134,6 +1155,41 @@ function exitAdmin() {
   document.getElementById('content-wrapper').style.display = 'block';
 }
 
+function generateCode() {
+  const name = document.getElementById('nName').value.trim();
+  const img = document.getElementById('nImg').value.trim();
+  if (!name || !img) { alert("Need Name & Main Image!"); return; }
+
+  const versions = [];
+  document.querySelectorAll('#versionList .row-flex').forEach(row => {
+    const v = row.querySelector('.nVer').value.trim();
+    const l = row.querySelector('.nLink').value.trim();
+    if (v && l) versions.push({ ver: v, link: l });
+  });
+
+  const screenshots = [];
+  document.querySelectorAll('.nScreenshot').forEach(inp => {
+    const val = inp.value.trim();
+    if (val) screenshots.push(val);
+  });
+
+  const newItem = {
+    slug: name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+    name,
+    cat: document.getElementById('nCat').value,
+    img,
+    desc: document.getElementById('nDesc').value.trim(),
+    loader: document.getElementById('nLoader').value.trim(),
+    keybinds: document.getElementById('nKeybinds').value.trim(),
+    versions,
+    screenshots: screenshots.length ? screenshots : [img]
+  };
+
+  const code = `items.push(${JSON.stringify(newItem, null, 2)});`;
+  prompt("Copy manually:", code);
+}
+
+// ── INIT ─────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(location.search);
   const slug = params.get('item');
