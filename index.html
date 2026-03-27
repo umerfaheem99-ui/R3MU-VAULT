@@ -5,94 +5,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R3MU VAULT | Official Archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root { --bg: #050505; --accent: #8147ff; --card-bg: #0f0f0f; --text: #eee; }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
         
+        /* Main Page Layout */
         #vaultContent { padding: 80px 20px; max-width: 1300px; margin: 0 auto; text-align: center; }
-        .hero-title { font-size: 4rem; font-weight: 900; margin-bottom: 50px; letter-spacing: -2px; text-transform: uppercase; }
-        
-        /* GRID & CARD CSS (Iske bina kuch nahi dikhega) */
+        .hero-title { font-size: 5rem; font-weight: 900; margin: 0; background: linear-gradient(to bottom, #fff, #8147ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -2px; text-transform: uppercase; }
+        .hero-sub { color: #888; font-size: 1.2rem; margin: 15px 0 50px; }
+
+        /* ADVANCED: Tab Categories (Ref: image_6b45ba.png) */
+        .tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+        .tab { padding: 12px 24px; background: #111; border-radius: 10px; font-weight: 700; color: #888; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 14px; border: 1px solid transparent; }
+        .tab:hover { background: #1a1a1a; }
+        .tab.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 0 15px rgba(129,71,255,0.4); }
+
+        /* Standard Grid System */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; text-align: left; }
-        .card { background: var(--card-bg); border-radius: 18px; border: 1px solid #1a1a1a; padding: 25px; cursor: pointer; transition: 0.3s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(129, 71, 255, 0.1); }
-        .card img { width: 100%; border-radius: 12px; height: 180px; object-fit: cover; border: 1px solid #222; }
-        .card-cat { color: var(--accent); font-size: 11px; font-weight: 900; text-transform: uppercase; margin-top: 15px; letter-spacing: 1px; }
-        .card h3 { margin: 10px 0; font-size: 22px; }
+        
+        /* Premium Card Design (Fixed image size and layout) */
+        .card { background: var(--card-bg); border-radius: 18px; border: 1px solid #1a1a1a; padding: 25px; transition: 0.3s; cursor: pointer; position: relative; overflow: hidden; }
+        .card:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card img { width: 100%; border-radius: 12px; height: 180px; object-fit: cover; border: 1px solid #222; margin-bottom: 15px; }
+        .card-cat { color: var(--accent); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .card h3 { margin: 10px 0; font-size: 24px; font-weight: 800; color: white; }
+        .card p { font-size: 13px; color: #aaa; line-height: 1.6; margin: 0; }
 
-        /* POPUP MODAL */
-        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
-        .m-content { background: #0f0f0f; padding: 40px; border-radius: 20px; max-width: 500px; width: 90%; border: 1px solid #222; position: relative; }
-        .dl-btn { display: block; background: var(--accent); color: white; padding: 15px; text-align: center; border-radius: 10px; text-decoration: none; margin-top: 20px; font-weight: bold; }
+        /* STANDARD POPUP (Restored & Advanced) */
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
+        .m-content { background: #0f0f0f; padding: 40px; border-radius: 25px; max-width: 600px; width: 100%; border: 1px solid #222; position: relative; max-height: 90vh; overflow-y: auto; text-align: left;}
+        .m-close { position: absolute; top: 20px; right: 20px; font-size: 28px; color: #666; cursor: pointer; transition: 0.3s; }
+        .m-close:hover { color: white; }
+        .m-img { width: 100%; border-radius: 15px; height: 250px; object-fit: cover; border: 1px solid #222; margin-bottom: 25px; }
+        .m-desc { color: #ccc; line-height: 1.7; font-size: 1.1rem; margin-bottom: 30px; }
+        .dl-btn { display: block; background: var(--accent); color: white; padding: 20px; text-align: center; border-radius: 12px; text-decoration: none; font-weight: 900; text-transform: uppercase; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 0 20px rgba(129,71,255,0.4); }
+        .dl-btn:hover { background: #966aff; transform: translateY(-3px); box-shadow: 0 0 30px rgba(129,71,255,0.6); }
 
+        /* Admin Console UI (Ref: image_6b3a3a.png) */
         #nimdoArea { display: none; padding: 40px; background: #0a0a0a; border-radius: 20px; border: 1px dashed var(--accent); max-width: 850px; margin: 50px auto; }
-        .nimdo-in { width: 100%; padding: 15px; margin-bottom: 10px; background: #000; color: white; border: 1px solid #333; border-radius: 10px; }
+        .nimdo-in { width: 100%; padding: 15px; margin-bottom: 12px; background: #000; color: white; border: 1px solid #222; border-radius: 10px; box-sizing: border-box; font-family: inherit; font-size: 14px;}
+        .nimdo-textarea { height: 100px; resize: vertical; }
+        .nimdo-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 12px; cursor: pointer; text-transform: uppercase; font-size: 1.1rem; }
+        .nimdo-btn:hover { background: #966aff; }
     </style>
 </head>
 <body>
 
     <div id="vaultContent">
         <h1 class="hero-title">ʀ3ᴍᴜ ᴠᴀᴜʟᴛ</h1>
-        <div class="grid" id="mainGrid">
-            <div class="card" onclick="openItem('Custom Clients','https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png','ALL','https://discord.gg/yourlink','Clients','UFJJQ0lORzogJDEgUGVyIE1vZHVsZSwgKyQ0IE1vZCBBbmFseXplciBCeXBhc3MsICskMTAgT2NlYW4gQnlwYXNzLCArJDE1IEFsbCBTUyBUb29scyBCeXBhc3M=')">
-                <img src="https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png">
-                <div class="card-cat">Clients</div>
-                <h3>Custom Clients</h3>
-                <p style="font-size:13px; color:#888;">PRICING: $1 Per Module...</p>
-            </div>
+        <p class="hero-sub">Official Archive. Built for the Elite.</p>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="filterVault('all', this)">All</div>
+            <div class="tab" onclick="filterVault('clients', this)">Clients</div>
+            <div class="tab" onclick="filterVault('mods', this)">Mods</div>
+            <div class="tab" onclick="filterVault('shop', this)">Shop</div>
         </div>
+
+        <div class="grid" id="mainGrid">
+            </div>
     </div>
 
-    <div id="modal" onclick="this.style.display='none'">
+    <div id="modal" onclick="closeM(event)">
         <div class="m-content" onclick="event.stopPropagation()">
-            <h2 id="mTitle" style="font-size:28px; margin:0; color:var(--accent);"></h2>
-            <p id="mDesc" style="color:#aaa; line-height:1.6; margin:20px 0; white-space: pre-wrap;"></p>
+            <span class="m-close" onclick="closeM(null)">&times;</span>
+            <img id="mImg" class="m-img" src="">
+            <div id="mCat" class="card-cat" style="font-size:12px;"></div>
+            <h2 id="mTitle" style="font-size:36px; margin: 10px 0 20px; color: white;"></h2>
+            <p id="mDesc" class="m-desc"></p>
             <div id="mLinks"></div>
         </div>
     </div>
 
     <div id="nimdoArea">
-        <h2 style="color:var(--accent);">NIMDO Console</h2>
-        <input type="text" id="nName" class="nimdo-in" placeholder="Client Name">
-        <input type="text" id="nImg" class="nimdo-in" placeholder="Image Link">
-        <textarea id="nDesc" class="nimdo-in" placeholder="Description" style="height:80px;"></textarea>
-        <input type="text" id="nVer" class="nimdo-in" placeholder="Version">
-        <input type="text" id="nLink" class="nimdo-in" placeholder="Download Link">
-        <button onclick="genItem()" style="width:100%; padding:15px; background:var(--accent); color:white; border:none; border-radius:10px; cursor:pointer; font-weight:bold;">GENERATE CODE</button>
+        <h2 style="color:var(--accent); font-weight:900;">NIMDO Console</h2>
+        <select id="nCat" class="nimdo-in">
+            <option value="clients">Clients</option>
+            <option value="mods">Mods</option>
+            <option value="shop">Shop</option>
+        </select>
+        <input type="text" id="nName" class="nimdo-in" placeholder="Client Name (e.g. Custom Clients)">
+        <input type="text" id="nImg" class="nimdo-in" placeholder="Direct Image URL (Imgur/Discord link)">
+        <textarea id="nDesc" class="nimdo-in nimdo-textarea" placeholder="Detailed Description (What does it do?)"></textarea>
+        <input type="text" id="nVer" class="nimdo-in" placeholder="Version (e.g. ALL)">
+        <input type="text" id="nLink" class="nimdo-in" placeholder="Order/Download Link (Discord server link for ordering)">
+        
+        <button class="nimdo-btn" onclick="genItem()">GENERATE & COPY NIMDO CODE</button>
+    </div>
+
+    <div id="vault-data" style="display:none;">
+        <div class="card" data-cat="clients" onclick="openItem('Argon Client','https://i.imgur.com/8nN2S3H.png','1.21','https://discord.gg/yourlink','Clients','QXJnb24gaXMgYSBQcmVtaXVtIE1pbmVjcmFmdCBDbGllbnQgZm9ocm9pbmcgQnlwYXNzIHdpdGggY3VzdG9tIG1vZHVsZXMu')">
+            <img src="https://i.imgur.com/8nN2S3H.png">
+            <div class="card-cat">Clients</div>
+            <h3>Argon Client</h3>
+            <p>Premium Minecraft Client bypassing Anticheats...</p>
+        </div>
     </div>
 
     <script>
-        // Check for Admin Access
-        if (window.location.search.includes('nimda')) {
-            if (prompt("NIMDO Key:") === "pookie123") {
+        // Check for Admin Access via ?nimda
+        if (window.location.search === "?nimda") {
+            // Encode password Po**ie123
+            if (btoa(prompt("NIMDO Key:")) === "cG9va2llMTIz") {
                 document.getElementById('nimdoArea').style.display = 'block';
                 document.getElementById('vaultContent').style.display = 'none';
+            } else {
+                window.location.href = window.location.pathname;
             }
         }
 
-        // Popup Logic
+        // Vault Filtering Logic
+        function filterVault(category, tabEl) {
+            const cards = document.getElementsByClassName('card');
+            for (let card of cards) {
+                if (category === 'all' || card.dataset.cat === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+            // Update Tab active state
+            const tabs = document.getElementsByClassName('tab');
+            for (let tab of tabs) tab.classList.remove('active');
+            tabEl.classList.add('active');
+        }
+
+        // POPUP (Modal) Logic
         function openItem(name, img, ver, link, cat, descBase64) {
             document.getElementById('mTitle').innerText = name;
+            document.getElementById('mImg').src = img;
+            document.getElementById('mCat').innerText = cat;
             document.getElementById('mDesc').innerText = atob(descBase64);
-            document.getElementById('mLinks').innerHTML = `<a href="${link}" class="dl-btn" target="_blank">Order/Download (${ver})</a>`;
+            
+            // Generate order/download button
+            let btnText = (cat === 'Shop') ? 'ORDER ON DISCORD →' : 'DOWNLOAD →';
+            let btnStyle = (cat === 'Shop') ? 'style="border-color:gold;"' : '';
+            document.getElementById('mLinks').innerHTML = `<a href="${link}" class="dl-btn" ${btnStyle} target="_blank">${btnText}</a>`;
             document.getElementById('modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Stop scrolling on main page
+        }
+
+        function closeM(event) {
+            if (!event || event.target.id === 'modal' || event.target.className === 'm-close') {
+                document.getElementById('modal').style.display = 'none';
+                document.body.style.overflow = ''; // Restore scrolling
+            }
         }
 
         // Generator Logic
         function genItem() {
             const n = document.getElementById('nName').value;
+            const c = document.getElementById('nCat').value;
             const i = document.getElementById('nImg').value;
             const d = document.getElementById('nDesc').value;
             const v = document.getElementById('nVer').value;
             const l = document.getElementById('nLink').value;
-            const code = `<div class="card" onclick="openItem('${n}','${i}','${v}','${l}','Clients','${btoa(d)}')">
+
+            // FIX: Encodes description to Base64 for safe HTML transfer
+            const cardCode = `
+<div class="card" data-cat="${c}" onclick="openItem('${n}','${i}','${v}','${l}','${c.charAt(0).toUpperCase() + c.slice(1)}','${btoa(d)}')">
     <img src="${i}">
-    <div class="card-cat">Clients</div>
+    <div class="card-cat">${c.charAt(0).toUpperCase() + c.slice(1)}</div>
     <h3>${n}</h3>
-    <p style="font-size:13px; color:#888;">${d.substring(0,30)}...</p>
+    <p>${d.substring(0,60)}...</p>
 </div>`;
-            navigator.clipboard.writeText(code);
-            alert("Code Copied! Paste it inside <div class='grid'> manually.");
+            navigator.clipboard.writeText(cardCode);
+            alert("Code Copied! Paste it into 'vault-data' div in your index.html manually.");
         }
     </script>
 </body>
