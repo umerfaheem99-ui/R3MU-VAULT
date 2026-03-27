@@ -1736,14 +1736,34 @@ function getAllVersions() {
   const vers = new Set();
   items.forEach(item => {
     (item.versions || []).forEach(v => {
-      const base = v.ver.replace(/[^0-9.]/g,'').split('.').slice(0,2).join('.');
-      if (base) vers.add(base);
+      // Split by common separators and extract version numbers
+      const verStr = v.ver;
+      // Match version patterns like 1.21, 1.21.1, 1.21.11, etc.
+      const matches = verStr.match(/\d+\.\d+(?:\.\d+)?/g);
+      if (matches) {
+        matches.forEach(match => {
+          // Normalize: keep major.minor or major.minor.patch
+          const parts = match.split('.');
+          if (parts.length >= 3 && parts[2].length >= 2) {
+            // It's a patch version like 1.21.11
+            vers.add(parts.slice(0, 3).join('.'));
+          } else if (parts.length >= 2) {
+            // It's major.minor like 1.21
+            vers.add(parts.slice(0, 2).join('.'));
+          }
+        });
+      }
     });
   });
   return [...vers].sort((a,b) => {
-    const [ma,mia] = a.split('.').map(Number);
-    const [mb,mib] = b.split('.').map(Number);
-    return ma !== mb ? ma-mb : mia-mib;
+    const pa = a.split('.').map(Number);
+    const pb = b.split('.').map(Number);
+    for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+      const va = pa[i] || 0;
+      const vb = pb[i] || 0;
+      if (va !== vb) return va - vb;
+    }
+    return 0;
   });
 }
 
@@ -1779,7 +1799,10 @@ function getFilteredItems() {
   // Version filter
   if (currentVer !== 'all') {
     filtered = filtered.filter(item =>
-      (item.versions || []).some(v => v.ver.includes(currentVer))
+      (item.versions || []).some(v => {
+        const clean = v.ver.replace(/[^0-9.]/g,'');
+        return clean.startsWith(currentVer) || v.ver.includes(currentVer);
+      })
     );
   }
 
