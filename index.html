@@ -1,91 +1,202 @@
-<script>
-let vaultUpdates = "New bypasses added for 1.21! | R3MU Client updated to v2.4 | Support for Fabric 1.21.11 added.";
-
-// 2. DISCORD CONFIG (Replace these with your actual info)
-const DISCORD_CLIENT_ID = 'YOUR_CLIENT_ID_HERE';
-const REDIRECT_URI = 'https://premiumvault.vercel.app'; // Your Vercel link
-const ADMIN_DISCORD_ID = 'YOUR_DISCORD_USER_ID'; // Your personal ID
-const SERVER_ID = 'YOUR_SERVER_ID'; // Your Discord Server ID
-const BOOSTER_ROLE_ID = 'BOOSTER_ROLE_ID_HERE'; // Premium Subscriber / Booster role ID
-</script>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R3MU VAULT | Premium Minecraft Archive</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <style>
-/* 3. Updates Section Style */
-.updates-banner {
-    background: rgba(124, 58, 237, 0.1);
-    border: 1px dashed var(--accent);
-    padding: 15px;
-    border-radius: 12px;
-    margin: 20px auto;
-    max-width: 800px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-.updates-tag {
-    background: var(--accent);
-    padding: 3px 8px;
-    border-radius: 5px;
-    font-size: 10px;
-    font-weight: 900;
-}
+/* ── BASE & VARIABLES (RESTORED) ── */
+:root { --bg: #050505; --accent: #8147ff; --card-bg: #0d0d0d; --text: #eee; --border: #1a1a1a; --yt: #FF0000; --dc: #5865F2; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
 
-/* 4. Locked Category Style */
-.locked-cat {
-    filter: blur(4px);
-    pointer-events: none;
-    position: relative;
-}
-.lock-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0,0,0,0.6);
-    z-index: 10;
-    border-radius: 12px;
-}
+/* ── LAYOUT (RESTORED) ── */
+#particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none; }
+#content-wrapper { position: relative; z-index: 2; }
+
+/* ── NAV (RESTORED) ── */
+.nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: rgba(5,5,5,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
+.nav-logo { font-weight: 900; font-size: 1.6rem; color: #fff; letter-spacing: -1px; }
+.nav-links { display: flex; align-items: center; }
+
+/* ── CHEAT COUNTER (RESTORED) ── */
+.cheat-counter { display: flex; align-items: center; color: #fff; font-weight: 700; font-size: 13px; margin-right: 15px; border: 1px solid rgba(129,71,255,0.3); padding: 4px 10px; border-radius: 20px; background: rgba(129,71,255,0.05); }
+.live-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; margin-right: 8px; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(129,71,255,0.7); } 70% { box-shadow: 0 0 0 8px rgba(129,71,255,0); } 100% { box-shadow: 0 0 0 0 rgba(129,71,255,0); } }
+
+/* ── HERO & GRID (RESTORED) ── */
+.hero { padding: 60px 20px 20px; text-align: center; }
+.hero-title { font-size: 3rem; font-weight: 900; margin: 0; text-transform: uppercase; }
+.hero-sub { color: #888; font-size: 1rem; margin: 10px 0 30px; font-weight: 600; }
+.search-bar { width: 90%; max-width: 600px; padding: 15px 20px; background: rgba(15,15,15,0.9); border: 1px solid var(--border); border-radius: 12px; color: white; font-size: 0.9rem; outline: none; margin-bottom: 40px; display: block; margin-left: auto; margin-right: auto; transition: 0.3s ease; }
+.search-bar:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(129, 71, 255, 0.2); transform: scale(1.01); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 15px; max-width: 1400px; margin: 0 auto; padding: 0 20px 80px; }
+.card { background: rgba(13,13,13,0.8); border-radius: 15px; border: 1px solid var(--border); padding: 15px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
+.card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.card img { width: 100%; border-radius: 10px; height: 130px; object-fit: cover; margin-bottom: 12px; }
+.card h3 { font-size: 1rem; margin: 10px 0 5px; }
+.card p { font-size: 0.8rem; color: #777; margin: 0; }
+
+/* ── MODAL & ZOOM (RESTORED) ── */
+#modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 1000; justify-content: center; align-items: center; padding: 15px; backdrop-filter: blur(8px); }
+.m-content { background: #0a0a0a; padding: 25px; border-radius: 20px; max-width: 500px; width: 100%; border: 1px solid #222; text-align: center; }
+.m-img { width: 100%; max-height: 250px; object-fit: contain; border-radius: 12px; margin-bottom: 20px; background: #000; }
+#zoomOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 2000; justify-content: center; align-items: center; }
+#zoomImg { max-width: 90%; max-height: 90%; border-radius: 10px; }
+.dl-btn { display: flex; justify-content: space-between; padding: 14px 18px; background: #151515; color: #fff; text-decoration: none; border-radius: 10px; font-weight: 700; margin-top: 10px; border: 1px solid #222; font-size: 0.9rem; transition: 0.3s; }
+.dl-btn:hover { background: var(--accent); }
+
+/* ── ADMIN (RESTORED) ── */
+#nimdoArea { display: none; padding: 40px 20px; min-height: 100vh; background: #050505; position: fixed; top: 0; left: 0; width: 100%; z-index: 5000; overflow-y: auto; }
+.nimdo-card { background: #0d0d0d; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 20px; border: 1px solid var(--accent); }
+.nimdo-in { width: 100%; padding: 12px; margin-bottom: 10px; background: #000; border: 1px solid #222; color: #fff; border-radius: 8px; box-sizing: border-box; }
+
+/* ── 🚀 NEW FEATURES SECTION (FIXED) ── */
+#extraFeatures { position: relative; z-index: 100; }
+.updates-banner { background: rgba(124, 58, 237, 0.1); border: 1px dashed var(--accent); padding: 15px; border-radius: 12px; margin: 20px auto; max-width: 800px; display: flex; align-items: center; gap: 15px; }
+.updates-tag { background: var(--accent); padding: 3px 8px; border-radius: 5px; font-size: 10px; font-weight: 900; }
+.locked-cat { filter: blur(4px); pointer-events: none; position: relative; }
+.lock-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(0,0,0,0.6); z-index: 10; border-radius: 12px; }
 </style>
+</head>
+<body>
+<div id="particles-js"></div>
+<div id="adminTrigger" style="position:fixed; bottom:0; right:0; width:20px; height:20px; cursor:pointer;" onclick="checkAdmin()"></div>
 
-<div class="updates-banner">
-    <span class="updates-tag">WHAT'S NEW</span>
-    <marquee id="updateText" style="font-size: 13px; font-weight: 600; color: #ccc;"></marquee>
+<div id="nimdoArea">
+<div class="nimdo-card">
+    <h2 style="color:var(--accent); text-align:center; margin-top:0;">NIMDO ADMIN 3.0</h2>
+    <div style="background: rgba(124,58,237,0.1); padding: 15px; border-radius: 10px; border: 1px dashed var(--accent); margin-bottom: 20px;">
+        <p class="hero-sub" style="color:var(--accent); font-weight:900; margin-top:0;">UPDATE MARQUEE</p>
+        <textarea id="nNews" class="nimdo-in" style="height:50px" placeholder="Latest News / Updates Marquee..."></textarea>
+        <button onclick="updateNews()" style="background:var(--accent); width:100%; padding:10px; border:none; border-radius:10px; color:white; font-weight:900; cursor:pointer;">UPDATE BANNER</button>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
+        <select id="nCat" class="nimdo-in">
+            <option value="clients">Clients</option>
+            <option value="mods / macros">Mods / Macros</option>
+            <option value="source codes">Source Codes</option>
+            <option value="store">Store</option>
+            <option value="booster">💎 BOOSTER</option>
+        </select>
+    </div>
+    <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL">
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+        <input type="text" id="nLoader" class="nimdo-in" placeholder="Loader (Fabric/Forge)">
+        <input type="text" id="nVer" class="nimdo-in" placeholder="Versions (e.g 1.21)">
+        <input type="text" id="nKey" class="nimdo-in" placeholder="Keybind">
+    </div>
+    <textarea id="nDesc" class="nimdo-in" style="height:70px" placeholder="Short Description"></textarea>
+    <input type="text" id="nLink" class="nimdo-in" placeholder="Download Link">
+    <button onclick="generateCode()" style="background:var(--accent); width:100%; padding:15px; border:none; border-radius:10px; color:white; font-weight:900; cursor:pointer; margin-top:10px;">COPY UPDATED CODE</button>
+    <button onclick="location.reload()" style="background:transparent; color:#555; border:none; width:100%; margin-top:15px; cursor:pointer;">Exit Admin</button>
+</div>
 </div>
 
-<div class="tab" onclick="checkBoosterAuth(this)">💎 BOOSTER</div>
+<div id="content-wrapper">
+<nav class="nav">
+    <div class="nav-logo">R3MU VAULT</div>
+    <div class="nav-links">
+        <div class="cheat-counter">
+            <div class="live-dot"></div>
+            LIVE | <span id="cheatCount">0</span> ASSETS
+        </div>
+        <a href="https://www.youtube.com/@r3mu2" target="_blank" style="color:var(--yt); margin-right:15px;"><i class="fab fa-youtube"></i></a>
+        <a href="https://discord.com/invite/r3musblackmarket" target="_blank" style="color:var(--dc);"><i class="fab fa-discord"></i></a>
+    </div>
+</nav>
+
+<div id="extraFeatures">
+    <div class="updates-banner">
+        <span class="updates-tag">WHAT'S NEW</span>
+        <marquee id="updateText" style="font-size: 13px; font-weight: 600; color: #ccc;">New Fabritone 1.21 support added! | R3MU Store updated. | Connect Discord for Booster category.</marquee>
+    </div>
+</div>
+
+<div class="hero">
+    <h1 class="hero-title">PREMIUM VAULT</h1>
+    <p class="hero-sub">Elite Minecraft archive • Clean • Shareable • Professional</p>
+    <input type="text" id="searchBar" class="search-bar" placeholder="Search..." onkeyup="search()">
+</div>
+
+<div class="tabs">
+    <div class="tab active" onclick="filterCat('all', this)">ALL</div>
+    <div class="tab" onclick="filterCat('clients', this)">CLIENTS</div>
+    <div class="tab" onclick="filterCat('mods / macros', this)">MODS</div>
+    <div class="tab" onclick="filterCat('source', this)">SOURCE</div>
+    <div class="tab" onclick="filterCat('shop', this)" style="color: gold;">💰 SHOP</div>
+    <div class="tab locked-cat" id="boosterTab" onclick="alert('Connect Discord to unlock💎')">
+        💎 BOOSTER
+        <div class="lock-overlay"><i class="fas fa-lock"></i></div>
+    </div>
+</div>
+
+<div class="grid" id="mainGrid">
+    </div>
+</div>
+
+<div id="modal" onclick="closeM(event)">
+<div class="m-content" onclick="event.stopPropagation()">
+    <img id="mImg" src="">
+    <h2 id="mTitle" style="font-size:22px; margin:0; font-weight:900;"></h2>
+    <p id="mDesc" style="color:#888; margin:15px 0; font-size:14px; font-weight:600;"></p>
+    <div id="mLinks"></div>
+</div>
+</div>
+
+<div id="zoomOverlay" onclick="this.style.display='none'">
+<img id="zoomImg" src="">
+</div>
 
 <script>
-// Check if URL has ?page=admin
-const urlParams = new URLSearchParams(window.location.search);
-if(urlParams.get('page') === 'admin') {
-    handleAdminLogin();
+particlesJS("particles-js", { "particles": { "number": { "value": 50 }, "size": { "value": 2 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "distance": 150, "color": "#8147ff", "opacity": 0.2 }, "move": { "speed": 1 } } });
+
+function openItem(name, img, versions, links, cat, descB64) {
+    document.getElementById('mTitle').innerText = name;
+    document.getElementById('mImg').src = img;
+    document.getElementById('mDesc').innerText = descB64 ? atob(descB64) : "";
+    let vArr = versions.split('|'), lArr = links.split('|'), h = '';
+    vArr.forEach((v, i) => { if(v.trim()) h += `<a href="${lArr[i].trim()}" class="dl-btn" target="_blank"><span>${v.trim()} | Download Now</span> <i class="fas fa-chevron-right"></i></a>`; });
+    document.getElementById('mLinks').innerHTML = h;
+    document.getElementById('modal').style.display = 'flex';
 }
 
-function handleAdminLogin() {
-    // Redirect to Discord OAuth
-    const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify%20guilds`;
-    
-    // Logic to check token and verify ADMIN_DISCORD_ID
-    // If verified: document.getElementById('nimdoArea').style.display = 'block';
-}
-
-async function checkBoosterAuth(el) {
-    const token = localStorage.getItem('dc_token');
-    if(!token) {
-        alert("Please connect Discord to access Booster items!");
-        // Trigger OAuth login...
-        return;
+function closeM() { document.getElementById('modal').style.display = 'none'; }
+function checkAdmin() {
+    if (prompt("NIMDO Password:") === "pookie123") {
+        document.getElementById('nimdoArea').style.display = 'block';
+        document.getElementById('content-wrapper').style.display = 'none';
     }
-    
-    // Fetch user guilds/roles to check for BOOSTER_ROLE_ID
-    // If verified, show 'booster' category items
+}
+function search() {
+    let q = document.getElementById('searchBar').value.toLowerCase();
+    document.querySelectorAll('.card').forEach(c => c.style.display = c.innerText.toLowerCase().includes(q) ? "block" : "none");
+}
+function filterCat(cat, el) {
+    document.querySelectorAll('.card').forEach(c => c.style.display = (cat === 'all' || c.dataset.cat === cat) ? "block" : "none");
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+}
+function addVerRow() { document.getElementById('versionList').insertAdjacentHTML('beforeend', '<div style="display:flex; gap:10px; margin-bottom:10px;"><input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1"><input type="text" class="nimdo-in nLink" placeholder="Link" style="flex:2"></div>'); }
+
+function generateCode() {
+    const name = document.getElementById('nName').value, cat = document.getElementById('nCat').value, img = document.getElementById('nImg').value, descRaw = document.getElementById('nDesc').value, desc = btoa(descRaw);
+    const vers = Array.from(document.querySelectorAll('.nVer')).map(i => i.value).join('|'), links = Array.from(document.querySelectorAll('.nLink')).map(i => i.value).join('|');
+    const code = `<div class="card" data-cat="${cat}" onclick="openItem('${name}','${img}','${vers}','${links}','${cat}','${desc}')"><img src="${img}"><div style="color:var(--accent); font-weight:900; font-size:10px;">${cat.toUpperCase()}</div><h3>${name}</h3><p>${descRaw.substring(0,25)}...</p></div>`;
+    navigator.clipboard.writeText(code); alert("Professional Code Copied!");
 }
 
 // NIMDO Admin function to update the marquee
 function updateNews() {
     const news = document.getElementById('nNews').value;
     document.getElementById('updateText').innerText = news;
+    document.getElementById('nNews').value = '';
+    alert("Banner Updated!");
 }
 </script>
+</body>
+</html>
