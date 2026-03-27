@@ -9,18 +9,25 @@
         :root { --bg: #050505; --accent: #8147ff; --card-bg: #0f0f0f; --text: #eee; }
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
         #vaultContent { padding: 40px 20px; max-width: 1300px; margin: 0 auto; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
-        .card { background: var(--card-bg); border-radius: 15px; border: 1px solid #1a1a1a; padding: 20px; cursor: pointer; transition: 0.3s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
         
-        /* Admin Manager UI */
-        #adminArea { display: none; padding: 30px; background: #0a0a0a; border-radius: 15px; border: 1px dashed var(--accent); max-width: 800px; margin: 50px auto; }
-        .adm-title { color: var(--accent); font-size: 2rem; font-weight: 900; margin-bottom: 20px; }
-        .adm-in { width: 100%; padding: 14px; margin-bottom: 12px; background: #000; color: white; border: 1px solid #333; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
+        /* NIMDO Panel UI */
+        #nimdoArea { display: none; padding: 30px; background: #0a0a0a; border-radius: 15px; border: 1px dashed var(--accent); max-width: 800px; margin: 50px auto; }
+        .nimdo-title { color: var(--accent); font-size: 2rem; font-weight: 900; margin-bottom: 20px; }
+        .nimdo-in { width: 100%; padding: 14px; margin-bottom: 12px; background: #000; color: white; border: 1px solid #333; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
+        
+        /* Version System with +/- */
         .v-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
-        .btn-plus { background: #222; color: var(--accent); border: 2px solid var(--accent); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 20px; font-weight: bold; transition: 0.3s; }
+        .btn-action { width: 45px; height: 45px; border-radius: 10px; cursor: pointer; font-size: 24px; font-weight: bold; transition: 0.3s; flex-shrink: 0; border: 2px solid; display: flex; align-items: center; justify-content: center; }
+        .btn-plus { background: #1a1a1a; color: var(--accent); border-color: var(--accent); }
+        .btn-minus { background: #1a1a1a; color: #ff4747; border-color: #ff4747; }
         .btn-plus:hover { background: var(--accent); color: white; }
-        .adm-btn { width: 100%; padding: 18px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 10px; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        .btn-minus:hover { background: #ff4747; color: white; }
+        
+        .nimdo-btn { width: 100%; padding: 18px; background: var(--accent); color: white; border: none; font-weight: 900; border-radius: 10px; cursor: pointer; text-transform: uppercase; margin-top: 10px; font-size: 1.1rem; }
+        
+        /* Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .card { background: var(--card-bg); border-radius: 15px; border: 1px solid #1a1a1a; padding: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -30,60 +37,60 @@
         <div class="grid" id="mainGrid"></div>
     </div>
 
-    <div id="adminArea">
-        <div class="adm-title">Vault Manager Console</div>
-        <select id="aCat" class="adm-in">
+    <div id="nimdoArea">
+        <div class="nimdo-title">NIMDO Access Console</div>
+        
+        <select id="nCat" class="nimdo-in">
             <option value="clients">Clients</option>
             <option value="mods">Mods / Macros</option>
-            <option value="bypass">SS Bypass</option>
             <option value="source">Source Codes</option>
             <option value="shop">Shop (Premium)</option>
         </select>
-        <input type="text" id="aName" class="adm-in" placeholder="Item Name (e.g. Lynoxl Client)">
-        <input type="text" id="aImg" class="adm-in" placeholder="Direct Image URL (Imgur)">
-        <textarea id="aDesc" class="adm-in" placeholder="Write item description here..." style="height:100px;"></textarea>
         
-        <div id="versionList">
+        <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
+        <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL (Direct Link)">
+        <textarea id="nDesc" class="nimdo-in" placeholder="Enter Description..." style="height:100px;"></textarea>
+        
+        <div id="vList">
             <div class="v-row">
-                <input type="text" class="adm-in v-num" placeholder="Version (e.g. 1.21.1)" style="margin-bottom:0;">
-                <input type="text" class="adm-in v-link" placeholder="Download Link" style="margin-bottom:0;">
-                <button class="btn-plus" onclick="addVersion()">+</button>
+                <input type="text" class="nimdo-in v-num" placeholder="Version" style="margin-bottom:0;">
+                <input type="text" class="nimdo-in v-link" placeholder="Download Link" style="margin-bottom:0;">
+                <button class="btn-action btn-plus" onclick="addV()">+</button>
             </div>
         </div>
         
-        <button class="adm-btn" onclick="generateItem()">GENERATE & COPY TO CLIPBOARD</button>
-        <textarea id="aOut" style="display:none;"></textarea>
+        <button class="nimdo-btn" onclick="genItem()">GENERATE & COPY NIMDO CODE</button>
     </div>
 
     <script>
-        // Check for ?nimda in URL
+        // Secret Access via ?nimda
         if (window.location.search === "?nimda") {
-            // Password is still encoded for safety
-            if (btoa(prompt("Security Key:")) === "cG9va2llMTIz") {
-                document.getElementById('adminArea').style.display = 'block';
+            // Password logic kept as requested
+            if (btoa(prompt("NIMDO Security Key:")) === "cG9va2llMTIz") { 
+                document.getElementById('nimdoArea').style.display = 'block';
                 document.getElementById('vaultContent').style.display = 'none';
             } else {
                 window.location.href = window.location.pathname;
             }
         }
 
-        function addVersion() {
-            const container = document.getElementById('versionList');
+        function addV() {
+            const container = document.getElementById('vList');
             const row = document.createElement('div');
             row.className = 'v-row';
             row.innerHTML = `
-                <input type="text" class="adm-in v-num" placeholder="Version" style="margin-bottom:0;">
-                <input type="text" class="adm-in v-link" placeholder="Download Link" style="margin-bottom:0;">
-                <button class="btn-plus" style="visibility:hidden;">+</button>
+                <input type="text" class="nimdo-in v-num" placeholder="Version" style="margin-bottom:0;">
+                <input type="text" class="nimdo-in v-link" placeholder="Download Link" style="margin-bottom:0;">
+                <button class="btn-action btn-minus" onclick="this.parentElement.remove()">-</button>
             `;
             container.appendChild(row);
         }
 
-        function generateItem() {
-            const n = document.getElementById('aName').value;
-            const c = document.getElementById('aCat').value;
-            const i = document.getElementById('aImg').value;
-            const d = document.getElementById('aDesc').value;
+        function genItem() {
+            const n = document.getElementById('nName').value;
+            const c = document.getElementById('nCat').value;
+            const i = document.getElementById('nImg').value;
+            const d = document.getElementById('nDesc').value;
             
             const vArr = Array.from(document.getElementsByClassName('v-num')).map(e => e.value).filter(e => e !== "");
             const lArr = Array.from(document.getElementsByClassName('v-link')).map(e => e.value).filter(e => e !== "");
@@ -97,7 +104,7 @@
             </div>`;
             
             navigator.clipboard.writeText(code);
-            alert("Code Generated & Copied! Paste it into 'vault-data' div in your file.");
+            alert("NIMDO Code Copied successfully!");
         }
     </script>
 </body>
