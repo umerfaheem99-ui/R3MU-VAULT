@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R3MU VAULT | Premium Minecraft Archive</title>
+    <title>R3MU VAULT | Elite Minecraft Archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -14,191 +14,175 @@
         #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none; }
         #content-wrapper { position: relative; z-index: 2; }
 
+        /* Navigation */
         .nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: rgba(5,5,5,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
         .nav-logo { font-weight: 900; font-size: 1.6rem; color: #fff; letter-spacing: -1px; }
-        .nav-links { display: flex; align-items: center; }
         
         .cheat-counter { display: flex; align-items: center; color: #fff; font-weight: 700; font-size: 13px; margin-right: 15px; border: 1px solid rgba(129,71,255,0.3); padding: 4px 10px; border-radius: 20px; background: rgba(129,71,255,0.05); }
         .live-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; margin-right: 8px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(129,71,255,0.7); } 70% { box-shadow: 0 0 0 8px rgba(129,71,255,0); } 100% { box-shadow: 0 0 0 0 rgba(129,71,255,0); } }
 
-        .hero { padding: 60px 20px 20px; text-align: center; }
-        .hero-title { font-size: 3rem; font-weight: 900; margin: 0; text-transform: uppercase; }
-        .hero-sub { color: #888; font-size: 1rem; margin: 10px 0 30px; font-weight: 600; }
-
-        .search-bar { width: 90%; max-width: 600px; padding: 15px 20px; background: rgba(15,15,15,0.9); border: 1px solid var(--border); border-radius: 12px; color: white; font-size: 0.9rem; outline: none; margin-bottom: 40px; display: block; margin-left: auto; margin-right: auto; transition: 0.3s ease; }
-        .search-bar:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(129, 71, 255, 0.2); transform: scale(1.01); }
-
-        .tabs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-        .tab { padding: 10px 18px; background: #111; border-radius: 10px; font-weight: 800; color: #555; cursor: pointer; border: 1px solid var(--border); transition: 0.3s; font-size: 0.85rem; }
-        .tab:hover { background: #1a1a1a; color: #fff; transform: translateY(-3px); }
-        .tab.active { background: var(--accent); color: white; border-color: var(--accent); }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 15px; max-width: 1400px; margin: 0 auto; padding: 0 20px 80px; }
-        .card { background: rgba(13,13,13,0.8); border-radius: 15px; border: 1px solid var(--border); padding: 15px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
-        .card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        /* Grid System - 5 Posts */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 15px; max-width: 1400px; margin: 40px auto; padding: 0 20px 80px; }
+        .card { background: rgba(13,13,13,0.8); border-radius: 15px; border: 1px solid var(--border); padding: 15px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(129,71,255,0.2); }
         .card img { width: 100%; border-radius: 10px; height: 130px; object-fit: cover; margin-bottom: 12px; }
-        .card h3 { font-size: 1rem; margin: 10px 0 5px; }
-        .card p { font-size: 0.8rem; color: #777; margin: 0; }
+        .card h3 { font-size: 1rem; margin: 10px 0 5px; color: #fff; }
 
-        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 1000; justify-content: center; align-items: center; padding: 15px; backdrop-filter: blur(8px); }
-        .m-content { background: #0a0a0a; padding: 25px; border-radius: 20px; max-width: 500px; width: 100%; border: 1px solid #222; text-align: center; }
-        .m-img { width: 100%; max-height: 250px; object-fit: contain; border-radius: 12px; margin-bottom: 20px; background: #000; }
+        /* Professional Modal */
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(10px); }
+        .m-content { background: #0a0a0a; padding: 30px; border-radius: 24px; max-width: 800px; width: 100%; border: 1px solid #222; max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
         
-        #zoomOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 2000; justify-content: center; align-items: center; }
-        #zoomImg { max-width: 90%; max-height: 90%; border-radius: 10px; }
+        .m-left img { width: 100%; border-radius: 15px; border: 1px solid #333; transition: transform 0.3s; }
+        .zoom-controls { display: flex; gap: 10px; margin-top: 10px; justify-content: center; }
+        .zoom-btn { background: #222; border: 1px solid #444; color: white; padding: 5px 15px; border-radius: 5px; cursor: pointer; }
 
-        .dl-btn { display: flex; justify-content: space-between; padding: 14px 18px; background: #151515; color: #fff; text-decoration: none; border-radius: 10px; font-weight: 700; margin-top: 10px; border: 1px solid #222; font-size: 0.9rem; transition: 0.3s; }
-        .dl-btn:hover { background: var(--accent); }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
+        .info-box { background: #111; padding: 12px; border-radius: 10px; border: 1px solid #1a1a1a; text-align: left; }
+        .info-label { font-size: 10px; color: var(--accent); font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
+        .info-value { font-size: 13px; color: #fff; font-weight: 600; }
 
-        #backToTop { position: fixed; bottom: 30px; left: 30px; background: var(--accent); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 500; border: none; box-shadow: 0 5px 15px rgba(129,71,255,0.4); opacity: 0; visibility: hidden; transition: 0.4s; }
-        #backToTop.show { opacity: 1; visibility: visible; }
-        
-        #adminTrigger { position: fixed; bottom: 5px; right: 5px; width: 15px; height: 15px; opacity: 0.01; cursor: pointer; z-index: 10; }
-        #nimdoArea { display: none; padding: 40px 20px; min-height: 100vh; background: #050505; position: fixed; top: 0; left: 0; width: 100%; z-index: 5000; overflow-y: auto; }
-        .nimdo-card { background: #0d0d0d; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 20px; border: 1px solid var(--accent); }
+        .dl-btn { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: var(--accent); color: #fff; text-decoration: none; border-radius: 12px; font-weight: 800; margin-top: 10px; transition: 0.3s; }
+        .dl-btn:hover { filter: brightness(1.2); transform: scale(1.02); }
+
+        /* Admin Panel Updates */
+        #nimdoArea { display: none; padding: 40px 20px; background: #050505; position: fixed; top: 0; left: 0; width: 100%; z-index: 5000; height: 100vh; overflow-y: auto; }
+        .nimdo-card { background: #0d0d0d; max-width: 600px; margin: 0 auto; padding: 30px; border-radius: 20px; border: 1px solid var(--accent); }
         .nimdo-in { width: 100%; padding: 12px; margin-bottom: 10px; background: #000; border: 1px solid #222; color: #fff; border-radius: 8px; box-sizing: border-box; }
+        
+        @media (max-width: 768px) { .m-content { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
-    <div id="adminTrigger" onclick="checkAdmin()"></div>
-    <button id="backToTop" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up"></i></button>
+    <div id="adminTrigger" style="position:fixed; bottom:0; right:0; width:20px; height:20px; cursor:pointer;" onclick="checkAdmin()"></div>
 
     <div id="nimdoArea">
         <div class="nimdo-card">
-            <h2 style="color:var(--accent); text-align:center; margin-top:0;">NIMDO Admin</h2>
-            <select id="nCat" class="nimdo-in">
-                <option value="clients">Clients</option>
-                <option value="mods / macros">Mods / Macros</option>
-                <option value="source codes">Source Codes</option>
-                <option value="shop">Shop</option>
-            </select>
-            <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
-            <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL">
-            <textarea id="nDesc" class="nimdo-in" style="height:70px" placeholder="Description"></textarea>
-            <div id="versionList">
-                <div style="display:flex; gap:8px; margin-bottom:8px;">
-                    <input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1">
-                    <input type="text" class="nimdo-in nLink" placeholder="Link" style="flex:2">
-                </div>
+            <h2 style="color:var(--accent); text-align:center;">NIMDO ADMIN 2.0</h2>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
+                <select id="nCat" class="nimdo-in">
+                    <option value="clients">Clients</option>
+                    <option value="mods / macros">Mods / Macros</option>
+                    <option value="source codes">Source Codes</option>
+                </select>
             </div>
-            <button onclick="addVerRow()" style="padding:8px; border-radius:5px; border:none; background:#222; color:white; cursor:pointer; width:100%; font-size:12px;">+ Add Version Row</button>
-            <button onclick="generateCode()" style="background:var(--accent); width:100%; margin-top:20px; padding:12px; border:none; border-radius:10px; color:white; font-weight:900; cursor:pointer;">GENERATE CODE</button>
-            <button onclick="location.reload()" style="background:transparent; color:#555; border:none; width:100%; margin-top:10px; cursor:pointer;">Exit</button>
+            <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL">
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+                <input type="text" id="nLoader" class="nimdo-in" placeholder="Loader (Fabric/Forge)">
+                <input type="text" id="nVer" class="nimdo-in" placeholder="Versions (e.g 1.21)">
+                <input type="text" id="nKey" class="nimdo-in" placeholder="Keybind">
+            </div>
+            <textarea id="nDesc" class="nimdo-in" style="height:80px" placeholder="Short Description"></textarea>
+            <input type="text" id="nLink" class="nimdo-in" placeholder="Download Link">
+            <button onclick="generateCode()" style="background:var(--accent); width:100%; padding:15px; border:none; border-radius:10px; color:white; font-weight:900; cursor:pointer; margin-top:10px;">COPY UPDATED CODE</button>
+            <button onclick="location.reload()" style="background:transparent; color:#555; border:none; width:100%; margin-top:15px; cursor:pointer;">Exit Admin</button>
         </div>
     </div>
 
     <div id="content-wrapper">
         <nav class="nav">
             <div class="nav-logo">R3MU VAULT</div>
-            <div class="nav-links">
-                <div class="cheat-counter">
-                    <div class="live-dot"></div>
-                    <span>LIVE | </span><span id="cheatCount">0</span><span> CHEATS</span>
-                </div>
-                <a href="https://www.youtube.com/@r3mu2" target="_blank" style="color:var(--yt); margin-right:15px;"><i class="fab fa-youtube"></i></a>
-                <a href="https://discord.com/invite/r3musblackmarket" target="_blank" style="color:var(--dc);"><i class="fab fa-discord"></i></a>
+            <div class="cheat-counter">
+                <div class="live-dot"></div>
+                <span>LIVE | </span><span id="cheatCount">0</span><span> ASSETS</span>
             </div>
         </nav>
 
-        <div class="hero">
-            <h1 class="hero-title">PREMIUM VAULT</h1>
-            <p class="hero-sub">The ultimate archive. Crafted for eliteness.</p>
-            <input type="text" id="searchBar" class="search-bar" placeholder="Search..." onkeyup="search()">
-        </div>
-
-        <div class="tabs">
-            <div class="tab active" onclick="filter('all', this)">ALL</div>
-            <div class="tab" onclick="filter('clients', this)">CLIENTS</div>
-            <div class="tab" onclick="filter('mods / macros', this)">MODS / MACROS</div>
-            <div class="tab" onclick="filter('source codes', this)">SOURCE CODES</div>
-            <div class="tab" onclick="filter('shop', this)" style="color: gold;">💰 SHOP</div>
-        </div>
-
         <div class="grid" id="mainGrid">
-            <div class="card" data-cat="clients" onclick="openItem('Cw Hack Client','https://i.postimg.cc/dtJfGxjM/2.png','1.17x|1.18x','https://shrinkme.click/9Kz0O |https://shrinkme.click/md3Y','clients','Q3cgSGFjayBDbGllbnQKQmVzdCBDUFZQIEhhY2sgQ2xpZW50CktleSBSaWdodCBTaGlmdAo=')">
+            <div class="card" data-cat="clients" onclick="openItem('Cw Hack Client','https://i.postimg.cc/dtJfGxjM/2.png','Fabric','1.17x - 1.18x','Right Shift','Q3cgSGFjayBDbGllbnQKQmVzdCBDUFZQIEhhY2sgQ2xpZW50','https://shrinkme.click/9Kz0O')">
                 <img src="https://i.postimg.cc/dtJfGxjM/2.png">
                 <div style="color:var(--accent); font-weight:900; font-size:10px;">CLIENTS</div>
                 <h3>Cw Hack Client</h3>
-                <p>Best CPVP Client...</p>
             </div>
 
-            <div class="card" data-cat="clients" onclick="openItem('Gardenia Client','https://i.postimg.cc/4xWnXqBg/image.png','1.21','https://shrinkme.click/bUCrhByx','clients','R2FyZGVuaWEgSGFjayBDbGllbnQKQmVzdCBIaWdoIFBpbmcgQ2xpZW50CmtleSA6IFJpZ2h0IFNoaWZ0')">
+            <div class="card" data-cat="clients" onclick="openItem('Gardenia Client','https://i.postimg.cc/4xWnXqBg/image.png','Fabric','1.21.x','Right Shift','R2FyZGVuaWEgSGFjayBDbGllbnQKQmVzdCBIaWdoIFBpbmcgQ2xpZW50','https://shrinkme.click/bUCrhByx')">
                 <img src="https://i.postimg.cc/4xWnXqBg/image.png">
                 <div style="color:var(--accent); font-weight:900; font-size:10px;">CLIENTS</div>
                 <h3>Gardenia Client</h3>
-                <p>Best High Ping Client...</p>
             </div>
         </div>
     </div>
 
-    <div id="modal" onclick="closeM(event)">
+    <div id="modal" onclick="closeM()">
         <div class="m-content" onclick="event.stopPropagation()">
-            <img id="mImg" class="m-img" src="" onclick="zoomImg(this.src)" style="cursor:zoom-in">
-            <h2 id="mTitle" style="font-size:22px; margin:0; font-weight:900;"></h2>
-            <p id="mDesc" style="color:#888; margin:15px 0; font-size:14px; font-weight:600;"></p>
-            <div id="mLinks"></div>
+            <div class="m-left">
+                <img id="mImg" src="">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" onclick="zoom(0.1)">+</button>
+                    <button class="zoom-btn" onclick="zoom(-0.1)">-</button>
+                </div>
+            </div>
+            <div class="m-right">
+                <h2 id="mTitle" style="margin:0; font-size:28px; font-weight:900;"></h2>
+                <p id="mDesc" style="color:#888; font-size:14px; margin:15px 0;"></p>
+                
+                <div class="info-grid">
+                    <div class="info-box"><div class="info-label">Loader</div><div id="mLoader" class="info-value"></div></div>
+                    <div class="info-box"><div class="info-label">Versions</div><div id="mVer" class="info-value"></div></div>
+                    <div class="info-box"><div class="info-label">Keybind</div><div id="mKey" class="info-value"></div></div>
+                    <div class="info-box"><div class="info-label">Status</div><div class="info-value" style="color:#00ff88;">Undetected</div></div>
+                </div>
+
+                <a id="mLink" href="#" class="dl-btn" target="_blank">
+                    <span>ACCESS DOWNLOAD</span>
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                <p style="font-size:10px; color:#444; margin-top:15px; text-align:center;">Shared from R3MU Vault Archive</p>
+            </div>
         </div>
     </div>
 
-    <div id="zoomOverlay" onclick="this.style.display='none'">
-        <img id="zoomImg" src="">
-    </div>
-
     <script>
-        particlesJS("particles-js", { "particles": { "number": { "value": 60 }, "size": { "value": 2 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "distance": 150, "color": "#8147ff", "opacity": 0.3 }, "move": { "speed": 1.5 } } });
+        particlesJS("particles-js", { "particles": { "number": { "value": 50 }, "size": { "value": 2 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "color": "#8147ff", "opacity": 0.2 }, "move": { "speed": 1 } } });
 
-        window.onscroll = function() {
-            let btt = document.getElementById('backToTop');
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) { btt.classList.add('show'); } 
-            else { btt.classList.remove('show'); }
-        };
+        let currentZoom = 1;
+        function zoom(val) { currentZoom += val; document.getElementById('mImg').style.transform = `scale(${currentZoom})`; }
 
-        window.onload = function() { updateCount(); };
-
-        function updateCount() {
-            document.getElementById('cheatCount').innerText = document.querySelectorAll('#mainGrid .card').length;
+        function openItem(name, img, loader, versions, key, descB64, link) {
+            currentZoom = 1;
+            document.getElementById('mImg').style.transform = 'scale(1)';
+            document.getElementById('mTitle').innerText = name;
+            document.getElementById('mImg').src = img;
+            document.getElementById('mLoader').innerText = loader;
+            document.getElementById('mVer').innerText = versions;
+            document.getElementById('mKey').innerText = key;
+            document.getElementById('mDesc').innerText = atob(descB64);
+            document.getElementById('mLink').href = link;
+            document.getElementById('modal').style.display = 'flex';
         }
 
+        function closeM() { document.getElementById('modal').style.display = 'none'; }
+        
         function checkAdmin() {
-            if (prompt("Enter NIMDO Password:") === "pookie123") {
+            if (prompt("NIMDO Password:") === "pookie123") {
                 document.getElementById('nimdoArea').style.display = 'block';
                 document.getElementById('content-wrapper').style.display = 'none';
             }
         }
 
-        function search() {
-            let q = document.getElementById('searchBar').value.toLowerCase();
-            document.querySelectorAll('.card').forEach(c => c.style.display = c.innerText.toLowerCase().includes(q) ? "block" : "none");
-        }
-
-        function filter(cat, el) {
-            document.querySelectorAll('.card').forEach(c => c.style.display = (cat === 'all' || c.dataset.cat === cat) ? "block" : "none");
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            el.classList.add('active');
-        }
-
-        function openItem(name, img, versions, links, cat, descB64) {
-            document.getElementById('mTitle').innerText = name;
-            document.getElementById('mImg').src = img;
-            document.getElementById('mDesc').innerText = descB64 ? atob(descB64) : "";
-            let vArr = versions.split('|'), lArr = links.split('|'), h = '';
-            vArr.forEach((v, i) => { if(v.trim()) h += `<a href="${lArr[i].trim()}" class="dl-btn" target="_blank"><span>${v.trim()} | Download</span> <i class="fas fa-chevron-right"></i></a>`; });
-            document.getElementById('mLinks').innerHTML = h;
-            document.getElementById('modal').style.display = 'flex';
-        }
-
-        function closeM() { document.getElementById('modal').style.display = 'none'; }
-        function zoomImg(src) { document.getElementById('zoomImg').src = src; document.getElementById('zoomOverlay').style.display = 'flex'; }
-        function addVerRow() { document.getElementById('versionList').insertAdjacentHTML('beforeend', '<div style="display:flex; gap:8px; margin-bottom:8px;"><input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1"><input type="text" class="nimdo-in nLink" placeholder="Link" style="flex:2"></div>'); }
-
         function generateCode() {
-            let cat = document.getElementById('nCat').value, name = document.getElementById('nName').value, img = document.getElementById('nImg').value, descRaw = document.getElementById('nDesc').value, desc = btoa(descRaw);
-            let vers = Array.from(document.querySelectorAll('.nVer')).map(i => i.value).join('|'), links = Array.from(document.querySelectorAll('.nLink')).map(i => i.value).join('|');
-            let code = `<div class="card" data-cat="${cat}" onclick="openItem('${name}','${img}','${vers}','${links}','${cat}','${desc}')"><img src="${img}"><div style="color:var(--accent); font-weight:900; font-size:10px;">${cat.toUpperCase()}</div><h3>${name}</h3><p>${descRaw.substring(0,25)}...</p></div>`;
-            navigator.clipboard.writeText(code); alert("Copied! Paste this inside <div id='mainGrid'> in your code.");
+            const name = document.getElementById('nName').value;
+            const cat = document.getElementById('nCat').value;
+            const img = document.getElementById('nImg').value;
+            const loader = document.getElementById('nLoader').value;
+            const ver = document.getElementById('nVer').value;
+            const key = document.getElementById('nKey').value;
+            const desc = btoa(document.getElementById('nDesc').value);
+            const link = document.getElementById('nLink').value;
+
+            const code = `<div class="card" data-cat="${cat}" onclick="openItem('${name}','${img}','${loader}','${ver}','${key}','${desc}','${link}')">
+                <img src="${img}">
+                <div style="color:var(--accent); font-weight:900; font-size:10px;">${cat.toUpperCase()}</div>
+                <h3>${name}</h3>
+            </div>`;
+            
+            navigator.clipboard.writeText(code);
+            alert("Professional Code Copied!");
         }
+
+        window.onload = () => { document.getElementById('cheatCount').innerText = document.querySelectorAll('.card').length; };
     </script>
 </body>
 </html>
