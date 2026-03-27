@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R3MU VAULT | Premium Minecraft Archive</title>
+    <title>R3MU PREMIUM VAULT | Premium Minecraft Archive</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root { --bg: #050505; --accent: #8147ff; --card-bg: #0d0d0d; --text: #eee; --border: #1a1a1a; --yt: #FF0000; --dc: #5865F2; }
-        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
         
         #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; pointer-events: none; }
         #content-wrapper { position: relative; z-index: 2; }
@@ -34,7 +34,6 @@
         .tab:hover { background: #1a1a1a; color: #fff; transform: translateY(-3px); }
         .tab.active { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* 5 POSTS PER ROW FIX */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 15px; max-width: 1400px; margin: 0 auto; padding: 0 20px 80px; }
         .card { background: rgba(13,13,13,0.8); border-radius: 15px; border: 1px solid var(--border); padding: 15px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; }
         .card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
@@ -42,7 +41,6 @@
         .card h3 { font-size: 1rem; margin: 10px 0 5px; }
         .card p { font-size: 0.8rem; color: #777; margin: 0; }
 
-        /* MODAL IMAGE FIX */
         #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 1000; justify-content: center; align-items: center; padding: 15px; backdrop-filter: blur(8px); }
         .m-content { background: #0a0a0a; padding: 25px; border-radius: 20px; max-width: 500px; width: 100%; border: 1px solid #222; text-align: center; }
         .m-img { width: 100%; max-height: 250px; object-fit: contain; border-radius: 12px; margin-bottom: 20px; background: #000; }
@@ -53,6 +51,11 @@
         .dl-btn { display: flex; justify-content: space-between; padding: 14px 18px; background: #151515; color: #fff; text-decoration: none; border-radius: 10px; font-weight: 700; margin-top: 10px; border: 1px solid #222; font-size: 0.9rem; transition: 0.3s; }
         .dl-btn:hover { background: var(--accent); }
 
+        /* BACK TO TOP BUTTON */
+        #backToTop { position: fixed; bottom: 30px; left: 30px; background: var(--accent); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 500; border: none; box-shadow: 0 5px 15px rgba(129,71,255,0.4); opacity: 0; visibility: hidden; transition: 0.4s; }
+        #backToTop.show { opacity: 1; visibility: visible; }
+        #backToTop:hover { transform: translateY(-5px); }
+
         #adminTrigger { position: fixed; bottom: 5px; right: 5px; width: 15px; height: 15px; opacity: 0.01; cursor: pointer; z-index: 10; }
         #nimdoArea { display: none; padding: 40px 20px; min-height: 100vh; background: #050505; position: fixed; top: 0; left: 0; width: 100%; z-index: 5000; overflow-y: auto; }
         .nimdo-card { background: #0d0d0d; max-width: 500px; margin: 0 auto; padding: 30px; border-radius: 20px; border: 1px solid var(--accent); }
@@ -62,6 +65,7 @@
 <body>
     <div id="particles-js"></div>
     <div id="adminTrigger" onclick="checkAdmin()"></div>
+    <button id="backToTop" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up"></i></button>
 
     <div id="nimdoArea">
         <div class="nimdo-card">
@@ -70,7 +74,7 @@
                 <option value="clients">Clients</option>
                 <option value="mods / macros">Mods / Macros</option>
                 <option value="source codes">Source Codes</option>
-                <option value="store">Store</option>
+                <option value="shop">Shop</option>
             </select>
             <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
             <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL">
@@ -109,26 +113,13 @@
         <div class="tabs">
             <div class="tab active" onclick="filter('all', this)">ALL</div>
             <div class="tab" onclick="filter('clients', this)">CLIENTS</div>
-            <div class="tab" onclick="filter('mods', this)">MODS</div>
-            <div class="tab" onclick="filter('source', this)">SOURCE</div>
+            <div class="tab" onclick="filter('mods / macros', this)">MODS / MACROS</div>
+            <div class="tab" onclick="filter('source codes', this)">SOURCE CODES</div>
             <div class="tab" onclick="filter('shop', this)" style="color: gold;">💰 SHOP</div>
         </div>
 
         <div class="grid" id="mainGrid">
-            <div class="card" data-cat="clients" onclick="openItem('Cw Hack Client','https://i.postimg.cc/dtJfGxjM/2.png','1.17x|1.18x','https://shrinkme.click/9Kz0O |https://shrinkme.click/md3Y','clients','Q3cgSGFjayBDbGllbnQKQmVzdCBDUFZQIEhhY2sgQ2xpZW50CktleSBSaWdodCBTaGlmdAo=')">
-                <img src="https://i.postimg.cc/dtJfGxjM/2.png">
-                <div style="color:var(--accent); font-weight:900; font-size:10px;">CLIENTS</div>
-                <h3>Cw Hack Client</h3>
-                <p>Best CPVP Client...</p>
             </div>
-
-            <div class="card" data-cat="clients" onclick="openItem('Gardenia Client','https://i.postimg.cc/4xWnXqBg/image.png','1.21','https://shrinkme.click/bUCrhByx','clients','R2FyZGVuaWEgSGFjayBDbGllbnQKQmVzdCBIaWdoIFBpbmcgQ2xpZW50CmtleSA6IFJpZ2h0IFNoaWZ0')">
-                <img src="https://i.postimg.cc/4xWnXqBg/image.png">
-                <div style="color:var(--accent); font-weight:900; font-size:10px;">CLIENTS</div>
-                <h3>Gardenia Client</h3>
-                <p>Best High Ping Client...</p>
-            </div>
-        </div>
     </div>
 
     <div id="modal" onclick="closeM(event)">
@@ -146,6 +137,16 @@
 
     <script>
         particlesJS("particles-js", { "particles": { "number": { "value": 60 }, "size": { "value": 2 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "distance": 150, "color": "#8147ff", "opacity": 0.3 }, "move": { "speed": 1.5 } } });
+
+        // Back to Top button logic
+        window.onscroll = function() {
+            let btt = document.getElementById('backToTop');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btt.classList.add('show');
+            } else {
+                btt.classList.remove('show');
+            }
+        };
 
         window.onload = function() {
             document.getElementById('cheatCount').innerText = document.querySelectorAll('#mainGrid .card').length;
