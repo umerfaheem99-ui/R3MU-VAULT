@@ -33,30 +33,31 @@
         .card { background: rgba(13,13,13,0.8); border-radius: 20px; border: 1px solid var(--border); padding: 22px; transition: 0.4s; cursor: pointer; }
         .card img { width: 100%; border-radius: 14px; height: 180px; object-fit: cover; margin-bottom: 18px; }
 
-        /* Modal Styles */
         #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
         .m-content { background: #0a0a0a; padding: 40px; border-radius: 25px; max-width: 550px; width: 100%; max-height: 85vh; overflow-y: auto; border: 1px solid #222; text-align: center; }
         .m-img { width: 100%; border-radius: 15px; margin-bottom: 20px; height: auto; max-height: 300px; object-fit: contain; cursor: zoom-in; background: #000; }
         
-        /* Zoom Overlay */
         #zoomOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 2000; justify-content: center; align-items: center; cursor: zoom-out; }
-        #zoomImg { max-width: 95%; max-height: 95%; border-radius: 10px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        #zoomImg { max-width: 95%; max-height: 95%; border-radius: 10px; }
 
         .dl-btn { display: flex; justify-content: space-between; padding: 16px 20px; background: #151515; color: #fff; text-decoration: none; border-radius: 12px; font-weight: 800; margin-top: 12px; border: 1px solid #222; transition: 0.3s; }
         .dl-btn:hover { background: var(--accent); }
 
-        /* Admin Area Fix */
-        #nimdoArea { display: none; padding: 50px 20px; min-height: 100vh; background: #050505; position: relative; z-index: 3000; }
-        .nimdo-card { background: #0d0d0d; max-width: 600px; margin: 0 auto; padding: 40px; border-radius: 30px; border: 1px solid var(--accent); }
+        /* Admin Area Styling */
+        #nimdoArea { display: none; padding: 50px 20px; min-height: 100vh; background: #050505; position: fixed; top: 0; left: 0; width: 100%; z-index: 5000; overflow-y: auto; }
+        .nimdo-card { background: #0d0d0d; max-width: 600px; margin: 0 auto; padding: 40px; border-radius: 30px; border: 1px solid var(--accent); box-shadow: 0 0 50px rgba(129,71,255,0.1); }
         .nimdo-in { width: 100%; padding: 14px; margin-bottom: 12px; background: #000; border: 1px solid #222; color: #fff; border-radius: 10px; box-sizing: border-box; }
+        
+        #adminTrigger { position: fixed; bottom: 10px; right: 10px; width: 20px; height: 20px; opacity: 0.05; cursor: pointer; z-index: 10; }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
+    <div id="adminTrigger" onclick="checkAdmin('manual')"></div>
 
     <div id="nimdoArea">
         <div class="nimdo-card">
-            <h2 style="color:var(--accent); text-align:center;">NIMDO Console</h2>
+            <h2 style="color:var(--accent); text-align:center;">NIMDO Admin Console</h2>
             <select id="nCat" class="nimdo-in">
                 <option value="clients">Clients</option>
                 <option value="mods">Mods / Macros</option>
@@ -72,9 +73,9 @@
                     <input type="text" class="nimdo-in nLink" placeholder="Link" style="flex:2">
                 </div>
             </div>
-            <button onclick="addVerRow()" style="padding:10px; border-radius:5px; border:none; background:#222; color:white; cursor:pointer; width:100%;">+ Add Version</button>
-            <button onclick="generateCode()" style="background:var(--accent); width:100%; margin-top:25px; padding:15px; border:none; border-radius:12px; color:white; font-weight:900; cursor:pointer;">GENERATE CODE & COPY</button>
-            <p style="text-align:center; font-size:12px; color:#555; margin-top:15px;">Paste the generated code inside #mainGrid in your HTML.</p>
+            <button onclick="addVerRow()" style="padding:10px; border-radius:5px; border:none; background:#222; color:white; cursor:pointer; width:100%;">+ Add Version Row</button>
+            <button onclick="generateCode()" style="background:var(--accent); width:100%; margin-top:25px; padding:15px; border:none; border-radius:12px; color:white; font-weight:900; cursor:pointer;">GENERATE & COPY CODE</button>
+            <button onclick="location.reload()" style="background:transparent; color:#555; border:none; width:100%; margin-top:10px; cursor:pointer;">Exit Admin Mode</button>
         </div>
     </div>
 
@@ -102,8 +103,8 @@
         </div>
 
         <div class="grid" id="mainGrid">
-            <div class="card" data-cat="clients" onclick="openItem('Gardenia Client','https://media.discordapp.net/attachments/1466198923277369464/1466199335929905324/image.png?ex=69c65cca&is=69c50b4a&hm=025377816c926eb151c07181936244c222199817823145a81db58fed5151d0c3&=&format=webp&quality=lossless&width=1463&height=822','1.21','https://shrinkme.click/bUCrhByx','clients','S2V5YmluZCA6IFJpZ2h0IFNoaWZ0')">
-                <img src="https://media.discordapp.net/attachments/1466198923277369464/1466199335929905324/image.png?ex=69c65cca&is=69c50b4a&hm=025377816c926eb151c07181936244c222199817823145a81db58fed5151d0c3&=&format=webp&quality=lossless&width=1463&height=822">
+            <div class="card" data-cat="clients" onclick="openItem('Gardenia Client','https://media.discordapp.net/attachments/1466198923277369464/1466199335929905324/image.png','1.21','https://shrinkme.click/bUCrhByx','clients','S2V5YmluZCA6IFJpZ2h0IFNoaWZ0')">
+                <img src="https://media.discordapp.net/attachments/1466198923277369464/1466199335929905324/image.png">
                 <div style="color:var(--accent); font-weight:900; font-size:11px;">CLIENTS</div>
                 <h3>Gardenia Client</h3>
                 <p>Keybind : Right Shift...</p>
@@ -113,7 +114,7 @@
 
     <div id="modal" onclick="closeM(event)">
         <div class="m-content" onclick="event.stopPropagation()">
-            <img id="mImg" class="m-img" src="" onclick="zoomImg(this.src)" title="Click to zoom">
+            <img id="mImg" class="m-img" src="" onclick="zoomImg(this.src)">
             <h2 id="mTitle" style="font-size:28px; margin:0; font-weight:900;"></h2>
             <p id="mDesc" style="color:#888; margin:20px 0; font-weight:600;"></p>
             <div id="mLinks"></div>
@@ -127,20 +128,21 @@
     <script>
         particlesJS("particles-js", { "particles": { "number": { "value": 80 }, "size": { "value": 3 }, "color": { "value": "#8147ff" }, "line_linked": { "enable": true, "distance": 150, "color": "#8147ff", "opacity": 0.35 }, "move": { "speed": 2 } } });
 
-        // Admin Auth Fix
-        window.onload = function() {
-            if (window.location.search.includes('nimda')) {
-                let pass = prompt("NIMDO Password:");
-                if (pass === "pookie123") {
-                    document.getElementById('nimdoArea').style.display = 'block';
-                    document.getElementById('content-wrapper').style.display = 'none';
-                    document.getElementById('particles-js').style.opacity = '0.3';
-                } else {
-                    alert("Wrong Password!");
-                    window.location.href = window.location.pathname;
-                }
+        // DIRECT ADMIN LOGIC
+        function checkAdmin(mode) {
+            let pass = prompt("Enter NIMDO Password:");
+            if (pass === "pookie123") {
+                document.getElementById('nimdoArea').style.display = 'block';
+                document.getElementById('content-wrapper').style.display = 'none';
+            } else if (pass !== null) {
+                alert("Incorrect Password!");
             }
-        };
+        }
+
+        // Auto-check URL on load
+        if (window.location.search.includes('nimda')) {
+            checkAdmin();
+        }
 
         function search() {
             let q = document.getElementById('searchBar').value.toLowerCase();
@@ -165,19 +167,14 @@
         }
 
         function closeM(e) { if(!e || e.target.id === 'modal') document.getElementById('modal').style.display = 'none'; }
-        
-        function zoomImg(src) {
-            document.getElementById('zoomImg').src = src;
-            document.getElementById('zoomOverlay').style.display = 'flex';
-        }
-
+        function zoomImg(src) { document.getElementById('zoomImg').src = src; document.getElementById('zoomOverlay').style.display = 'flex'; }
         function addVerRow() { document.getElementById('versionList').insertAdjacentHTML('beforeend', '<div style="display:flex; gap:10px; margin-bottom:10px;"><input type="text" class="nimdo-in nVer" placeholder="Version" style="flex:1"><input type="text" class="nimdo-in nLink" placeholder="Link" style="flex:2"></div>'); }
 
         function generateCode() {
             let cat = document.getElementById('nCat').value, name = document.getElementById('nName').value, img = document.getElementById('nImg').value, desc = btoa(document.getElementById('nDesc').value);
             let vers = Array.from(document.querySelectorAll('.nVer')).map(i => i.value).join('|'), links = Array.from(document.querySelectorAll('.nLink')).map(i => i.value).join('|');
             let code = `<div class="card" data-cat="${cat}" onclick="openItem('${name}','${img}','${vers}','${links}','${cat}','${desc}')"><img src="${img}"><div style="color:var(--accent); font-weight:900; font-size:11px;">${cat.toUpperCase()}</div><h3>${name}</h3><p>${document.getElementById('nDesc').value.substring(0,30)}...</p></div>`;
-            navigator.clipboard.writeText(code); alert("Code Copied to Clipboard!");
+            navigator.clipboard.writeText(code); alert("Code Generated & Copied!");
         }
     </script>
 </body>
