@@ -4,24 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R3MU VAULT | Premium Minecraft Archive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { --bg: #050505; --accent: #8147ff; --card-bg: #0d0d0d; --text: #eee; --border: #1a1a1a; --yt: #FF0000; --dc: #5865F2; }
         body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; letter-spacing: -0.2px; }
         
-        /* Navbar */
+        /* Navbar with normal smooth bold logo */
         .nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 8%; background: rgba(5,5,5,0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
-        .nav-logo { font-weight: 900; font-size: 1.8rem; letter-spacing: -1.5px; text-transform: uppercase; color: #fff; }
+        .nav-logo { font-weight: 700; font-size: 1.7rem; letter-spacing: -1.2px; text-transform: uppercase; color: #fff; }
         .nav-links { display: flex; gap: 20px; }
         .nav-links a { font-size: 1.4rem; transition: 0.3s; }
         .fa-youtube { color: var(--yt); }
         .fa-discord { color: var(--dc); }
-        .nav-links a:hover { transform: scale(1.2); filter: brightness(1.2); }
+        .nav-links a:hover { transform: scale(1.15); filter: brightness(1.2); }
 
-        /* Search & Hero */
-        .hero { padding: 60px 20px 20px; text-align: center; }
-        .search-container { max-width: 700px; margin: 30px auto; position: relative; }
+        /* ADVANCED: Full Hero Section with bold Title */
+        .hero { padding: 90px 20px 20px; text-align: center; }
+        .hero-title { font-size: 4.8rem; font-weight: 900; margin: 0; letter-spacing: -3px; text-transform: uppercase; line-height: 1; }
+        .hero-accent { color: var(--accent); }
+        .hero-sub { color: #888; font-size: 1.2rem; margin: 15px 0 50px; font-weight: 600;}
+
+        /* Search bar (Fixed and styled like Cyde.xyz) */
+        .search-container { max-width: 700px; margin: 0 auto 50px; position: relative; }
         .search-bar { width: 100%; padding: 20px 30px; background: #0f0f0f; border: 1px solid var(--border); border-radius: 18px; color: white; font-size: 1.1rem; outline: none; transition: 0.3s; box-sizing: border-box; font-weight: 600; }
         .search-bar:focus { border-color: var(--accent); box-shadow: 0 0 30px rgba(129,71,255,0.15); }
 
@@ -67,8 +72,11 @@
 
     <div id="vaultContent">
         <div class="hero">
+            <h1 class="hero-title">ʀ3ᴍᴜ PREMIUM VAULT</h1>
+            <p class="hero-sub">The ultimate archive. Crafted for eliteness.</p>
+            
             <div class="search-container">
-                <input type="text" id="searchBar" class="search-bar" placeholder="Search vault items..." onkeyup="search()">
+                <input type="text" id="searchBar" class="search-bar" placeholder="Search for clients, mods, or sources..." onkeyup="search()">
             </div>
         </div>
 
@@ -87,7 +95,7 @@
                 <img src="https://media.discordapp.net/attachments/1485819883538354206/1485932090649219072/image.png">
                 <div class="card-cat">Shop</div>
                 <h3>Custom Client Build</h3>
-                <p>Per Module: $1 | Mod Analyzer: $4...</p>
+                <p>Per Module: $1 | Mod Analyzer Bypass: $4...</p>
             </div>
         </div>
     </div>
@@ -115,16 +123,14 @@
             <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
             <input type="text" id="nImg" class="nimdo-in" placeholder="Image URL">
             <textarea id="nDesc" class="nimdo-in" placeholder="Description" style="height:100px;"></textarea>
-            
             <div id="vList">
                 <div class="v-row">
-                    <input type="text" class="nimdo-in v-num" placeholder="Version (e.g. 1.8.9)" style="margin:0;">
-                    <input type="text" class="nimdo-in v-link" placeholder="Download Link" style="margin:0;">
+                    <input type="text" class="nimdo-in v-num" placeholder="Version (e.g. ALL)" style="margin:0;">
+                    <input type="text" class="nimdo-in v-link" placeholder="Order Link" style="margin:0;">
                     <button class="btn-v" onclick="addV()">+</button>
                 </div>
             </div>
-
-            <button onclick="genItem()" style="width:100%; padding:20px; background:var(--accent); color:white; border:none; border-radius:15px; font-weight:900; cursor:pointer; margin-top:10px; font-size:1rem;">GENERATE CARD CODE</button>
+            <button onclick="genItem()" style="width:100%; padding:20px; background:var(--accent); color:white; border:none; border-radius:15px; font-weight:900; cursor:pointer; margin-top:10px; font-size:1rem;">GENERATE & COPY CODE</button>
         </div>
     </div>
 
@@ -177,10 +183,9 @@
             const n = document.getElementById('nName').value, c = document.getElementById('nCat').value, i = document.getElementById('nImg').value, d = document.getElementById('nDesc').value;
             const v = Array.from(document.querySelectorAll('.v-num')).map(e => e.value).join('|');
             const l = Array.from(document.querySelectorAll('.v-link')).map(e => e.value).join('|');
-            const code = `<div class="card" data-cat="${c}" onclick="openItem('${n}','${i}','${v}','${l}','${c}','${btoa(d)}')">
-<img src="${i}"><div class="card-cat">${c}</div><h3>${n}</h3><p>${d.substring(0,50)}...</p></div>`;
+            const code = `<div class="card" data-cat="${c}" onclick="openItem('${n}','${i}','${v}','${l}','${c}','${btoa(d)}')"><img src="${i}"><div class="card-cat">${c}</div><h3>${n}</h3><p>${d.substring(0,50)}...</p></div>`;
             navigator.clipboard.writeText(code);
-            alert("Card Code Copied! Paste it in the grid.");
+            alert("Card Code Copied! Now paste it into the main grid.");
         }
     </script>
 </body>
