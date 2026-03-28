@@ -1,6 +1,6 @@
 // api/auth.js — Place in "api" folder in your GitHub repo root
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   const { code, guild } = req.query;
@@ -48,7 +48,6 @@ export default async function handler(req, res) {
         userId: user.id,
         username: user.username,
         roles: [],
-        roleIds: [],
         reason: 'not_in_guild'
       });
     }
@@ -68,7 +67,6 @@ export default async function handler(req, res) {
 
       if (guildRolesRes.ok) {
         const guildRoles = await guildRolesRes.json();
-        // DEBUG: all guild roles with names — check this in browser
         debugInfo.allGuildRoles = guildRoles.map(r => ({ id: r.id, name: r.name }));
 
         roleNames = guildRoles
@@ -90,4 +88,4 @@ export default async function handler(req, res) {
     console.error('Auth error:', err);
     return res.status(500).json({ error: err.message });
   }
-}
+};
