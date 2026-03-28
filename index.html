@@ -751,9 +751,6 @@ body {
   box-shadow: 0 0 12px rgba(168,85,247,0.25);
 }
 </style>
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
 </head>
 <body>
 <div id="particles-js"></div>
@@ -1709,26 +1706,68 @@ function closeBoosterModal(e) {
   }
 }
 
-// ── DISCORD OAUTH2 PLACEHOLDER ────────────────
-// Replace DISCORD_CLIENT_ID and REDIRECT_URI with your real values when ready.
+// ── DISCORD OAUTH2 ────────────────────────────
 const DISCORD_CLIENT_ID = '1487495610239287478';
-const DISCORD_REDIRECT_URI = encodeURIComponent(window.location.origin + window.location.pathname);
-const DISCORD_SCOPE = 'identify guilds.members.read';
+const DISCORD_GUILD_ID  = 'YOUR_GUILD_ID_HERE'; // Right-click your Discord server → Copy Server ID
+const DISCORD_REDIRECT  = window.location.origin + window.location.pathname;
+const DISCORD_SCOPE     = 'identify guilds.members.read';
 
 function initiateDiscordOAuth() {
-  // Constructs the Discord OAuth2 authorization URL
-  const oauthURL = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${DISCORD_REDIRECT_URI}&response_type=code&scope=${encodeURIComponent(DISCORD_SCOPE)}`;
-  // TODO: After redirect, exchange the `code` param for an access token via your backend,
-  // then call the Discord API to check if the user has the "Server Booster" role in your guild.
-  // If verified, set a session flag (e.g. localStorage.setItem('isBooster','1')) and unlock the tab.
-  window.location.href = oauthURL;
+  sessionStorage.setItem('preOAuthCat', currentCat);
+  const url = 'https://discord.com/api/oauth2/authorize'
+    + '?client_id=' + DISCORD_CLIENT_ID
+    + '&redirect_uri=' + encodeURIComponent(DISCORD_REDIRECT)
+    + '&response_type=code'
+    + '&scope=' + encodeURIComponent(DISCORD_SCOPE);
+  window.location.href = url;
 }
 
-function checkBoosterStatus() {
-  // Placeholder: call your backend here to verify Booster role via Discord API.
-  // Example: GET /api/discord/verify-booster?token=ACCESS_TOKEN
-  // Returns: { isBooster: true/false }
-  return false; // Default: not verified
+async function handleOAuthCallback(code) {
+  // Show loading in modal
+  document.getElementById('boosterModal').style.display = 'flex';
+  document.querySelector('.booster-modal-card h3').textContent = 'Verifying...';
+  document.querySelector('.booster-modal-card p').textContent = 'Checking your booster status...';
+  document.querySelector('.discord-btn').style.display = 'none';
+
+  try {
+    const res = await fetch('/api/auth?code=' + encodeURIComponent(code) + '&guild=' + DISCORD_GUILD_ID);
+    const data = await res.json();
+    history.replaceState(null, '', location.pathname);
+
+    if (data.isBooster) {
+      sessionStorage.setItem('isBooster', '1');
+      document.getElementById('boosterModal').style.display = 'none';
+      unlockBoosterTab();
+      // Show green toast
+      const toast = document.createElement('div');
+      toast.innerHTML = '<i class="fas fa-check-circle" style="color:#4ade80;margin-right:8px;"></i>Booster access unlocked!';
+      Object.assign(toast.style, {
+        position:'fixed', bottom:'24px', left:'50%', transform:'translateX(-50%)',
+        background:'#0e0e12', border:'1px solid rgba(74,222,128,0.4)',
+        color:'#4ade80', padding:'12px 24px', borderRadius:'9999px',
+        fontWeight:'700', fontSize:'0.85rem', zIndex:'9999',
+        boxShadow:'0 4px 20px rgba(74,222,128,0.2)', whiteSpace:'nowrap'
+      });
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3500);
+    } else {
+      document.querySelector('.discord-btn').style.display = 'inline-flex';
+      document.querySelector('.booster-modal-card h3').textContent = 'Not a Booster';
+      document.querySelector('.booster-modal-card p').innerHTML = "You're not a <strong style='color:#c4b5fd;'>Server Booster</strong> in R3MU's Discord.<br>Boost the server to unlock this!";
+    }
+  } catch(err) {
+    history.replaceState(null, '', location.pathname);
+    document.querySelector('.discord-btn').style.display = 'inline-flex';
+    document.querySelector('.booster-modal-card h3').textContent = 'Error';
+    document.querySelector('.booster-modal-card p').textContent = 'Something went wrong. Make sure the site is on Vercel.';
+  }
+}
+
+function unlockBoosterTab() {
+  const tab = document.querySelector('.booster-tab');
+  if (!tab) return;
+  tab.innerHTML = '💎 BOOSTER';
+  tab.onclick = function() { filterCat('booster', this); };
 }
 
 // ── BUILD VERSION LIST ────────────────────────
@@ -2025,6 +2064,21 @@ window.addEventListener('DOMContentLoaded', () => {
       history.replaceState(null, '', location.pathname);
     }
     return;
+  }
+
+  // Handle Discord OAuth callback
+  const code = params.get('code');
+  if (code) {
+    buildVerTabs();
+    renderGrid();
+    document.getElementById('cheatCount').textContent = items.length;
+    handleOAuthCallback(code);
+    return;
+  }
+
+  // Restore booster if already verified this session
+  if (sessionStorage.getItem('isBooster') === '1') {
+    unlockBoosterTab();
   }
 
   const slug = params.get('item');
