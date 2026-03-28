@@ -1,11 +1,12 @@
 {
-  "functions": {
-    "api/*.js": {
-      "runtime": "nodejs24.x"
-    }
-  },
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "src": "/api/auth",
+      "dest": "/api/auth.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }
