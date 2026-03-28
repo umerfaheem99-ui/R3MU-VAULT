@@ -751,6 +751,9 @@ body {
   box-shadow: 0 0 12px rgba(168,85,247,0.25);
 }
 </style>
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
 </head>
 <body>
 <div id="particles-js"></div>
@@ -761,7 +764,7 @@ body {
     <span class="booster-gem">💎</span>
     <h3>BOOSTERS ONLY</h3>
     <p>This category is exclusive to <strong style="color:#c4b5fd;">Discord Server Boosters</strong>.<br>Connect your Discord account to verify your Booster role and unlock access.</p>
-    <button class="discord-btn" onclick="initiateDiscordOAuth('booster')">
+    <button class="discord-btn" onclick="initiateDiscordOAuth()">
       <i class="fab fa-discord"></i> Connect Discord
     </button>
     <button class="modal-close" onclick="document.getElementById('boosterModal').style.display='none'">
@@ -781,7 +784,6 @@ body {
     <option value="mods / macros">Mods / Macros</option>
     <option value="source codes">Source Codes</option>
     <option value="shop">Shop</option>
-    <option value="booster">Booster</option>
   </select>
   <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
   <input type="text" id="nImg" class="nimdo-in" placeholder="Main Image URL">
@@ -884,11 +886,6 @@ body {
   </div>
 
   <div class="grid" id="mainGrid"></div>
-
-  <!-- Staff admin login — subtle link at bottom -->
-  <div style="text-align:center;padding:10px 0 30px;">
-    <span onclick="initiateDiscordOAuth('admin')" style="color:#2a2a3a;font-size:11px;cursor:pointer;transition:color 0.2s;user-select:none;" onmouseover="this.style.color='#5a5a72'" onmouseout="this.style.color='#2a2a3a'">Staff Login</span>
-  </div>
 </div>
 
 <!-- DETAIL PAGE -->
@@ -949,39 +946,18 @@ body {
 // ── PARTICLES ────────────────────────────────
 particlesJS("particles-js",{
   particles:{
-    number:{ value:80, density:{ enable:true, value_area:900 } },
-    color:{ value:["#7c3aed","#a855f7","#6366f1","#ec4899"] },
+    number:{ value:60, density:{ enable:true, value_area:900 } },
+    color:{ value:"#7c3aed" },
     shape:{ type:"circle" },
-    opacity:{
-      value:0.6, random:true,
-      anim:{ enable:true, speed:0.6, opacity_min:0.1, sync:false }
-    },
-    size:{
-      value:2.5, random:true,
-      anim:{ enable:true, speed:1.2, size_min:0.3, sync:false }
-    },
-    line_linked:{
-      enable:true, distance:160,
-      color:"#7c3aed", opacity:0.25, width:1
-    },
-    move:{
-      enable:true, speed:1.1,
-      direction:"none", random:true, straight:false,
-      out_mode:"out", bounce:false,
-      attract:{ enable:true, rotateX:800, rotateY:1600 }
-    }
+    opacity:{ value:0.3, random:true, anim:{ enable:true, speed:0.3, opacity_min:0.05, sync:false } },
+    size:{ value:1.6, random:true, anim:{ enable:false } },
+    line_linked:{ enable:true, distance:150, color:"#7c3aed", opacity:0.12, width:1 },
+    move:{ enable:true, speed:0.7, direction:"none", random:true, straight:false, out_mode:"out", bounce:false }
   },
   interactivity:{
     detect_on:"canvas",
-    events:{
-      onhover:{ enable:true, mode:"grab" },
-      onclick:{ enable:true, mode:"push" },
-      resize:true
-    },
-    modes:{
-      grab:{ distance:180, line_linked:{ opacity:0.5 } },
-      push:{ particles_nb:4 }
-    }
+    events:{ onhover:{ enable:true, mode:"grab" }, onclick:{ enable:false }, resize:true },
+    modes:{ grab:{ distance:140, line_linked:{ opacity:0.25 } } }
   },
   retina_detect:true
 });
@@ -1749,127 +1725,26 @@ function closeBoosterModal(e) {
   }
 }
 
-// ── DISCORD CONFIG ────────────────────────────
-const DISCORD_CLIENT_ID  = '1487495610239287478';
-const DISCORD_GUILD_ID   = '1455947243415801949';     // Right-click server → Copy Server ID
-const OWNER_DISCORD_ID   = '1469970101259210803';   // Your personal Discord ID (18-digit number)
-const PANEL_ACCESS_ROLE  = '1487516769018187876';            // Exact role name in your Discord server
-const DISCORD_REDIRECT   = window.location.origin + window.location.pathname;
-const DISCORD_SCOPE      = 'identify guilds.members.read';
+// ── DISCORD OAUTH2 PLACEHOLDER ────────────────
+// Replace DISCORD_CLIENT_ID and REDIRECT_URI with your real values when ready.
+const DISCORD_CLIENT_ID = '1487495610239287478';
+const DISCORD_REDIRECT_URI = encodeURIComponent(window.location.origin + window.location.pathname);
+const DISCORD_SCOPE = 'identify guilds.members.read';
 
-// Which mode triggered OAuth: 'booster' or 'admin'
-let oauthMode = 'booster';
-
-function initiateDiscordOAuth(mode) {
-  oauthMode = mode || 'booster';
-  sessionStorage.setItem('oauthMode', oauthMode);
-  const url = 'https://discord.com/api/oauth2/authorize'
-    + '?client_id=' + DISCORD_CLIENT_ID
-    + '&redirect_uri=' + encodeURIComponent(DISCORD_REDIRECT)
-    + '&response_type=code'
-    + '&scope=' + encodeURIComponent(DISCORD_SCOPE);
-  window.location.href = url;
+function initiateDiscordOAuth() {
+  // Constructs the Discord OAuth2 authorization URL
+  const oauthURL = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${DISCORD_REDIRECT_URI}&response_type=code&scope=${encodeURIComponent(DISCORD_SCOPE)}`;
+  // TODO: After redirect, exchange the `code` param for an access token via your backend,
+  // then call the Discord API to check if the user has the "Server Booster" role in your guild.
+  // If verified, set a session flag (e.g. localStorage.setItem('isBooster','1')) and unlock the tab.
+  window.location.href = oauthURL;
 }
 
-async function handleOAuthCallback(code) {
-  const mode = sessionStorage.getItem('oauthMode') || 'booster';
-
-  // Show loading modal for booster mode
-  if (mode === 'booster') {
-    document.getElementById('boosterModal').style.display = 'flex';
-    document.querySelector('.booster-modal-card h3').textContent = 'Verifying...';
-    document.querySelector('.booster-modal-card p').textContent = 'Checking your status...';
-    document.querySelector('.discord-btn').style.display = 'none';
-  } else {
-    // Admin mode - show a simple loading overlay
-    const overlay = document.createElement('div');
-    overlay.id = 'authLoadingOverlay';
-    overlay.innerHTML = '<div style="color:#a855f7;font-family:Rajdhani,sans-serif;font-size:1.2rem;letter-spacing:2px;"><i class="fas fa-spinner fa-spin" style="margin-right:10px;"></i>VERIFYING IDENTITY...</div>';
-    Object.assign(overlay.style, {
-      position:'fixed', inset:'0', background:'rgba(0,0,0,0.92)',
-      zIndex:'9999', display:'flex', alignItems:'center', justifyContent:'center'
-    });
-    document.body.appendChild(overlay);
-  }
-
-  try {
-    const res = await fetch('/api/auth?code=' + encodeURIComponent(code) + '&guild=' + DISCORD_GUILD_ID);
-    const data = await res.json();
-    history.replaceState(null, '', location.pathname);
-    sessionStorage.removeItem('oauthMode');
-
-    // Remove admin loading overlay if present
-    const overlay = document.getElementById('authLoadingOverlay');
-    if (overlay) overlay.remove();
-
-    if (mode === 'admin') {
-      // Check: owner OR has PANEL ACCESS role
-      const isOwner = data.userId === OWNER_DISCORD_ID;
-      const hasRole = data.roleIds && data.roleIds.includes(PANEL_ACCESS_ROLE);
-
-      if (isOwner || hasRole) {
-        sessionStorage.setItem('isAdmin', '1');
-        sessionStorage.setItem('adminUser', data.username || '');
-        openAdminPanel();
-        showToast('<i class="fas fa-shield-alt" style="color:#a855f7;margin-right:8px;"></i>Admin access granted!', '#a855f7');
-      } else {
-        showToast('<i class="fas fa-times-circle" style="color:#f87171;margin-right:8px;"></i>No admin access — ask for PANEL ACCESS role', '#f87171');
-      }
-    } else {
-      // Booster check: owner always gets in, or premium_since set
-      const isOwner = data.userId === OWNER_DISCORD_ID;
-      if (isOwner || data.isBooster) {
-        sessionStorage.setItem('isBooster', '1');
-        document.getElementById('boosterModal').style.display = 'none';
-        unlockBoosterTab();
-        showToast('<i class="fas fa-check-circle" style="color:#4ade80;margin-right:8px;"></i>Booster access unlocked!', '#4ade80');
-      } else {
-        document.querySelector('.discord-btn').style.display = 'inline-flex';
-        document.querySelector('.booster-modal-card h3').textContent = 'Not a Booster';
-        document.querySelector('.booster-modal-card p').innerHTML = "You\'re not a <strong style=\'color:#c4b5fd;\'>Server Booster</strong>.<br>Boost R3MU\'s server to unlock!";
-      }
-    }
-  } catch(err) {
-    history.replaceState(null, '', location.pathname);
-    const overlay = document.getElementById('authLoadingOverlay');
-    if (overlay) overlay.remove();
-    if (mode === 'booster') {
-      document.querySelector('.discord-btn').style.display = 'inline-flex';
-      document.querySelector('.booster-modal-card h3').textContent = 'Error';
-      document.querySelector('.booster-modal-card p').textContent = 'Something went wrong. Make sure site is on Vercel.';
-    } else {
-      showToast('<i class="fas fa-times-circle" style="color:#f87171;margin-right:8px;"></i>Auth failed — check Vercel setup', '#f87171');
-    }
-  }
-}
-
-function unlockBoosterTab() {
-  const tab = document.querySelector('.booster-tab');
-  if (!tab) return;
-  tab.innerHTML = '💎 BOOSTER';
-  tab.onclick = function() { filterCat('booster', this); };
-}
-
-function openAdminPanel() {
-  document.getElementById('nimdoArea').style.display = 'block';
-  document.getElementById('content-wrapper').style.display = 'none';
-  if (document.getElementById('detailPage').style.display !== 'none') {
-    document.getElementById('detailPage').style.display = 'none';
-  }
-}
-
-function showToast(html, color) {
-  const toast = document.createElement('div');
-  toast.innerHTML = html;
-  Object.assign(toast.style, {
-    position:'fixed', bottom:'24px', left:'50%', transform:'translateX(-50%)',
-    background:'#0e0e12', border:'1px solid ' + color + '44',
-    color: color, padding:'12px 24px', borderRadius:'9999px',
-    fontWeight:'700', fontSize:'0.85rem', zIndex:'9999',
-    boxShadow:'0 4px 20px ' + color + '22', whiteSpace:'nowrap'
-  });
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3500);
+function checkBoosterStatus() {
+  // Placeholder: call your backend here to verify Booster role via Discord API.
+  // Example: GET /api/discord/verify-booster?token=ACCESS_TOKEN
+  // Returns: { isBooster: true/false }
+  return false; // Default: not verified
 }
 
 // ── BUILD VERSION LIST ────────────────────────
@@ -2057,9 +1932,21 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// ── ADMIN BUTTON (shown only after Discord verify with PANEL ACCESS role) ──
-// Triple-click removed — admin access via Discord only now
-// The admin button appears in nav after verification
+// ── ADMIN (triple-click logo OR ?page=admin URL) ──
+let logoClicks = 0, logoTimer = null;
+document.getElementById('adminTrigger').addEventListener('click', () => {
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(() => { logoClicks = 0; }, 600);
+  if (logoClicks >= 3) {
+    logoClicks = 0;
+    const pw = prompt("NIMDO Password:");
+    if (pw === "pookie123") {
+      document.getElementById('nimdoArea').style.display = 'block';
+      document.getElementById('content-wrapper').style.display = 'none';
+    }
+  }
+});
 
 function exitAdmin() {
   document.getElementById('nimdoArea').style.display = 'none';
@@ -2143,24 +2030,17 @@ function generateCode() {
 window.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(location.search);
 
-  // Handle Discord OAuth callback
-  const code = params.get('code');
-  if (code) {
-    buildVerTabs();
-    renderGrid();
-    document.getElementById('cheatCount').textContent = items.length;
-    handleOAuthCallback(code);
+  // URL-based admin access: ?page=admin
+  if (params.get('page') === 'admin') {
+    const pw = prompt("NIMDO Password:");
+    if (pw === "pookie123") {
+      document.getElementById('nimdoArea').style.display = 'block';
+      document.getElementById('content-wrapper').style.display = 'none';
+    } else {
+      // Wrong password — fall through to normal vault
+      history.replaceState(null, '', location.pathname);
+    }
     return;
-  }
-
-  // Restore booster session
-  if (sessionStorage.getItem('isBooster') === '1') {
-    unlockBoosterTab();
-  }
-
-  // Restore admin session — show admin button in nav
-  if (sessionStorage.getItem('isAdmin') === '1') {
-    showAdminNavBtn();
   }
 
   const slug = params.get('item');
@@ -2179,32 +2059,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('cheatCount').textContent = items.length;
   }
 });
-
-function showAdminNavBtn() {
-  // Don't add twice
-  if (document.getElementById('adminNavBtn')) return;
-  const btn = document.createElement('button');
-  btn.id = 'adminNavBtn';
-  btn.innerHTML = '<i class="fas fa-shield-alt"></i> ADMIN';
-  Object.assign(btn.style, {
-    display:'flex', alignItems:'center', gap:'6px',
-    padding:'5px 12px',
-    background:'rgba(124,58,237,0.15)',
-    border:'1px solid rgba(124,58,237,0.5)',
-    borderRadius:'8px',
-    color:'#a855f7',
-    fontSize:'11px', fontWeight:'700',
-    fontFamily:'DM Sans,sans-serif',
-    cursor:'pointer', letterSpacing:'0.5px',
-    transition:'all 0.2s'
-  });
-  btn.onmouseover = () => { btn.style.background = 'rgba(124,58,237,0.3)'; btn.style.boxShadow = '0 0 12px rgba(124,58,237,0.4)'; };
-  btn.onmouseout  = () => { btn.style.background = 'rgba(124,58,237,0.15)'; btn.style.boxShadow = 'none'; };
-  btn.onclick = openAdminPanel;
-  // Insert before cheat counter in nav
-  const navLinks = document.querySelector('#content-wrapper .nav-links');
-  if (navLinks) navLinks.insertBefore(btn, navLinks.firstChild);
-}
 </script>
 </body>
 </html>
