@@ -1,4 +1,4 @@
-// api/auth.js — Place in "api" folder in your GitHub repo root
+// api/auth.js
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -45,43 +45,40 @@ module.exports = async function handler(req, res) {
     if (memberRes.status === 404) {
       return res.status(200).json({
         isBooster: false,
-        userId: user.id,
-        username: user.username,
-        roles: [],
-        reason: 'not_in_guild'
+        userId:    user.id,
+        username:  user.username,
+        roles:     [],
+        roleIds:   [],
+        reason:    'not_in_guild'
       });
     }
 
     const member = await memberRes.json();
 
-    // Step 4: Get role names via bot token
-    let roleNames = [];
-    let debugInfo = { botTokenPresent: !!BOT_TOKEN, memberRoleIds: member.roles || [] };
+    // member.roles = array of role IDs the user has
+    const memberRoleIds = member.roles || [];
 
-    if (BOT_TOKEN && member.roles && member.roles.length > 0) {
+    // Step 4: Get role names via bot token (optional but useful)
+    let roleNames = [];
+    if (BOT_TOKEN && memberRoleIds.length > 0) {
       const guildRolesRes = await fetch(`https://discord.com/api/guilds/${guild}/roles`, {
         headers: { Authorization: `Bot ${BOT_TOKEN}` },
       });
-
-      debugInfo.guildRolesStatus = guildRolesRes.status;
-
       if (guildRolesRes.ok) {
         const guildRoles = await guildRolesRes.json();
-        debugInfo.allGuildRoles = guildRoles.map(r => ({ id: r.id, name: r.name }));
-
         roleNames = guildRoles
-          .filter(r => member.roles.includes(r.id))
+          .filter(r => memberRoleIds.includes(r.id))
           .map(r => r.name);
       }
     }
 
     return res.status(200).json({
-      isBooster:  !!member.premium_since,
-      userId:     user.id,
-      username:   user.username,
-      roles:      roleNames,
-      debug:      debugInfo,
-      reason:     member.premium_since ? 'boosting' : 'not_boosting'
+      isBooster: !!member.premium_since,
+      userId:    user.id,
+      username:  user.username,
+      roleIds:   memberRoleIds,   // array of role ID strings — used by index.html
+      roles:     roleNames,        // array of role name strings — bonus
+      reason:    member.premium_since ? 'boosting' : 'not_boosting'
     });
 
   } catch (err) {
