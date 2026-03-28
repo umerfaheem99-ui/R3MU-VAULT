@@ -949,39 +949,18 @@ body {
 // ── PARTICLES ────────────────────────────────
 particlesJS("particles-js",{
   particles:{
-    number:{ value:80, density:{ enable:true, value_area:900 } },
-    color:{ value:["#7c3aed","#a855f7","#6366f1","#ec4899"] },
+    number:{ value:120, density:{ enable:true, value_area:800 } },
+    color:{ value:"#9d5cff" },
     shape:{ type:"circle" },
-    opacity:{
-      value:0.6, random:true,
-      anim:{ enable:true, speed:0.6, opacity_min:0.1, sync:false }
-    },
-    size:{
-      value:2.5, random:true,
-      anim:{ enable:true, speed:1.2, size_min:0.3, sync:false }
-    },
-    line_linked:{
-      enable:true, distance:160,
-      color:"#7c3aed", opacity:0.25, width:1
-    },
-    move:{
-      enable:true, speed:1.1,
-      direction:"none", random:true, straight:false,
-      out_mode:"out", bounce:false,
-      attract:{ enable:true, rotateX:800, rotateY:1600 }
-    }
+    opacity:{ value:0.7, random:true, anim:{ enable:true, speed:0.5, opacity_min:0.3, sync:false } },
+    size:{ value:2.5, random:true, anim:{ enable:false } },
+    line_linked:{ enable:true, distance:130, color:"#8b3fff", opacity:0.35, width:1 },
+    move:{ enable:true, speed:1.2, direction:"none", random:true, straight:false, out_mode:"out", bounce:false }
   },
   interactivity:{
     detect_on:"canvas",
-    events:{
-      onhover:{ enable:true, mode:"grab" },
-      onclick:{ enable:true, mode:"push" },
-      resize:true
-    },
-    modes:{
-      grab:{ distance:180, line_linked:{ opacity:0.5 } },
-      push:{ particles_nb:4 }
-    }
+    events:{ onhover:{ enable:true, mode:"grab" }, onclick:{ enable:true, mode:"push" }, resize:true },
+    modes:{ grab:{ distance:160, line_linked:{ opacity:0.6 } }, push:{ particles_nb:3 } }
   },
   retina_detect:true
 });
