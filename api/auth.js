@@ -9,6 +9,7 @@ export default async function handler(req, res) {
   const CLIENT_ID     = process.env.DISCORD_CLIENT_ID;
   const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
   const REDIRECT_URI  = process.env.DISCORD_REDIRECT_URI;
+  const BOT_TOKEN     = process.env.DISCORD_BOT_TOKEN;
 
   try {
     // Step 1: Exchange code for access token
@@ -30,13 +31,13 @@ export default async function handler(req, res) {
 
     const accessToken = tokenData.access_token;
 
-    // Step 2: Get user info (for userId and username)
+    // Step 2: Get user info
     const userRes = await fetch('https://discord.com/api/users/@me', {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     const user = await userRes.json();
 
-    // Step 3: Get guild member info (roles + booster status)
+    // Step 3: Get guild member info
     const memberRes = await fetch(`https://discord.com/api/users/@me/guilds/${guild}/member`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
@@ -47,25 +48,29 @@ export default async function handler(req, res) {
         userId: user.id,
         username: user.username,
         roles: [],
+        roleIds: [],
         reason: 'not_in_guild'
       });
     }
 
     const member = await memberRes.json();
 
-    // Step 4: Fetch full guild roles to get role names
-    // We need Bot token for this — using the role IDs from member
-    // and matching against guild roles via bot token
-    const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
+    // Step 4: Get role names via bot token
     let roleNames = [];
+    let debugInfo = { botTokenPresent: !!BOT_TOKEN, memberRoleIds: member.roles || [] };
 
     if (BOT_TOKEN && member.roles && member.roles.length > 0) {
       const guildRolesRes = await fetch(`https://discord.com/api/guilds/${guild}/roles`, {
         headers: { Authorization: `Bot ${BOT_TOKEN}` },
       });
+
+      debugInfo.guildRolesStatus = guildRolesRes.status;
+
       if (guildRolesRes.ok) {
         const guildRoles = await guildRolesRes.json();
-        // Map role IDs to names
+        // DEBUG: all guild roles with names — check this in browser
+        debugInfo.allGuildRoles = guildRoles.map(r => ({ id: r.id, name: r.name }));
+
         roleNames = guildRoles
           .filter(r => member.roles.includes(r.id))
           .map(r => r.name);
@@ -77,6 +82,7 @@ export default async function handler(req, res) {
       userId:     user.id,
       username:   user.username,
       roles:      roleNames,
+      debug:      debugInfo,
       reason:     member.premium_since ? 'boosting' : 'not_boosting'
     });
 
