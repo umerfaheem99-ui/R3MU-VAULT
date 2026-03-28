@@ -1,0 +1,7 @@
+{
+  "name": "r3mu-vault",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  }
+}
