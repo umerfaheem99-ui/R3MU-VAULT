@@ -1805,7 +1805,7 @@ async function handleOAuthCallback(code) {
     if (mode === 'admin') {
       // Check: owner OR has PANEL ACCESS role
       const isOwner = data.userId === OWNER_DISCORD_ID;
-      const hasRole = data.roles && data.roles.includes(PANEL_ACCESS_ROLE);
+      const hasRole = data.roleIds && data.roleIds.includes(PANEL_ACCESS_ROLE);
 
       if (isOwner || hasRole) {
         sessionStorage.setItem('isAdmin', '1');
