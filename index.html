@@ -346,6 +346,41 @@ body {
   border-color: rgba(124,58,237,0.5);
 }
 
+/* Version dropdown */
+.ver-dropdown {
+  padding: 6px 14px;
+  background: rgba(14,14,18,0.95);
+  border: 1px solid rgba(124,58,237,0.35);
+  border-radius: 9999px;
+  color: var(--accent2);
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  outline: none;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a855f7' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 30px;
+}
+.ver-dropdown:hover {
+  border-color: rgba(124,58,237,0.6);
+  box-shadow: 0 0 12px rgba(124,58,237,0.2);
+}
+.ver-dropdown:focus {
+  border-color: var(--accent2);
+  box-shadow: 0 0 14px rgba(168,85,247,0.3);
+}
+.ver-dropdown option {
+  background: #0e0e12;
+  color: #e8e8f0;
+  font-weight: 600;
+}
+
 .filter-label {
   font-size: 0.65rem;
   color: var(--muted);
@@ -2918,21 +2953,12 @@ function getAllVersions() {
   const vers = new Set();
   items.forEach(item => {
     (item.versions || []).forEach(v => {
-      // Split by common separators and extract version numbers
       const verStr = v.ver;
-      // Match version patterns like 1.21, 1.21.1, 1.21.11, etc.
+      // Match version patterns like 1.17, 1.21, 1.21.1, 1.21.4, 1.21.11, etc.
       const matches = verStr.match(/\d+\.\d+(?:\.\d+)?/g);
       if (matches) {
         matches.forEach(match => {
-          // Normalize: keep major.minor or major.minor.patch
-          const parts = match.split('.');
-          if (parts.length >= 3 && parts[2].length >= 2) {
-            // It's a patch version like 1.21.11
-            vers.add(parts.slice(0, 3).join('.'));
-          } else if (parts.length >= 2) {
-            // It's major.minor like 1.21
-            vers.add(parts.slice(0, 2).join('.'));
-          }
+          vers.add(match); // Keep full version as-is (1.21, 1.21.1, 1.21.4, etc.)
         });
       }
     });
@@ -2952,16 +2978,22 @@ function getAllVersions() {
 function buildVerTabs() {
   const container = document.getElementById('verTabs');
   const vers = getAllVersions();
-  container.innerHTML = `<div class="ver-tab active" onclick="filterVer('all',this)">ALL</div>`;
+  let html = `<select class="ver-dropdown" onchange="filterVerDropdown(this)">`;
+  html += `<option value="all">ALL VERSIONS</option>`;
   vers.forEach(v => {
-    container.innerHTML += `<div class="ver-tab" onclick="filterVer('${v}',this)">${v}</div>`;
+    html += `<option value="${v}">${v}</option>`;
   });
+  html += `</select>`;
+  container.innerHTML = html;
 }
 
 function filterVer(ver, el) {
   currentVer = ver;
-  document.querySelectorAll('.ver-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
+  renderGrid();
+}
+
+function filterVerDropdown(el) {
+  currentVer = el.value;
   renderGrid();
 }
 
@@ -2982,8 +3014,8 @@ function getFilteredItems() {
   if (currentVer !== 'all') {
     filtered = filtered.filter(item =>
       (item.versions || []).some(v => {
-        const clean = v.ver.replace(/[^0-9.]/g,'');
-        return clean.startsWith(currentVer) || v.ver.includes(currentVer);
+        const matches = v.ver.match(/\d+\.\d+(?:\.\d+)?/g) || [];
+        return matches.includes(currentVer);
       })
     );
   }
