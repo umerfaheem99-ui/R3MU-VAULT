@@ -902,6 +902,22 @@ body {
     <input type="text" id="searchBar" class="search-bar" placeholder="Search clients, mods, keybinds..." oninput="doSearch()">
   </div>
 
+  <!-- Notice Banner -->
+  <div style="display:flex;justify-content:center;padding:0 16px 18px;">
+    <div style="display:inline-flex;align-items:flex-start;gap:12px;background:rgba(124,58,237,0.07);border:1px solid rgba(124,58,237,0.28);border-radius:12px;padding:13px 18px;max-width:600px;width:100%;text-align:left;box-shadow:0 0 20px rgba(124,58,237,0.07);">
+      <i class="fas fa-shield-halved" style="color:#a855f7;font-size:15px;margin-top:2px;flex-shrink:0;"></i>
+      <p style="margin:0;font-size:0.78rem;color:#7c6a9e;line-height:1.65;">
+        <strong style="color:#a855f7;font-weight:700;letter-spacing:0.3px;">Notice —</strong>
+        We try our best to share everything we get. Files are scanned, but mistakes can happen when we're in a hurry. To stay safe from RATs, always double-check on
+        <a href="https://www.virustotal.com" target="_blank" rel="noopener" style="color:#c084fc;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(192,132,252,0.35);">VirusTotal</a>,
+        <a href="https://jlab.threat.rip" target="_blank" rel="noopener" style="color:#c084fc;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(192,132,252,0.35);">jlab.threat.rip</a>,
+        and
+        <a href="https://java-decompiler.github.io" target="_blank" rel="noopener" style="color:#c084fc;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(192,132,252,0.35);">Java Decompiler</a>
+        before using.
+      </p>
+    </div>
+  </div>
+
   <!-- Category tabs -->
   <div class="filter-row" id="catTabs">
     <div class="tab active" onclick="filterCat('all',this)">ALL</div>
