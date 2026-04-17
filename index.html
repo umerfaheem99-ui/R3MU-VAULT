@@ -786,6 +786,385 @@ body {
   border-color: var(--accent2);
   box-shadow: 0 0 12px rgba(168,85,247,0.25);
 }
+
+
+/* ── V2 MODERN OVERRIDES ───────────────────── */
+:root {
+  --bg: #050816;
+  --bg-2: #0a1022;
+  --accent: #38bdf8;
+  --accent2: #8b5cf6;
+  --accent3: #22d3ee;
+  --card-bg: rgba(9, 14, 30, 0.76);
+  --text: #edf4ff;
+  --muted: #8ea0c8;
+  --border: rgba(122, 162, 255, 0.16);
+  --grad: linear-gradient(135deg, #38bdf8 0%, #60a5fa 35%, #8b5cf6 70%, #22d3ee 100%);
+}
+body {
+  background:
+    radial-gradient(circle at top, rgba(56,189,248,0.10), transparent 28%),
+    radial-gradient(circle at 85% 10%, rgba(139,92,246,0.12), transparent 22%),
+    linear-gradient(180deg, #040814 0%, #050816 45%, #040611 100%);
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), transparent 18%, transparent 82%, rgba(255,255,255,0.02));
+  z-index: 0;
+}
+.nav {
+  height: auto;
+  min-height: 60px;
+  padding: 10px 4%;
+  background: rgba(5,8,22,0.72);
+  border-bottom: 1px solid rgba(96,165,250,0.18);
+  box-shadow: 0 14px 40px rgba(2,6,23,0.42);
+}
+.nav-logo {
+  border-color: rgba(56,189,248,0.28);
+  background-image: var(--grad);
+}
+.nav-logo:hover {
+  border-color: rgba(56,189,248,0.7);
+  box-shadow: 0 0 20px rgba(56,189,248,0.22);
+}
+.nav-links { flex-wrap: wrap; justify-content: flex-end; }
+.whats-new-btn,
+.cheat-counter,
+#adminNavBtn,
+.social-icon,
+.tab,
+.ver-dropdown,
+.info-box,
+.card,
+.booster-modal-card {
+  backdrop-filter: blur(14px);
+}
+.whats-new-btn {
+  color: #7dd3fc;
+  background: rgba(56,189,248,0.10);
+  border-color: rgba(56,189,248,0.24);
+}
+.whats-new-btn i { color: #7dd3fc; }
+.cheat-counter {
+  background: linear-gradient(180deg, rgba(56,189,248,0.12), rgba(139,92,246,0.08));
+  border-color: rgba(96,165,250,0.26);
+}
+.live-dot { background: #22d3ee; }
+#marqueeBar {
+  background: linear-gradient(90deg, rgba(56,189,248,0.08), rgba(139,92,246,0.08));
+  border-color: rgba(96,165,250,0.14);
+}
+#marqueeBar .marquee-inner span,
+.filter-label,
+.hero-sub,
+.card p,
+.detail-info-header p,
+.no-results { color: var(--muted); }
+.hero {
+  padding: 56px 16px 28px;
+}
+.hero-title {
+  font-size: clamp(2.55rem, 8vw, 4.8rem);
+  letter-spacing: 5px;
+  text-shadow: 0 0 35px rgba(96,165,250,0.12);
+}
+.hero-sub {
+  font-size: 0.9rem;
+  letter-spacing: 1.6px;
+}
+.search-shell {
+  width: min(720px, 92%);
+  margin: 0 auto 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px 10px 16px;
+  background: linear-gradient(180deg, rgba(8,15,34,0.84), rgba(8,14,28,0.70));
+  border: 1px solid rgba(96,165,250,0.18);
+  border-radius: 18px;
+  box-shadow: 0 18px 44px rgba(2,6,23,0.34);
+}
+.search-shell i {
+  color: #7dd3fc;
+  font-size: 0.95rem;
+}
+.search-bar {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 6px 2px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none !important;
+  font-size: 0.92rem;
+}
+.search-clear {
+  border: 1px solid rgba(148,163,184,0.16);
+  background: rgba(255,255,255,0.05);
+  color: #bcd3ff;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: none;
+}
+.search-clear.show { display: inline-flex; }
+#resultsMeta {
+  max-width: 1300px;
+  margin: 8px auto 0;
+  padding: 0 16px;
+  color: #9ab3df;
+  font-size: 0.78rem;
+}
+.filter-row { gap: 10px; padding: 0 14px; }
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border-radius: 999px;
+  color: #b4c4e4;
+  background: rgba(255,255,255,0.025);
+  border-color: rgba(148,163,184,0.14);
+}
+.tab .tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  color: #d8e7ff;
+  font-size: 0.64rem;
+}
+.tab.active {
+  background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(139,92,246,0.26));
+  border-color: rgba(96,165,250,0.48);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(56,189,248,0.14);
+}
+.tab.shop-tab { color: #fbbf24; }
+.tab.shop-tab.active {
+  color: #16120a;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+.tab.booster-tab {
+  color: #c4b5fd;
+  border-color: rgba(196,181,253,0.22);
+}
+.ver-dropdown {
+  background-color: rgba(9,14,30,0.9);
+  color: #d6e9ff;
+  border-color: rgba(96,165,250,0.24);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.grid {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+  padding-top: 22px;
+}
+.card {
+  padding: 12px;
+  border-radius: 18px;
+  border-color: rgba(96,165,250,0.16);
+  background:
+    linear-gradient(180deg, rgba(10,18,40,0.94), rgba(9,14,30,0.72));
+  box-shadow: 0 18px 38px rgba(2,6,23,0.28);
+}
+.card::before {
+  background: linear-gradient(180deg, rgba(56,189,248,0.10), rgba(139,92,246,0.02));
+}
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(96,165,250,0.42);
+  box-shadow: 0 22px 52px rgba(8,15,34,0.58), 0 0 0 1px rgba(125,211,252,0.10) inset;
+}
+.card-thumb {
+  width: 100%;
+  height: 146px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 11px;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(139,92,246,0.24));
+  position: relative;
+}
+.card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.card-thumb.fallback {
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
+  background:
+    radial-gradient(circle at top right, rgba(34,211,238,0.26), transparent 28%),
+    radial-gradient(circle at 18% 18%, rgba(139,92,246,0.30), transparent 32%),
+    linear-gradient(135deg, #091224 0%, #0e1834 55%, #11162b 100%);
+}
+.card-thumb.fallback::before {
+  content: 'THE VAULT';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(237,244,255,0.92);
+}
+.card-thumb.fallback::after {
+  content: attr(data-cat);
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #d8e7ff;
+  font-size: 0.62rem;
+  letter-spacing: 1px;
+}
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.card .cat-badge {
+  color: #7dd3fc;
+  font-size: 0.58rem;
+  letter-spacing: 1.5px;
+}
+.card-score {
+  font-size: 0.66rem;
+  font-weight: 800;
+  color: #d4b3ff;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(139,92,246,0.12);
+  border: 1px solid rgba(139,92,246,0.16);
+}
+.card h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: #f7fbff;
+}
+.card p {
+  min-height: 36px;
+  font-size: 0.79rem;
+  line-height: 1.5;
+}
+.card .ver-chip {
+  background: rgba(56,189,248,0.10);
+  color: #b7e8ff;
+  border-color: rgba(56,189,248,0.18);
+  border-radius: 999px;
+  padding: 4px 8px;
+}
+.detail-hero,
+.detail-content {
+  max-width: 1260px;
+}
+.detail-main-img-container img,
+.screenshots-grid img {
+  border: 1px solid rgba(96,165,250,0.16);
+}
+.detail-info-header .cat-badge,
+.detail-ver-btn,
+.dl-btn,
+.info-box {
+  background: linear-gradient(180deg, rgba(9,14,30,0.88), rgba(9,14,30,0.70));
+  border-color: rgba(96,165,250,0.18);
+}
+.detail-info-header h1 {
+  font-size: clamp(2rem, 6vw, 3.3rem);
+}
+.detail-ver-btn:hover,
+.dl-btn:hover {
+  background: linear-gradient(135deg, rgba(56,189,248,0.22), rgba(139,92,246,0.26));
+  border-color: rgba(125,211,252,0.35);
+}
+.info-box {
+  border-radius: 16px;
+  box-shadow: 0 16px 38px rgba(2,6,23,0.22);
+}
+.notice-modern {
+  border-color: rgba(96,165,250,0.18) !important;
+  background: linear-gradient(180deg, rgba(8,15,34,0.78), rgba(8,14,28,0.64)) !important;
+}
+.booster-modal-card {
+  background: linear-gradient(180deg, rgba(8,15,34,0.96), rgba(8,14,28,0.92));
+}
+body.low-end-device *, body.low-end-device *::before, body.low-end-device *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  * , *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body.low-end-device .card,
+body.low-end-device .info-box,
+body.low-end-device .nav,
+body.low-end-device .search-shell {
+  backdrop-filter: none;
+  box-shadow: none;
+}
+body.low-end-device .card:hover { transform: none; }
+@media (max-width: 900px) {
+  .nav { gap: 10px; }
+  .nav-links { gap: 8px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  .detail-hero { gap: 20px; }
+}
+@media (max-width: 640px) {
+  body { font-size: 13px; }
+  .nav {
+    padding: 10px 14px;
+    align-items: flex-start;
+  }
+  .nav-logo { font-size: 1.05rem; padding: 7px 11px; }
+  .nav-links { width: 100%; justify-content: flex-start; gap: 7px; }
+  .hero { padding: 40px 14px 18px; }
+  .hero-title { letter-spacing: 2px; }
+  .search-shell { padding: 10px 12px; border-radius: 16px; }
+  .filter-row { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 6px; scrollbar-width: none; }
+  .filter-row::-webkit-scrollbar { display: none; }
+  .tab { flex: 0 0 auto; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .card { padding: 9px; border-radius: 14px; }
+  .card-thumb { height: 118px; border-radius: 12px; }
+  .card h3 { font-size: 0.85rem; }
+  .card p { font-size: 0.72rem; min-height: 32px; }
+  .detail-hero,
+  .detail-content { padding-left: 14px; padding-right: 14px; }
+  .detail-main-img-container { width: 100%; }
+  #infoGrid { grid-template-columns: 1fr !important; }
+  .screenshots-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .screenshots-grid img { height: 100px; }
+  .detail-ver-selector { gap: 8px; }
+  .detail-ver-btn { width: calc(50% - 4px); justify-content: center; }
+}
+
 </style>
 </head>
 <body>
@@ -998,24 +1377,44 @@ body {
 </div>
 
 <script>
-// ── PARTICLES ────────────────────────────────
-particlesJS("particles-js",{
-  particles:{
-    number:{ value:120, density:{ enable:true, value_area:800 } },
-    color:{ value:"#9d5cff" },
-    shape:{ type:"circle" },
-    opacity:{ value:0.7, random:true, anim:{ enable:true, speed:0.5, opacity_min:0.3, sync:false } },
-    size:{ value:2.5, random:true, anim:{ enable:false } },
-    line_linked:{ enable:true, distance:130, color:"#8b3fff", opacity:0.35, width:1 },
-    move:{ enable:true, speed:1.2, direction:"none", random:true, straight:false, out_mode:"out", bounce:false }
-  },
-  interactivity:{
-    detect_on:"canvas",
-    events:{ onhover:{ enable:true, mode:"grab" }, onclick:{ enable:true, mode:"push" }, resize:true },
-    modes:{ grab:{ distance:160, line_linked:{ opacity:0.6 } }, push:{ particles_nb:3 } }
-  },
-  retina_detect:true
-});
+// ── PARTICLES / PERFORMANCE ─────────────────
+function isLowEndDevice() {
+  const mem = navigator.deviceMemory || 4;
+  const cores = navigator.hardwareConcurrency || 4;
+  const smallScreen = window.innerWidth < 700;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const slowNet = navigator.connection && /2g/.test(navigator.connection.effectiveType || '');
+  return reducedMotion || slowNet || mem <= 4 || cores <= 4 || smallScreen;
+}
+
+function initParticles() {
+  const el = document.getElementById('particles-js');
+  if (!el || typeof particlesJS !== 'function') return;
+
+  if (isLowEndDevice()) {
+    document.body.classList.add('low-end-device');
+    el.style.display = 'none';
+    return;
+  }
+
+  particlesJS("particles-js",{
+    particles:{
+      number:{ value:70, density:{ enable:true, value_area:900 } },
+      color:{ value:["#5eead4", "#60a5fa", "#8b5cf6"] },
+      shape:{ type:"circle" },
+      opacity:{ value:0.45, random:true, anim:{ enable:false } },
+      size:{ value:2.2, random:true, anim:{ enable:false } },
+      line_linked:{ enable:true, distance:115, color:"#3b82f6", opacity:0.18, width:1 },
+      move:{ enable:true, speed:0.8, direction:"none", random:true, straight:false, out_mode:"out", bounce:false }
+    },
+    interactivity:{
+      detect_on:"canvas",
+      events:{ onhover:{ enable:true, mode:"grab" }, onclick:{ enable:false }, resize:true },
+      modes:{ grab:{ distance:130, line_linked:{ opacity:0.28 } } }
+    },
+    retina_detect:true
+  });
+}
 
 // ── DATA ─────────────────────────────────────
 const items = [
@@ -5315,6 +5714,7 @@ function unlockBoosterTab() {
   if (!tab) return;
   tab.innerHTML = '💎 BOOSTER';
   tab.onclick = function() { filterCat('booster', this); };
+  updateCategoryTabs();
 }
 
 function openAdminPanel() {
@@ -5338,6 +5738,116 @@ function showToast(html, color) {
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 3500);
 }
+
+function slugifyCat(cat) {
+  return (cat || 'vault').replace(/\s*\/\s*/g, ' / ').toUpperCase();
+}
+
+function isLikelyBrokenImage(src) {
+  if (!src) return true;
+  const bad = ['gg', 'no ss', 'no image sadly', 'no image', 'n/a', 'none', 'null', 'undefined'];
+  const clean = String(src).trim().toLowerCase();
+  if (!clean) return true;
+  return bad.includes(clean);
+}
+
+function makeFallbackCardMedia(item) {
+  return `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}"></div>`;
+}
+
+function makeImageThumb(item, cls='card-thumb') {
+  if (isLikelyBrokenImage(item.img)) return makeFallbackCardMedia(item);
+  const safeName = (item.name || 'Vault Item').replace(/"/g, '&quot;');
+  return `<div class="${cls}"><img src="${item.img}" alt="${safeName}" loading="lazy" decoding="async" onerror="this.closest('.${cls}').outerHTML = makeFallbackCardMedia(${JSON.stringify({cat:'__CAT__'})}).replace('__CAT__', '${slugifyCat(item.cat)}')"></div>`;
+}
+
+function getMainMediaMarkup(item) {
+  if (isLikelyBrokenImage(item.img)) {
+    return `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}" style="height:min(440px,72vw);border-radius:16px;"></div>`;
+  }
+  return `<img id="detailMainImg" src="${item.img}" alt="${(item.name || '').replace(/"/g, '&quot;')}" onclick="zoomImg(this.src)">`;
+}
+
+function getValidScreenshots(item) {
+  return [...new Set([item.img, ...(item.screenshots || [])])].filter(src => !isLikelyBrokenImage(src));
+}
+
+function getCategoryCounts() {
+  const counts = {};
+  getAccessibleItems().filter(i => i.cat !== 'booster').forEach(item => {
+    counts[item.cat] = (counts[item.cat] || 0) + 1;
+  });
+  if (isBoosterUnlocked()) {
+    counts['booster'] = items.filter(i => i.cat === 'booster').length;
+  }
+  counts['all'] = Object.values(counts).reduce((a, b) => a + b, 0);
+  return counts;
+}
+
+function updateCategoryTabs() {
+  const counts = getCategoryCounts();
+  document.querySelectorAll('#catTabs .tab').forEach(tab => {
+    const label = tab.textContent.replace(/\d+/g, '').replace(/\s+/g, ' ').trim();
+    let key = 'all';
+    if (label.includes('CLIENTS')) key = 'clients';
+    else if (label.includes('MODS')) key = 'mods / macros';
+    else if (label.includes('SOURCE')) key = 'source codes';
+    else if (label.includes('SHOP')) key = 'shop';
+    else if (label.includes('BOOSTER')) key = 'booster';
+    const base = key === 'shop' ? '💰 SHOP' : key === 'booster' ? (isBoosterUnlocked() ? '💎 BOOSTER' : '🚀 BOOSTER <i class="fas fa-lock lock-icon"></i>') : label.split(' ')[0] === 'ALL' ? 'ALL' : label;
+    const count = counts[key] || 0;
+    tab.innerHTML = `${base} <span class="tab-count">${count}</span>`;
+  });
+}
+
+function updateResultsMeta(filtered) {
+  const meta = document.getElementById('resultsMeta');
+  if (!meta) return;
+  const searchValue = document.getElementById('searchBar').value.trim();
+  const catLabel = currentCat === 'all' ? 'All categories' : slugifyCat(currentCat);
+  const verLabel = currentVer === 'all' ? 'All versions' : currentVer;
+  meta.innerHTML = `<strong>${filtered.length}</strong> results <span style="opacity:.7;">•</span> ${catLabel} <span style="opacity:.7;">•</span> ${verLabel}${searchValue ? ` <span style="opacity:.7;">•</span> Search: <strong>${searchValue}</strong>` : ''}`;
+}
+
+function enhanceSearchUI() {
+  const input = document.getElementById('searchBar');
+  if (!input || input.parentElement.classList.contains('search-shell')) return;
+  const shell = document.createElement('div');
+  shell.className = 'search-shell';
+  const icon = document.createElement('i');
+  icon.className = 'fas fa-magnifying-glass';
+  const clear = document.createElement('button');
+  clear.className = 'search-clear';
+  clear.type = 'button';
+  clear.textContent = 'CLEAR';
+  clear.onclick = () => {
+    input.value = '';
+    clear.classList.remove('show');
+    renderGrid();
+  };
+  input.parentNode.insertBefore(shell, input);
+  shell.appendChild(icon);
+  shell.appendChild(input);
+  shell.appendChild(clear);
+  input.addEventListener('input', () => clear.classList.toggle('show', !!input.value.trim()));
+}
+
+function injectResultsMeta() {
+  if (document.getElementById('resultsMeta')) return;
+  const grid = document.getElementById('mainGrid');
+  if (!grid) return;
+  const meta = document.createElement('div');
+  meta.id = 'resultsMeta';
+  grid.parentNode.insertBefore(meta, grid);
+}
+
+function tuneNoticeBanner() {
+  const notice = Array.from(document.querySelectorAll('#content-wrapper > div')).find(el => el.textContent && el.textContent.includes('VirusTotal'));
+  if (!notice) return;
+  const card = notice.querySelector('div');
+  if (card) card.classList.add('notice-modern');
+}
+
 
 // ── BUILD VERSION LIST ────────────────────────
 function getAllVersions() {
@@ -5396,7 +5906,11 @@ function filterCat(cat, el) {
   renderGrid();
 }
 
-function doSearch() { renderGrid(); }
+let searchDebounce;
+function doSearch() {
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(() => renderGrid(), 90);
+}
 
 function getFilteredItems() {
   let filtered = currentCat === 'all'
@@ -5429,24 +5943,31 @@ function getFilteredItems() {
 function renderGrid() {
   const grid = document.getElementById('mainGrid');
   const filtered = getFilteredItems();
+  updateResultsMeta(filtered);
+  updateCategoryTabs();
 
   if (!filtered.length) {
-    grid.innerHTML = '<div class="no-results">No items found</div>';
+    grid.innerHTML = '<div class="no-results">No items found. Try a different category, version, or search term.</div>';
     return;
   }
 
   grid.innerHTML = filtered.map(item => {
-    const chips = (item.versions || []).map(v =>
-      `<span class="ver-chip">${v.ver}</span>`
-    ).join('');
+    const chips = (item.versions || []).slice(0, 3).map(v => `<span class="ver-chip">${v.ver}</span>`).join('');
+    const extra = (item.versions || []).length > 3 ? `<span class="ver-chip">+${item.versions.length - 3}</span>` : '';
+    const score = item.cat === 'shop' ? 'PREMIUM' : item.cat === 'booster' ? 'BOOSTER' : `${(item.versions || []).length} VER`;
     return `
-      <div class="card" onclick="openDetail('${item.slug}')">
-        <img src="${item.img}" alt="${item.name}" loading="lazy">
-        <div class="cat-badge">${item.cat.toUpperCase()}</div>
+      <article class="card" onclick="openDetail('${item.slug}')">
+        ${isLikelyBrokenImage(item.img)
+          ? `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}"></div>`
+          : `<div class="card-thumb"><img src="${item.img}" alt="${item.name.replace(/"/g, '&quot;')}" loading="lazy" decoding="async" onerror="this.closest('.card-thumb').outerHTML='<div class=&quot;card-thumb fallback&quot; data-cat=&quot;${slugifyCat(item.cat)}&quot;></div>'"></div>`}
+        <div class="card-meta">
+          <div class="cat-badge">${slugifyCat(item.cat)}</div>
+          <div class="card-score">${score}</div>
+        </div>
         <h3>${item.name}</h3>
-        <p>${(item.desc||'').substring(0,55)}${(item.desc||'').length>55?'…':''}</p>
-        <div class="ver-chips">${chips}</div>
-      </div>`;
+        <p>${(item.desc || '').substring(0, 78)}${(item.desc || '').length > 78 ? '…' : ''}</p>
+        <div class="ver-chips">${chips}${extra}</div>
+      </article>`;
   }).join('');
 }
 
@@ -5475,45 +5996,39 @@ function backToVault() {
 
 // ── RENDER DETAIL ────────────────────────────
 function renderDetail(item) {
-  document.title = `${item.name} | R3MU VAULT`;
+  document.title = `${item.name} | THE VAULT`;
 
   document.getElementById('detailTitle').textContent = item.name;
   document.getElementById('detailDesc').textContent = item.desc || '';
-  document.getElementById('detailCatBadge').innerHTML = `<i class="fas fa-cube"></i> ${item.cat.toUpperCase()}`;
-  document.getElementById('detailMainImg').src = item.img;
+  document.getElementById('detailCatBadge').innerHTML = `<i class="fas fa-cube"></i> ${slugifyCat(item.cat)}`;
+  document.querySelector('.detail-main-img-container').innerHTML = isLikelyBrokenImage(item.img)
+    ? `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}" style="height:min(440px,72vw);border-radius:16px;"></div>`
+    : `<img id="detailMainImg" src="${item.img}" alt="${item.name.replace(/"/g, '&quot;')}" onclick="zoomImg(this.src)" onerror="this.outerHTML='<div class=&quot;card-thumb fallback&quot; data-cat=&quot;${slugifyCat(item.cat)}&quot; style=&quot;height:min(440px,72vw);border-radius:16px;&quot;></div>'">`;
   updateCheatCounters();
 
-  // Quick download buttons in header
-  document.getElementById('detailVerBtns').innerHTML = (item.versions||[]).map(v =>
-    `<a href="${v.link}" class="detail-ver-btn" target="_blank" rel="noopener">
-      <i class="fas fa-download" style="font-size:10px;"></i> ${v.ver}
-    </a>`
+  document.getElementById('detailVerBtns').innerHTML = (item.versions || []).map(v =>
+    `<a href="${v.link}" class="detail-ver-btn" target="_blank" rel="noopener"><i class="fas fa-download" style="font-size:10px;"></i> ${v.ver}</a>`
   ).join('');
 
-  // Screenshots (deduplicated, main image first)
-  const unique = [...new Set([item.img, ...(item.screenshots||[])])];
-  document.getElementById('detailScreenshots').innerHTML = unique.map(src =>
-    `<img src="${src}" alt="Screenshot" onclick="zoomImg(this.src)" loading="lazy">`
-  ).join('') || '<p style="color:var(--muted);padding:20px 0;">No screenshots available.</p>';
+  const screenshots = getValidScreenshots(item);
+  document.getElementById('detailScreenshots').innerHTML = screenshots.length
+    ? screenshots.map(src => `<img src="${src}" alt="Screenshot" onclick="zoomImg(this.src)" loading="lazy" decoding="async">`).join('')
+    : `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}" style="min-height:160px;border-radius:14px;"></div>`;
 
-  // Loader
   document.getElementById('detailLoader').innerHTML = item.loader
     ? `<span style="white-space:pre-line">${item.loader}</span>`
     : '<span style="color:var(--muted)">No info provided.</span>';
 
-  // Keybinds
   document.getElementById('detailKeybinds').textContent = item.keybinds || 'No keybinds provided.';
 
-  // Versions list
-  document.getElementById('detailVersions').innerHTML = (item.versions&&item.versions.length)
+  document.getElementById('detailVersions').innerHTML = (item.versions && item.versions.length)
     ? item.versions.map(v => `
         <a href="${v.link}" class="dl-btn" target="_blank" rel="noopener">
-          <span><i class="fas fa-download" style="margin-right:8px;opacity:0.6;font-size:12px;"></i>${v.ver} • Download</span>
+          <span><i class="fas fa-download" style="margin-right:8px;opacity:0.7;font-size:12px;"></i>${v.ver} • Download</span>
           <i class="fas fa-chevron-right" style="font-size:12px;"></i>
         </a>`).join('')
     : '<p style="color:var(--muted);text-align:center;">No versions available.</p>';
 
-  // Make info grid single column on small screen
   if (window.innerWidth < 600) {
     document.getElementById('infoGrid').style.gridTemplateColumns = '1fr';
   }
@@ -5623,9 +6138,15 @@ window.addEventListener('DOMContentLoaded', () => {
     buildVerTabs();
     renderGrid();
     updateCheatCounters();
+    updateCategoryTabs();
     handleOAuthCallback(code);
     return;
   }
+
+  initParticles();
+  enhanceSearchUI();
+  injectResultsMeta();
+  tuneNoticeBanner();
 
   // Restore booster session
   if (sessionStorage.getItem('isBooster') === '1') {
@@ -5650,6 +6171,7 @@ window.addEventListener('DOMContentLoaded', () => {
       buildVerTabs();
       renderGrid();
       updateCheatCounters();
+      updateCategoryTabs();
       openBoosterModal();
       return;
     }
@@ -5662,6 +6184,7 @@ window.addEventListener('DOMContentLoaded', () => {
     buildVerTabs();
     renderGrid();
     updateCheatCounters();
+    updateCategoryTabs();
   }
 });
 
@@ -5674,10 +6197,10 @@ function showAdminNavBtn() {
   Object.assign(btn.style, {
     display:'flex', alignItems:'center', gap:'6px',
     padding:'5px 12px',
-    background:'rgba(124,58,237,0.15)',
-    border:'1px solid rgba(124,58,237,0.5)',
+    background:'rgba(56,189,248,0.12)',
+    border:'1px solid rgba(56,189,248,0.32)',
     borderRadius:'8px',
-    color:'#a855f7',
+    color:'#7dd3fc',
     fontSize:'11px', fontWeight:'700',
     fontFamily:'DM Sans,sans-serif',
     cursor:'pointer', letterSpacing:'0.5px',
@@ -5692,4 +6215,4 @@ function showAdminNavBtn() {
 }
 </script>
 </body>
-</html
+</html>
