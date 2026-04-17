@@ -5266,6 +5266,9 @@ async function handleOAuthCallback(code) {
         sessionStorage.setItem('isBooster', '1');
         document.getElementById('boosterModal').style.display = 'none';
         unlockBoosterTab();
+        buildVerTabs();
+        renderGrid();
+        updateCheatCounters();
         showToast('<i class="fas fa-check-circle" style="color:#4ade80;margin-right:8px;"></i>Booster access unlocked!', '#4ade80');
       } else {
         document.querySelector('.discord-btn').style.display = 'inline-flex';
@@ -5285,6 +5288,26 @@ async function handleOAuthCallback(code) {
       showToast('<i class="fas fa-times-circle" style="color:#f87171;margin-right:8px;"></i>Auth failed — check Vercel setup', '#f87171');
     }
   }
+}
+
+function isBoosterUnlocked() {
+  return sessionStorage.getItem('isBooster') === '1';
+}
+
+function canAccessItem(item) {
+  return item && (item.cat !== 'booster' || isBoosterUnlocked());
+}
+
+function getAccessibleItems() {
+  return items.filter(canAccessItem);
+}
+
+function updateCheatCounters() {
+  const count = getAccessibleItems().length;
+  const main = document.getElementById('cheatCount');
+  const detail = document.getElementById('detailCheatCount');
+  if (main) main.textContent = count;
+  if (detail) detail.textContent = count;
 }
 
 function unlockBoosterTab() {
@@ -5319,7 +5342,7 @@ function showToast(html, color) {
 // ── BUILD VERSION LIST ────────────────────────
 function getAllVersions() {
   const vers = new Set();
-  items.forEach(item => {
+  getAccessibleItems().forEach(item => {
     (item.versions || []).forEach(v => {
       const verStr = v.ver;
       // Match version patterns like 1.17, 1.21, 1.21.1, 1.21.4, 1.21.11, etc.
@@ -5376,7 +5399,9 @@ function filterCat(cat, el) {
 function doSearch() { renderGrid(); }
 
 function getFilteredItems() {
-  let filtered = currentCat === 'all' ? [...items] : items.filter(i => i.cat === currentCat);
+  let filtered = currentCat === 'all'
+    ? items.filter(i => i.cat !== 'booster')
+    : items.filter(i => i.cat === currentCat && canAccessItem(i));
 
   // Version filter
   if (currentVer !== 'all') {
@@ -5427,6 +5452,14 @@ function renderGrid() {
 
 // ── OPEN DETAIL ──────────────────────────────
 function openDetail(slug) {
+  const item = items.find(i => i.slug === slug);
+  if (!item) return;
+
+  if (!canAccessItem(item)) {
+    openBoosterModal();
+    return;
+  }
+
   const url = `${location.origin}${location.pathname}?item=${encodeURIComponent(slug)}`;
   window.open(url, '_blank');
 }
@@ -5448,7 +5481,7 @@ function renderDetail(item) {
   document.getElementById('detailDesc').textContent = item.desc || '';
   document.getElementById('detailCatBadge').innerHTML = `<i class="fas fa-cube"></i> ${item.cat.toUpperCase()}`;
   document.getElementById('detailMainImg').src = item.img;
-  document.getElementById('detailCheatCount').textContent = items.length;
+  updateCheatCounters();
 
   // Quick download buttons in header
   document.getElementById('detailVerBtns').innerHTML = (item.versions||[]).map(v =>
@@ -5589,7 +5622,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (code) {
     buildVerTabs();
     renderGrid();
-    document.getElementById('cheatCount').textContent = items.length;
+    updateCheatCounters();
     handleOAuthCallback(code);
     return;
   }
@@ -5607,17 +5640,28 @@ window.addEventListener('DOMContentLoaded', () => {
   const slug = params.get('item');
   if (slug) {
     const item = items.find(i => i.slug === slug);
-    if (item) {
-      document.getElementById('content-wrapper').style.display = 'none';
-      document.getElementById('detailPage').style.display = 'block';
-      renderDetail(item);
-    } else {
+    if (!item) {
       location.replace(location.pathname);
+      return;
     }
+
+    if (!canAccessItem(item)) {
+      history.replaceState(null, '', location.pathname);
+      buildVerTabs();
+      renderGrid();
+      updateCheatCounters();
+      openBoosterModal();
+      return;
+    }
+
+    document.getElementById('content-wrapper').style.display = 'none';
+    document.getElementById('detailPage').style.display = 'block';
+    renderDetail(item);
+    updateCheatCounters();
   } else {
     buildVerTabs();
     renderGrid();
-    document.getElementById('cheatCount').textContent = items.length;
+    updateCheatCounters();
   }
 });
 
