@@ -382,6 +382,159 @@ body {
   font-weight: 600;
 }
 
+.selector-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: min(100%, 420px);
+}
+.selector-shell {
+  width: min(100%, 420px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: linear-gradient(180deg, rgba(8,15,34,0.84), rgba(8,14,28,0.72));
+  border: 1px solid rgba(96,165,250,0.22);
+  border-radius: 18px;
+  box-shadow: 0 16px 34px rgba(2,6,23,0.24);
+}
+.selector-shell i {
+  color: #7dd3fc;
+  font-size: 0.92rem;
+}
+.selector-shell .ver-dropdown {
+  width: 100%;
+  margin: 0;
+  padding: 0 28px 0 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  background-position: right 0 center;
+  box-shadow: none;
+}
+.selector-shell .ver-dropdown:hover,
+.selector-shell .ver-dropdown:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+.custom-select-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #d6e9ff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  text-align: left;
+}
+.custom-select-btn span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #bcd3ff;
+  transition: color 0.2s ease;
+}
+.custom-select-btn i {
+  color: #7dd3fc;
+  font-size: 0.86rem;
+  transition: transform 0.22s ease, color 0.2s ease;
+}
+.custom-select.is-default .custom-select-btn span {
+  color: #dbeafe;
+}
+.custom-select.is-default .custom-select-btn i {
+  color: #a78bfa;
+}
+.custom-select.has-selection .custom-select-btn span {
+  color: #7dd3fc;
+}
+.custom-select.has-selection .custom-select-btn i {
+  color: #22d3ee;
+}
+.custom-select.open .custom-select-btn i {
+  transform: rotate(180deg);
+}
+.custom-select-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, rgba(7,11,25,0.98), rgba(5,8,22,0.98));
+  border: 1px solid rgba(96,165,250,0.22);
+  border-radius: 16px;
+  box-shadow: 0 24px 50px rgba(2,6,23,0.55);
+  padding: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+  display: none;
+  z-index: 120;
+}
+.custom-select.open .custom-select-menu {
+  display: block;
+}
+.custom-select-option {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #d6e9ff;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.custom-select-option:hover {
+  background: rgba(56,189,248,0.10);
+  color: #ffffff;
+}
+.custom-select-option.active {
+  background: linear-gradient(135deg, rgba(56,189,248,0.16), rgba(139,92,246,0.22));
+  color: #ffffff;
+}
+.selector-hint {
+  font-size: 0.72rem;
+  color: #8ea0c8;
+  letter-spacing: 0.4px;
+}
+.admin-check-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(56,189,248,0.08);
+  border: 1px solid rgba(96,165,250,0.18);
+  margin-bottom: 16px;
+}
+.admin-check-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #38bdf8;
+}
+.admin-check-row label {
+  color: #cfe5ff;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .filter-label {
   font-size: 0.65rem;
   color: var(--muted);
@@ -1130,6 +1283,8 @@ body.low-end-device .search-shell {
   box-shadow: none;
 }
 body.low-end-device .card:hover { transform: none; }
+
+
 @media (max-width: 900px) {
   .nav { gap: 10px; }
   .nav-links { gap: 8px; }
@@ -1229,6 +1384,12 @@ body.low-end-device .card:hover { transform: none; }
   </div>
   <button onclick="addScreenshotRow()" class="admin-btn-sm" style="margin-top:6px;margin-bottom:20px;">+ Add Screenshot</button>
 
+  <div class="admin-label">Recently Added Filter</div>
+  <div class="admin-check-row">
+    <input type="checkbox" id="nRecentlyAdded" checked>
+    <label for="nRecentlyAdded">Show this item inside the <strong>Recently Added</strong> filter</label>
+  </div>
+
   <button onclick="generateCode()" style="background:var(--accent);width:100%;padding:14px;border:none;border-radius:10px;color:white;font-weight:800;font-size:1rem;cursor:pointer;font-family:'Rajdhani',sans-serif;letter-spacing:1px;">
     GENERATE CODE &amp; COPY
   </button>
@@ -1308,10 +1469,28 @@ body.low-end-device .card:hover { transform: none; }
     <div class="tab booster-tab" onclick="openBoosterModal()">🚀 BOOSTER <i class="fas fa-lock lock-icon"></i></div>
   </div>
 
-  <!-- Version filter -->
-  <div class="filter-label">MINECRAFT VERSION</div>
-  <div class="filter-row" id="verTabs">
-    <div class="ver-tab active" onclick="filterVer('all',this)">ALL</div>
+  <!-- Filters -->
+  <div class="filter-row" style="margin-top:4px;">
+    <div class="selector-group">
+      <div class="filter-label">MINECRAFT VERSION</div>
+      <div class="selector-shell" id="verTabs">
+        <i class="fas fa-layer-group"></i>
+        <select class="ver-dropdown" onchange="filterVerDropdown(this)">
+          <option value="all">ALL VERSIONS</option>
+        </select>
+      </div>
+    </div>
+    <div class="selector-group">
+      <div class="filter-label">BROWSE FILTER</div>
+      <div class="selector-shell" id="browseTabs">
+        <i class="fas fa-filter"></i>
+        <select class="ver-dropdown" id="extraFilterDropdown" onchange="filterExtraDropdown(this)">
+          <option value="all">ALL ITEMS</option>
+          <option value="recently-added">RECENTLY ADDED</option>
+        </select>
+      </div>
+      <div class="selector-hint">Use this to quickly show items you marked for Recently Added.</div>
+    </div>
   </div>
 
   <div class="grid" id="mainGrid"></div>
@@ -5556,6 +5735,7 @@ items.push({
 // ── STATE ────────────────────────────────────
 let currentCat = 'all';
 let currentVer = 'all';
+let currentExtraFilter = 'all';
 
 // ── MARQUEE STATE ─────────────────────────────
 let marqueeVisible = false;
@@ -5701,7 +5881,46 @@ function getAccessibleItems() {
   return items.filter(canAccessItem);
 }
 
+
+
+function getRecentlyAddedItems() {
+  return getAccessibleItems().filter(item => item.cat !== 'booster' && item.recentlyAdded === true);
+}
+
+function createCardMarkup(item) {
+  const chips = (item.versions || []).slice(0, 3).map(v => `<span class="ver-chip">${v.ver}</span>`).join('');
+  const extra = (item.versions || []).length > 3 ? `<span class="ver-chip">+${item.versions.length - 3}</span>` : '';
+  const score = item.cat === 'shop' ? 'PREMIUM' : item.cat === 'booster' ? 'BOOSTER' : `${(item.versions || []).length} VER`;
+  return `
+      <article class="card" onclick="openDetail('${item.slug}')">
+        ${isLikelyBrokenImage(item.img)
+          ? `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}"></div>`
+          : `<div class="card-thumb"><img src="${item.img}" alt="${item.name.replace(/"/g, '&quot;')}" loading="lazy" decoding="async" onerror="this.closest('.card-thumb').outerHTML='<div class=&quot;card-thumb fallback&quot; data-cat=&quot;${slugifyCat(item.cat)}&quot;></div>'"></div>`}
+        <div class="card-meta">
+          <div class="cat-badge">${slugifyCat(item.cat)}</div>
+          <div class="card-score">${score}</div>
+        </div>
+        <h3>${item.name}</h3>
+        <p>${(item.desc || '').substring(0, 78)}${(item.desc || '').length > 78 ? '…' : ''}</p>
+        <div class="ver-chips">${chips}${extra}</div>
+      </article>`;
+}
+
+function resetBrowseFilters() {
+  currentCat = 'all';
+  currentVer = 'all';
+  currentExtraFilter = 'all';
+  const searchBar = document.getElementById('searchBar');
+  if (searchBar) searchBar.value = '';
+  updateCustomSelectUI('versionSelect', currentVer);
+  updateCustomSelectUI('extraFilterDropdown', currentExtraFilter);
+  document.querySelectorAll('#catTabs .tab').forEach(t => t.classList.remove('active'));
+  const allTab = document.querySelector('#catTabs .tab');
+  if (allTab) allTab.classList.add('active');
+}
+
 function updateCheatCounters() {
+
   const count = getAccessibleItems().length;
   const main = document.getElementById('cheatCount');
   const detail = document.getElementById('detailCheatCount');
@@ -5806,7 +6025,8 @@ function updateResultsMeta(filtered) {
   const searchValue = document.getElementById('searchBar').value.trim();
   const catLabel = currentCat === 'all' ? 'All categories' : slugifyCat(currentCat);
   const verLabel = currentVer === 'all' ? 'All versions' : currentVer;
-  meta.innerHTML = `<strong>${filtered.length}</strong> results <span style="opacity:.7;">•</span> ${catLabel} <span style="opacity:.7;">•</span> ${verLabel}${searchValue ? ` <span style="opacity:.7;">•</span> Search: <strong>${searchValue}</strong>` : ''}`;
+  const extraLabel = currentExtraFilter === 'recently-added' ? 'Recently Added' : 'All items';
+  meta.innerHTML = `<strong>${filtered.length}</strong> results <span style="opacity:.7;">•</span> ${catLabel} <span style="opacity:.7;">•</span> ${verLabel} <span style="opacity:.7;">•</span> ${extraLabel}${searchValue ? ` <span style="opacity:.7;">•</span> Search: <strong>${searchValue}</strong>` : ''}`;
 }
 
 function enhanceSearchUI() {
@@ -5876,19 +6096,93 @@ function getAllVersions() {
   });
 }
 
-function buildVerTabs() {
-  const container = document.getElementById('verTabs');
-  const vers = getAllVersions();
-  let html = `<select class="ver-dropdown" onchange="filterVerDropdown(this)">`;
-  html += `<option value="all">ALL VERSIONS</option>`;
-  vers.forEach(v => {
-    html += `<option value="${v}">${v}</option>`;
+function getExtraFilterOptions() {
+  return [
+    { value: 'all', label: 'ALL ITEMS' },
+    { value: 'recently-added', label: 'RECENTLY ADDED' }
+  ];
+}
+
+function buildCustomSelect(containerId, config) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const current = config.getValue();
+  const active = config.options.find(opt => opt.value === current) || config.options[0];
+  const optionsHtml = config.options.map(opt => `
+    <button type="button" class="custom-select-option ${current === opt.value ? 'active' : ''}" data-value="${opt.value}">${opt.label}</button>
+  `).join('');
+
+  container.innerHTML = `
+    <i class="${config.icon}"></i>
+    <div class="custom-select" id="${config.selectId}">
+      <button type="button" class="custom-select-btn">
+        <span>${active.label}</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="custom-select-menu">${optionsHtml}</div>
+    </div>`;
+
+  const root = document.getElementById(config.selectId);
+  const btn = root.querySelector('.custom-select-btn');
+  btn.onclick = function(e) {
+    e.stopPropagation();
+    document.querySelectorAll('.custom-select.open').forEach(el => {
+      if (el !== root) el.classList.remove('open');
+    });
+    root.classList.toggle('open');
+  };
+  root.querySelectorAll('.custom-select-option').forEach(option => {
+    option.onclick = function(e) {
+      e.stopPropagation();
+      config.onChange(this.dataset.value);
+      root.classList.remove('open');
+    };
   });
-  html += `</select>`;
-  container.innerHTML = html;
+  updateCustomSelectUI(config.selectId, current);
+}
+
+function updateCustomSelectUI(selectId, value) {
+  const root = document.getElementById(selectId);
+  if (!root) return;
+  const active = root.querySelector(`.custom-select-option[data-value="${value}"]`) || root.querySelector('.custom-select-option');
+  if (!active) return;
+  root.querySelectorAll('.custom-select-option').forEach(el => el.classList.toggle('active', el === active));
+  const span = root.querySelector('.custom-select-btn span');
+  if (span) span.textContent = active.textContent;
+  root.classList.toggle('is-default', value === 'all');
+  root.classList.toggle('has-selection', value !== 'all');
+  root.dataset.value = value;
+}
+
+function buildVerTabs() {
+  const vers = getAllVersions();
+  buildCustomSelect('verTabs', {
+    selectId: 'versionSelect',
+    icon: 'fas fa-layer-group',
+    options: [{ value: 'all', label: 'ALL VERSIONS' }, ...vers.map(v => ({ value: v, label: v }))],
+    getValue: () => currentVer,
+    onChange: value => {
+      currentVer = value;
+      renderGrid();
+    }
+  });
+}
+
+function buildExtraFilterTabs() {
+  buildCustomSelect('browseTabs', {
+    selectId: 'extraFilterDropdown',
+    icon: 'fas fa-wand-magic-sparkles',
+    options: getExtraFilterOptions(),
+    getValue: () => currentExtraFilter,
+    onChange: value => {
+      currentExtraFilter = value;
+      renderGrid();
+    }
+  });
 }
 
 function filterVer(ver, el) {
+
   currentVer = ver;
   renderGrid();
 }
@@ -5897,6 +6191,15 @@ function filterVerDropdown(el) {
   currentVer = el.value;
   renderGrid();
 }
+
+function filterExtraDropdown(el) {
+  currentExtraFilter = el.value;
+  renderGrid();
+}
+
+document.addEventListener('click', function() {
+  document.querySelectorAll('.custom-select.open').forEach(el => el.classList.remove('open'));
+});
 
 // ── FILTER + SEARCH ──────────────────────────
 function filterCat(cat, el) {
@@ -5916,6 +6219,10 @@ function getFilteredItems() {
   let filtered = currentCat === 'all'
     ? items.filter(i => i.cat !== 'booster')
     : items.filter(i => i.cat === currentCat && canAccessItem(i));
+
+  if (currentExtraFilter === 'recently-added') {
+    filtered = filtered.filter(item => item.recentlyAdded === true);
+  }
 
   // Version filter
   if (currentVer !== 'all') {
@@ -5943,6 +6250,8 @@ function getFilteredItems() {
 function renderGrid() {
   const grid = document.getElementById('mainGrid');
   const filtered = getFilteredItems();
+  updateCustomSelectUI('versionSelect', currentVer);
+  updateCustomSelectUI('extraFilterDropdown', currentExtraFilter);
   updateResultsMeta(filtered);
   updateCategoryTabs();
 
@@ -5951,24 +6260,7 @@ function renderGrid() {
     return;
   }
 
-  grid.innerHTML = filtered.map(item => {
-    const chips = (item.versions || []).slice(0, 3).map(v => `<span class="ver-chip">${v.ver}</span>`).join('');
-    const extra = (item.versions || []).length > 3 ? `<span class="ver-chip">+${item.versions.length - 3}</span>` : '';
-    const score = item.cat === 'shop' ? 'PREMIUM' : item.cat === 'booster' ? 'BOOSTER' : `${(item.versions || []).length} VER`;
-    return `
-      <article class="card" onclick="openDetail('${item.slug}')">
-        ${isLikelyBrokenImage(item.img)
-          ? `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}"></div>`
-          : `<div class="card-thumb"><img src="${item.img}" alt="${item.name.replace(/"/g, '&quot;')}" loading="lazy" decoding="async" onerror="this.closest('.card-thumb').outerHTML='<div class=&quot;card-thumb fallback&quot; data-cat=&quot;${slugifyCat(item.cat)}&quot;></div>'"></div>`}
-        <div class="card-meta">
-          <div class="cat-badge">${slugifyCat(item.cat)}</div>
-          <div class="card-score">${score}</div>
-        </div>
-        <h3>${item.name}</h3>
-        <p>${(item.desc || '').substring(0, 78)}${(item.desc || '').length > 78 ? '…' : ''}</p>
-        <div class="ver-chips">${chips}${extra}</div>
-      </article>`;
-  }).join('');
+  grid.innerHTML = filtered.map(createCardMarkup).join('');
 }
 
 // ── OPEN DETAIL ──────────────────────────────
@@ -6100,6 +6392,7 @@ function generateCode() {
   code += `  "desc": "${document.getElementById('nDesc').value.trim().replace(/\n/g, '\n')}",\n`;
   code += `  "loader": "${document.getElementById('nLoader').value.trim().replace(/\n/g, '\n')}",\n`;
   code += `  "keybinds": "${document.getElementById('nKeybinds').value.trim().replace(/\n/g, '\n')}",\n`;
+  code += `  "recentlyAdded": ${document.getElementById('nRecentlyAdded').checked ? 'true' : 'false'},\n`;
 
   code += `  "versions": [\n`;
   versions.forEach((v, i) => {
@@ -6136,6 +6429,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const code = params.get('code');
   if (code) {
     buildVerTabs();
+    buildExtraFilterTabs();
     renderGrid();
     updateCheatCounters();
     updateCategoryTabs();
@@ -6182,6 +6476,7 @@ window.addEventListener('DOMContentLoaded', () => {
     updateCheatCounters();
   } else {
     buildVerTabs();
+    buildExtraFilterTabs();
     renderGrid();
     updateCheatCounters();
     updateCategoryTabs();
