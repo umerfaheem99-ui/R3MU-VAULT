@@ -1036,14 +1036,20 @@ body::before {
   align-items: center;
   gap: 10px;
   padding: 10px 12px 10px 16px;
-  background: linear-gradient(180deg, rgba(8,15,34,0.84), rgba(8,14,28,0.70));
-  border: 1px solid rgba(96,165,250,0.18);
+  background: linear-gradient(180deg, rgba(8,15,34,0.92), rgba(8,14,28,0.85));
+  border: 1px solid rgba(56,189,248,0.22);
   border-radius: 18px;
-  box-shadow: 0 18px 44px rgba(2,6,23,0.34);
+  box-shadow: 0 18px 44px rgba(2,6,23,0.34), 0 0 0 1px rgba(56,189,248,0.05) inset;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.search-shell:focus-within {
+  border-color: rgba(56,189,248,0.45);
+  box-shadow: 0 18px 44px rgba(2,6,23,0.4), 0 0 20px rgba(56,189,248,0.12);
 }
 .search-shell i {
   color: #7dd3fc;
   font-size: 0.95rem;
+  flex-shrink: 0;
 }
 .search-bar {
   width: 100%;
@@ -1057,17 +1063,27 @@ body::before {
   font-size: 0.92rem;
 }
 .search-clear {
-  border: 1px solid rgba(148,163,184,0.16);
-  background: rgba(255,255,255,0.05);
-  color: #bcd3ff;
+  border: 1px solid rgba(56,189,248,0.25);
+  background: rgba(56,189,248,0.08);
+  color: #7dd3fc;
   border-radius: 999px;
-  padding: 7px 12px;
+  padding: 7px 14px;
   font-size: 0.7rem;
   font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
   cursor: pointer;
   display: none;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
-.search-clear.show { display: inline-flex; }
+.search-clear:hover {
+  background: rgba(56,189,248,0.18);
+  border-color: rgba(56,189,248,0.5);
+  box-shadow: 0 0 10px rgba(56,189,248,0.2);
+}
+.search-clear.show { display: inline-flex; align-items: center; }
 #resultsMeta {
   max-width: 1300px;
   margin: 8px auto 0;
@@ -1228,6 +1244,29 @@ body::before {
   border-radius: 999px;
   padding: 4px 8px;
 }
+
+/* NEW badge for recently added items */
+.new-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px rgba(34,211,238,0.5);
+  animation: newBadgePulse 2s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+@keyframes newBadgePulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(34,211,238,0.5); }
+  50% { box-shadow: 0 0 16px rgba(34,211,238,0.85), 0 0 28px rgba(139,92,246,0.4); }
+}
 .detail-hero,
 .detail-content {
   max-width: 1260px;
@@ -1274,6 +1313,32 @@ body.low-end-device *, body.low-end-device *::before, body.low-end-device *::aft
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ── CUSTOM SCROLLBAR ─────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(5, 8, 22, 0.95);
+  border-left: 1px solid rgba(56,189,248,0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(56,189,248,0.35), rgba(139,92,246,0.35));
+  border-radius: 999px;
+  border: 1px solid rgba(56,189,248,0.1);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(56,189,248,0.6), rgba(139,92,246,0.6));
+}
+::-webkit-scrollbar-corner {
+  background: rgba(5, 8, 22, 0.95);
+}
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56,189,248,0.3) rgba(5,8,22,0.9);
 }
 body.low-end-device .card,
 body.low-end-device .info-box,
@@ -1489,7 +1554,7 @@ body.low-end-device .card:hover { transform: none; }
           <option value="recently-added">RECENTLY ADDED</option>
         </select>
       </div>
-      <div class="selector-hint">Use this to quickly show items you marked for Recently Added.</div>
+
     </div>
   </div>
 
@@ -5906,6 +5971,7 @@ function createCardMarkup(item) {
   const score = item.cat === 'shop' ? 'PREMIUM' : item.cat === 'booster' ? 'BOOSTER' : `${(item.versions || []).length} VER`;
   return `
       <article class="card" onclick="openDetail('${item.slug}')">
+        ${item.recentlyAdded ? `<div class="new-badge">✦ NEW</div>` : ''}
         ${isLikelyBrokenImage(item.img)
           ? `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}"></div>`
           : `<div class="card-thumb"><img src="${item.img}" alt="${item.name.replace(/"/g, '&quot;')}" loading="lazy" decoding="async" onerror="this.closest('.card-thumb').outerHTML='<div class=&quot;card-thumb fallback&quot; data-cat=&quot;${slugifyCat(item.cat)}&quot;></div>'"></div>`}
