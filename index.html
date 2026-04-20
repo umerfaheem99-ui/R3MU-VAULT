@@ -399,6 +399,16 @@ body {
   border: 1px solid rgba(96,165,250,0.22);
   border-radius: 18px;
   box-shadow: 0 16px 34px rgba(2,6,23,0.24);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.selector-shell:hover {
+  border-color: rgba(56,189,248,0.42);
+  box-shadow: 0 16px 34px rgba(2,6,23,0.3), 0 0 18px rgba(56,189,248,0.1);
+  transform: translateY(-1px);
+}
+.selector-shell.is-open {
+  border-color: rgba(56,189,248,0.55);
+  box-shadow: 0 16px 38px rgba(2,6,23,0.36), 0 0 22px rgba(56,189,248,0.16);
 }
 .selector-shell i {
   color: #7dd3fc;
@@ -451,7 +461,7 @@ body {
 .custom-select-btn i {
   color: #7dd3fc;
   font-size: 0.86rem;
-  transition: transform 0.22s ease, color 0.2s ease;
+  transition: transform 0.26s cubic-bezier(0.4,0,0.2,1), color 0.2s ease;
 }
 .custom-select.is-default .custom-select-btn span {
   color: #dbeafe;
@@ -467,6 +477,7 @@ body {
 }
 .custom-select.open .custom-select-btn i {
   transform: rotate(180deg);
+  color: #38bdf8;
 }
 .custom-select-menu {
   position: absolute;
@@ -482,9 +493,17 @@ body {
   overflow-y: auto;
   display: none;
   z-index: 120;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .custom-select.open .custom-select-menu {
   display: block;
+  animation: dropdownReveal 0.22s ease forwards;
+}
+@keyframes dropdownReveal {
+  from { opacity: 0; transform: translateY(-8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 .custom-select-option {
   width: 100%;
@@ -498,11 +517,25 @@ body {
   font-weight: 700;
   font-family: 'DM Sans', sans-serif;
   cursor: pointer;
-  transition: background 0.18s ease, color 0.18s ease;
+  transition: background 0.18s ease, color 0.18s ease, padding-left 0.18s ease;
+}
+.custom-select.open .custom-select-option {
+  animation: optionFadeIn 0.18s ease both;
+}
+.custom-select.open .custom-select-option:nth-child(1)  { animation-delay: 0.03s; }
+.custom-select.open .custom-select-option:nth-child(2)  { animation-delay: 0.06s; }
+.custom-select.open .custom-select-option:nth-child(3)  { animation-delay: 0.09s; }
+.custom-select.open .custom-select-option:nth-child(4)  { animation-delay: 0.12s; }
+.custom-select.open .custom-select-option:nth-child(5)  { animation-delay: 0.15s; }
+.custom-select.open .custom-select-option:nth-child(n+6) { animation-delay: 0.18s; }
+@keyframes optionFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .custom-select-option:hover {
   background: rgba(56,189,248,0.10);
   color: #ffffff;
+  padding-left: 18px;
 }
 .custom-select-option.active {
   background: linear-gradient(135deg, rgba(56,189,248,0.16), rgba(139,92,246,0.22));
@@ -1250,22 +1283,25 @@ body::before {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: linear-gradient(135deg, #22d3ee, #8b5cf6);
-  color: #fff;
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  padding: 3px 8px;
-  border-radius: 999px;
+  background: rgba(5, 8, 22, 0.82);
+  color: #38bdf8;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 3px 9px;
+  border-radius: 6px;
   text-transform: uppercase;
-  box-shadow: 0 0 10px rgba(34,211,238,0.5);
-  animation: newBadgePulse 2s ease-in-out infinite;
+  border: 1px solid rgba(56, 189, 248, 0.55);
+  box-shadow: 0 0 10px rgba(56,189,248,0.18), inset 0 0 8px rgba(56,189,248,0.06);
+  backdrop-filter: blur(8px);
+  animation: newBadgePulse 2.4s ease-in-out infinite;
   z-index: 2;
   pointer-events: none;
 }
 @keyframes newBadgePulse {
-  0%, 100% { box-shadow: 0 0 8px rgba(34,211,238,0.5); }
-  50% { box-shadow: 0 0 16px rgba(34,211,238,0.85), 0 0 28px rgba(139,92,246,0.4); }
+  0%, 100% { border-color: rgba(56,189,248,0.45); box-shadow: 0 0 8px rgba(56,189,248,0.15); }
+  50% { border-color: rgba(56,189,248,0.9); box-shadow: 0 0 16px rgba(56,189,248,0.38), 0 0 28px rgba(139,92,246,0.18); }
 }
 .detail-hero,
 .detail-content {
@@ -1510,15 +1546,15 @@ body.low-end-device .card:hover { transform: none; }
 
   <!-- Notice Banner -->
   <div style="display:flex;justify-content:center;padding:0 16px 18px;">
-    <div style="display:inline-flex;align-items:flex-start;gap:12px;background:rgba(124,58,237,0.07);border:1px solid rgba(124,58,237,0.28);border-radius:12px;padding:13px 18px;max-width:600px;width:100%;text-align:left;box-shadow:0 0 20px rgba(124,58,237,0.07);">
-      <i class="fas fa-shield-halved" style="color:#a855f7;font-size:15px;margin-top:2px;flex-shrink:0;"></i>
-      <p style="margin:0;font-size:0.78rem;color:#7c6a9e;line-height:1.65;">
-        <strong style="color:#a855f7;font-weight:700;letter-spacing:0.3px;">Notice —</strong>
-        We try our best to share everything we get. Files are scanned, but mistakes can happen when we're in a hurry. To stay safe from RATs, always double-check on
-        <a href="https://www.virustotal.com" target="_blank" rel="noopener" style="color:#c084fc;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(192,132,252,0.35);">VirusTotal</a>,
-        <a href="https://jlab.threat.rip" target="_blank" rel="noopener" style="color:#c084fc;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(192,132,252,0.35);">jlab.threat.rip</a>,
+    <div style="display:inline-flex;align-items:flex-start;gap:13px;background:linear-gradient(180deg,rgba(8,15,34,0.82),rgba(8,14,28,0.68));border:1px solid rgba(56,189,248,0.22);border-radius:16px;padding:14px 20px;max-width:620px;width:100%;text-align:left;box-shadow:0 8px 28px rgba(2,6,23,0.28),0 0 0 1px rgba(56,189,248,0.04) inset;backdrop-filter:blur(14px);">
+      <i class="fas fa-shield-halved" style="color:#38bdf8;font-size:15px;margin-top:2px;flex-shrink:0;filter:drop-shadow(0 0 6px rgba(56,189,248,0.45));"></i>
+      <p style="margin:0;font-size:0.78rem;color:#7a94c2;line-height:1.7;">
+        <strong style="color:#7dd3fc;font-weight:700;letter-spacing:0.5px;font-family:'Rajdhani',sans-serif;font-size:0.85rem;">NOTICE —</strong>
+        We try our best to share everything we get. Files are scanned, but mistakes can happen. To stay safe from RATs, always double-check on
+        <a href="https://www.virustotal.com" target="_blank" rel="noopener" style="color:#38bdf8;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(56,189,248,0.3);transition:all 0.2s;" onmouseover="this.style.color='#bae6fd';this.style.borderBottomColor='rgba(56,189,248,0.7)'" onmouseout="this.style.color='#38bdf8';this.style.borderBottomColor='rgba(56,189,248,0.3)'">VirusTotal</a>,
+        <a href="https://jlab.threat.rip" target="_blank" rel="noopener" style="color:#38bdf8;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(56,189,248,0.3);transition:all 0.2s;" onmouseover="this.style.color='#bae6fd';this.style.borderBottomColor='rgba(56,189,248,0.7)'" onmouseout="this.style.color='#38bdf8';this.style.borderBottomColor='rgba(56,189,248,0.3)'">jlab.threat.rip</a>,
         and
-        <a href="https://java-decompiler.github.io" target="_blank" rel="noopener" style="color:#c084fc;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(192,132,252,0.35);">Java Decompiler</a>
+        <a href="https://java-decompiler.github.io" target="_blank" rel="noopener" style="color:#38bdf8;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(56,189,248,0.3);transition:all 0.2s;" onmouseover="this.style.color='#bae6fd';this.style.borderBottomColor='rgba(56,189,248,0.7)'" onmouseout="this.style.color='#38bdf8';this.style.borderBottomColor='rgba(56,189,248,0.3)'">Java Decompiler</a>
         before using.
       </p>
     </div>
@@ -5971,12 +6007,11 @@ function createCardMarkup(item) {
   const score = item.cat === 'shop' ? 'PREMIUM' : item.cat === 'booster' ? 'BOOSTER' : `${(item.versions || []).length} VER`;
   return `
       <article class="card" onclick="openDetail('${item.slug}')">
-        ${item.recentlyAdded ? `<div class="new-badge">✦ NEW</div>` : ''}
+        ${item.recentlyAdded ? `<div class="new-badge">NEW</div>` : ''}
         ${isLikelyBrokenImage(item.img)
           ? `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}"></div>`
           : `<div class="card-thumb"><img src="${item.img}" alt="${item.name.replace(/"/g, '&quot;')}" loading="lazy" decoding="async" onerror="this.closest('.card-thumb').outerHTML='<div class=&quot;card-thumb fallback&quot; data-cat=&quot;${slugifyCat(item.cat)}&quot;></div>'"></div>`}
         <div class="card-meta">
-          <div class="cat-badge">${slugifyCat(item.cat)}</div>
           <div class="card-score">${score}</div>
         </div>
         <h3>${item.name}</h3>
@@ -6206,15 +6241,23 @@ function buildCustomSelect(containerId, config) {
   btn.onclick = function(e) {
     e.stopPropagation();
     document.querySelectorAll('.custom-select.open').forEach(el => {
-      if (el !== root) el.classList.remove('open');
+      if (el !== root) {
+        el.classList.remove('open');
+        const shell = el.closest('.selector-shell');
+        if (shell) shell.classList.remove('is-open');
+      }
     });
     root.classList.toggle('open');
+    const shell = root.closest('.selector-shell');
+    if (shell) shell.classList.toggle('is-open', root.classList.contains('open'));
   };
   root.querySelectorAll('.custom-select-option').forEach(option => {
     option.onclick = function(e) {
       e.stopPropagation();
       config.onChange(this.dataset.value);
       root.classList.remove('open');
+      const shell = root.closest('.selector-shell');
+      if (shell) shell.classList.remove('is-open');
     };
   });
   updateCustomSelectUI(config.selectId, current);
@@ -6277,7 +6320,11 @@ function filterExtraDropdown(el) {
 }
 
 document.addEventListener('click', function() {
-  document.querySelectorAll('.custom-select.open').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.custom-select.open').forEach(el => {
+    el.classList.remove('open');
+    const shell = el.closest('.selector-shell');
+    if (shell) shell.classList.remove('is-open');
+  });
 });
 
 // ── FILTER + SEARCH ──────────────────────────
@@ -6339,7 +6386,14 @@ function renderGrid() {
     return;
   }
 
-  grid.innerHTML = filtered.map(createCardMarkup).join('');
+  // Sort: recently added items always appear first
+  const sorted = [...filtered].sort((a, b) => {
+    if (a.recentlyAdded && !b.recentlyAdded) return -1;
+    if (!a.recentlyAdded && b.recentlyAdded) return 1;
+    return 0;
+  });
+
+  grid.innerHTML = sorted.map(createCardMarkup).join('');
 }
 
 // ── OPEN DETAIL ──────────────────────────────
