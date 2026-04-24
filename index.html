@@ -303,16 +303,17 @@ body {
   border-color: var(--accent);
   box-shadow: 0 0 16px rgba(124,58,237,0.4);
 }
-.tab.others-tab { color: #34d399; border-color: rgba(52,211,153,0.3); }
+.tab.others-tab { color: var(--accent2); border-color: rgba(168,85,247,0.3); }
 .tab.others-tab:hover {
-  background: rgba(52,211,153,0.12);
-  border-color: #34d399;
-  box-shadow: 0 0 12px rgba(52,211,153,0.3);
-  color: #6ee7b7;
+  background: rgba(124,58,237,0.08);
+  border-color: rgba(124,58,237,0.5);
+  box-shadow: 0 0 12px rgba(124,58,237,0.2);
+  color: #fff;
 }
 .tab.others-tab.active {
-  background: #34d399; color: #04130d;
-  border-color: #34d399;
+  background: var(--accent); color: white;
+  border-color: var(--accent);
+  box-shadow: 0 0 16px rgba(124,58,237,0.4);
 }
 
 /* Booster locked tab */
@@ -1178,10 +1179,10 @@ body::before {
   color: #fff;
   box-shadow: 0 12px 28px rgba(56,189,248,0.14);
 }
-.tab.others-tab { color: #6ee7b7; }
+.tab.others-tab { color: var(--accent2); }
 .tab.others-tab.active {
-  color: #04130d;
-  background: linear-gradient(135deg, #10b981, #6ee7b7);
+  color: white;
+  background: var(--accent);
 }
 .tab.booster-tab {
   color: #c4b5fd;
@@ -1568,7 +1569,11 @@ body.low-end-device .card:hover { transform: none; }
   <div class="hero">
     <h1 class="hero-title">THE VAULT</h1>
     <p class="hero-sub">Elite Minecraft archive</p>
-    <input type="text" id="searchBar" class="search-bar" placeholder="Search clients, mods, keybinds..." oninput="doSearch()">
+    <div class="search-shell">
+      <i class="fas fa-magnifying-glass"></i>
+      <input type="text" id="searchBar" class="search-bar" placeholder="Search clients, mods, keybinds..." oninput="doSearch()">
+      <button class="search-clear" type="button" id="searchClearBtn" onclick="document.getElementById('searchBar').value='';this.classList.remove('show');renderGrid();">CLEAR</button>
+    </div>
   </div>
 
   <!-- Notice Banner -->
@@ -6593,6 +6598,9 @@ let searchDebounce;
 function doSearch() {
   clearTimeout(searchDebounce);
   searchDebounce = setTimeout(() => renderGrid(), 90);
+  const clearBtn = document.getElementById('searchClearBtn');
+  const input = document.getElementById('searchBar');
+  if (clearBtn && input) clearBtn.classList.toggle('show', !!input.value.trim());
 }
 
 function getFilteredItems() {
