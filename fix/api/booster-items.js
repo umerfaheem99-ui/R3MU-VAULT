@@ -39,7 +39,7 @@ const BOOSTER_ITEMS = [
     desc: 'It has no gui Modules | Triggerbot Jumpreset Mouse Tweaks Fast Place For Fast Potting Self Destruct Bypasses Ocean and Other SS TOOLS',
     loader: 'Loader | Fabric - Put it in mods folder',
     keybinds: 'Triggerbot R | Z | K - You Can Choose Which key you want from the downloads option JumpReset | J SelfDestruct | M It Will Bypass all ss tools after self destruct',
-    recentlyAdded: true,
+    recentlyAdded: false,
     versions: [
       { ver: '1.21 / 1.21.1 | R', link: 'https://shrinkme.click/iaCw' },
       { ver: '1.21 / 1.21.1 | K', link: 'https://shrinkme.click/ABlGziel' },
@@ -57,12 +57,28 @@ const BOOSTER_ITEMS = [
     desc: 'It has no gui Modules | Triggerbot Jumpreset Mouse Tweaks Fast Place For Fast Potting Self Destruct Bypasses Ocean and Other SS TOOLS',
     loader: 'Loader | Fabric - Put it in mods folder',
     keybinds: 'Triggerbot Y - JumpReset | J SelfDestruct | M It Will Bypass all ss tools after self destruct',
-    recentlyAdded: true,
+    recentlyAdded: false,
     versions: [
       { ver: '1.21.4', link: 'https://shrinkme.click/BAgls' }
     ],
     screenshots: [
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTukqqNRXWMcVhwfC__4P0e0oufz2qXPVnp3g&s'
+    ]
+  },
+  {
+    slug: 'queue-sniper',
+    name: 'Queue Sniper',
+    cat: 'booster',
+    recentlyAdded: true,
+    img: 'https://i.postimg.cc/htdgmV5h/image.webp',
+    desc: 'First, we will go to our main browser, then we press "F12" to open the console. After that, we copy everything that appears into a .txt file to be able to use it. It will probably tell you that this requires authorization; read the message because it will tell you what you need to do. After that, go to Discord and paste the .txt file again in your console so the program opens. And finally, go to the tier list where you want to enter, enter the milliseconds you want, and wait until you get in.',
+    loader: 'Open browser → Press F12 → Copy console code to .txt → Paste in Discord console → Enter ms delay → Wait for entry',
+    keybinds: 'N/A',
+    versions: [
+      { ver: 'Qsniper', link: 'https://shrinkme.click/mM9lNRE' }
+    ],
+    screenshots: [
+      'https://i.postimg.cc/htdgmV5h/image.webp'
     ]
   }
 ];
