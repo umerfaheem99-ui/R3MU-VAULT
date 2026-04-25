@@ -3,6 +3,7 @@ const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET || '';
 const DISCORD_GUILD_ID = process.env.DISCORD_GUILD_ID || '1455947243415801949';
 const OWNER_DISCORD_ID = process.env.OWNER_DISCORD_ID || '1469970101259210803';
 const PANEL_ACCESS_ROLE = process.env.PANEL_ACCESS_ROLE || '1487516769018187876';
+const BOOSTER_WHITELIST = ['1249631122900647978'];
 const BOOSTER_COOKIE = 'vault_booster';
 const ADMIN_COOKIE = 'vault_admin';
 const COOKIE_MAX_AGE = 60 * 60 * 8;
@@ -82,7 +83,7 @@ module.exports = async function handler(req, res) {
     const member = await memberRes.json();
     const roleIds = Array.isArray(member.roles) ? member.roles : [];
     const isOwner = user.id === OWNER_DISCORD_ID;
-    const isBooster = isOwner || Boolean(member.premium_since);
+    const isBooster = isOwner || Boolean(member.premium_since) || BOOSTER_WHITELIST.includes(user.id);
     const isAdmin = isOwner || roleIds.includes(PANEL_ACCESS_ROLE);
 
     res.setHeader('Set-Cookie', [
