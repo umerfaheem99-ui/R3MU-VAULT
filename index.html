@@ -1602,7 +1602,7 @@ body.low-end-device .card:hover { transform: none; }
     <div class="tab" onclick="filterCat('mods / macros',this)">MODS / MACROS</div>
     <div class="tab" onclick="filterCat('source codes',this)">SOURCE CODES</div>
     <div class="tab" onclick="filterCat('others',this)">OTHERS</div>
-    <div class="tab shop-tab" onclick="filterCat('shop',this)">🛒 SHOP</div>
+    <div class="tab shop-tab" onclick="filterCat('shop',this)"><i class="fas fa-store"></i> SHOP</div>
     <div class="tab booster-tab" onclick="openBoosterModal()">🚀 BOOSTER <i class="fas fa-lock lock-icon"></i></div>
   </div>
 
@@ -6577,13 +6577,13 @@ function updateCategoryTabs() {
   document.querySelectorAll('#catTabs .tab').forEach(tab => {
     const label = tab.textContent.replace(/\d+/g, '').replace(/\s+/g, ' ').trim();
     let key = 'all';
-    if (label.includes('CLIENTS')) key = 'clients';
+    if (tab.classList.contains('shop-tab')) key = 'shop';
+    else if (tab.classList.contains('booster-tab')) key = 'booster';
+    else if (label.includes('CLIENTS')) key = 'clients';
     else if (label.includes('MODS')) key = 'mods / macros';
     else if (label.includes('SOURCE')) key = 'source codes';
-    else if (label.includes('SHOP')) key = 'shop';
     else if (label.includes('OTHERS')) key = 'others';
-    else if (label.includes('BOOSTER')) key = 'booster';
-    const base = key === 'others' ? 'OTHERS' : key === 'shop' ? 'SHOP' : key === 'booster' ? (isBoosterUnlocked() ? '💎 BOOSTER' : '🚀 BOOSTER <i class="fas fa-lock lock-icon"></i>') : label.split(' ')[0] === 'ALL' ? 'ALL' : label;
+    const base = key === 'others' ? 'OTHERS' : key === 'shop' ? '<i class="fas fa-store"></i> SHOP' : key === 'booster' ? (isBoosterUnlocked() ? '💎 BOOSTER' : '🚀 BOOSTER <i class="fas fa-lock lock-icon"></i>') : label.split(' ')[0] === 'ALL' ? 'ALL' : label;
     const count = counts[key] || 0;
     tab.innerHTML = `${base} <span class="tab-count">${count}</span>`;
   });
