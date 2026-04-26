@@ -329,6 +329,18 @@ body {
   margin-left: 5px;
   opacity: 0.75;
 }
+.tab.shop-tab {
+  color: #34d399;
+  border-color: rgba(52,211,153,0.3);
+  position: relative;
+}
+.tab.shop-tab:hover {
+  background: rgba(52,211,153,0.1);
+  border-color: #34d399;
+  box-shadow: 0 0 14px rgba(52,211,153,0.35);
+  color: #6ee7b7;
+  transform: translateY(-1px);
+}
 
 /* Version filter tabs - smaller style */
 .ver-tab {
@@ -1470,7 +1482,7 @@ body.low-end-device .card:hover { transform: none; }
     <option value="mods / macros">Mods / Macros</option>
     <option value="source codes">Source Codes</option>
     <option value="others">Others</option>
-    <option value="bypasses">Bypasses</option>
+    <option value="shop">Shop</option>
     <option value="booster">Booster</option>
   </select>
   <input type="text" id="nName" class="nimdo-in" placeholder="Item Name">
@@ -1590,7 +1602,7 @@ body.low-end-device .card:hover { transform: none; }
     <div class="tab" onclick="filterCat('mods / macros',this)">MODS / MACROS</div>
     <div class="tab" onclick="filterCat('source codes',this)">SOURCE CODES</div>
     <div class="tab" onclick="filterCat('others',this)">OTHERS</div>
-    <div class="tab" onclick="filterCat('bypasses',this)">BYPASSES</div>
+    <div class="tab shop-tab" onclick="filterCat('shop',this)">🛒 SHOP</div>
     <div class="tab booster-tab" onclick="openBoosterModal()">🚀 BOOSTER <i class="fas fa-lock lock-icon"></i></div>
   </div>
 
@@ -6568,10 +6580,10 @@ function updateCategoryTabs() {
     if (label.includes('CLIENTS')) key = 'clients';
     else if (label.includes('MODS')) key = 'mods / macros';
     else if (label.includes('SOURCE')) key = 'source codes';
-    else if (label.includes('BYPASSES')) key = 'bypasses';
+    else if (label.includes('SHOP')) key = 'shop';
     else if (label.includes('OTHERS')) key = 'others';
     else if (label.includes('BOOSTER')) key = 'booster';
-    const base = key === 'others' ? 'OTHERS' : key === 'bypasses' ? 'BYPASSES' : key === 'booster' ? (isBoosterUnlocked() ? '💎 BOOSTER' : '🚀 BOOSTER <i class="fas fa-lock lock-icon"></i>') : label.split(' ')[0] === 'ALL' ? 'ALL' : label;
+    const base = key === 'others' ? 'OTHERS' : key === 'shop' ? 'SHOP' : key === 'booster' ? (isBoosterUnlocked() ? '💎 BOOSTER' : '🚀 BOOSTER <i class="fas fa-lock lock-icon"></i>') : label.split(' ')[0] === 'ALL' ? 'ALL' : label;
     const count = counts[key] || 0;
     tab.innerHTML = `${base} <span class="tab-count">${count}</span>`;
   });
