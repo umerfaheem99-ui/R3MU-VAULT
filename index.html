@@ -32,6 +32,7 @@
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+* { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 body {
   margin: 0;
   background: var(--bg);
@@ -628,10 +629,10 @@ body {
 /* ── CARD ────────────────────────────────────── */
 .card {
   background: var(--card-bg);
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid var(--border);
-  padding: 10px;
-  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 12px;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease, box-shadow 0.28s ease;
   cursor: pointer;
   overflow: hidden;
   position: relative;
@@ -640,42 +641,46 @@ body {
 .card::before {
   content: '';
   position: absolute; inset: 0;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(124,58,237,0.05), transparent);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.07), transparent 60%);
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.28s ease;
 }
 .card:hover::before { opacity: 1; }
 .card:hover {
-  transform: translateY(-6px) scale(1.035);
-  border-color: rgba(124,58,237,0.5);
-  box-shadow: 0 10px 28px rgba(124,58,237,0.15);
+  transform: translateY(-5px);
+  border-color: rgba(124,58,237,0.45);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35), 0 0 20px rgba(124,58,237,0.12);
   z-index: 2;
 }
 .card img {
   width: 100%;
-  border-radius: 8px;
-  height: 110px;
+  border-radius: 9px;
+  height: 120px;
   object-fit: cover;
-  margin-bottom: 9px;
+  margin-bottom: 10px;
   display: block;
+  transition: transform 0.28s ease;
 }
+.card:hover img { transform: scale(1.03); }
 .card .cat-badge {
   color: var(--accent2);
   font-weight: 700;
   font-size: 9px;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
+  opacity: 0.85;
 }
 .card h3 {
-  font-size: 0.9rem;
-  margin: 5px 0 3px;
+  font-size: 0.88rem;
+  margin: 5px 0 4px;
   font-weight: 700;
-  color: #ddd;
-  line-height: 1.2;
+  color: #e8e8f0;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
 }
 .card p {
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   color: var(--muted);
   margin: 0;
   line-height: 1.3;
@@ -6251,6 +6256,26 @@ items.push({
   "cat": "shop",
   "img": "https://i.postimg.cc/dVKv0yHr/1777207287565-019dc9cc-8f14-76c7-9860-9cd0e7264c79.webp",
   "desc": "Create Toclet On Discord To Purchase",
+  "loader": "",
+  "keybinds": "",
+  "recentlyAdded": true,
+  "versions": [
+    {
+      "ver": "Discord",
+      "link": "https://discord.com/invite/r3musblackmarket"
+    }
+  ],
+  "screenshots": [
+    "https://i.postimg.cc/dVKv0yHr/1777207287565-019dc9cc-8f14-76c7-9860-9cd0e7264c79.webp"
+  ]
+});
+
+items.push({
+  "slug": "donut-smp-money",
+  "name": "Donut SMP Money",
+  "cat": "shop",
+  "img": "https://i.postimg.cc/dVKv0yHr/1777207287565-019dc9cc-8f14-76c7-9860-9cd0e7264c79.webp",
+  "desc": "1M = 11 PKR / 3.7 INR | 2M = 22 PKR / 7.4 INR\nCreate a ticket on Discord to purchase.",
   "loader": "",
   "keybinds": "",
   "recentlyAdded": true,
