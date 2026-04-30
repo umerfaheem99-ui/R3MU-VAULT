@@ -19,16 +19,8 @@
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <style>
 :root {
-  --bg: #060608;
-  --accent: #7c3aed;
-  --accent2: #a855f7;
-  --card-bg: #0e0e12;
-  --text: #e8e8f0;
-  --muted: #5a5a72;
-  --border: #1c1c28;
   --yt: #FF0000;
   --dc: #5865F2;
-  --grad: linear-gradient(135deg, #7c3aed, #a855f7, #ec4899);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -234,31 +226,7 @@ body {
   letter-spacing: 1px;
 }
 
-/* Search bar */
-.search-bar {
-  width: 90%; max-width: 480px;
-  padding: 11px 20px;
-  background: rgba(14,14,18,0.95);
-  border: 1px solid var(--border);
-  border-radius: 9999px;
-  color: white;
-  font-size: 0.85rem;
-  font-family: 'DM Sans', sans-serif;
-  outline: none;
-  margin-bottom: 28px;
-  display: block;
-  margin-left: auto; margin-right: auto;
-  transition: all 0.3s ease;
-}
-.search-bar::placeholder { color: var(--muted); }
-.search-bar:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(124,58,237,0.2), 0 0 20px rgba(124,58,237,0.15);
-  background: rgba(20,20,28,0.98);
-}
-.search-bar:hover {
-  border-color: rgba(124,58,237,0.4);
-}
+/* old search-bar removed */
 
 /* ── FILTER ROWS ─────────────────────────────── */
 .filter-row {
@@ -276,71 +244,30 @@ body {
 }
 
 /* Category tabs */
+/* Category tab base — full styling defined further below in
+   "PROFESSIONAL CATEGORY NAV" for proper override order */
 .tab {
-  padding: 7px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
   background: transparent;
   border-radius: 9999px;
   font-weight: 700;
-  font-size: 0.75rem;
-  color: var(--muted);
+  font-size: 0.72rem;
+  color: #9aa0bf;
   cursor: pointer;
-  border: 1px solid var(--border);
-  transition: all 0.25s ease;
-  letter-spacing: 0.5px;
+  border: 1px solid transparent;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.6px;
   position: relative;
-  overflow: hidden;
-}
-.tab::after {
-  content: '';
-  position: absolute; inset: 0;
-  border-radius: 9999px;
-  box-shadow: inset 0 0 0 1px transparent;
-  transition: box-shadow 0.25s;
-}
-.tab:hover {
-  color: #fff;
-  border-color: rgba(124,58,237,0.5);
-  background: rgba(124,58,237,0.08);
-  transform: translateY(-1px);
-  box-shadow: 0 0 12px rgba(124,58,237,0.2);
-}
-.tab.active {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
-  box-shadow: 0 0 16px rgba(124,58,237,0.4);
-}
-
-
-/* Booster locked tab */
-.tab.booster-tab {
-  color: #a78bfa;
-  border-color: rgba(167,139,250,0.3);
-  position: relative;
-}
-.tab.booster-tab:hover {
-  background: rgba(167,139,250,0.1);
-  border-color: #a78bfa;
-  box-shadow: 0 0 14px rgba(167,139,250,0.35);
-  color: #c4b5fd;
-  transform: translateY(-1px);
+  white-space: nowrap;
+  user-select: none;
 }
 .tab.booster-tab .lock-icon {
   font-size: 9px;
-  margin-left: 5px;
-  opacity: 0.75;
-}
-.tab.shop-tab {
-  color: #34d399;
-  border-color: rgba(52,211,153,0.3);
-  position: relative;
-}
-.tab.shop-tab:hover {
-  background: rgba(52,211,153,0.1);
-  border-color: #34d399;
-  box-shadow: 0 0 14px rgba(52,211,153,0.35);
-  color: #6ee7b7;
-  transform: translateY(-1px);
+  margin-left: 2px;
+  opacity: 0.7;
 }
 
 /* Version filter tabs - smaller style */
@@ -690,7 +617,7 @@ body {
   margin-top: 7px;
 }
 .card .ver-chip {
-  background: rgba(124,58,237,0.12);
+  background: rgba(56,189,248,0.12);
   color: var(--accent2);
   border: 1px solid rgba(124,58,237,0.25);
   border-radius: 4px;
@@ -724,7 +651,7 @@ body {
 .detail-info-header { flex: 1; min-width: 240px; }
 .detail-info-header .cat-badge {
   display: inline-flex; align-items: center; gap: 5px;
-  background: rgba(124,58,237,0.12);
+  background: rgba(56,189,248,0.12);
   color: var(--accent2);
   padding: 4px 12px;
   border-radius: 9999px;
@@ -877,10 +804,22 @@ body {
   position: relative;
 }
 .booster-modal-card .booster-gem {
-  font-size: 2.8rem;
-  margin-bottom: 12px;
-  display: block;
-  filter: drop-shadow(0 0 12px rgba(168,85,247,0.6));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(236,72,153,0.18), rgba(168,85,247,0.22));
+  border: 1px solid rgba(168,85,247,0.35);
+  font-size: 1.7rem;
+  color: #f0abfc;
+  box-shadow: 0 10px 28px rgba(168,85,247,0.28),
+              inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.booster-modal-card .booster-gem i {
+  filter: drop-shadow(0 0 10px rgba(236,72,153,0.55));
 }
 .booster-modal-card h3 {
   font-family: 'Rajdhani', sans-serif;
@@ -1026,10 +965,7 @@ body {
   --grad: linear-gradient(135deg, #38bdf8 0%, #60a5fa 35%, #8b5cf6 70%, #22d3ee 100%);
 }
 body {
-  background:
-    radial-gradient(circle at top, rgba(56,189,248,0.10), transparent 28%),
-    radial-gradient(circle at 85% 10%, rgba(139,92,246,0.12), transparent 22%),
-    linear-gradient(180deg, #040814 0%, #050816 45%, #040611 100%);
+  background: linear-gradient(180deg, #040814 0%, #050816 45%, #040611 100%);
 }
 body::before {
   content: '';
@@ -1056,16 +992,15 @@ body::before {
   box-shadow: 0 0 20px rgba(56,189,248,0.22);
 }
 .nav-links { flex-wrap: wrap; justify-content: flex-end; }
+/* Backdrop blur only on lightweight, low-count elements.
+   Removed from .card/.tab/.info-box/.ver-dropdown to prevent
+   GPU lag when many cards are on screen at once. */
 .whats-new-btn,
 .cheat-counter,
 #adminNavBtn,
 .social-icon,
-.tab,
-.ver-dropdown,
-.info-box,
-.card,
 .booster-modal-card {
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(12px);
 }
 .whats-new-btn {
   color: #7dd3fc;
@@ -1111,11 +1046,17 @@ body::before {
   border: 1px solid rgba(56,189,248,0.22);
   border-radius: 18px;
   box-shadow: 0 18px 44px rgba(2,6,23,0.34), 0 0 0 1px rgba(56,189,248,0.05) inset;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease, background 0.28s ease;
+}
+.search-shell:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56,189,248,0.34);
+  box-shadow: 0 20px 48px rgba(2,6,23,0.38), 0 0 18px rgba(56,189,248,0.10);
 }
 .search-shell:focus-within {
   border-color: rgba(56,189,248,0.45);
-  box-shadow: 0 18px 44px rgba(2,6,23,0.4), 0 0 20px rgba(56,189,248,0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px rgba(2,6,23,0.42), 0 0 22px rgba(56,189,248,0.14);
 }
 .search-shell i {
   color: #7dd3fc;
@@ -1130,6 +1071,7 @@ body::before {
   border: none;
   border-radius: 0;
   background: transparent;
+  outline: none;
   box-shadow: none !important;
   font-size: 0.92rem;
 }
@@ -1163,37 +1105,187 @@ body::before {
   font-size: 0.78rem;
 }
 .filter-row { gap: 10px; padding: 0 14px; }
-.tab {
+
+/* ── PROFESSIONAL CATEGORY NAV ─────────────────────────────────
+   Pill-shaped container holding the category tabs.
+   Each tab gets a square icon chip + label + count badge. */
+#catTabs.filter-row {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px;
+  margin: 0 auto 14px;
+  background: linear-gradient(180deg, rgba(14,16,28,0.9), rgba(10,12,22,0.78));
+  border: 1px solid rgba(96,165,250,0.18);
+  border-radius: 9999px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45),
+              inset 0 1px 0 rgba(255,255,255,0.05);
+  width: auto;
+  max-width: calc(100% - 24px);
+  justify-content: center;
+}
+.cat-tabs-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 6px 12px;
+  position: static;
+  z-index: 1;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 0;
+}
+#catTabs .tab {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 15px;
-  border-radius: 999px;
-  color: #b4c4e4;
-  background: rgba(255,255,255,0.025);
-  border-color: rgba(148,163,184,0.14);
+  padding: 9px 14px 9px 10px;
+  border-radius: 9999px;
+  color: #98a4c4;
+  background: transparent;
+  border: 1px solid transparent;
+  font-size: 0.72rem;
+  letter-spacing: 0.6px;
 }
-.tab .tab-count {
+#catTabs .tab .tab-ico {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 6px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  color: #d8e7ff;
-  font-size: 0.64rem;
+  width: 22px; height: 22px;
+  border-radius: 7px;
+  background: rgba(124,58,237,0.12);
+  color: var(--accent2);
+  font-size: 10px;
+  transition: all 0.28s ease;
+  flex-shrink: 0;
 }
-.tab.active {
-  background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(139,92,246,0.26));
-  border-color: rgba(96,165,250,0.48);
+#catTabs .tab .tab-count {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  min-width: 20px;
+  padding: 1px 7px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: rgba(216,231,255,0.55);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  height: auto;
+}
+#catTabs .tab:hover {
   color: #fff;
-  box-shadow: 0 12px 28px rgba(56,189,248,0.14);
+  background: rgba(56,189,248,0.10);
+  border-color: rgba(56,189,248,0.28);
+  transform: translateY(-1px);
+  box-shadow: none;
 }
-.tab.booster-tab {
-  color: #c4b5fd;
-  border-color: rgba(196,181,253,0.22);
+#catTabs .tab:hover .tab-ico {
+  background: rgba(56,189,248,0.22);
+  color: #fff;
+  transform: scale(1.06);
+}
+#catTabs .tab.active {
+  background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+  color: #fff;
+  border-color: rgba(56,189,248,0.45);
+  box-shadow: 0 8px 22px rgba(29,78,216,0.34),
+              inset 0 1px 0 rgba(255,255,255,0.18);
+}
+#catTabs .tab.active .tab-ico {
+  background: rgba(255,255,255,0.22);
+  color: #fff;
+}
+#catTabs .tab.active .tab-count {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+/* All tabs share the same look — only the icon chip color differs.
+   Per-icon brand colors below. Active state stays unified (purple gradient). */
+
+/* ALL */
+#catTabs .tab[data-cat="all"] .tab-ico {
+  background: linear-gradient(135deg, rgba(96,165,250,0.20), rgba(56,189,248,0.18));
+  color: #7dd3fc;
+  box-shadow: inset 0 0 0 1px rgba(125,211,252,0.18);
+}
+/* CLIENTS */
+#catTabs .tab[data-cat="clients"] .tab-ico {
+  background: linear-gradient(135deg, rgba(34,211,238,0.20), rgba(14,165,233,0.18));
+  color: #67e8f9;
+  box-shadow: inset 0 0 0 1px rgba(103,232,249,0.18);
+}
+/* MODS / MACROS */
+#catTabs .tab[data-cat="mods / macros"] .tab-ico {
+  background: linear-gradient(135deg, rgba(34,197,94,0.20), rgba(16,185,129,0.18));
+  color: #6ee7b7;
+  box-shadow: inset 0 0 0 1px rgba(110,231,183,0.18);
+}
+/* SOURCE CODES */
+#catTabs .tab[data-cat="source codes"] .tab-ico {
+  background: linear-gradient(135deg, rgba(249,115,22,0.20), rgba(234,88,12,0.18));
+  color: #fdba74;
+  box-shadow: inset 0 0 0 1px rgba(253,186,116,0.20);
+}
+/* OTHERS */
+#catTabs .tab[data-cat="others"] .tab-ico {
+  background: linear-gradient(135deg, rgba(251,191,36,0.20), rgba(245,158,11,0.18));
+  color: #fcd34d;
+  box-shadow: inset 0 0 0 1px rgba(252,211,77,0.20);
+}
+/* SHOP */
+#catTabs .tab[data-cat="shop"] .tab-ico {
+  background: linear-gradient(135deg, rgba(52,211,153,0.20), rgba(16,185,129,0.18));
+  color: #34d399;
+  box-shadow: inset 0 0 0 1px rgba(52,211,153,0.20);
+}
+/* BOOSTER */
+#catTabs .tab[data-cat="booster"] .tab-ico {
+  background: linear-gradient(135deg, rgba(236,72,153,0.22), rgba(168,85,247,0.22));
+  color: #f9a8d4;
+  box-shadow: inset 0 0 0 1px rgba(249,168,212,0.22);
+}
+/* BOOSTER lock icon stays subtle */
+#catTabs .tab[data-cat="booster"] .lock-icon {
+  font-size: 8px;
+  margin-left: 4px;
+  opacity: 0.7;
+  color: inherit;
+}
+/* On hover/active, keep each icon's own color slightly amplified */
+#catTabs .tab:hover .tab-ico { transform: scale(1.08); filter: brightness(1.15); }
+#catTabs .tab.active .tab-ico {
+  background: rgba(255,255,255,0.22);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.30);
+  filter: none;
+}
+/* Active icon keeps its colored hue but on white background */
+#catTabs .tab.active[data-cat="all"] .tab-ico        { color: #e0f2fe; }
+#catTabs .tab.active[data-cat="clients"] .tab-ico    { color: #cffafe; }
+#catTabs .tab.active[data-cat="mods / macros"] .tab-ico { color: #d1fae5; }
+#catTabs .tab.active[data-cat="source codes"] .tab-ico  { color: #fed7aa; }
+#catTabs .tab.active[data-cat="others"] .tab-ico     { color: #fef3c7; }
+#catTabs .tab.active[data-cat="shop"] .tab-ico       { color: #a7f3d0; }
+#catTabs .tab.active[data-cat="booster"] .tab-ico    { color: #fbcfe8; }
+
+@media (max-width: 600px) {
+  #catTabs.filter-row {
+    padding: 5px;
+    gap: 3px;
+    border-radius: 18px;
+  }
+  #catTabs .tab {
+    padding: 7px 11px 7px 8px;
+    font-size: 0.66rem;
+    gap: 6px;
+    letter-spacing: 0.4px;
+  }
+  #catTabs .tab .tab-ico { width: 18px; height: 18px; font-size: 9px; }
+  #catTabs .tab .tab-count { font-size: 9px; min-width: 18px; padding: 1px 5px; }
 }
 .ver-dropdown {
   background-color: rgba(9,14,30,0.9);
@@ -1207,8 +1299,23 @@ body::before {
   gap: 18px;
   padding-top: 22px;
 }
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.grid .card {
+  animation: cardFadeIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.grid .card:nth-child(2)  { animation-delay: 0.03s; }
+.grid .card:nth-child(3)  { animation-delay: 0.06s; }
+.grid .card:nth-child(4)  { animation-delay: 0.09s; }
+.grid .card:nth-child(5)  { animation-delay: 0.12s; }
+.grid .card:nth-child(6)  { animation-delay: 0.14s; }
+.grid .card:nth-child(7)  { animation-delay: 0.16s; }
+.grid .card:nth-child(8)  { animation-delay: 0.18s; }
+.grid .card:nth-child(n+9) { animation-delay: 0.20s; }
 .card {
-  padding: 12px;
+  padding: 13px;
   border-radius: 18px;
   border-color: rgba(96,165,250,0.16);
   background:
@@ -1218,11 +1325,15 @@ body::before {
 .card::before {
   background: linear-gradient(180deg, rgba(56,189,248,0.10), rgba(139,92,246,0.02));
 }
+.card { will-change: transform; }
 .card:hover {
-  transform: translateY(-8px) scale(1.04);
+  transform: translateY(-5px) scale(1.015);
   border-color: rgba(96,165,250,0.42);
-  box-shadow: 0 22px 52px rgba(8,15,34,0.58), 0 0 0 1px rgba(125,211,252,0.10) inset;
+  box-shadow: 0 18px 40px rgba(8,15,34,0.5), 0 0 0 1px rgba(125,211,252,0.10) inset;
   z-index: 2;
+}
+.card:hover img {
+  transform: none !important;
 }
 .card-thumb {
   width: 100%;
@@ -1239,6 +1350,16 @@ body::before {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: none;
+}
+.card-thumb.smart-contain img {
+  object-fit: contain;
+  object-position: center;
+  background: rgba(4,8,20,0.72);
+}
+.card-thumb.smart-wide img {
+  object-fit: cover;
+  object-position: center;
 }
 .card-thumb.fallback {
   display: flex;
@@ -1298,6 +1419,7 @@ body::before {
   font-size: 1rem;
   margin-bottom: 6px;
   color: #f7fbff;
+  line-height: 1.25;
 }
 .card p {
   min-height: 36px;
@@ -1309,7 +1431,7 @@ body::before {
   color: #b7e8ff;
   border-color: rgba(56,189,248,0.18);
   border-radius: 999px;
-  padding: 4px 8px;
+  padding: 3px 8px;
 }
 
 /* NEW badge for recently added items */
@@ -1436,11 +1558,20 @@ body.low-end-device .card:hover { transform: none; }
   .nav-links { width: 100%; justify-content: flex-start; gap: 7px; }
   .hero { padding: 40px 14px 18px; }
   .hero-title { letter-spacing: 2px; }
-  .search-shell { padding: 10px 12px; border-radius: 16px; }
+  .hero-sub { margin-bottom: 24px; }
+  .hero-stats {
+    gap: 12px;
+    padding: 8px 14px;
+    font-size: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .search-shell { padding: 10px 12px; border-radius: 16px; width: calc(100% - 20px); gap: 10px; }
   .filter-row { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 6px; scrollbar-width: none; }
-  .filter-controls { overflow: visible; flex-wrap: wrap; }
+  .filter-controls { overflow: visible; flex-wrap: wrap; gap: 12px; padding: 0 12px 8px; }
   .filter-row::-webkit-scrollbar { display: none; }
   .tab { flex: 0 0 auto; }
+  .notice-card { align-items: flex-start; padding: 14px 16px; }
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .card { padding: 9px; border-radius: 14px; }
   .card-thumb { height: 118px; border-radius: 12px; }
@@ -1456,15 +1587,601 @@ body.low-end-device .card:hover { transform: none; }
   .detail-ver-btn { width: calc(50% - 4px); justify-content: center; }
 }
 
+/* ════════════════════════════════════════════════════════════════
+   FULL-SITE POLISH PASS
+   Refines hero, nav, marquee, search, notice, filters, cards,
+   detail page, modals, and adds a proper footer.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── NAV ── */
+.nav {
+  background: linear-gradient(180deg, rgba(5,8,22,0.92), rgba(5,8,22,0.78));
+  border-bottom: 1px solid rgba(96,165,250,0.16);
+  box-shadow: 0 8px 28px rgba(2,6,23,0.5);
+}
+.nav-logo {
+  letter-spacing: 2.5px;
+  padding: 7px 14px;
+  border-radius: 10px;
+}
+.cheat-counter {
+  font-size: 10.5px;
+  padding: 5px 11px;
+  border-radius: 9999px;
+  border: 1px solid rgba(96,165,250,0.28);
+  background: linear-gradient(180deg, rgba(56,189,248,0.10), rgba(139,92,246,0.06));
+}
+.live-dot { width: 7px; height: 7px; }
+.whats-new-btn {
+  font-size: 10.5px;
+  padding: 6px 13px;
+  border-radius: 9999px;
+  letter-spacing: 0.6px;
+  font-family: 'DM Sans', sans-serif;
+}
+.social-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(96,165,250,0.18);
+  background: rgba(56,189,248,0.05);
+  font-size: 1.05rem;
+}
+
+/* ── MARQUEE ── */
+#marqueeBar {
+  padding: 8px 0;
+  background: linear-gradient(90deg, rgba(56,189,248,0.10), rgba(139,92,246,0.10), rgba(56,189,248,0.10));
+  border-color: rgba(96,165,250,0.18);
+}
+#marqueeBar .marquee-inner span {
+  font-size: 11.5px;
+  letter-spacing: 0.6px;
+  color: #b3c7e8;
+}
+#marqueeBar .marquee-inner span i {
+  color: #7dd3fc;
+  margin-right: 6px;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 56px 16px 18px;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 24px; left: 50%; transform: translateX(-50%);
+  width: min(680px, 80%); height: 180px;
+  background: radial-gradient(ellipse at center,
+    rgba(124,58,237,0.18), rgba(56,189,248,0.10) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(24px);
+}
+.hero-title {
+  font-size: clamp(2.7rem, 8vw, 5rem);
+  letter-spacing: 6px;
+  text-shadow: 0 4px 30px rgba(56,189,248,0.18);
+}
+.hero-sub {
+  font-size: 0.92rem;
+  letter-spacing: 2px;
+  margin: 12px 0 30px;
+  text-transform: uppercase;
+  color: #8ea0c8;
+}
+.hero-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin: -10px auto 22px;
+  padding: 8px 18px;
+  background: linear-gradient(180deg, rgba(9,14,30,0.78), rgba(8,14,28,0.58));
+  border: 1px solid rgba(96,165,250,0.18);
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #b8c8e8;
+}
+.hero-stats .stat-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+.hero-stats .stat-divider {
+  width: 1px; height: 12px;
+  background: rgba(148,163,184,0.25);
+}
+
+/* ── SEARCH ── */
+.search-shell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(760px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 12px 14px 12px 18px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(9,14,30,0.95), rgba(8,14,28,0.85));
+  border: 1px solid rgba(96,165,250,0.22);
+  box-shadow: 0 14px 40px rgba(2,6,23,0.4),
+              inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+}
+.search-shell:focus-within {
+  border-color: rgba(56,189,248,0.55);
+  box-shadow: 0 14px 40px rgba(2,6,23,0.45),
+              0 0 0 4px rgba(56,189,248,0.10),
+              inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.search-shell i {
+  color: #7dd3fc;
+  font-size: 1rem;
+}
+.search-clear {
+  border-radius: 9999px;
+  padding: 7px 14px;
+  font-size: 0.7rem;
+  letter-spacing: 0.7px;
+}
+#resultsMeta {
+  max-width: 1240px;
+  font-size: 0.78rem;
+  color: #8ea0c8;
+  text-align: center;
+  letter-spacing: 0.3px;
+  margin: 16px auto 0;
+  padding: 0 18px;
+}
+#resultsMeta strong { color: #e8f1ff; }
+
+/* ── NOTICE BANNER ── */
+.notice-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 4px 16px 26px;
+}
+.notice-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  max-width: 760px;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(8,15,34,0.82), rgba(8,14,28,0.68));
+  border: 1px solid rgba(96,165,250,0.22);
+  border-radius: 16px;
+  box-shadow: 0 10px 32px rgba(2,6,23,0.32),
+              inset 0 1px 0 rgba(255,255,255,0.04);
+  text-align: left;
+}
+.notice-icon {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(56,189,248,0.18), rgba(125,211,252,0.10));
+  border: 1px solid rgba(56,189,248,0.28);
+  color: #38bdf8;
+  font-size: 14px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(56,189,248,0.30));
+}
+.notice-text {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #94aacc;
+  line-height: 1.7;
+}
+.notice-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(56,189,248,0.12);
+  border: 1px solid rgba(56,189,248,0.25);
+  color: #7dd3fc;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  line-height: 1;
+  vertical-align: middle;
+}
+.notice-link {
+  color: #7dd3fc;
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(56,189,248,0.30);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.notice-link:hover {
+  color: #bae6fd;
+  border-bottom-color: rgba(125,211,252,0.7);
+}
+
+/* ── FILTER SELECTOR SHELLS (version + browse) ── */
+.filter-controls .selector-group { gap: 6px; }
+.filter-label {
+  font-size: 0.62rem;
+  color: #6f80a4;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+.selector-shell {
+  padding: 9px 14px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(9,14,30,0.85), rgba(8,14,28,0.7));
+  border: 1px solid rgba(96,165,250,0.20);
+  box-shadow: 0 8px 22px rgba(2,6,23,0.28),
+              inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.selector-shell:hover {
+  border-color: rgba(56,189,248,0.45);
+  box-shadow: 0 8px 22px rgba(2,6,23,0.34),
+              0 0 0 3px rgba(56,189,248,0.08),
+              inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.selector-shell i {
+  color: #7dd3fc;
+  font-size: 0.95rem;
+}
+.filter-controls {
+  gap: 18px;
+  margin: 6px auto 8px;
+  padding: 0 16px 8px;
+}
+.selector-group {
+  min-width: min(100%, 240px);
+}
+
+/* ── CARDS ── */
+.grid {
+  width: min(1240px, calc(100% - 32px));
+  margin: 16px auto 0;
+  gap: 16px;
+}
+.card {
+  background: linear-gradient(180deg, rgba(11,18,40,0.92), rgba(9,14,30,0.78));
+  border: 1px solid rgba(96,165,250,0.16);
+  box-shadow: 0 14px 30px rgba(2,6,23,0.28);
+  padding: 14px;
+  border-radius: 18px;
+  transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+}
+.card .cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: rgba(56,189,248,0.10);
+  border: 1px solid rgba(56,189,248,0.18);
+  color: #7dd3fc;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+.card-meta { margin-bottom: 8px; }
+.card-score {
+  background: rgba(139,92,246,0.14);
+  border: 1px solid rgba(139,92,246,0.20);
+  color: #d4b3ff;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  font-size: 9.5px;
+  letter-spacing: 0.4px;
+}
+.card h3 {
+  font-size: 0.96rem;
+  font-weight: 700;
+  margin: 6px 0 7px;
+  color: #f4f8ff;
+  letter-spacing: 0.2px;
+  line-height: 1.3;
+}
+.card p {
+  font-size: 0.78rem;
+  color: #8ea0c8;
+  line-height: 1.55;
+  min-height: 40px;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96,165,250,0.28);
+  box-shadow: 0 20px 40px rgba(2,6,23,0.34);
+}
+.card .ver-chip {
+  background: rgba(56,189,248,0.10);
+  color: #b7e8ff;
+  border: 1px solid rgba(56,189,248,0.20);
+  border-radius: 9999px;
+  padding: 3px 9px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* ── DETAIL PAGE ── */
+.detail-hero { padding: 36px 4% 24px; gap: 32px; }
+.detail-info-header .cat-badge {
+  background: rgba(56,189,248,0.12);
+  border: 1px solid rgba(56,189,248,0.30);
+  color: #7dd3fc;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 12px;
+  letter-spacing: 1.2px;
+}
+.detail-info-header h1 {
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 24px rgba(56,189,248,0.18);
+}
+.detail-info-header p {
+  color: #94aacc;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+.detail-ver-selector { gap: 8px; margin-top: 18px; }
+.detail-ver-btn {
+  padding: 9px 16px;
+  font-size: 0.82rem;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(9,14,30,0.95), rgba(8,14,28,0.78));
+  border: 1px solid rgba(96,165,250,0.25);
+  color: #c8def8;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  transition: all 0.22s ease;
+}
+.detail-ver-btn i { color: #7dd3fc; }
+.detail-ver-btn:hover {
+  background: linear-gradient(135deg, rgba(56,189,248,0.30), rgba(139,92,246,0.30));
+  border-color: rgba(125,211,252,0.55);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(56,189,248,0.20);
+}
+.detail-ver-btn:hover i { color: #fff; }
+.section-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: #94aacc;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.section-title i {
+  color: #7dd3fc;
+  background: rgba(56,189,248,0.12);
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  font-size: 11px;
+  border: 1px solid rgba(56,189,248,0.20);
+}
+.info-box {
+  background: linear-gradient(180deg, rgba(11,18,40,0.92), rgba(9,14,30,0.78));
+  border: 1px solid rgba(96,165,250,0.18);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 14px 36px rgba(2,6,23,0.30);
+}
+.screenshots-grid img {
+  border-radius: 12px;
+  border: 1px solid rgba(96,165,250,0.18);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+.screenshots-grid img:hover {
+  transform: scale(1.02);
+  border-color: rgba(125,211,252,0.45);
+  box-shadow: 0 10px 26px rgba(2,6,23,0.4);
+}
+
+/* ── ZOOM OVERLAY ── */
+#zoomOverlay {
+  background: rgba(2,6,23,0.92) !important;
+  backdrop-filter: blur(12px);
+}
+#zoomImg {
+  border-radius: 14px;
+  box-shadow: 0 30px 80px rgba(2,6,23,0.7),
+              0 0 0 1px rgba(125,211,252,0.20);
+}
+
+/* ── BOOSTER MODAL refinements ── */
+#boosterModal { backdrop-filter: blur(8px); }
+.booster-modal-card {
+  border-radius: 22px;
+  padding: 38px 32px 26px;
+}
+.booster-modal-card .discord-btn {
+  width: 100%;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 0.92rem;
+  letter-spacing: 0.4px;
+  box-shadow: 0 8px 22px rgba(88,101,242,0.32);
+}
+.booster-modal-card .discord-btn:hover {
+  box-shadow: 0 10px 28px rgba(88,101,242,0.45);
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  margin-top: 30px;
+  padding: 28px 16px 26px;
+  border-top: 1px solid rgba(96,165,250,0.14);
+  background: linear-gradient(180deg, rgba(5,8,22,0.0), rgba(5,8,22,0.6));
+  position: relative;
+  z-index: 2;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.footer-logo {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  letter-spacing: 3px;
+  font-size: 1.05rem;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.footer-tag {
+  font-size: 11px;
+  color: #6f80a4;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.footer-socials {
+  display: flex;
+  gap: 8px;
+}
+.footer-social {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(96,165,250,0.22);
+  background: rgba(56,189,248,0.05);
+  text-decoration: none;
+  font-size: 1.05rem;
+  transition: all 0.22s ease;
+}
+.footer-social.yt { color: #ef4444; }
+.footer-social.dc { color: #818cf8; }
+.footer-social.yt:hover {
+  background: #ef4444; color: #fff;
+  border-color: #ef4444;
+  box-shadow: 0 0 16px rgba(239,68,68,0.4);
+  transform: translateY(-2px);
+}
+.footer-social.dc:hover {
+  background: #5865F2; color: #fff;
+  border-color: #5865F2;
+  box-shadow: 0 0 16px rgba(88,101,242,0.45);
+  transform: translateY(-2px);
+}
+.footer-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  color: #6f80a4;
+  letter-spacing: 0.3px;
+}
+.staff-login {
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(148,163,184,0.12);
+  color: #4d5a7a;
+  transition: color 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+}
+.staff-login:hover {
+  color: #94aacc;
+  border-color: rgba(148,163,184,0.28);
+  background: rgba(148,163,184,0.06);
+}
+@media (max-width: 600px) {
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-meta { justify-content: center; }
+}
+
+/* ── GLOBAL: smoother focus rings ── */
+button:focus-visible,
+.tab:focus-visible,
+.detail-ver-btn:focus-visible,
+.search-clear:focus-visible {
+  outline: 2px solid rgba(56,189,248,0.6);
+  outline-offset: 2px;
+}
+
+/* Subtle hero entrance */
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-title { animation: heroIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-sub   { animation: heroIn 0.6s 0.08s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.search-shell { animation: heroIn 0.6s 0.16s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+
+/* ── SCROLL TO TOP BUTTON ── */
+#scrollTopBtn {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(16px) scale(0.85);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 18px rgba(56,189,248,0.30);
+  pointer-events: none;
+}
+#scrollTopBtn.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+#scrollTopBtn:hover {
+  box-shadow: 0 6px 24px rgba(56,189,248,0.45);
+  transform: translateY(-2px) scale(1.05);
+}
+
 </style>
 </head>
 <body>
 <div id="particles-js"></div>
 
+<!-- Scroll to top -->
+<button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
 <!-- BOOSTER MODAL -->
 <div id="boosterModal" onclick="closeBoosterModal(event)">
   <div class="booster-modal-card">
-    <span class="booster-gem">💎</span>
+    <span class="booster-gem"><i class="fas fa-gem"></i></span>
     <h3>BOOSTERS ONLY</h3>
     <p>This category is exclusive to <strong style="color:#c4b5fd;">Discord Server Boosters</strong>.<br>Connect your Discord account to verify your Booster role and unlock access.</p>
     <button class="discord-btn" onclick="initiateDiscordOAuth('booster')">
@@ -1577,38 +2294,62 @@ body.low-end-device .card:hover { transform: none; }
   <div class="hero">
     <h1 class="hero-title">THE VAULT</h1>
     <p class="hero-sub">Elite Minecraft archive</p>
+    <div class="hero-stats">
+      <span class="stat-dot"></span>
+      <span><span id="heroStatCount">0</span> CHEATS</span>
+      <span class="stat-divider"></span>
+      <span><i class="fas fa-shield-halved" style="color:#7dd3fc;margin-right:4px;"></i> CLEAN &amp; SCANNED</span>
+      <span class="stat-divider"></span>
+      <span><i class="fas fa-rotate" style="color:#4ade80;margin-right:4px;"></i> ALWAYS UPDATED</span>
+    </div>
     <div class="search-shell">
       <i class="fas fa-magnifying-glass"></i>
-      <input type="text" id="searchBar" class="search-bar" placeholder="Search clients, mods, keybinds..." oninput="doSearch()">
+      <input type="text" id="searchBar" class="search-bar" placeholder="Search clients, mods, keybinds..." oninput="doSearch()" onkeydown="if(event.key==='Enter'){this.blur();}">
       <button class="search-clear" type="button" id="searchClearBtn" onclick="document.getElementById('searchBar').value='';this.classList.remove('show');renderGrid();">CLEAR</button>
     </div>
   </div>
 
   <!-- Notice Banner -->
-  <div style="display:flex;justify-content:center;padding:0 16px 18px;">
-    <div style="display:inline-flex;align-items:flex-start;gap:13px;background:linear-gradient(180deg,rgba(8,15,34,0.82),rgba(8,14,28,0.68));border:1px solid rgba(56,189,248,0.22);border-radius:16px;padding:14px 20px;max-width:620px;width:100%;text-align:left;box-shadow:0 8px 28px rgba(2,6,23,0.28),0 0 0 1px rgba(56,189,248,0.04) inset;backdrop-filter:blur(14px);">
-      <i class="fas fa-shield-halved" style="color:#38bdf8;font-size:15px;margin-top:2px;flex-shrink:0;filter:drop-shadow(0 0 6px rgba(56,189,248,0.45));"></i>
-      <p style="margin:0;font-size:0.78rem;color:#7a94c2;line-height:1.7;">
-        <strong style="color:#7dd3fc;font-weight:700;letter-spacing:0.5px;font-family:'Rajdhani',sans-serif;font-size:0.85rem;">NOTICE —</strong>
+  <div class="notice-wrap">
+    <div class="notice-card">
+      <div class="notice-icon"><i class="fas fa-shield-halved"></i></div>
+      <p class="notice-text">
+        <strong class="notice-label">NOTICE</strong>
         We try our best to share everything we get. Files are scanned, but mistakes can happen. To stay safe from RATs, always double-check on
-        <a href="https://www.virustotal.com" target="_blank" rel="noopener" style="color:#38bdf8;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(56,189,248,0.3);transition:all 0.2s;" onmouseover="this.style.color='#bae6fd';this.style.borderBottomColor='rgba(56,189,248,0.7)'" onmouseout="this.style.color='#38bdf8';this.style.borderBottomColor='rgba(56,189,248,0.3)'">VirusTotal</a>,
-        <a href="https://jlab.threat.rip" target="_blank" rel="noopener" style="color:#38bdf8;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(56,189,248,0.3);transition:all 0.2s;" onmouseover="this.style.color='#bae6fd';this.style.borderBottomColor='rgba(56,189,248,0.7)'" onmouseout="this.style.color='#38bdf8';this.style.borderBottomColor='rgba(56,189,248,0.3)'">jlab.threat.rip</a>,
+        <a class="notice-link" href="https://www.virustotal.com" target="_blank" rel="noopener">VirusTotal</a>,
+        <a class="notice-link" href="https://jlab.threat.rip" target="_blank" rel="noopener">jlab.threat.rip</a>,
         and
-        <a href="https://java-decompiler.github.io" target="_blank" rel="noopener" style="color:#38bdf8;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(56,189,248,0.3);transition:all 0.2s;" onmouseover="this.style.color='#bae6fd';this.style.borderBottomColor='rgba(56,189,248,0.7)'" onmouseout="this.style.color='#38bdf8';this.style.borderBottomColor='rgba(56,189,248,0.3)'">Java Decompiler</a>
+        <a class="notice-link" href="https://java-decompiler.github.io" target="_blank" rel="noopener">Java Decompiler</a>
         before using.
       </p>
     </div>
   </div>
 
   <!-- Category tabs -->
-  <div class="filter-row" id="catTabs">
-    <div class="tab active" onclick="filterCat('all',this)">ALL</div>
-    <div class="tab" onclick="filterCat('clients',this)">CLIENTS</div>
-    <div class="tab" onclick="filterCat('mods / macros',this)">MODS / MACROS</div>
-    <div class="tab" onclick="filterCat('source codes',this)">SOURCE CODES</div>
-    <div class="tab" onclick="filterCat('others',this)">OTHERS</div>
-    <div class="tab shop-tab" onclick="filterCat('shop',this)"><i class="fas fa-store"></i> SHOP</div>
-    <div class="tab booster-tab" onclick="openBoosterModal()">🚀 BOOSTER <i class="fas fa-lock lock-icon"></i></div>
+  <div class="cat-tabs-wrap">
+    <div class="filter-row" id="catTabs">
+      <div class="tab active" data-cat="all" onclick="filterCat('all',this)">
+        <span class="tab-ico"><i class="fas fa-th-large"></i></span>ALL
+      </div>
+      <div class="tab" data-cat="clients" onclick="filterCat('clients',this)">
+        <span class="tab-ico"><i class="fas fa-cube"></i></span>CLIENTS
+      </div>
+      <div class="tab" data-cat="mods / macros" onclick="filterCat('mods / macros',this)">
+        <span class="tab-ico"><i class="fas fa-puzzle-piece"></i></span>MODS / MACROS
+      </div>
+      <div class="tab" data-cat="source codes" onclick="filterCat('source codes',this)">
+        <span class="tab-ico"><i class="fas fa-code"></i></span>SOURCE CODES
+      </div>
+      <div class="tab" data-cat="others" onclick="filterCat('others',this)">
+        <span class="tab-ico"><i class="fas fa-layer-group"></i></span>OTHERS
+      </div>
+      <div class="tab shop-tab" data-cat="shop" onclick="filterCat('shop',this)">
+        <span class="tab-ico"><i class="fas fa-store"></i></span>SHOP
+      </div>
+      <div class="tab booster-tab" data-cat="booster" onclick="openBoosterModal()">
+        <span class="tab-ico"><i class="fas fa-rocket"></i></span>BOOSTER<i class="fas fa-lock lock-icon"></i>
+      </div>
+    </div>
   </div>
 
   <!-- Filters -->
@@ -1637,10 +2378,30 @@ body.low-end-device .card:hover { transform: none; }
 
   <div class="grid" id="mainGrid"></div>
 
-  <!-- Staff admin login — subtle link at bottom -->
-  <div style="text-align:center;padding:10px 0 30px;">
-    <span onclick="initiateDiscordOAuth('admin')" style="color:#2a2a3a;font-size:11px;cursor:pointer;transition:color 0.2s;user-select:none;" onmouseover="this.style.color='#5a5a72'" onmouseout="this.style.color='#2a2a3a'">Staff Login</span>
-  </div>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">THE VAULT</span>
+        <span class="footer-tag">Elite Minecraft Archive</span>
+      </div>
+      <div class="footer-socials">
+        <a href="https://www.youtube.com/@r3mu2" target="_blank" rel="noopener" class="footer-social yt" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://discord.com/invite/r3musblackmarket" target="_blank" rel="noopener" class="footer-social dc" aria-label="Discord">
+          <i class="fab fa-discord"></i>
+        </a>
+      </div>
+      <div class="footer-meta">
+        <span>&copy; THE VAULT &middot; All clients listed are for archival/educational reference</span>
+        <span class="staff-login" onclick="initiateDiscordOAuth('admin')">Staff Login</span>
+      </div>
+      <div class="footer-meta">
+        <span>&copy; THE VAULT. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
 </div>
 
 <!-- DETAIL PAGE -->
@@ -1698,6 +2459,16 @@ body.low-end-device .card:hover { transform: none; }
 </div>
 
 <script>
+// ── MOBILE DETECTION & REDIRECT ──
+(function(){
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || window.innerWidth <= 768;
+  // Store for use elsewhere
+  window._isMobile = isMobile;
+  // Uncomment below line to enable separate mobile.html redirect:
+  // if(isMobile && !window.location.search.includes('nomobile')) window.location.href = 'mobile.html';
+})();
+
 // ── PARTICLES / PERFORMANCE ─────────────────
 function isLowEndDevice() {
   const mem = navigator.deviceMemory || 4;
@@ -1708,7 +2479,7 @@ function isLowEndDevice() {
   return reducedMotion || slowNet || mem <= 4 || cores <= 4 || smallScreen;
 }
 
-function initParticles() {
+function initParticles() { return; /* disabled */
   const el = document.getElementById('particles-js');
   if (!el || typeof particlesJS !== 'function') return;
 
@@ -1720,25 +2491,236 @@ function initParticles() {
 
   particlesJS("particles-js",{
     particles:{
-      number:{ value:70, density:{ enable:true, value_area:900 } },
+      number:{ value:38, density:{ enable:true, value_area:1100 } },
       color:{ value:["#5eead4", "#60a5fa", "#8b5cf6"] },
       shape:{ type:"circle" },
-      opacity:{ value:0.45, random:true, anim:{ enable:false } },
-      size:{ value:2.2, random:true, anim:{ enable:false } },
-      line_linked:{ enable:true, distance:115, color:"#3b82f6", opacity:0.18, width:1 },
-      move:{ enable:true, speed:0.8, direction:"none", random:true, straight:false, out_mode:"out", bounce:false }
+      opacity:{ value:0.35, random:true, anim:{ enable:false } },
+      size:{ value:1.8, random:true, anim:{ enable:false } },
+      line_linked:{ enable:true, distance:130, color:"#3b82f6", opacity:0.14, width:1 },
+      move:{ enable:true, speed:0.55, direction:"none", random:true, straight:false, out_mode:"out", bounce:false }
     },
     interactivity:{
       detect_on:"canvas",
       events:{ onhover:{ enable:true, mode:"grab" }, onclick:{ enable:false }, resize:true },
-      modes:{ grab:{ distance:130, line_linked:{ opacity:0.28 } } }
+      modes:{ grab:{ distance:140, line_linked:{ opacity:0.22 } } }
     },
-    retina_detect:true
+    retina_detect:false,
+    fps_limit:45
   });
 }
 
 // ── DATA ─────────────────────────────────────
 const items = [
+  {
+    "slug": "zxcv-fast-gap",
+    "name": "Zxcv Fast Gap",
+    "cat": "mods / macros",
+    "img": "https://i.postimg.cc/sg2qWBLw/image.webp",
+    "desc": "Never ghost a gap after this ^-^, Use this mod to reduce your golden apple consume time.\nThe normal time to eat a golden apple is 1.6 seconds (32 ticks),\nWith this mod, you would be able to eat the gap in 1.2 SECONDS (~28 ticks), while the animation would still be normal.\nThis mod works regardless of your ping and input latency.",
+    "loader": "Fabric | Put It In Mods Folder",
+    "keybinds": "",
+    "recentlyAdded": true,
+    "versions": [
+      {
+        "ver": "1.21 / 1.21.1",
+        "link": "https://shrinkme.click/ZFOUl"
+      },
+      {
+        "ver": "1.21.4",
+        "link": "https://shrinkme.click/SbB5e7"
+      },
+      {
+        "ver": "1.21.11",
+        "link": "https://shrinkme.click/vusmK2"
+      }
+    ],
+    "screenshots": [
+      "https://i.postimg.cc/sg2qWBLw/image.webp"
+    ]
+  },
+  {
+    "slug": "ghost-walksy-optimizer",
+    "name": "Ghost Walksy Optimizer",
+    "cat": "mods / macros",
+    "img": "https://i.postimg.cc/rpkZqQ4B/images-q-tbn-ANd9Gc-Q9n5Zg0s-Lw-Pz-TRs-KEf3JQgub8Aj4Vk-Ixbj-AQ-s.jpg",
+    "desc": "A ghost version of Walksy Crystal Optimizer",
+    "loader": "Fabric | Put It In Mods Folder",
+    "keybinds": "",
+    "recentlyAdded": true,
+    "versions": [
+      {
+        "ver": "1.21",
+        "link": "https://shrinkme.click/bLqMHj"
+      },
+      {
+        "ver": "1.21.x",
+        "link": "https://shrinkme.click/AUOSjroa"
+      },
+      {
+        "ver": "1.21.11",
+        "link": "https://shrinkme.click/RsovLeg"
+      }
+    ],
+    "screenshots": [
+      "https://i.postimg.cc/rpkZqQ4B/images-q-tbn-ANd9Gc-Q9n5Zg0s-Lw-Pz-TRs-KEf3JQgub8Aj4Vk-Ixbj-AQ-s.jpg"
+    ]
+  },
+  {
+    "slug": "walksy-crystal-optimizer-src",
+    "name": "Walksy Crystal Optimizer SRC",
+    "cat": "source codes",
+    "img": "https://i.postimg.cc/rpkZqQ4B/images-q-tbn-ANd9Gc-Q9n5Zg0s-Lw-Pz-TRs-KEf3JQgub8Aj4Vk-Ixbj-AQ-s.jpg",
+    "desc": "Happy Skidding..",
+    "loader": "Fabric | Put It In Mods Folder",
+    "keybinds": "",
+    "recentlyAdded": true,
+    "versions": [
+      {
+        "ver": "1.21.1 To 1.21.4",
+        "link": "https://shrinkme.click/85BeBC"
+      },
+      {
+        "ver": "1.21.11",
+        "link": "https://shrinkme.click/9zuGU"
+      }
+    ],
+    "screenshots": [
+      "https://i.postimg.cc/rpkZqQ4B/images-q-tbn-ANd9Gc-Q9n5Zg0s-Lw-Pz-TRs-KEf3JQgub8Aj4Vk-Ixbj-AQ-s.jpg"
+    ]
+  },
+  {
+    "slug": "auto-stun-slam",
+    "name": "Auto Stun Slam",
+    "cat": "mods / macros",
+    "img": "https://i.postimg.cc/vHtYtSv0/hq720.jpg",
+    "desc": "Automatically Performs Stun Slam",
+    "loader": "Fabric | Put It In Mods Folder",
+    "keybinds": "",
+    "recentlyAdded": true,
+    "versions": [
+      {
+        "ver": "1.21.1",
+        "link": "https://shrinkme.click/QBQHV5"
+      }
+    ],
+    "screenshots": [
+      "https://i.postimg.cc/vHtYtSv0/hq720.jpg"
+    ]
+  },
+  {
+    "slug": "auto-stun-slam-src",
+    "name": "Auto Stun Slam SRC",
+    "cat": "source codes",
+    "img": "https://i.postimg.cc/vHtYtSv0/hq720.jpg",
+    "desc": "Happy Skidding..",
+    "loader": "",
+    "keybinds": "",
+    "recentlyAdded": true,
+    "versions": [
+      {
+        "ver": "1.21.1",
+        "link": "https://shrinkme.click/mV75lsmP"
+      }
+    ],
+    "screenshots": [
+      "https://i.postimg.cc/vHtYtSv0/hq720.jpg"
+    ]
+  },
+  {
+    "slug": "mc-crasher",
+    "name": "Mc Crasher",
+    "cat": "others",
+    "img": "",
+    "desc": "This is quite well known. It is based on the idea that, before accepting AnyDesk from the staff, we execute this .exe, and after 2 minutes the game will crash and all the strings will be cleaned.",
+    "loader": "Since Minecraft crashed during the screen share and the staff saw that you did not close it yourself, they cannot ban you.",
+    "keybinds": "It is very effective for bypassing cheats that leave many traces, such as Slinky.",
+    "recentlyAdded": true,
+    "versions": [
+      {
+        "ver": "Download",
+        "link": "https://shrinkme.click/JR4o4IrG"
+      }
+    ],
+    "screenshots": [
+      ""
+    ]
+  },
+  {
+    "slug": "mod-deleter",
+    "name": "Mod Deleter",
+    "cat": "others",
+    "img": "https://i.postimg.cc/DyYT6WDK/Delete-icon-1.png",
+    "desc": "This Program Lets you delete you're minecraft mod without quiting you're game that helps you bypass mod analyzers",
+    "loader": "",
+    "keybinds": "",
+    "recentlyAdded": true,
+    "versions": [
+      {
+        "ver": "Link",
+        "link": "https://shrinkme.click/tKqY"
+      }
+    ],
+    "screenshots": [
+      "https://i.postimg.cc/DyYT6WDK/Delete-icon-1.png"
+    ]
+  },
+  {
+    "slug": "anti-ss-tool",
+    "name": "Anti SS TOOL",
+    "cat": "others",
+    "img": "https://i.postimg.cc/d3p5kKHw/image.webp",
+    "desc": "You can clearly see the ss and understand how to use it.",
+    "loader": "",
+    "keybinds": "",
+    "recentlyAdded": true,
+    "versions": [
+      {
+        "ver": "Link",
+        "link": "https://shrinkme.click/p8WALF"
+      }
+    ],
+    "screenshots": [
+      "https://i.postimg.cc/d3p5kKHw/image.webp"
+    ]
+  },
+  {
+    "slug": "water-client-src",
+    "name": "Water Client SRC",
+    "cat": "source codes",
+    "img": "https://i.postimg.cc/HWFwGzF3/IMG-20260426-204047-975.webp",
+    "desc": "Happy Skidding....",
+    "loader": "Fabric | Put it in mods folder",
+    "keybinds": "Right Shift",
+    "recentlyAdded": true,
+    "versions": [
+      {
+        "ver": "1.21.4",
+        "link": "https://shrinkme.click/bg4sHL9l"
+      }
+    ],
+    "screenshots": [
+      "https://i.postimg.cc/HWFwGzF3/IMG-20260426-204047-975.webp"
+    ]
+  },
+  {
+    "slug": "thorium-client",
+    "name": "Thorium Client",
+    "cat": "clients",
+    "img": "https://i.postimg.cc/bNBVG1GW/hxvn2ds.webp",
+    "desc": "Nice Client ig",
+    "loader": "Fabric | Put it in mods folder",
+    "keybinds": "Right Shift",
+    "recentlyAdded": true,
+    "versions": [
+      {
+        "ver": "1.21.1",
+        "link": "https://shrinkme.click/4DnqyyoT"
+      }
+    ],
+    "screenshots": [
+      "https://i.postimg.cc/bNBVG1GW/hxvn2ds.webp"
+    ]
+  },
   {
     "slug": "cw-hack-client",
     "name": "Cw Hack Client",
@@ -1790,6 +2772,9 @@ const items = [
     ]
   }
 ];
+
+const initialArchiveCount = items.length;
+const topPinnedEndIndex = items.findIndex(item => item.slug === 'thorium-client');
 
 items.push({
   "slug": "onyx-client",
@@ -6048,7 +7033,7 @@ items.push({
   "desc": "A hack client",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "Right Shift | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "1.21.8",
@@ -6067,7 +7052,7 @@ items.push({
   "desc": "A hack client",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "F12 | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "1.21.11",
@@ -6086,7 +7071,7 @@ items.push({
   "desc": "A hack client",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "BackSpace | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "1.21.11",
@@ -6105,7 +7090,7 @@ items.push({
   "desc": "A hack client",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "Check you're self idk the keybind | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "1.21.11",
@@ -6124,7 +7109,7 @@ items.push({
   "desc": "A hack client",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "Check you're self idk the keybind | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "1.21.4",
@@ -6143,7 +7128,7 @@ items.push({
   "desc": "A hack client",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "Rshift | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "1.21.4",
@@ -6162,7 +7147,7 @@ items.push({
   "desc": "A hack client",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "Rshift | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "1.21.4",
@@ -6181,7 +7166,7 @@ items.push({
   "desc": "add -noverify to lunch args or it wont run",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "Rshift | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "1.21.4",
@@ -6200,7 +7185,7 @@ items.push({
   "desc": "Happy Skidding",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "Rshift | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "?",
@@ -6219,7 +7204,7 @@ items.push({
   "desc": "Happy Skidding",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "Rshift | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "1.21 / 1.21.1",
@@ -6238,7 +7223,7 @@ items.push({
   "desc": "A hack client",
   "loader": "Loader Fabric | Put it in mods folder",
   "keybinds": "Rshift | Open Menu",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "1.21.4",
@@ -6258,7 +7243,7 @@ items.push({
   "desc": "Create Toclet On Discord To Purchase",
   "loader": "",
   "keybinds": "",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "Discord",
@@ -6278,7 +7263,7 @@ items.push({
   "desc": "1M = 11 PKR / 3.7 INR | 2M = 22 PKR / 7.4 INR\nCreate a ticket on Discord to purchase.",
   "loader": "",
   "keybinds": "",
-  "recentlyAdded": true,
+  "recentlyAdded": false,
   "versions": [
     {
       "ver": "Discord",
@@ -6291,6 +7276,13 @@ items.push({
 });
 
 // ── STATE ────────────────────────────────────
+if (topPinnedEndIndex !== -1 && items.length > initialArchiveCount) {
+  const pinnedItems = items.slice(0, topPinnedEndIndex + 1);
+  const lowerAddedItems = items.slice(initialArchiveCount).reverse();
+  const olderArchiveItems = items.slice(topPinnedEndIndex + 1, initialArchiveCount);
+  items.splice(0, items.length, ...pinnedItems, ...lowerAddedItems, ...olderArchiveItems);
+}
+
 let currentCat = 'all';
 let currentVer = 'all';
 let currentExtraFilter = 'all';
@@ -6492,7 +7484,13 @@ function canAccessItem(item) {
 }
 
 function getAccessibleItems() {
-  return items.filter(canAccessItem);
+  return items
+    .map((item, index) => ({ ...item, __order: index }))
+    .filter(canAccessItem);
+}
+
+function getDisplayPriority(item) {
+  return { group: 0, index: item.__order };
 }
 
 
@@ -6510,7 +7508,7 @@ function createCardMarkup(item) {
         ${item.recentlyAdded ? `<div class="new-badge">NEW</div>` : ''}
         ${isLikelyBrokenImage(item.img)
           ? `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}"></div>`
-          : `<div class="card-thumb"><img src="${item.img}" alt="${item.name.replace(/"/g, '&quot;')}" loading="lazy" decoding="async" onerror="this.closest('.card-thumb').outerHTML='<div class=&quot;card-thumb fallback&quot; data-cat=&quot;${slugifyCat(item.cat)}&quot;></div>'"></div>`}
+          : `<div class="card-thumb smart-wide"><img src="${item.img}" alt="${item.name.replace(/"/g, '&quot;')}" loading="lazy" decoding="async" onload="handleSmartThumb(this)" onerror="this.closest('.card-thumb').outerHTML='<div class=&quot;card-thumb fallback&quot; data-cat=&quot;${slugifyCat(item.cat)}&quot;></div>'"></div>`}
         <div class="card-meta">
           <div class="card-score">${score}</div>
         </div>
@@ -6538,8 +7536,10 @@ function updateCheatCounters() {
   const count = getAccessibleItems().length;
   const main = document.getElementById('cheatCount');
   const detail = document.getElementById('detailCheatCount');
+  const heroStat = document.getElementById('heroStatCount');
   if (main) main.textContent = count;
   if (detail) detail.textContent = count;
+  if (heroStat) heroStat.textContent = count;
 }
 
 function unlockBoosterTab() {
@@ -6588,10 +7588,28 @@ function makeFallbackCardMedia(item) {
   return `<div class="card-thumb fallback" data-cat="${slugifyCat(item.cat)}"></div>`;
 }
 
+function handleSmartThumb(img) {
+  const shell = img && img.closest('.card-thumb');
+  if (!shell) return;
+  const w = img.naturalWidth || 0;
+  const h = img.naturalHeight || 0;
+  shell.classList.remove('smart-contain', 'smart-wide');
+  if (!w || !h) {
+    shell.classList.add('smart-wide');
+    return;
+  }
+  const ratio = w / h;
+  if (ratio < 1.2 || h > w) {
+    shell.classList.add('smart-contain');
+  } else {
+    shell.classList.add('smart-wide');
+  }
+}
+
 function makeImageThumb(item, cls='card-thumb') {
   if (isLikelyBrokenImage(item.img)) return makeFallbackCardMedia(item);
   const safeName = (item.name || 'Vault Item').replace(/"/g, '&quot;');
-  return `<div class="${cls}"><img src="${item.img}" alt="${safeName}" loading="lazy" decoding="async" onerror="this.closest('.${cls}').outerHTML = makeFallbackCardMedia(${JSON.stringify({cat:'__CAT__'})}).replace('__CAT__', '${slugifyCat(item.cat)}')"></div>`;
+  return `<div class="${cls} smart-wide"><img src="${item.img}" alt="${safeName}" loading="lazy" decoding="async" onload="handleSmartThumb(this)" onerror="this.closest('.${cls}').outerHTML = makeFallbackCardMedia(${JSON.stringify({cat:'__CAT__'})}).replace('__CAT__', '${slugifyCat(item.cat)}')"></div>`;
 }
 
 function getMainMediaMarkup(item) {
@@ -6619,16 +7637,33 @@ function getCategoryCounts() {
 
 function updateCategoryTabs() {
   const counts = getCategoryCounts();
+  const labels = {
+    'all':           '<span class="tab-ico"><i class="fas fa-th-large"></i></span>ALL',
+    'clients':       '<span class="tab-ico"><i class="fas fa-cube"></i></span>CLIENTS',
+    'mods / macros': '<span class="tab-ico"><i class="fas fa-puzzle-piece"></i></span>MODS / MACROS',
+    'source codes':  '<span class="tab-ico"><i class="fas fa-code"></i></span>SOURCE CODES',
+    'others':        '<span class="tab-ico"><i class="fas fa-layer-group"></i></span>OTHERS',
+    'shop':          '<span class="tab-ico"><i class="fas fa-store"></i></span>SHOP',
+    'booster':       isBoosterUnlocked()
+      ? '<span class="tab-ico"><i class="fas fa-gem"></i></span>BOOSTER'
+      : '<span class="tab-ico"><i class="fas fa-rocket"></i></span>BOOSTER<i class="fas fa-lock lock-icon"></i>'
+  };
   document.querySelectorAll('#catTabs .tab').forEach(tab => {
-    const label = tab.textContent.replace(/\d+/g, '').replace(/\s+/g, ' ').trim();
-    let key = 'all';
-    if (tab.classList.contains('shop-tab')) key = 'shop';
-    else if (tab.classList.contains('booster-tab')) key = 'booster';
-    else if (label.includes('CLIENTS')) key = 'clients';
-    else if (label.includes('MODS')) key = 'mods / macros';
-    else if (label.includes('SOURCE')) key = 'source codes';
-    else if (label.includes('OTHERS')) key = 'others';
-    const base = key === 'others' ? 'OTHERS' : key === 'shop' ? '<i class="fas fa-store"></i> SHOP' : key === 'booster' ? (isBoosterUnlocked() ? '💎 BOOSTER' : '🚀 BOOSTER <i class="fas fa-lock lock-icon"></i>') : label.split(' ')[0] === 'ALL' ? 'ALL' : label;
+    let key = tab.dataset.cat;
+    if (!key) {
+      if (tab.classList.contains('shop-tab')) key = 'shop';
+      else if (tab.classList.contains('booster-tab')) key = 'booster';
+      else {
+        const label = tab.textContent.replace(/\d+/g, '').toUpperCase();
+        if (label.includes('CLIENTS')) key = 'clients';
+        else if (label.includes('MODS')) key = 'mods / macros';
+        else if (label.includes('SOURCE')) key = 'source codes';
+        else if (label.includes('OTHERS')) key = 'others';
+        else key = 'all';
+      }
+      tab.dataset.cat = key;
+    }
+    const base = labels[key] || labels.all;
     const count = counts[key] || 0;
     tab.innerHTML = `${base} <span class="tab-count">${count}</span>`;
   });
@@ -6680,7 +7715,7 @@ function tuneNoticeBanner() {
   const notice = Array.from(document.querySelectorAll('#content-wrapper > div')).find(el => el.textContent && el.textContent.includes('VirusTotal'));
   if (!notice) return;
   const card = notice.querySelector('div');
-  if (card) card.classList.add('notice-modern');
+  // notice-modern disabled (caused glitch)
 }
 
 
@@ -6890,11 +7925,13 @@ function renderGrid() {
     return;
   }
 
-  // Sort: recently added items always appear first
+  // Keep newest cards first, then the older recently-added batch, then everything else.
   const sorted = [...filtered].sort((a, b) => {
-    if (a.recentlyAdded && !b.recentlyAdded) return -1;
-    if (!a.recentlyAdded && b.recentlyAdded) return 1;
-    return 0;
+    const pa = getDisplayPriority(a);
+    const pb = getDisplayPriority(b);
+    if (pa.group !== pb.group) return pa.group - pb.group;
+    if (pa.index !== pb.index) return pa.index - pb.index;
+    return a.__order - b.__order;
   });
 
   grid.innerHTML = sorted.map(createCardMarkup).join('');
@@ -7198,6 +8235,17 @@ function showAdminNavBtn() {
   const navLinks = document.querySelector('#content-wrapper .nav-links');
   if (navLinks) navLinks.insertBefore(btn, navLinks.firstChild);
 }
+
+// ── SCROLL TO TOP ──
+(function(){
+  var btn = document.getElementById('scrollTopBtn');
+  if(!btn) return;
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 400) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  }, {passive: true});
+})();
+
 </script>
 </body>
 </html>
